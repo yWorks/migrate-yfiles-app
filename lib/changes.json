@@ -4,11 +4,6 @@
     "yfiles.algorithms.GraphHider": "yfiles.algorithms.LayoutGraphHider",
     "yfiles.algorithms.IMap": "yfiles.collections.IMap",
     "yfiles.algorithms.IntersectionAlgorithm.IIntersectionHandler": "yfiles.algorithms.IIntersectionHandler",
-    "yfiles.algorithms.Maps.HighPerformanceBoolMap": "yfiles",
-    "yfiles.algorithms.Maps.HighPerformanceDoubleMap": "yfiles",
-    "yfiles.algorithms.Maps.HighPerformanceIntMap": "yfiles",
-    "yfiles.algorithms.Maps.HighPerformanceObjectMap": "yfiles",
-    "yfiles.algorithms.YList.ListCursorImpl": "yfiles",
     "yfiles.binding.AdjacentNodesGraphSource": "yfiles.binding.AdjacentNodesGraphBuilder",
     "yfiles.binding.GraphSource": "yfiles.binding.GraphBuilder",
     "yfiles.binding.GraphSourceBase": "yfiles.binding.GraphBuilderBase",
@@ -217,7 +212,6 @@
     "yfiles.graph.IStripeHitTestHelper": "yfiles.input.IStripeHitTestHelper",
     "yfiles.graph.IStripeInputVisualizationHelper": "yfiles.input.IStripeInputVisualizationHelper",
     "yfiles.graph.IStripeSelection": "yfiles.view.IStripeSelection",
-    "yfiles.graph.LayoutExceptionEventArgs": "yfiles",
     "yfiles.graph.LayoutExecutor": "yfiles.layout.LayoutExecutor",
     "yfiles.graph.LayoutGraphAdapter": "yfiles.layout.LayoutGraphAdapter",
     "yfiles.graph.MergingDummyEdgeConverter": "yfiles.graph.MergingFoldingEdgeConverter",
@@ -235,8 +229,7 @@
     "yfiles.graphml.IXmlPrefixMapper": "yfiles.graphml.IXamlPrefixMapper",
     "yfiles.graphml.NullXmlWriter": "yfiles.graphml.XmlWriter",
     "yfiles.graphml.XamlAttributeWriteMode": "yfiles.graphml.XamlAttributeWritePolicy",
-    "yfiles.hierarchic.ConstraintLayerer.IConstraintFactory": "yfiles",
-    "yfiles.hierarchic.incremental.AbstractPortConstraintOptimizer": "yfiles",
+    "yfiles.hierarchic.incremental.AbstractPortConstraintOptimizer": "yfiles.hierarchic.PortConstraintOptimizerBase",
     "yfiles.hierarchic.incremental.AbstractPortConstraintOptimizer.SameLayerData": "yfiles.hierarchic.PortConstraintOptimizerSameLayerData",
     "yfiles.hierarchic.incremental.AsIsSequencer": "yfiles.hierarchic.AsIsSequencer",
     "yfiles.hierarchic.incremental.AspectRatioComponentLayerer": "yfiles.hierarchic.AspectRatioComponentLayerer",
@@ -342,15 +335,12 @@
     "yfiles.layout.MinNodeSizeStage": "yfiles.layout.MinimumNodeSizeStage",
     "yfiles.layout.MirrorMask": "yfiles.layout.MirrorModes",
     "yfiles.layout.NormalizingGraphElementOrderStage": "yfiles.layout.NormalizeGraphElementOrderStage",
-    "yfiles.layout.OrientationLayouter.Transformer": "yfiles",
     "yfiles.layout.ParallelEdgeLayouter": "yfiles.router.ParallelEdgeRouter",
     "yfiles.layout.PartitionCellId.Pair": "yfiles.layout.PartitionCellIdEntry",
     "yfiles.layout.PartitionLayouter": "yfiles.layout.PartitionLayout",
-    "yfiles.layout.PartitionLayouter.EdgeBetweennessPartitionFinder": "yfiles",
     "yfiles.layout.PartitionLayouter.IInterEdgeRouter": "yfiles.layout.IPartitionInterEdgeRouter",
     "yfiles.layout.PartitionLayouter.IPartitionFinder": "yfiles.layout.IPartitionFinder",
     "yfiles.layout.PartitionLayouter.IPartitionPlacer": "yfiles.layout.IPartitionPlacer",
-    "yfiles.layout.PartitionLayouter.PolylineInterEdgeRouter": "yfiles",
     "yfiles.layout.PortCandidateSet.ICandidateMatcher": "yfiles.layout.IPortCandidateMatcher",
     "yfiles.layout.PortCandidateSet.IEntry": "yfiles.layout.IPortCandidateSetEntry",
     "yfiles.layout.PortDirection": "yfiles.layout.PortDirections",
@@ -446,7 +436,6 @@
     "yfiles.support.AbstractUndoUnit": "yfiles.graph.UndoUnitBase",
     "yfiles.support.DelegateUndoUnit": "yfiles.graph.DelegateUndoUnit",
     "yfiles.support.DelegateUndoUnit.DoHandlerDelegate": "yfiles",
-    "yfiles.support.DictionaryLookup": "yfiles",
     "yfiles.support.Future": "yfiles.graphml.Future",
     "yfiles.support.ICompoundEdit": "yfiles.graph.ICompoundEdit",
     "yfiles.support.IContextLookup": "yfiles.graph.IContextLookup",
@@ -461,16 +450,11 @@
     "yfiles.support.TypedKey": "yfiles.collections.TypedKey",
     "yfiles.support.TypedKeyMapper": "yfiles.collections.TypedKeyMapper",
     "yfiles.support.UndoEngine": "yfiles.graph.UndoEngine",
-    "yfiles.support.ValueSerializerAttribute": "yfiles",
-    "yfiles.support.XmlLoader": "yfiles",
-    "yfiles.support.XmlLoader.XmlLoaded": "yfiles",
     "yfiles.support.XmlName": "yfiles.graphml.XmlName",
     "yfiles.system.ApplicationCommands": "yfiles.input.ICommand",
     "yfiles.system.Brush": "yfiles.view.Fill",
     "yfiles.system.Brushes": "yfiles.view.Fill",
     "yfiles.system.Color": "yfiles.view.Color",
-    "yfiles.system.CommandBinding": "yfiles",
-    "yfiles.system.ContentPropertyAttribute": "yfiles",
     "yfiles.system.DashStyle": "yfiles.view.DashStyle",
     "yfiles.system.DashStyleValueSerializer": "yfiles.graphml.DashStyleValueSerializer",
     "yfiles.system.DragAction": "yfiles.view.DragAction",
@@ -487,12 +471,10 @@
     "yfiles.system.GradientStop": "yfiles.view.GradientStop",
     "yfiles.system.ICloneable": "yfiles.lang.ICloneable",
     "yfiles.system.ICommand": "yfiles.input.ICommand",
-    "yfiles.system.INotifyPropertyChanged": "yfiles",
+    "yfiles.system.INotifyPropertyChanged": "yfiles.lang.IPropertyObservable",
     "yfiles.system.IValueSerializerContext": "yfiles.graphml.IValueSerializerContext",
-    "yfiles.system.KeyBinding": "yfiles",
     "yfiles.system.LinearGradientBrush": "yfiles.view.LinearGradient",
     "yfiles.system.MarkupExtension": "yfiles.graphml.MarkupExtension",
-    "yfiles.system.MarkupExtensionReturnTypeAttribute": "yfiles",
     "yfiles.system.MouseButtons": "yfiles.view.MouseButtons",
     "yfiles.system.NavigationCommands": "yfiles.input.ICommand",
     "yfiles.system.PatternBrush": "yfiles.view.PatternFill",
@@ -525,7 +507,6 @@
     "yfiles.tree.GenericTreeLayouter": "yfiles.tree.TreeLayout",
     "yfiles.tree.GenericTreeLayouter.SubtreeShape": "yfiles.tree.SubtreeShape",
     "yfiles.tree.LeftRightPlacer": "yfiles.tree.LeftRightNodePlacer",
-    "yfiles.tree.LeftRightPlacer.LeftRightDataProvider": "yfiles",
     "yfiles.tree.SubtreeShapeRotated": "yfiles.tree.RotatedSubtreeShape",
     "yfiles.tree.TreeLayouter": "yfiles.tree.ClassicTreeLayout"
   },
@@ -552,9 +533,14 @@
     "yfiles.algorithms.IListIterator",
     "yfiles.algorithms.IMapEntry",
     "yfiles.algorithms.ISet",
+    "yfiles.algorithms.Maps.HighPerformanceBoolMap",
+    "yfiles.algorithms.Maps.HighPerformanceDoubleMap",
+    "yfiles.algorithms.Maps.HighPerformanceIntMap",
+    "yfiles.algorithms.Maps.HighPerformanceObjectMap",
     "yfiles.algorithms.Point2D.Double",
     "yfiles.algorithms.Random",
     "yfiles.algorithms.Rectangle2D.Double",
+    "yfiles.algorithms.YList.ListCursorImpl",
     "yfiles.algorithms.YRandom",
     "yfiles.canvas.CanvasContainer",
     "yfiles.canvas.CanvasContext",
@@ -587,6 +573,8 @@
     "yfiles.drawing.SimplePortStyleRenderer",
     "yfiles.drawing.TemplateStyleBase",
     "yfiles.graph.IHierarchy",
+    "yfiles.graph.LayoutExceptionEventArgs",
+    "yfiles.hierarchic.ConstraintLayerer.IConstraintFactory",
     "yfiles.hierarchic.incremental.OldLayererWrapper",
     "yfiles.input.GraphInputModeController",
     "yfiles.input.InputFeedbackParameter",
@@ -596,7 +584,11 @@
     "yfiles.input.MouseEventArgs",
     "yfiles.input.TouchDevice",
     "yfiles.input.TouchEventArgs",
+    "yfiles.layout.OrientationLayouter.Transformer",
+    "yfiles.layout.PartitionLayouter.EdgeBetweennessPartitionFinder",
+    "yfiles.layout.PartitionLayouter.PolylineInterEdgeRouter",
     "yfiles.router.ChannelEdgeRouter.OrthogonalShortestPathPathFinder",
+    "yfiles.support.DictionaryLookup",
     "yfiles.support.State",
     "yfiles.support.StateEnteredHandler",
     "yfiles.support.StateExitedHandler",
@@ -605,12 +597,19 @@
     "yfiles.support.Transition",
     "yfiles.support.TransitionDoneHandler",
     "yfiles.support.TransitionHandler",
+    "yfiles.support.ValueSerializerAttribute",
+    "yfiles.support.XmlLoader",
+    "yfiles.support.XmlLoader.XmlLoaded",
     "yfiles.system.CancelEventArgs",
+    "yfiles.system.CommandBinding",
+    "yfiles.system.ContentPropertyAttribute",
     "yfiles.system.FieldInfo",
     "yfiles.system.Freezable",
     "yfiles.system.GradientBrush",
     "yfiles.system.GradientStopCollection",
     "yfiles.system.HatchBrushes",
+    "yfiles.system.KeyBinding",
+    "yfiles.system.MarkupExtensionReturnTypeAttribute",
     "yfiles.system.Math",
     "yfiles.system.MethodAttributes",
     "yfiles.system.RoutedCommand",
@@ -619,6 +618,7 @@
     "yfiles.tree.ARNodePlacer",
     "yfiles.tree.ARTreeLayouter",
     "yfiles.tree.HVTreeLayouter",
+    "yfiles.tree.LeftRightPlacer.LeftRightDataProvider",
     "yfiles.tree.Orientation"
   ],
   "newTypes": [
@@ -807,30 +807,6 @@
       "createIndexNodeMapBoolean": "createIndexNodeMapForBoolean",
       "createIndexNodeMapDouble": "createIndexNodeMap",
       "createIndexNodeMapInt": "createIndexNodeMap"
-    },
-    "yfiles.algorithms.Maps.HighPerformanceBoolMap": {
-      "getBool": "getBoolean",
-      "getDouble": "get",
-      "setBool": "setBoolean",
-      "setDouble": "set"
-    },
-    "yfiles.algorithms.Maps.HighPerformanceDoubleMap": {
-      "getBool": "getBoolean",
-      "getDouble": "get",
-      "setBool": "setBoolean",
-      "setDouble": "set"
-    },
-    "yfiles.algorithms.Maps.HighPerformanceIntMap": {
-      "getBool": "getBoolean",
-      "getDouble": "get",
-      "setBool": "setBoolean",
-      "setDouble": "set"
-    },
-    "yfiles.algorithms.Maps.HighPerformanceObjectMap": {
-      "getBool": "getBoolean",
-      "getDouble": "get",
-      "setBool": "setBoolean",
-      "setDouble": "set"
     },
     "yfiles.algorithms.NetworkFlows": {
       "minCostFlowBetweenSourceAndSink": "minCostFlow",
@@ -2064,6 +2040,9 @@
     "yfiles.graphml.WriteContextExtensions": {
       "serializeWithItemAndType": "serialize"
     },
+    "yfiles.hierarchic.incremental.AbstractPortConstraintOptimizer": {
+      "mirrorMask": "mirrorMode"
+    },
     "yfiles.hierarchic.incremental.DefaultDrawingDistanceCalculator": {
       "edge2EdgeDistance": "edgeToEdgeDistance",
       "node2EdgeDistance": "nodeToEdgeDistance",
@@ -2110,7 +2089,8 @@
       "doLayoutCore": "applyLayoutCore"
     },
     "yfiles.hierarchic.incremental.PCListOptimizer": {
-      "backloopPenalty": "backLoopPenalty"
+      "backloopPenalty": "backLoopPenalty",
+      "mirrorMask": "mirrorMode"
     },
     "yfiles.hierarchic.incremental.RoutingStyle": {
       "backloopRoutingStyle": "backLoopRoutingStyle",
@@ -3126,9 +3106,6 @@
     "yfiles.support.DelegateUndoUnit": {
       "redoImpl": "redo"
     },
-    "yfiles.support.DictionaryLookup": {
-      "safeGet": "lookup"
-    },
     "yfiles.support.IContextLookup": {
       "lookupForItem": "contextLookup"
     },
@@ -3328,10 +3305,6 @@
       "nodeShapeProviderF": "nodeShapeProvider",
       "placeSubtreeWithDirection": "placeSubtree",
       "subtreeShapeProviderF": "subtreeShapeProvider"
-    },
-    "yfiles.tree.LeftRightPlacer.LeftRightDataProvider": {
-      "getBool": "getBoolean",
-      "getDouble": "get"
     },
     "yfiles.tree.NodeLabelingPolicy": {
       "MIXED": "RAY_LIKE_LEAVES",
@@ -5476,18 +5449,6 @@
     "yfiles.algorithms.INodeMap": {
       "getDouble": "Object"
     },
-    "yfiles.algorithms.Maps.HighPerformanceBoolMap": {
-      "getDouble": "Object"
-    },
-    "yfiles.algorithms.Maps.HighPerformanceDoubleMap": {
-      "getDouble": "Object"
-    },
-    "yfiles.algorithms.Maps.HighPerformanceIntMap": {
-      "getDouble": "Object"
-    },
-    "yfiles.algorithms.Maps.HighPerformanceObjectMap": {
-      "getDouble": "Object"
-    },
     "yfiles.algorithms.ShortestPaths": {
       "singleSourceToMap": "number"
     },
@@ -5953,9 +5914,6 @@
       "getCells": "yfiles.collections.IList<Object>",
       "getNeighbors": "yfiles.collections.IList<Object>"
     },
-    "yfiles.support.DictionaryLookup": {
-      "safeGet": "Object"
-    },
     "yfiles.support.ILookup": {
       "safeGet": "Object"
     },
@@ -5979,9 +5937,6 @@
     },
     "yfiles.tree.LeftRightPlacer": {
       "placeSubtreeWithDirection": "yfiles.tree.SubtreeShape"
-    },
-    "yfiles.tree.LeftRightPlacer.LeftRightDataProvider": {
-      "getDouble": "Object"
     },
     "yfiles.tree.SimpleNodePlacer": {
       "placeSubtreeWithDirection": "yfiles.tree.SubtreeShape"

@@ -4,10 +4,10 @@
 module.exports = function(grunt) {
 
   // point to folder (or file) that should be migrated
-  var contentSrc = "C:/root_src_folder/";
+  var contentSrc = "./path/to/source";
 
-  // the output folder 
-  var contentDest = "C:/migration_result/";
+  // the output folder (don't omit trailing slash!)
+  var contentDest = "./path/to/converted/source/";
 
   grunt.registerTask("default", ["migration-tool"]);
 
@@ -25,6 +25,14 @@ module.exports = function(grunt) {
           src: ["**/*.js", "!**/lib/**", "!**/node_modules/**"],
           dest: contentDest
         }]
+        // in order to only convert a single file, do this:
+        /*
+        files: [{
+          expand: true,
+          src: ["MySingleSourceFile.js"],
+          dest: contentDest
+        }]
+        */
       }
     }
   });

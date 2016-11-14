@@ -3,7 +3,7 @@ Javascript toolchain that helps in migrating yFiles for HTML 1.3 apps to the yFi
 
 # Usage
 1. Run `npm install` to install the dependencies.
-2. Specificy the input (`contentSrc`) and output (`contentDest`) folder the gruntfile.
+2. Specify the input (`contentSrc`) and output (`contentDest`) folder in the gruntfile.
 3. Run `grunt` to migrate your files from yFiles for HTML 1.3 to yFiles for HTML 2.0.
 
 # Notes

@@ -217,6 +217,7 @@
     "yfiles.graph.MergingDummyEdgeConverter": "yfiles.graph.MergingFoldingEdgeConverter",
     "yfiles.graph.StripeSelection": "yfiles.view.StripeSelection",
     "yfiles.graph.StripeSubregion": "yfiles.input.StripeSubregionTypes",
+    "yfiles.graph.StripeSubregionDescriptor": "yfiles.input.StripeSubregion",
     "yfiles.graph.StripeVisualizationType": "yfiles.input.StripeVisualizationType",
     "yfiles.graph.TableLayoutConfigurator": "yfiles.layout.TableLayoutConfigurator",
     "yfiles.graph.YGraphAdapter": "yfiles.layout.YGraphAdapter",
@@ -285,6 +286,7 @@
     "yfiles.input.CompoundKeyEventArgs": "yfiles.view.KeyEventArgs",
     "yfiles.input.CompoundKeyEventType": "yfiles.view.KeyEventType",
     "yfiles.input.DropCreationCallback": "yfiles",
+    "yfiles.input.EmptyPortsCandidateProvider.INSTANCE": "yfiles.input",
     "yfiles.input.GraphCommands": "yfiles.input.ICommand",
     "yfiles.input.HandleType": "yfiles.input.HandleTypes",
     "yfiles.input.IActionButtonProvider": "yfiles.input.IClickListener",
@@ -455,7 +457,9 @@
     "yfiles.system.Brush": "yfiles.view.Fill",
     "yfiles.system.Brushes": "yfiles.view.Fill",
     "yfiles.system.Color": "yfiles.view.Color",
+    "yfiles.system.ComponentCommands": "yfiles.input.ICommand",
     "yfiles.system.DashStyle": "yfiles.view.DashStyle",
+    "yfiles.system.DashStyles": "yfiles.view.DashStyle",
     "yfiles.system.DashStyleValueSerializer": "yfiles.graphml.DashStyleValueSerializer",
     "yfiles.system.DragAction": "yfiles.view.DragAction",
     "yfiles.system.DragDropEffects": "yfiles.view.DragDropEffects",
@@ -542,6 +546,7 @@
     "yfiles.algorithms.Rectangle2D.Double",
     "yfiles.algorithms.YList.ListCursorImpl",
     "yfiles.algorithms.YRandom",
+    "yfiles.binding.Binding",
     "yfiles.canvas.CanvasContainer",
     "yfiles.canvas.CanvasContext",
     "yfiles.canvas.CanvasExtensions",
@@ -564,8 +569,10 @@
     "yfiles.canvas.ScrollEventHandler",
     "yfiles.canvas.TextBox",
     "yfiles.canvas.XamlConstants",
+    "yfiles.collections.HashSet",
     "yfiles.drawing.EdgeStyleDescriptor",
     "yfiles.drawing.FillMode",
+    "yfiles.drawing.HitTestable",
     "yfiles.drawing.ImageSupport",
     "yfiles.drawing.ISimplePortStyle",
     "yfiles.drawing.RotatedSliderEdgeLabelModel",
@@ -930,13 +937,55 @@
       "animateAndWait": "animate",
       "animateHandler": "animate",
       "animateHandlerAndWait": "animate",
-      "animateWithCallback": "animate"
+      "animateWithCallback": "animate",
+      "invalidateControl": "invalidateComponent",
+      "useWaitInputMode": "allowUserInteraction"
     },
     "yfiles.canvas.CanvasControl": {
+      "addCompoundKeyPressedListener": "addKeyDownListener",
+      "addCompoundKeyReleasedListener": "addKeyUpListener",
+      "addCompoundKeyTypedListener": "addKeyPressedListener",
+      "addMouse2DClickedListener": "addMouseClickListener",
+      "addMouse2DDraggedListener": "addMouseDragListener",
+      "addMouse2DEnteredListener": "addMouseEnterListener",
+      "addMouse2DExitedListener": "addMouseLeaveListener",
+      "addMouse2DLostCaptureListener": "addMouseLostCaptureListener",
+      "addMouse2DMovedListener": "addMouseMoveListener",
+      "addMouse2DPressedListener": "addMouseDownListener",
+      "addMouse2DReleasedListener": "addMouseUpListener",
+      "addMouse2DWheelTurnedListener": "addMouseWheelListener",
+      "addTouch2DDownListener": "addTouchDownListener",
+      "addTouch2DEnteredListener": "addTouchEnterListener",
+      "addTouch2DExitedListener": "addTouchLeaveListener",
+      "addTouch2DLongPressedListener": "addTouchLongPressListener",
+      "addTouch2DLostCaptureListener": "addTouchLostCaptureListener",
+      "addTouch2DMovedListener": "addTouchMoveListener",
+      "addTouch2DTappedListener": "addTouchClickListener",
+      "addTouch2DUpListener": "addTouchUpListener",
       "compare": "compareRenderOrder",
       "defsManager": "svgDefsManager",
       "lastMouse2DEvent": "lastMouseEvent",
       "printCommandsEnabled": "navigationCommandsEnabled",
+      "removeCompoundKeyPressedListener": "removeKeyDownListener",
+      "removeCompoundKeyReleasedListener": "removeKeyUpListener",
+      "removeCompoundKeyTypedListener": "removeKeyPressedListener",
+      "removeMouse2DClickedListener": "removeMouseClickListener",
+      "removeMouse2DDraggedListener": "removeMouseDragListener",
+      "removeMouse2DEnteredListener": "removeMouseEnterListener",
+      "removeMouse2DExitedListener": "removeMouseLeaveListener",
+      "removeMouse2DLostCaptureListener": "removeMouseLostCaptureListener",
+      "removeMouse2DMovedListener": "removeMouseMoveListener",
+      "removeMouse2DPressedListener": "removeMouseDownListener",
+      "removeMouse2DReleasedListener": "removeMouseUpListener",
+      "removeMouse2DWheelTurnedListener": "removeMouseWheelListener",
+      "removeTouch2DDownListener": "removeTouchDownListener",
+      "removeTouch2DEnteredListener": "removeTouchEnterListener",
+      "removeTouch2DExitedListener": "removeTouchLeaveListener",
+      "removeTouch2DLongPressedListener": "removeTouchLongPressListener",
+      "removeTouch2DLostCaptureListener": "removeTouchLostCaptureListener",
+      "removeTouch2DMovedListener": "removeTouchMoveListener",
+      "removeTouch2DTappedListener": "removeTouchClickListener",
+      "removeTouch2DUpListener": "removeTouchUpListener",
       "root": "rootGroup",
       "safeGet": "lookup",
       "updateContentRectWithMargins": "updateContentRect",
@@ -951,6 +1000,26 @@
       "SIZE_SW": "SIZE_S"
     },
     "yfiles.canvas.GraphControl": {
+      "addCompoundKeyPressedListener": "addKeyDownListener",
+      "addCompoundKeyReleasedListener": "addKeyUpListener",
+      "addCompoundKeyTypedListener": "addKeyPressedListener",
+      "addMouse2DClickedListener": "addMouseClickListener",
+      "addMouse2DDraggedListener": "addMouseDragListener",
+      "addMouse2DEnteredListener": "addMouseEnterListener",
+      "addMouse2DExitedListener": "addMouseLeaveListener",
+      "addMouse2DLostCaptureListener": "addMouseLostCaptureListener",
+      "addMouse2DMovedListener": "addMouseMoveListener",
+      "addMouse2DPressedListener": "addMouseDownListener",
+      "addMouse2DReleasedListener": "addMouseUpListener",
+      "addMouse2DWheelTurnedListener": "addMouseWheelListener",
+      "addTouch2DDownListener": "addTouchDownListener",
+      "addTouch2DEnteredListener": "addTouchEnterListener",
+      "addTouch2DExitedListener": "addTouchLeaveListener",
+      "addTouch2DLongPressedListener": "addTouchLongPressListener",
+      "addTouch2DLostCaptureListener": "addTouchLostCaptureListener",
+      "addTouch2DMovedListener": "addTouchMoveListener",
+      "addTouch2DTappedListener": "addTouchClickListener",
+      "addTouch2DUpListener": "addTouchUpListener",
       "clipboardEnabled": "enabled",
       "compare": "compareRenderOrder",
       "defsManager": "svgDefsManager",
@@ -959,6 +1028,26 @@
       "highlightPaintManager": "highlightIndicatorManager",
       "lastMouse2DEvent": "lastMouseEvent",
       "printCommandsEnabled": "navigationCommandsEnabled",
+      "removeCompoundKeyPressedListener": "removeKeyDownListener",
+      "removeCompoundKeyReleasedListener": "removeKeyUpListener",
+      "removeCompoundKeyTypedListener": "removeKeyPressedListener",
+      "removeMouse2DClickedListener": "removeMouseClickListener",
+      "removeMouse2DDraggedListener": "removeMouseDragListener",
+      "removeMouse2DEnteredListener": "removeMouseEnterListener",
+      "removeMouse2DExitedListener": "removeMouseLeaveListener",
+      "removeMouse2DLostCaptureListener": "removeMouseLostCaptureListener",
+      "removeMouse2DMovedListener": "removeMouseMoveListener",
+      "removeMouse2DPressedListener": "removeMouseDownListener",
+      "removeMouse2DReleasedListener": "removeMouseUpListener",
+      "removeMouse2DWheelTurnedListener": "removeMouseWheelListener",
+      "removeTouch2DDownListener": "removeTouchDownListener",
+      "removeTouch2DEnteredListener": "removeTouchEnterListener",
+      "removeTouch2DExitedListener": "removeTouchLeaveListener",
+      "removeTouch2DLongPressedListener": "removeTouchLongPressListener",
+      "removeTouch2DLostCaptureListener": "removeTouchLostCaptureListener",
+      "removeTouch2DMovedListener": "removeTouchMoveListener",
+      "removeTouch2DTappedListener": "removeTouchClickListener",
+      "removeTouch2DUpListener": "removeTouchUpListener",
       "root": "rootGroup",
       "safeGet": "lookup",
       "selectionPaintManager": "selectionIndicatorManager",
@@ -969,6 +1058,26 @@
       "zoomToWithCenter": "zoomTo"
     },
     "yfiles.canvas.GraphOverviewControl": {
+      "addCompoundKeyPressedListener": "addKeyDownListener",
+      "addCompoundKeyReleasedListener": "addKeyUpListener",
+      "addCompoundKeyTypedListener": "addKeyPressedListener",
+      "addMouse2DClickedListener": "addMouseClickListener",
+      "addMouse2DDraggedListener": "addMouseDragListener",
+      "addMouse2DEnteredListener": "addMouseEnterListener",
+      "addMouse2DExitedListener": "addMouseLeaveListener",
+      "addMouse2DLostCaptureListener": "addMouseLostCaptureListener",
+      "addMouse2DMovedListener": "addMouseMoveListener",
+      "addMouse2DPressedListener": "addMouseDownListener",
+      "addMouse2DReleasedListener": "addMouseUpListener",
+      "addMouse2DWheelTurnedListener": "addMouseWheelListener",
+      "addTouch2DDownListener": "addTouchDownListener",
+      "addTouch2DEnteredListener": "addTouchEnterListener",
+      "addTouch2DExitedListener": "addTouchLeaveListener",
+      "addTouch2DLongPressedListener": "addTouchLongPressListener",
+      "addTouch2DLostCaptureListener": "addTouchLostCaptureListener",
+      "addTouch2DMovedListener": "addTouchMoveListener",
+      "addTouch2DTappedListener": "addTouchClickListener",
+      "addTouch2DUpListener": "addTouchUpListener",
       "compare": "compareRenderOrder",
       "createGraphCanvasVisualCreator": "createCanvasVisualCreator",
       "createGraphVisualCreator": "createSvgVisualCreator",
@@ -976,6 +1085,26 @@
       "graphControl": "graphComponent",
       "lastMouse2DEvent": "lastMouseEvent",
       "printCommandsEnabled": "navigationCommandsEnabled",
+      "removeCompoundKeyPressedListener": "removeKeyDownListener",
+      "removeCompoundKeyReleasedListener": "removeKeyUpListener",
+      "removeCompoundKeyTypedListener": "removeKeyPressedListener",
+      "removeMouse2DClickedListener": "removeMouseClickListener",
+      "removeMouse2DDraggedListener": "removeMouseDragListener",
+      "removeMouse2DEnteredListener": "removeMouseEnterListener",
+      "removeMouse2DExitedListener": "removeMouseLeaveListener",
+      "removeMouse2DLostCaptureListener": "removeMouseLostCaptureListener",
+      "removeMouse2DMovedListener": "removeMouseMoveListener",
+      "removeMouse2DPressedListener": "removeMouseDownListener",
+      "removeMouse2DReleasedListener": "removeMouseUpListener",
+      "removeMouse2DWheelTurnedListener": "removeMouseWheelListener",
+      "removeTouch2DDownListener": "removeTouchDownListener",
+      "removeTouch2DEnteredListener": "removeTouchEnterListener",
+      "removeTouch2DExitedListener": "removeTouchLeaveListener",
+      "removeTouch2DLongPressedListener": "removeTouchLongPressListener",
+      "removeTouch2DLostCaptureListener": "removeTouchLostCaptureListener",
+      "removeTouch2DMovedListener": "removeTouchMoveListener",
+      "removeTouch2DTappedListener": "removeTouchClickListener",
+      "removeTouch2DUpListener": "removeTouchUpListener",
       "root": "rootGroup",
       "safeGet": "lookup",
       "updateContentRectWithMargins": "updateContentRect",
@@ -1418,9 +1547,12 @@
       "removePortOwner": "remove",
       "safeGet": "lookup",
       "setCenter": "setNodeCenter",
+      "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
       "setLocationModelParameter": "setPortLocationParameter",
+      "setNodeStyle": "setStyle",
       "setPorts": "setEdgePorts",
+      "setPortStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
       "setRelativeLocation": "setRelativePortLocation",
       "typedEdgesAtPort": "edgesAt"
@@ -1517,9 +1649,12 @@
       "removePortOwner": "remove",
       "safeGet": "lookup",
       "setCenter": "setNodeCenter",
+      "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
       "setLocationModelParameter": "setPortLocationParameter",
+      "setNodeStyle": "setStyle",
       "setPorts": "setEdgePorts",
+      "setPortStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
       "setRelativeLocation": "setRelativePortLocation",
       "typedEdgesAtPort": "edgesAt"
@@ -1529,6 +1664,9 @@
     },
     "yfiles.graph.DefaultPortCandidateDescriptor": {
       "getVisibilityTest": "getVisibilityTestable"
+    },
+    "yfiles.graph.EdgeDecorator": {
+      "edgePortCandidateProviderDecorator": "portCandidateProviderDecorator"
     },
     "yfiles.graph.ExcludingDummyEdgeConverter": {
       "addDummyEdge": "addFoldingEdge"
@@ -1593,9 +1731,12 @@
       "removePortOwner": "remove",
       "safeGet": "lookup",
       "setCenter": "setNodeCenter",
+      "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
       "setLocationModelParameter": "setPortLocationParameter",
+      "setNodeStyle": "setStyle",
       "setPorts": "setEdgePorts",
+      "setPortStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
       "setRelativeLocation": "setRelativePortLocation",
       "typedEdgesAtPort": "edgesAt"
@@ -1706,9 +1847,12 @@
       "removePortOwner": "remove",
       "safeGet": "lookup",
       "setCenter": "setNodeCenter",
+      "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
       "setLocationModelParameter": "setPortLocationParameter",
+      "setNodeStyle": "setStyle",
       "setPorts": "setEdgePorts",
+      "setPortStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
       "setRelativeLocation": "setRelativePortLocation",
       "typedEdgesAtPort": "edgesAt"
@@ -1801,6 +1945,7 @@
       "createColumnAtIndexWithSize": "createColumn",
       "createColumnAtIndexWithSizeAndStyle": "createColumn",
       "createColumnAtIndexWithSizeAndTag": "createColumn",
+      "createColumnAtIndexWithSizeInsetsStyleAndTag": "createChildColumn",
       "createColumnAtIndexWithSizeStyleAndTag": "createColumn",
       "createColumnWithSize": "createColumn",
       "createColumnWithSizeAndStyle": "createColumn",
@@ -1811,18 +1956,31 @@
       "createColumnWithTag": "createColumn",
       "createRootColumn": "createColumn",
       "createRootColumnAtIndexWithSize": "createColumn",
+      "createRootColumnAtIndexWithSizeAndStyle": "createColumn",
       "createRootColumnAtIndexWithSizeAndTag": "createColumn",
+      "createRootColumnAtIndexWithSizeStyleAndTag": "createColumn",
       "createRootColumnWithSize": "createColumn",
+      "createRootColumnWithSizeAndStyle": "createColumn",
       "createRootColumnWithSizeAndTag": "createColumn",
+      "createRootColumnWithSizeStyleAndTag": "createColumn",
+      "createRootColumnWithStyle": "createColumn",
+      "createRootColumnWithStyleAndTag": "createColumn",
       "createRootColumnWithTag": "createColumn",
       "createRootRow": "createRow",
       "createRootRowAtIndexWithSize": "createRow",
+      "createRootRowAtIndexWithSizeAndTag": "createRow",
+      "createRootRowAtIndexWithSizeStyleAndTag": "createRow",
       "createRootRowWithSize": "createRow",
+      "createRootRowWithSizeAndStyle": "createRow",
       "createRootRowWithSizeAndTag": "createRow",
+      "createRootRowWithSizeStyleAndTag": "createRow",
+      "createRootRowWithStyle": "createRow",
+      "createRootRowWithStyleAndTag": "createRow",
       "createRootRowWithTag": "createRow",
       "createRowAtIndexWithSize": "createRow",
       "createRowAtIndexWithSizeAndStyle": "createRow",
       "createRowAtIndexWithSizeAndTag": "createRow",
+      "createRowAtIndexWithSizeInsetsStyleAndTag": "createChildRow",
       "createRowAtIndexWithSizeStyleAndTag": "createRow",
       "createRowWithSize": "createRow",
       "createRowWithSizeAndStyle": "createRow",
@@ -1838,6 +1996,7 @@
       "setColumnParentAtIndex": "setParent",
       "setInsets": "setStripeInsets",
       "setLabelModelParameter": "setLabelLayoutParameter",
+      "setLabelStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
       "setRowParent": "setParent",
       "setRowParentAtIndex": "setParent",
@@ -1853,6 +2012,8 @@
       "layouter": "layout"
     },
     "yfiles.graph.LookupDecorator": {
+      "hideImplementationWithPredicate": "hideImplementation",
+      "setFactoryWithPredicate": "setFactory",
       "setImplementationForItem": "setImplementation",
       "setImplementationWithPredicate": "setImplementation",
       "setImplementationWrapperWithPredicate": "setImplementationWrapper"
@@ -1910,6 +2071,9 @@
       "setSelectedColumn": "setSelected",
       "setSelectedRow": "setSelected"
     },
+    "yfiles.graph.StripeSubregionDescriptor": {
+      "subregion": "subregionType"
+    },
     "yfiles.graph.Table": {
       "addLabelWithParameter": "addLabel",
       "addLabelWithParameterAndStyle": "addLabel",
@@ -1922,7 +2086,9 @@
       "createColumnAtIndexWithSize": "createColumn",
       "createColumnAtIndexWithSizeAndStyle": "createColumn",
       "createColumnAtIndexWithSizeAndTag": "createColumn",
+      "createColumnAtIndexWithSizeInsetsStyleAndTag": "createChildColumn",
       "createColumnAtIndexWithSizeStyleAndTag": "createColumn",
+      "createColumnLabelDefaults": "createColumnDefaults",
       "createColumnWithSize": "createColumn",
       "createColumnWithSizeAndStyle": "createColumn",
       "createColumnWithSizeAndTag": "createColumn",
@@ -1930,21 +2096,43 @@
       "createColumnWithStyle": "createColumn",
       "createColumnWithStyleAndTag": "createColumn",
       "createColumnWithTag": "createColumn",
+      "createDefaultColumnInsets": "createColumnDefaults",
+      "createDefaultColumnLabelModelParameter": "createColumnDefaults",
+      "createDefaultColumnLabelStyle": "createColumnDefaults",
+      "createDefaultColumnStyle": "createColumnDefaults",
+      "createDefaultRowInsets": "createRowDefaults",
+      "createDefaultRowLabelModelParameter": "createRowDefaults",
+      "createDefaultRowLabelStyle": "createRowDefaults",
+      "createDefaultRowStyle": "createRowDefaults",
       "createRootColumn": "createColumn",
       "createRootColumnAtIndexWithSize": "createColumn",
+      "createRootColumnAtIndexWithSizeAndStyle": "createColumn",
       "createRootColumnAtIndexWithSizeAndTag": "createColumn",
+      "createRootColumnAtIndexWithSizeStyleAndTag": "createColumn",
       "createRootColumnWithSize": "createColumn",
+      "createRootColumnWithSizeAndStyle": "createColumn",
       "createRootColumnWithSizeAndTag": "createColumn",
+      "createRootColumnWithSizeStyleAndTag": "createColumn",
+      "createRootColumnWithStyle": "createColumn",
+      "createRootColumnWithStyleAndTag": "createColumn",
       "createRootColumnWithTag": "createColumn",
       "createRootRow": "createRow",
       "createRootRowAtIndexWithSize": "createRow",
+      "createRootRowAtIndexWithSizeAndTag": "createRow",
+      "createRootRowAtIndexWithSizeStyleAndTag": "createRow",
       "createRootRowWithSize": "createRow",
+      "createRootRowWithSizeAndStyle": "createRow",
       "createRootRowWithSizeAndTag": "createRow",
+      "createRootRowWithSizeStyleAndTag": "createRow",
+      "createRootRowWithStyle": "createRow",
+      "createRootRowWithStyleAndTag": "createRow",
       "createRootRowWithTag": "createRow",
       "createRowAtIndexWithSize": "createRow",
       "createRowAtIndexWithSizeAndStyle": "createRow",
       "createRowAtIndexWithSizeAndTag": "createRow",
+      "createRowAtIndexWithSizeInsetsStyleAndTag": "createChildRow",
       "createRowAtIndexWithSizeStyleAndTag": "createRow",
+      "createRowLabelDefaults": "createRowDefaults",
       "createRowWithSize": "createRow",
       "createRowWithSizeAndStyle": "createRow",
       "createRowWithSizeAndTag": "createRow",
@@ -1954,6 +2142,7 @@
       "createRowWithTag": "createRow",
       "onStripeAdded": "onStripeCreated",
       "registerDynamicUndoSupport": "installDynamicUndoSupport",
+      "registerStaticUndoSupport": "installStaticUndoSupport",
       "removeLabel": "remove",
       "removeStripe": "remove",
       "safeGet": "lookup",
@@ -1961,6 +2150,7 @@
       "setColumnParentAtIndex": "setParent",
       "setInsets": "setStripeInsets",
       "setLabelModelParameter": "setLabelLayoutParameter",
+      "setLabelStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
       "setRowParent": "setParent",
       "setRowParentAtIndex": "setParent",
@@ -2169,7 +2359,9 @@
       "delegateHandler": "wrappedHandler"
     },
     "yfiles.input.ContextMenuInputMode": {
+      "addPopulateContextMenuListener": "addPopulateMenuListener",
       "createContextMenuHandlerInputModeContext": "createPopulateMenuContext",
+      "removePopulateContextMenuListener": "removePopulateMenuListener",
       "validContextMenuLocationHitTestable": "validMenuLocationHitTestable"
     },
     "yfiles.input.CreateBendInputMode": {
@@ -2295,7 +2487,9 @@
       "movesVerticallyInSyncWith": "movesVerticallySynchronizedWith"
     },
     "yfiles.input.NavigationInputMode": {
+      "collapsingGroupsAllowed": "allowCollapseGroup",
       "exitingGroupAllowed": "allowExitGroup",
+      "expandingGroupsAllowed": "allowExpandGroup",
       "graphControl": "graphComponent",
       "setCurrentItemForGraphControl": "setCurrentItem",
       "shouldToggleGroupState": "shouldToggleExpansionState",
@@ -3398,6 +3592,34 @@
       "getCastedEnumerable",
       "getCastedEnumerable"
     ],
+    "yfiles.binding.AdjacentEdgesGraphSource": [
+      "edgeDefaults",
+      "nodeDefaults",
+      "groupNodeDefaults"
+    ],
+    "yfiles.binding.AdjacentNodesGraphSource": [
+      "edgeDefaults",
+      "nodeDefaults",
+      "groupNodeDefaults"
+    ],
+    "yfiles.binding.GraphSource": [
+      "edgeDefaults",
+      "nodeDefaults",
+      "groupNodeDefaults"
+    ],
+    "yfiles.binding.GraphSourceBase": [
+      "edgeDefaults",
+      "nodeDefaults",
+      "groupNodeDefaults"
+    ],
+    "yfiles.binding.TreeSource": [
+      "edgeDefaults",
+      "nodeDefaults",
+      "groupNodeDefaults"
+    ],
+    "yfiles.canvas.Animator": [
+      "animateHandlerWithCallback"
+    ],
     "yfiles.canvas.CanvasControl": [
       "add",
       "addCreator",
@@ -3634,6 +3856,9 @@
     "yfiles.collections.ReadOnlyCollection": [
       "getCastedEnumerable"
     ],
+    "yfiles.drawing.DefaultPositionHandler": [
+      "setPosition"
+    ],
     "yfiles.drawing.GenericPortLocationModel": [
       "getCastedEnumerable"
     ],
@@ -3684,6 +3909,8 @@
       "PortChanged"
     ],
     "yfiles.graph.CompositeStripeSelection": [
+      "ItemSelected",
+      "ItemDeselected",
       "getCastedEnumerable"
     ],
     "yfiles.graph.CopiedLayoutIGraph": [
@@ -3733,9 +3960,6 @@
     "yfiles.graph.DefaultHierarchy": [
       "getCastedEnumerable"
     ],
-    "yfiles.graph.EdgeDecorator": [
-      "edgePortCandidateProviderDecorator"
-    ],
     "yfiles.graph.FilteredGraphWrapper": [
       "appendBends",
       "BendChanged",
@@ -3755,6 +3979,8 @@
       "getGroupedGraph"
     ],
     "yfiles.graph.GraphSelection": [
+      "ItemSelected",
+      "ItemDeselected",
       "getCastedEnumerable"
     ],
     "yfiles.graph.IGraph": [
@@ -3773,6 +3999,8 @@
       "PortChanged"
     ],
     "yfiles.graph.IGraphSelection": [
+      "ItemSelected",
+      "ItemDeselected",
       "getCastedEnumerable"
     ],
     "yfiles.graph.IStripeSelection": [
@@ -3790,6 +4018,12 @@
     "yfiles.graph.StripeSelection": [
       "getCastedEnumerable"
     ],
+    "yfiles.graph.Table": [
+      "createDefaultColumnInsets",
+      "getUndoSupport",
+      "registerUndoSupport",
+      "removeUndoSupport"
+    ],
     "yfiles.hierarchic.HierarchicGroupLayouter": [
       "applyLayout",
       "calcLayout",
@@ -3805,6 +4039,9 @@
       "doLayoutWithGraphAndLayout",
       "canLayoutCore",
       "canLayout"
+    ],
+    "yfiles.hierarchic.incremental.EdgeLayoutDescriptor": [
+      "orthogonallyRouted"
     ],
     "yfiles.hierarchic.incremental.HierarchicLayouter": [
       "applyLayout",
@@ -3830,6 +4067,12 @@
       "canLayoutCore",
       "canLayout"
     ],
+    "yfiles.input.CompositePositionHandler": [
+      "setPosition"
+    ],
+    "yfiles.input.ConstrainedPositionHandler": [
+      "setPosition"
+    ],
     "yfiles.input.GraphEditorInputMode": [
       "createBendModePriority",
       "createDefaultLabelConfiguration",
@@ -3841,7 +4084,9 @@
       "nodeDropInputModePriority",
       "setGraphControl",
       "setGraphCore",
-      "setGraphSelection"
+      "setGraphSelection",
+      "PreferredCursorChanged",
+      "Canceled"
     ],
     "yfiles.input.GraphViewerInputMode": [
       "clickModePriority",
@@ -3855,10 +4100,21 @@
       "onClipboardCommandsEnabledChanged",
       "onItemSelected",
       "tapModePriority",
-      "waitModePriority"
+      "waitModePriority",
+      "PreferredCursorChanged",
+      "ItemSelected"
     ],
     "yfiles.input.IInputModeContext": [
       "getFoldedGraph"
+    ],
+    "yfiles.input.IPositionHandler": [
+      "setPosition"
+    ],
+    "yfiles.input.LabelPositionHandler": [
+      "setPosition"
+    ],
+    "yfiles.input.ReparentStripePositionHandler": [
+      "setPosition"
     ],
     "yfiles.input.SimpleInputModeContext": [
       "getFoldedGraph"
@@ -4579,6 +4835,15 @@
     ],
     "yfiles.input.GraphViewerInputMode": [
       "priority"
+    ],
+    "yfiles.input.MoveInputMode": [
+      "movable"
+    ],
+    "yfiles.input.MoveLabelInputMode": [
+      "movable"
+    ],
+    "yfiles.input.ReparentStripeInputMode": [
+      "movable"
     ]
   },
   "signatureChanges": {
@@ -5025,6 +5290,15 @@
         3,
         1
       ],
+      "createColumnAtIndexWithSizeInsetsStyleAndTag": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        1
+      ],
       "createColumnAtIndexWithSizeStyleAndTag": [
         2,
         3,
@@ -5061,13 +5335,35 @@
         1,
         0
       ],
+      "createRootColumnAtIndexWithSizeAndStyle": [
+        1,
+        2,
+        0
+      ],
       "createRootColumnAtIndexWithSizeAndTag": [
         1,
         2,
         0
       ],
+      "createRootColumnAtIndexWithSizeStyleAndTag": [
+        1,
+        2,
+        3,
+        0
+      ],
       "createRootRowAtIndexWithSize": [
         1,
+        0
+      ],
+      "createRootRowAtIndexWithSizeAndTag": [
+        1,
+        2,
+        0
+      ],
+      "createRootRowAtIndexWithSizeStyleAndTag": [
+        1,
+        2,
+        3,
         0
       ],
       "createRowAtIndexWithSize": [
@@ -5082,6 +5378,15 @@
       "createRowAtIndexWithSizeAndTag": [
         2,
         3,
+        1
+      ],
+      "createRowAtIndexWithSizeInsetsStyleAndTag": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
         1
       ],
       "createRowAtIndexWithSizeStyleAndTag": [
@@ -5118,6 +5423,9 @@
       ]
     },
     "yfiles.graph.LookupDecorator": {
+      "setFactoryWithPredicate": [
+        1
+      ],
       "setImplementationWithPredicate": [
         1
       ],
@@ -5173,6 +5481,15 @@
         3,
         1
       ],
+      "createColumnAtIndexWithSizeInsetsStyleAndTag": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        1
+      ],
       "createColumnAtIndexWithSizeStyleAndTag": [
         2,
         3,
@@ -5209,13 +5526,35 @@
         1,
         0
       ],
+      "createRootColumnAtIndexWithSizeAndStyle": [
+        1,
+        2,
+        0
+      ],
       "createRootColumnAtIndexWithSizeAndTag": [
         1,
         2,
         0
       ],
+      "createRootColumnAtIndexWithSizeStyleAndTag": [
+        1,
+        2,
+        3,
+        0
+      ],
       "createRootRowAtIndexWithSize": [
         1,
+        0
+      ],
+      "createRootRowAtIndexWithSizeAndTag": [
+        1,
+        2,
+        0
+      ],
+      "createRootRowAtIndexWithSizeStyleAndTag": [
+        1,
+        2,
+        3,
         0
       ],
       "createRowAtIndexWithSize": [
@@ -5230,6 +5569,15 @@
       "createRowAtIndexWithSizeAndTag": [
         2,
         3,
+        1
+      ],
+      "createRowAtIndexWithSizeInsetsStyleAndTag": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
         1
       ],
       "createRowAtIndexWithSizeStyleAndTag": [
@@ -5735,6 +6083,16 @@
       "getStyleInstance": "yfiles.styles.IStripeStyle"
     },
     "yfiles.graph.Table": {
+      "createColumnLabelDefaults": "yfiles.graph.IStripeDefaults",
+      "createDefaultColumnInsets": "yfiles.graph.IStripeDefaults",
+      "createDefaultColumnLabelModelParameter": "yfiles.graph.IStripeDefaults",
+      "createDefaultColumnLabelStyle": "yfiles.graph.IStripeDefaults",
+      "createDefaultColumnStyle": "yfiles.graph.IStripeDefaults",
+      "createDefaultRowInsets": "yfiles.graph.IStripeDefaults",
+      "createDefaultRowLabelModelParameter": "yfiles.graph.IStripeDefaults",
+      "createDefaultRowLabelStyle": "yfiles.graph.IStripeDefaults",
+      "createDefaultRowStyle": "yfiles.graph.IStripeDefaults",
+      "createRowLabelDefaults": "yfiles.graph.IStripeDefaults",
       "safeGet": "Object"
     },
     "yfiles.graphml.ChildParseContext": {
@@ -5848,7 +6206,6 @@
       "setWithXAndY": ""
     },
     "yfiles.input.ReparentStripePositionHandler": {
-      "getTargetSubregion": "yfiles.input.StripeSubregion",
       "handleMove": ""
     },
     "yfiles.input.ReshapeHandlerHandle": {
@@ -5857,8 +6214,6 @@
     "yfiles.input.TableEditorInputMode": {
       "createLabel": "Promise<yfiles.graph.ILabel>",
       "editLabel": "Promise<yfiles.graph.ILabel>",
-      "findStripe": "yfiles.input.StripeSubregion",
-      "findStripeFiltered": "yfiles.input.StripeSubregion",
       "getMutexOwner": "yfiles.input.IInputMode"
     },
     "yfiles.input.TableReshapeHandler": {

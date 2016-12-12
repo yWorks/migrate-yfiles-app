@@ -4,11 +4,12 @@
     "yfiles.algorithms.GraphHider": "yfiles.algorithms.LayoutGraphHider",
     "yfiles.algorithms.IMap": "yfiles.collections.IMap",
     "yfiles.algorithms.IntersectionAlgorithm.IIntersectionHandler": "yfiles.algorithms.IIntersectionHandler",
+    "yfiles.AttributeDefinition": "yfiles.lang.AttributeDefinition",
     "yfiles.binding.AdjacentNodesGraphSource": "yfiles.binding.AdjacentNodesGraphBuilder",
     "yfiles.binding.GraphSource": "yfiles.binding.GraphBuilder",
     "yfiles.binding.GraphSourceBase": "yfiles.binding.GraphBuilderBase",
-    "yfiles.canvas.AnimationHandler": "yfiles",
     "yfiles.canvas.Animator": "yfiles.view.Animator",
+    "yfiles.canvas.CanvasContainer": "yfiles.view.SvgVisualGroup",
     "yfiles.canvas.CanvasControl": "yfiles.view.CanvasComponent",
     "yfiles.canvas.CanvasControl.SizeChangedDetectionMode": "yfiles.view.SizeChangedDetectionMode",
     "yfiles.canvas.CanvasControl.SizeChangedEventArgs": "yfiles.view.SizeChangedEventArgs",
@@ -36,6 +37,7 @@
     "yfiles.circular.CircularLayouter": "yfiles.circular.CircularLayout",
     "yfiles.circular.PartitionLayoutStyle": "yfiles.circular.PartitionStyle",
     "yfiles.circular.SingleCycleLayouter": "yfiles.circular.SingleCycleLayout",
+    "yfiles.ClassDefinition": "yfiles.lang.ClassDefinition",
     "yfiles.collections.Dictionary": "yfiles.collections.Map",
     "yfiles.collections.IDictionary": "yfiles.collections.IMap",
     "yfiles.drawing.ArcEdgeStyle": "yfiles.styles.ArcEdgeStyle",
@@ -80,9 +82,8 @@
     "yfiles.drawing.GraphModelManager": "yfiles.view.GraphModelManager",
     "yfiles.drawing.GridStyle": "yfiles.view.GridStyle",
     "yfiles.drawing.GridVisualCreator": "yfiles.view.GridVisualCreator",
-    "yfiles.drawing.HitTestableHandler": "yfiles",
+    "yfiles.drawing.HitTestableHandler": "yfiles.input.HitTestableHandler",
     "yfiles.drawing.IArrow": "yfiles.styles.IArrow",
-    "yfiles.drawing.IArrowOwner": "yfiles.styles.IArrowOwner",
     "yfiles.drawing.IBoundsProvider": "yfiles.view.IBoundsProvider",
     "yfiles.drawing.IconLabelStyleRenderer": "yfiles.styles.IconLabelStyleRenderer",
     "yfiles.drawing.IEdgeIntersectionCalculator": "yfiles.styles.IEdgePathCropper",
@@ -132,6 +133,7 @@
     "yfiles.drawing.PointSelectionInstaller": "yfiles.view.PointSelectionIndicatorInstaller",
     "yfiles.drawing.PolylineEdgeStyle": "yfiles.styles.PolylineEdgeStyle",
     "yfiles.drawing.PolylineEdgeStyleRenderer": "yfiles.styles.PolylineEdgeStyleRenderer",
+    "yfiles.drawing.RenderVisual": "yfiles.view.HtmlCanvasVisual",
     "yfiles.drawing.RotatingEdgeLabelModel": "yfiles.graph.EdgePathLabelModel",
     "yfiles.drawing.SandwichLabelModel": "yfiles.graph.SandwichLabelModel",
     "yfiles.drawing.SegmentRatioPortLocationModel": "yfiles.graph.SegmentRatioPortLocationModel",
@@ -148,6 +150,7 @@
     "yfiles.drawing.SimpleAbstractPortStyle": "yfiles.styles.PortStyleBase",
     "yfiles.drawing.SimpleLabelStyle": "yfiles.styles.DefaultLabelStyle",
     "yfiles.drawing.SimpleLabelStyleRenderer": "yfiles.styles.DefaultLabelStyleRenderer",
+    "yfiles.drawing.SliderParameterLocation": "yfiles.graphml.SliderParameterLocation",
     "yfiles.drawing.SmartEdgeLabelModel": "yfiles.graph.SmartEdgeLabelModel",
     "yfiles.drawing.StretchStripeLabelModel": "yfiles.graph.StretchStripeLabelModel",
     "yfiles.drawing.StretchStripeLabelModel.Position": "yfiles.graph.StretchStripeLabelModelPosition",
@@ -169,6 +172,7 @@
     "yfiles.drawing.TextRenderSupport.TextMeasureMode": "yfiles.styles.TextMeasurePolicy",
     "yfiles.drawing.Visual": "yfiles.view.Visual",
     "yfiles.drawing.VoidVisualCreator": "yfiles.view.VoidVisualCreator",
+    "yfiles.EnumDefinition": "yfiles.lang.EnumDefinition",
     "yfiles.geometry.GeomSupport": "yfiles.geometry.GeomUtilities",
     "yfiles.geometry.IContainsTest": "yfiles.input.IContainsBendTester",
     "yfiles.geometry.InsetsD": "yfiles.geometry.Insets",
@@ -181,7 +185,6 @@
     "yfiles.geometry.SizeD": "yfiles.geometry.Size",
     "yfiles.graph.AbstractDummyEdgeConverter": "yfiles.graph.FoldingEdgeConverterBase",
     "yfiles.graph.AbstractGraphWrapper": "yfiles.graph.GraphWrapperBase",
-    "yfiles.graph.BendLocationChanged": "yfiles",
     "yfiles.graph.DataMapAdapter": "yfiles.layout.DataMapAdapter",
     "yfiles.graph.DataProviderAdapter": "yfiles.layout.DataProviderAdapter",
     "yfiles.graph.DefaultDummyEdgeConverter": "yfiles.graph.DefaultFoldingEdgeConverter",
@@ -189,7 +192,6 @@
     "yfiles.graph.DefaultEdgeIntersectionCalculator": "yfiles.styles.DefaultEdgePathCropper",
     "yfiles.graph.DefaultPortCandidateDescriptor": "yfiles.view.DefaultPortCandidateDescriptor",
     "yfiles.graph.DefaultStripeInputVisualizationHelper": "yfiles.input.DefaultStripeInputVisualizationHelper",
-    "yfiles.graph.ElementCopiedDelegate": "yfiles",
     "yfiles.graph.ExcludingDummyEdgeConverter": "yfiles.graph.ExcludingFoldingEdgeConverter",
     "yfiles.graph.ExtendedEdgeLabelCandidate": "yfiles.layout.ExtendedEdgeLabelCandidate",
     "yfiles.graph.ExtendedLabelCandidateProfitModel": "yfiles.layout.ExtendedLabelCandidateProfitModel",
@@ -225,10 +227,8 @@
     "yfiles.graphml.AbstractOutputHandler": "yfiles.graphml.OutputHandlerBase",
     "yfiles.graphml.ComplexMapperInputHandler": "yfiles.graphml.MapperInputHandler",
     "yfiles.graphml.ComplexMapperOutputHandler": "yfiles.graphml.MapperOutputHandler",
-    "yfiles.graphml.GraphMLSerializationMode": "yfiles.graphml.GraphMLSerializationPolicy",
     "yfiles.graphml.IXamlTypeMapper": "yfiles.graphml.IXamlNameMapper",
     "yfiles.graphml.IXmlPrefixMapper": "yfiles.graphml.IXamlPrefixMapper",
-    "yfiles.graphml.NullXmlWriter": "yfiles.graphml.XmlWriter",
     "yfiles.graphml.XamlAttributeWriteMode": "yfiles.graphml.XamlAttributeWritePolicy",
     "yfiles.hierarchic.incremental.AbstractPortConstraintOptimizer": "yfiles.hierarchic.PortConstraintOptimizerBase",
     "yfiles.hierarchic.incremental.AbstractPortConstraintOptimizer.SameLayerData": "yfiles.hierarchic.PortConstraintOptimizerSameLayerData",
@@ -246,7 +246,6 @@
     "yfiles.hierarchic.incremental.GroupCompactionPolicy": "yfiles.hierarchic.GroupCompactionPolicy",
     "yfiles.hierarchic.incremental.GroupingSupport": "yfiles.hierarchic.GroupingSupport",
     "yfiles.hierarchic.incremental.GroupingSupport.IVisitor": "yfiles.hierarchic.IVisitor",
-    "yfiles.hierarchic.incremental.HierarchicLayouter.IncrementalHint": "yfiles.hierarchic.IncrementalHint",
     "yfiles.hierarchic.incremental.IDrawingDistanceCalculator": "yfiles.hierarchic.IDrawingDistanceCalculator",
     "yfiles.hierarchic.incremental.IEdgeData": "yfiles.hierarchic.IEdgeData",
     "yfiles.hierarchic.incremental.IEdgeReverser": "yfiles.hierarchic.IEdgeReverser",
@@ -258,7 +257,6 @@
     "yfiles.hierarchic.incremental.ILayeredComponentsMerger": "yfiles.hierarchic.ILayeredComponentsMerger",
     "yfiles.hierarchic.incremental.ILayers": "yfiles.hierarchic.ILayers",
     "yfiles.hierarchic.incremental.ILayoutDataProvider": "yfiles.hierarchic.ILayoutDataProvider",
-    "yfiles.hierarchic.incremental.IncrementalHintType": "yfiles.hierarchic.IncrementalHintType",
     "yfiles.hierarchic.incremental.INodeData": "yfiles.hierarchic.INodeData",
     "yfiles.hierarchic.incremental.INodePlacer": "yfiles.hierarchic.INodePlacer",
     "yfiles.hierarchic.incremental.IPortAllocator": "yfiles.hierarchic.IPortAllocator",
@@ -285,8 +283,8 @@
     "yfiles.input.AbstractPortCandidateProvider": "yfiles.input.PortCandidateProviderBase",
     "yfiles.input.CompoundKeyEventArgs": "yfiles.view.KeyEventArgs",
     "yfiles.input.CompoundKeyEventType": "yfiles.view.KeyEventType",
-    "yfiles.input.DropCreationCallback": "yfiles",
     "yfiles.input.EmptyPortsCandidateProvider.INSTANCE": "yfiles.input",
+    "yfiles.input.EventRecognizerCallback": "yfiles.input.EventRecognizer",
     "yfiles.input.GraphCommands": "yfiles.input.ICommand",
     "yfiles.input.HandleType": "yfiles.input.HandleTypes",
     "yfiles.input.IActionButtonProvider": "yfiles.input.IClickListener",
@@ -311,6 +309,7 @@
     "yfiles.input.Touch2DEventArgs": "yfiles.view.TouchEventArgs",
     "yfiles.input.Touch2DEvents": "yfiles.input.TouchEventRecognizers",
     "yfiles.input.Touch2DEventTypes": "yfiles.view.TouchEventTypes",
+    "yfiles.InterfaceDefinition": "yfiles.lang.InterfaceDefinition",
     "yfiles.labeling.AbstractLabelingAlgorithm": "yfiles.labeling.LabelingBase",
     "yfiles.labeling.GreedyMISLabeling": "yfiles.labeling.GenericLabeling",
     "yfiles.labeling.MISLabelingAlgorithm": "yfiles.labeling.MISLabelingBase",
@@ -370,7 +369,7 @@
     "yfiles.model.ISelectionModel": "yfiles.view.ISelectionModel",
     "yfiles.model.ItemEventArgs": "yfiles.collections.ItemEventArgs",
     "yfiles.model.ListEnumerable": "yfiles.collections.ListEnumerable",
-    "yfiles.model.MapperDelegate": "yfiles",
+    "yfiles.model.MapperDelegate": "yfiles.graph.MapperDelegate",
     "yfiles.model.ModelManager": "yfiles.view.ModelManager",
     "yfiles.model.SelectionPaintManager": "yfiles.view.SelectionIndicatorManager",
     "yfiles.model.ShowFocusPolicy": "yfiles.view.ShowFocusPolicy",
@@ -396,7 +395,7 @@
     "yfiles.partial.SubgraphPositioningStrategy": "yfiles.partial.SubgraphPlacement",
     "yfiles.radial.RadialLayouter": "yfiles.radial.RadialLayout",
     "yfiles.radial.RadialLayouter.NodeInfo": "yfiles.radial.RadialLayoutNodeInfo",
-    "yfiles.router.polyline.AbstractSegmentInfo": "yfiles.router.AbstractSegmentInfo",
+    "yfiles.router.polyline.AbstractSegmentInfo": "yfiles.router.SegmentInfoBase",
     "yfiles.router.polyline.Alignment": "yfiles.router.Alignment",
     "yfiles.router.polyline.CellEntrance": "yfiles.router.CellEntrance",
     "yfiles.router.polyline.CellSegmentInfo": "yfiles.router.CellSegmentInfo",
@@ -435,9 +434,10 @@
     "yfiles.router.SphereOfAction": "yfiles.router.Scope",
     "yfiles.seriesparallel.DefaultOutEdgeComparator": "yfiles.seriesparallel.DefaultOutEdgeComparer",
     "yfiles.seriesparallel.SeriesParallelLayouter": "yfiles.seriesparallel.SeriesParallelLayout",
+    "yfiles.StructDefinition": "yfiles.lang.StructDefinition",
     "yfiles.support.AbstractUndoUnit": "yfiles.graph.UndoUnitBase",
     "yfiles.support.DelegateUndoUnit": "yfiles.graph.DelegateUndoUnit",
-    "yfiles.support.DelegateUndoUnit.DoHandlerDelegate": "yfiles",
+    "yfiles.support.DelegateUndoUnit.DoHandlerDelegate": "yfiles.graph.DoHandlerDelegate",
     "yfiles.support.Future": "yfiles.graphml.Future",
     "yfiles.support.ICompoundEdit": "yfiles.graph.ICompoundEdit",
     "yfiles.support.IContextLookup": "yfiles.graph.IContextLookup",
@@ -447,10 +447,8 @@
     "yfiles.support.IMementoSupport": "yfiles.graph.IMementoSupport",
     "yfiles.support.ITagOwner": "yfiles.graph.ITagOwner",
     "yfiles.support.IUndoUnit": "yfiles.graph.IUndoUnit",
-    "yfiles.support.LookupCallback": "yfiles",
+    "yfiles.support.LookupCallback": "yfiles.graph.LookupCallback",
     "yfiles.support.LookupChain": "yfiles.graph.LookupChain",
-    "yfiles.support.TypedKey": "yfiles.collections.TypedKey",
-    "yfiles.support.TypedKeyMapper": "yfiles.collections.TypedKeyMapper",
     "yfiles.support.UndoEngine": "yfiles.graph.UndoEngine",
     "yfiles.support.XmlName": "yfiles.graphml.XmlName",
     "yfiles.system.ApplicationCommands": "yfiles.input.ICommand",
@@ -460,14 +458,13 @@
     "yfiles.system.ComponentCommands": "yfiles.input.ICommand",
     "yfiles.system.DashStyle": "yfiles.view.DashStyle",
     "yfiles.system.DashStyles": "yfiles.view.DashStyle",
-    "yfiles.system.DashStyleValueSerializer": "yfiles.graphml.DashStyleValueSerializer",
     "yfiles.system.DragAction": "yfiles.view.DragAction",
     "yfiles.system.DragDropEffects": "yfiles.view.DragDropEffects",
     "yfiles.system.DragDropKeyStates": "yfiles.view.DragDropKeyStates",
     "yfiles.system.DragEventArgs": "yfiles.view.DragEventArgs",
     "yfiles.system.DragSource": "yfiles.view.DragSource",
     "yfiles.system.DropTarget": "yfiles.view.DropTarget",
-    "yfiles.system.ErrorHandling": "yfiles.view.ErrorHandling",
+    "yfiles.system.ErrorHandling": "yfiles.lang.Exception",
     "yfiles.system.EventArgs": "yfiles.lang.EventArgs",
     "yfiles.system.FontStyle": "yfiles.view.FontStyle",
     "yfiles.system.FontWeight": "yfiles.view.FontWeight",
@@ -483,17 +480,17 @@
     "yfiles.system.NavigationCommands": "yfiles.input.ICommand",
     "yfiles.system.PatternBrush": "yfiles.view.PatternFill",
     "yfiles.system.Pen": "yfiles.view.Stroke",
-    "yfiles.system.PenLineCap": "yfiles.view.StrokeLineCap",
-    "yfiles.system.PenLineJoin": "yfiles.view.StrokeLineJoin",
+    "yfiles.system.PenLineCap": "yfiles.view.LineCap",
+    "yfiles.system.PenLineJoin": "yfiles.view.LineJoin",
     "yfiles.system.Pens": "yfiles.view.Stroke",
     "yfiles.system.PropertyChangedEventArgs": "yfiles.lang.PropertyChangedEventArgs",
+    "yfiles.system.PropertyInfo": "yfiles.lang.PropertyInfo",
     "yfiles.system.QueryContinueDragEventArgs": "yfiles.view.QueryContinueDragEventArgs",
     "yfiles.system.RadialGradientBrush": "yfiles.view.RadialGradient",
     "yfiles.system.SolidColorBrush": "yfiles.view.SolidColorFill",
     "yfiles.system.StringTrimming": "yfiles.view.TextWrapping",
     "yfiles.system.TextAlignment": "yfiles.view.HorizontalTextAlignment",
     "yfiles.system.TextDecoration": "yfiles.view.TextDecoration",
-    "yfiles.system.TimeSpan": "yfiles.lang.TimeSpan",
     "yfiles.system.Touch2DEventArgs": "yfiles.view.TouchEventArgs",
     "yfiles.system.Typeface": "yfiles.view.Font",
     "yfiles.system.ValueSerializer": "yfiles.graphml.ValueSerializer",
@@ -547,7 +544,6 @@
     "yfiles.algorithms.YList.ListCursorImpl",
     "yfiles.algorithms.YRandom",
     "yfiles.binding.Binding",
-    "yfiles.canvas.CanvasContainer",
     "yfiles.canvas.CanvasContext",
     "yfiles.canvas.CanvasExtensions",
     "yfiles.canvas.CanvasObjectAddedEventHandler",
@@ -573,6 +569,8 @@
     "yfiles.drawing.EdgeStyleDescriptor",
     "yfiles.drawing.FillMode",
     "yfiles.drawing.HitTestable",
+    "yfiles.drawing.IArrowOwner",
+    "yfiles.drawing.ImageSource",
     "yfiles.drawing.ImageSupport",
     "yfiles.drawing.ISimplePortStyle",
     "yfiles.drawing.RotatedSliderEdgeLabelModel",
@@ -582,6 +580,8 @@
     "yfiles.graph.IHierarchy",
     "yfiles.graph.LayoutExceptionEventArgs",
     "yfiles.hierarchic.ConstraintLayerer.IConstraintFactory",
+    "yfiles.hierarchic.incremental.HierarchicLayouter.IncrementalHint",
+    "yfiles.hierarchic.incremental.IncrementalHintType",
     "yfiles.hierarchic.incremental.OldLayererWrapper",
     "yfiles.input.GraphInputModeController",
     "yfiles.input.InputFeedbackParameter",
@@ -604,12 +604,15 @@
     "yfiles.support.Transition",
     "yfiles.support.TransitionDoneHandler",
     "yfiles.support.TransitionHandler",
+    "yfiles.support.TypedKey",
+    "yfiles.support.TypedKeyMapper",
     "yfiles.support.ValueSerializerAttribute",
     "yfiles.support.XmlLoader",
     "yfiles.support.XmlLoader.XmlLoaded",
     "yfiles.system.CancelEventArgs",
     "yfiles.system.CommandBinding",
     "yfiles.system.ContentPropertyAttribute",
+    "yfiles.system.DashStyleValueSerializer",
     "yfiles.system.FieldInfo",
     "yfiles.system.Freezable",
     "yfiles.system.GradientBrush",
@@ -703,17 +706,18 @@
     "yfiles.algorithms.DataProviders": {
       "createEdgeDataProviderBoolean": "createEdgeDataProviderForBoolean",
       "createEdgeDataProviderDouble": "createEdgeDataProvider",
-      "createEdgeDataProviderInt": "createEdgeDataProvider",
+      "createEdgeDataProviderInt": "createEdgeDataProviderForInt",
       "createNodeDataProviderBoolean": "createNodeDataProviderForBoolean",
       "createNodeDataProviderDouble": "createNodeDataProvider",
-      "createNodeDataProviderInt": "createNodeDataProvider"
+      "createNodeDataProviderInt": "createNodeDataProviderForInt"
     },
     "yfiles.algorithms.Dfs": {
       "startFromNode": "start"
     },
     "yfiles.algorithms.EdgeList": {
       "addAllFromCursor": "addAll",
-      "first": "first1",
+      "first": "firstObject",
+      "last": "popLast",
       "removeItemPointedToByCursor": "removeAtCursor",
       "sortWithComparer": "sort"
     },
@@ -750,9 +754,9 @@
       "stronglyConnectedComponentsWithIndex": "stronglyConnectedComponents"
     },
     "yfiles.algorithms.GraphHider": {
-      "hiddenEdges": "getHiddenEdges",
+      "hiddenEdges": "getHiddenEdgeCursor",
       "hiddenEdgesF": "hiddenEdges",
-      "hiddenNodes": "getHiddenNodes",
+      "hiddenNodes": "getHiddenNodeCursor",
       "hiddenNodesF": "hiddenNodes",
       "hideEdgeList": "hide",
       "hideNode": "hide",
@@ -799,9 +803,6 @@
       "setBool": "setBoolean",
       "setDouble": "set"
     },
-    "yfiles.algorithms.Insets": {
-      "toInsetsD": "toInsets"
-    },
     "yfiles.algorithms.LineSegment": {
       "boxIntersectsSegmentDouble": "boxIntersectsSegment",
       "intersectsPoint": "intersects",
@@ -810,10 +811,10 @@
     "yfiles.algorithms.Maps": {
       "createIndexEdgeMapBoolean": "createIndexEdgeMapForBoolean",
       "createIndexEdgeMapDouble": "createIndexEdgeMap",
-      "createIndexEdgeMapInt": "createIndexEdgeMap",
+      "createIndexEdgeMapInt": "createIndexEdgeMapForInt",
       "createIndexNodeMapBoolean": "createIndexNodeMapForBoolean",
       "createIndexNodeMapDouble": "createIndexNodeMap",
-      "createIndexNodeMapInt": "createIndexNodeMap"
+      "createIndexNodeMapInt": "createIndexNodeMapForInt"
     },
     "yfiles.algorithms.NetworkFlows": {
       "minCostFlowBetweenSourceAndSink": "minCostFlow",
@@ -825,7 +826,8 @@
     },
     "yfiles.algorithms.NodeList": {
       "addAllFromCursor": "addAll",
-      "first": "first1",
+      "first": "firstObject",
+      "last": "popLast",
       "removeItemPointedToByCursor": "removeAtCursor",
       "sortWithComparer": "sort"
     },
@@ -845,8 +847,7 @@
       "distanceBetween": "distance",
       "distanceSqBetween": "distanceSq",
       "distanceSqToCoordinates": "distanceSq",
-      "distanceToCoordinates": "distance",
-      "toPointD": "toPoint"
+      "distanceToCoordinates": "distance"
     },
     "yfiles.algorithms.RankAssignments": {
       "simpleFromArray": "simple",
@@ -864,17 +865,19 @@
       "intersectsRectangle": "intersects",
       "intersectsRectangleCoordinates": "intersects",
       "setFrameFromCenterCoordinates": "setFrameFromCenter",
-      "setFrameFromDiagonalCoordinates": "setFrameFromDiagonal",
-      "toRectDFromRectangle2D": "toRect"
+      "setFrameFromDiagonalCoordinates": "setFrameFromDiagonal"
     },
     "yfiles.algorithms.ShortestPaths": {
       "acyclicToArray": "acyclic",
+      "acyclicToMap": "acyclic",
       "bellmanFordToArray": "bellmanFord",
+      "bellmanFordToMap": "bellmanFord",
       "constructEdgePathFromArray": "constructEdgePath",
       "constructEdgePathToMap": "constructEdgePath",
       "constructNodePathFromArray": "constructNodePath",
       "constructNodePathFromMap": "constructNodePath",
       "dijkstraToArray": "dijkstra",
+      "dijkstraWithCostToMap": "dijkstra",
       "findShortestUniformPathsFromMap": "findShortestUniformPaths",
       "singleSourceSingleSinkToArray": "singleSourceSingleSink",
       "singleSourceSingleSinkToMap": "singleSourceSingleSink",
@@ -896,12 +899,10 @@
     "yfiles.algorithms.Triangulator": {
       "triangulatePointsFromList": "triangulatePoints"
     },
-    "yfiles.algorithms.YDimension": {
-      "toSizeD": "toSize"
-    },
     "yfiles.algorithms.YList": {
       "addAllFromCursor": "addAll",
-      "first": "first1",
+      "first": "firstObject",
+      "last": "popLast",
       "removeItemPointedToByCursor": "removeAtCursor",
       "sortWithComparer": "sort"
     },
@@ -916,22 +917,18 @@
     },
     "yfiles.algorithms.YPoint": {
       "distanceDouble": "distance",
-      "distanceToDouble": "distanceTo",
-      "toPointD": "toPoint"
+      "distanceToDouble": "distanceTo"
     },
     "yfiles.algorithms.YRectangle": {
       "containsPointDouble": "contains",
       "containsRectangle": "contains",
       "containsRectangleCoordinates": "contains",
       "containsRectangleCoordinatesWithBorder": "contains",
-      "containsRectangleDouble": "contains",
-      "toRectD": "toRect",
-      "toSizeD": "toSize"
+      "containsRectangleDouble": "contains"
     },
     "yfiles.algorithms.YVector": {
       "addPointToVector": "add",
-      "addVectors": "add",
-      "toPointD": "toPoint"
+      "addVectors": "add"
     },
     "yfiles.canvas.Animator": {
       "animateAndWait": "animate",
@@ -964,6 +961,8 @@
       "addTouch2DUpListener": "addTouchUpListener",
       "compare": "compareRenderOrder",
       "defsManager": "svgDefsManager",
+      "getCurrentTouchDevices": "currentTouchDevices",
+      "isDeviceDown": "isTouchDeviceDown",
       "lastMouse2DEvent": "lastMouseEvent",
       "printCommandsEnabled": "navigationCommandsEnabled",
       "removeCompoundKeyPressedListener": "removeKeyDownListener",
@@ -994,10 +993,7 @@
       "zoomToWithCenter": "zoomTo"
     },
     "yfiles.canvas.CanvasCursor": {
-      "SIZE_NE": "SIZE_N",
-      "SIZE_NW": "SIZE_N",
-      "SIZE_SE": "SIZE_S",
-      "SIZE_SW": "SIZE_S"
+      "CROSS": "CROSSHAIR"
     },
     "yfiles.canvas.GraphControl": {
       "addCompoundKeyPressedListener": "addKeyDownListener",
@@ -1022,10 +1018,13 @@
       "addTouch2DUpListener": "addTouchUpListener",
       "clipboardEnabled": "enabled",
       "compare": "compareRenderOrder",
+      "createSelectionPaintManager": "createSelection",
       "defsManager": "svgDefsManager",
       "fitGraphBoundsWithInsets": "fitGraphBounds",
       "focusPaintManager": "focusIndicatorManager",
+      "getCurrentTouchDevices": "currentTouchDevices",
       "highlightPaintManager": "highlightIndicatorManager",
+      "isDeviceDown": "isTouchDeviceDown",
       "lastMouse2DEvent": "lastMouseEvent",
       "printCommandsEnabled": "navigationCommandsEnabled",
       "removeCompoundKeyPressedListener": "removeKeyDownListener",
@@ -1082,7 +1081,9 @@
       "createGraphCanvasVisualCreator": "createCanvasVisualCreator",
       "createGraphVisualCreator": "createSvgVisualCreator",
       "defsManager": "svgDefsManager",
+      "getCurrentTouchDevices": "currentTouchDevices",
       "graphControl": "graphComponent",
+      "isDeviceDown": "isTouchDeviceDown",
       "lastMouse2DEvent": "lastMouseEvent",
       "printCommandsEnabled": "navigationCommandsEnabled",
       "removeCompoundKeyPressedListener": "removeKeyDownListener",
@@ -1116,11 +1117,18 @@
     "yfiles.canvas.ICanvasContext": {
       "safeGet": "lookup"
     },
+    "yfiles.canvas.ICanvasObject": {
+      "next": "nextSibling",
+      "previous": "previousSibling"
+    },
     "yfiles.canvas.ICanvasObjectDescriptor": {
       "getVisibilityTest": "getVisibilityTestable"
     },
     "yfiles.canvas.ICanvasObjectGroup": {
-      "first": "first1"
+      "first": "firstChild",
+      "last": "lastChild",
+      "next": "nextSibling",
+      "previous": "previousSibling"
     },
     "yfiles.canvas.SvgExport": {
       "getScaleForHeight": "calculateScaleForHeight",
@@ -1182,7 +1190,6 @@
       "containsWithValue": "has",
       "count": "size",
       "getDictionaryEnumerator": "getEnumerator",
-      "getEnumerableOfType": "ofType",
       "getObject": "get",
       "getObjectEnumerator": "getEnumerator",
       "objectKeys": "keys",
@@ -1213,9 +1220,6 @@
       "getElementSum": "sum",
       "getEnumerableAsArray": "toArray",
       "getEnumerableAsList": "toList",
-      "getEnumerableOfType": "ofType",
-      "getFirstElement": "first",
-      "getFirstElementOrDefault": "firstOrDefault",
       "getFirstElementOrDefaultWithPredicate": "firstOrDefault",
       "getFirstElementWithPredicate": "first",
       "getLastElement": "last",
@@ -1236,7 +1240,6 @@
       "containsValue": "includes",
       "copyToArray": "copyTo",
       "count": "size",
-      "getEnumerableOfType": "ofType",
       "getListEnumerator": "getEnumerator",
       "getObject": "get",
       "getObjectEnumerator": "getEnumerator",
@@ -1297,13 +1300,17 @@
     "yfiles.drawing.GeneralPath.PathCursor": {
       "getCurrentEndPointValueArray": "getCurrentEndPoint",
       "getCurrentEndPointWithCoordinatesSValueArray": "getCurrentEndPoint",
-      "getCurrentSingles": "getCurrent"
+      "getCurrentEndPointX": "currentEndPointX",
+      "getCurrentEndPointY": "currentEndPointY",
+      "getCurrentSingles": "getCurrent",
+      "getPathType": "pathType"
     },
     "yfiles.drawing.GenericLabelModel": {
       "addParameterWithDescriptor": "addParameter",
       "safeGet": "lookup"
     },
     "yfiles.drawing.GenericPortLocationModel": {
+      "parameters": "locationParameters",
       "safeGet": "lookup"
     },
     "yfiles.drawing.GraphModelManager": {
@@ -1312,7 +1319,11 @@
       "getCanvasObjectGroupForNode": "getCanvasObjectGroup",
       "getCanvasObjectGroupForPort": "getCanvasObjectGroup",
       "getCanvasObjects": "getCanvasObject",
+      "hitTestEnumerator": "hitTester",
       "useHierarchicNesting": "useHierarchicEdgeNesting"
+    },
+    "yfiles.drawing.IIconLabelStyle": {
+      "innerStyleInsets": "wrappedInsets"
     },
     "yfiles.drawing.InteriorLabelModel": {
       "safeGet": "lookup"
@@ -1335,13 +1346,21 @@
     },
     "yfiles.drawing.ISimpleLabelStyle": {
       "backgroundBrush": "backgroundFill",
-      "backgroundPen": "backgroundStroke"
+      "backgroundPen": "backgroundStroke",
+      "textAlignment": "horizontalTextAlignment"
     },
     "yfiles.drawing.LabelStyleDecorationInstaller": {
       "zoomMode": "zoomPolicy"
     },
     "yfiles.drawing.NinePositionsEdgeLabelModel": {
       "safeGet": "lookup"
+    },
+    "yfiles.drawing.NinePositionsEdgeLabelModel.Position": {
+      "ABOVE": "SOURCE_ABOVE",
+      "BELOW": "SOURCE_BELOW",
+      "CENTER": "CENTER_ABOVE",
+      "SOURCE": "SOURCE_BELOW",
+      "TARGET": "TARGET_BELOW"
     },
     "yfiles.drawing.NodeScaledPortLocationModel": {
       "safeGet": "lookup"
@@ -1384,7 +1403,8 @@
     },
     "yfiles.drawing.SimpleLabelStyle": {
       "backgroundBrush": "backgroundFill",
-      "backgroundPen": "backgroundStroke"
+      "backgroundPen": "backgroundStroke",
+      "textAlignment": "horizontalTextAlignment"
     },
     "yfiles.drawing.SimpleLabelStyleRenderer": {
       "getVerticalAlignment": "getVerticalTextAlignment"
@@ -1398,41 +1418,28 @@
     "yfiles.drawing.StripeLabelModel": {
       "safeGet": "lookup"
     },
-    "yfiles.drawing.TemplatePortStyleRenderer": {
-      "getPreferredSizeWithContext": "getPreferredSize"
-    },
     "yfiles.geometry.IMutableOrientedRectangle": {
-      "containsPointWithEps": "containsWithPointAndEps",
       "getAnchorLocation": "anchorLocation",
       "setUpVectorValues": "setUpVector"
     },
     "yfiles.geometry.IMutableRectangle": {
-      "addPoint": "add",
-      "addRectangle": "add",
-      "containsPoint": "contains",
-      "containsPointD": "contains",
       "getBottomLeft": "bottomLeft",
       "getBottomRight": "bottomRight",
       "getMaxX": "maxX",
       "getMaxY": "maxY",
       "getTopLeft": "topLeft",
-      "getTopRight": "topRight",
-      "toRectD": "toRect"
+      "getTopRight": "topRight"
     },
     "yfiles.geometry.IOrientedRectangle": {
-      "containsPointWithEps": "containsWithPointAndEps",
       "getAnchorLocation": "anchorLocation"
     },
     "yfiles.geometry.IRectangle": {
-      "containsPoint": "contains",
-      "containsPointD": "contains",
       "getBottomLeft": "bottomLeft",
       "getBottomRight": "bottomRight",
       "getMaxX": "maxX",
       "getMaxY": "maxY",
       "getTopLeft": "topLeft",
-      "getTopRight": "topRight",
-      "toRectD": "toRect"
+      "getTopRight": "topRight"
     },
     "yfiles.geometry.Matrix2D": {
       "rotateWithCenter": "rotate",
@@ -1446,21 +1453,11 @@
       "translateWithOrder": "translate"
     },
     "yfiles.geometry.OrientedRectangle": {
-      "containsPointWithEps": "containsWithPointAndEps",
       "empty": "isEmpty",
       "getAnchorLocation": "anchorLocation",
       "setUpVectorValues": "setUpVector"
     },
-    "yfiles.geometry.PointD": {
-      "distanceToPointD": "distanceTo"
-    },
     "yfiles.geometry.Rectangle": {
-      "addPoint": "add",
-      "addRectangle": "add",
-      "addRectangleWithBounds": "add",
-      "containsPoint": "contains",
-      "containsPointD": "contains",
-      "containsPointWithEps": "containsWithPointAndEps",
       "empty": "isEmpty",
       "getAnchorLocation": "anchorLocation",
       "getBottomLeft": "bottomLeft",
@@ -1468,14 +1465,10 @@
       "getMaxX": "maxX",
       "getMaxY": "maxY",
       "getTopLeft": "topLeft",
-      "getTopRight": "topRight",
-      "reshapeRectangleToIRectangle": "reshape",
-      "toRectD": "toRect"
+      "getTopRight": "topRight"
     },
     "yfiles.geometry.RectD": {
-      "containsPoint": "contains",
-      "containsPointD": "contains",
-      "containsPointDEps": "containsPointEps",
+      "containsPointDEps": "containsWithEps",
       "convertToRectangle": "convertToMutableRectangle",
       "getBottomLeft": "bottomLeft",
       "getBottomRight": "bottomRight",
@@ -1485,8 +1478,7 @@
       "getTopRight": "topRight",
       "intersectsOrientedRectangleEps": "intersects",
       "intersectsRectD": "intersects",
-      "isEmptyRectD": "isEmpty",
-      "toRectD": "toRect"
+      "isEmptyRectD": "isEmpty"
     },
     "yfiles.graph.AbstractDummyEdgeConverter": {
       "addDummyEdge": "addFoldingEdge",
@@ -1503,13 +1495,12 @@
       "addLabelWithParameterStyleAndTag": "addLabel",
       "addLabelWithParameterStylePreferredSizeAndTag": "addLabel",
       "addLabelWithTag": "addLabel",
-      "addPortAtLocationWithStyle": "addPortAt",
+      "addPortAtLocationWithStyle": "addPort",
       "addPortWithParameter": "addPort",
       "addPortWithParameterAndStyle": "addPort",
       "addPortWithParameterStyleAndTag": "addPort",
-      "adjustPreferredSize": "adjustLabelPreferredSize",
+      "appendBend": "addBend",
       "beginEditWithUndoNameRedoNameAndItems": "beginEdit",
-      "calculatePreferredSize": "calculateLabelPreferredSize",
       "calculatePreferredSizeWithStyleAndParameter": "calculateLabelPreferredSize",
       "calculatePreferredSizeWithStyleParameterAndTag": "calculateLabelPreferredSize",
       "createEdgeAtPorts": "createEdge",
@@ -1519,7 +1510,6 @@
       "createEdgeWithPortsStyleAndTag": "createEdge",
       "createLabelModelParameter": "createDefaultLabelLayoutParameter",
       "createLocationModelParameter": "createDefaultPortLocationParameter",
-      "createLocationModelParameterForLocation": "createDefaultPortLocationParameter",
       "createNodeWithBounds": "createNode",
       "createNodeWithBoundsAndStyle": "createNode",
       "createNodeWithBoundsAndTag": "createNode",
@@ -1530,14 +1520,11 @@
       "edgesAtOwner": "edgesAt",
       "edgesAtPort": "edgesAt",
       "getDecorator": "decorator",
-      "getEdgeAtOwners": "getEdge",
-      "getEdgeAtPorts": "getEdge",
-      "portDegree": "degree",
-      "portInDegree": "inDegree",
-      "portInEdgesAt": "inEdgesAt",
-      "portOutDegree": "outDegree",
-      "portOutEdgesAt": "outEdgesAt",
-      "portOwnerDegree": "degree",
+      "onBendChanged": "onBendTagChanged",
+      "onEdgeChanged": "onEdgeTagChanged",
+      "onLabelChanged": "onLabelTagChanged",
+      "onNodeChanged": "onNodeTagChanged",
+      "onPortChanged": "onPortTagChanged",
       "removeBend": "remove",
       "removeEdge": "remove",
       "removeLabel": "remove",
@@ -1546,15 +1533,14 @@
       "removePort": "remove",
       "removePortOwner": "remove",
       "safeGet": "lookup",
-      "setCenter": "setNodeCenter",
       "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
+      "setLabelStyle": "setStyle",
       "setLocationModelParameter": "setPortLocationParameter",
       "setNodeStyle": "setStyle",
       "setPorts": "setEdgePorts",
       "setPortStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
-      "setRelativeLocation": "setRelativePortLocation",
       "typedEdgesAtPort": "edgesAt"
     },
     "yfiles.graph.DataMapAdapter": {
@@ -1583,6 +1569,7 @@
       "initialSize": "folderNodeSize"
     },
     "yfiles.graph.DefaultEdgeIntersectionCalculator": {
+      "cropEdgePathWithEdgePathAtSourceAndArrow": "cropEdgePathAtArrow",
       "inside": "isInside"
     },
     "yfiles.graph.DefaultGraph": {
@@ -1592,19 +1579,16 @@
       "addLabelWithParameterStyleAndTag": "addLabel",
       "addLabelWithParameterStylePreferredSizeAndTag": "addLabel",
       "addLabelWithTag": "addLabel",
-      "addPortAtLocationWithStyle": "addPortAt",
+      "addPortAtLocationWithStyle": "addPort",
       "addPortWithParameter": "addPort",
       "addPortWithParameterAndStyle": "addPort",
       "addPortWithParameterStyleAndTag": "addPort",
-      "adjustPreferredSize": "adjustLabelPreferredSize",
+      "appendBend": "addBend",
       "beginEditWithUndoNameRedoNameAndItems": "beginEdit",
-      "calculatePreferredSize": "calculateLabelPreferredSize",
       "calculatePreferredSizeWithStyleAndParameter": "calculateLabelPreferredSize",
       "calculatePreferredSizeWithStyleParameterAndTag": "calculateLabelPreferredSize",
       "createDefaultEdgeLabelModelParameter": "createDefaultLabelLayoutParameter",
-      "createDefaultEdgePortLocationParameter": "createDefaultPortLocationParameter",
       "createDefaultNodeLabelModelParameter": "createDefaultLabelLayoutParameter",
-      "createDefaultNodePortLocationParameter": "createDefaultPortLocationParameter",
       "createEdgeAtPorts": "createEdge",
       "createEdgeWithNodesAndStyle": "createEdge",
       "createEdgeWithNodesStyleAndTag": "createEdge",
@@ -1612,7 +1596,6 @@
       "createEdgeWithPortsStyleAndTag": "createEdge",
       "createLabelModelParameter": "createDefaultLabelLayoutParameter",
       "createLocationModelParameter": "createDefaultPortLocationParameter",
-      "createLocationModelParameterForLocation": "createDefaultPortLocationParameter",
       "createNodeWithBounds": "createNode",
       "createNodeWithBoundsAndStyle": "createNode",
       "createNodeWithBoundsAndTag": "createNode",
@@ -1623,8 +1606,6 @@
       "edgesAtOwner": "edgesAt",
       "edgesAtPort": "edgesAt",
       "getDecorator": "decorator",
-      "getEdgeAtOwners": "getEdge",
-      "getEdgeAtPorts": "getEdge",
       "onBendChanged": "onBendTagChanged",
       "onChangingEdge": "onChangingEdgeStyle",
       "onChangingLabel": "onChangingLabelText",
@@ -1634,12 +1615,6 @@
       "onLabelChanged": "onLabelTagChanged",
       "onNodeChanged": "onNodeTagChanged",
       "onPortChanged": "onPortTagChanged",
-      "portDegree": "degree",
-      "portInDegree": "inDegree",
-      "portInEdgesAt": "inEdgesAt",
-      "portOutDegree": "outDegree",
-      "portOutEdgesAt": "outEdgesAt",
-      "portOwnerDegree": "degree",
       "removeBend": "remove",
       "removeEdge": "remove",
       "removeLabel": "remove",
@@ -1648,15 +1623,14 @@
       "removePort": "remove",
       "removePortOwner": "remove",
       "safeGet": "lookup",
-      "setCenter": "setNodeCenter",
       "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
+      "setLabelStyle": "setStyle",
       "setLocationModelParameter": "setPortLocationParameter",
       "setNodeStyle": "setStyle",
       "setPorts": "setEdgePorts",
       "setPortStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
-      "setRelativeLocation": "setRelativePortLocation",
       "typedEdgesAtPort": "edgesAt"
     },
     "yfiles.graph.DefaultLabelModelParameterFinder": {
@@ -1684,13 +1658,12 @@
       "addLabelWithParameterStyleAndTag": "addLabel",
       "addLabelWithParameterStylePreferredSizeAndTag": "addLabel",
       "addLabelWithTag": "addLabel",
-      "addPortAtLocationWithStyle": "addPortAt",
+      "addPortAtLocationWithStyle": "addPort",
       "addPortWithParameter": "addPort",
       "addPortWithParameterAndStyle": "addPort",
       "addPortWithParameterStyleAndTag": "addPort",
-      "adjustPreferredSize": "adjustLabelPreferredSize",
+      "appendBend": "addBend",
       "beginEditWithUndoNameRedoNameAndItems": "beginEdit",
-      "calculatePreferredSize": "calculateLabelPreferredSize",
       "calculatePreferredSizeWithStyleAndParameter": "calculateLabelPreferredSize",
       "calculatePreferredSizeWithStyleParameterAndTag": "calculateLabelPreferredSize",
       "createEdgeAtPorts": "createEdge",
@@ -1700,7 +1673,6 @@
       "createEdgeWithPortsStyleAndTag": "createEdge",
       "createLabelModelParameter": "createDefaultLabelLayoutParameter",
       "createLocationModelParameter": "createDefaultPortLocationParameter",
-      "createLocationModelParameterForLocation": "createDefaultPortLocationParameter",
       "createNodeWithBounds": "createNode",
       "createNodeWithBoundsAndStyle": "createNode",
       "createNodeWithBoundsAndTag": "createNode",
@@ -1713,15 +1685,12 @@
       "edgesAtPort": "edgesAt",
       "fullGraph": "wrappedGraph",
       "getDecorator": "decorator",
-      "getEdgeAtOwners": "getEdge",
-      "getEdgeAtPorts": "getEdge",
       "nodePredicateChangedForNode": "nodePredicateChanged",
-      "portDegree": "degree",
-      "portInDegree": "inDegree",
-      "portInEdgesAt": "inEdgesAt",
-      "portOutDegree": "outDegree",
-      "portOutEdgesAt": "outEdgesAt",
-      "portOwnerDegree": "degree",
+      "onBendChanged": "onBendTagChanged",
+      "onEdgeChanged": "onEdgeTagChanged",
+      "onLabelChanged": "onLabelTagChanged",
+      "onNodeChanged": "onNodeTagChanged",
+      "onPortChanged": "onPortTagChanged",
       "removeBend": "remove",
       "removeEdge": "remove",
       "removeLabel": "remove",
@@ -1730,15 +1699,14 @@
       "removePort": "remove",
       "removePortOwner": "remove",
       "safeGet": "lookup",
-      "setCenter": "setNodeCenter",
       "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
+      "setLabelStyle": "setStyle",
       "setLocationModelParameter": "setPortLocationParameter",
       "setNodeStyle": "setStyle",
       "setPorts": "setEdgePorts",
       "setPortStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
-      "setRelativeLocation": "setRelativePortLocation",
       "typedEdgesAtPort": "edgesAt"
     },
     "yfiles.graph.FoldingManager": {
@@ -1752,6 +1720,8 @@
     },
     "yfiles.graph.GraphClipboard": {
       "copyGraphToRoot": "copy",
+      "getLabelModelParameter": "getLabelLayoutParameter",
+      "getPortLocationModelParameter": "getPortLocationParameter",
       "getTargetBend": "getTargetEdge",
       "getTargetLabel": "getTargetLabeledItem",
       "pasteSubset": "paste",
@@ -1763,7 +1733,9 @@
     "yfiles.graph.GraphCopier": {
       "copyGraph": "copy",
       "copyGraphToRoot": "copy",
+      "copyLabelModelParameter": "copyLabelLayoutParameter",
       "copyNodeWithParent": "copyNode",
+      "copyPortLocationModelParameter": "copyPortLocationParameter",
       "copyViewStates": "copyFoldingStates"
     },
     "yfiles.graph.GraphItemTypes": {
@@ -1775,9 +1747,14 @@
     },
     "yfiles.graph.IColumn": {
       "columns": "childColumns",
-      "getChildren": "getChildStripes",
-      "getEffectiveMinSize": "getActualMinSize",
-      "getParent": "getParentStripe",
+      "getActualInsets": "actualInsets",
+      "getActualSize": "actualSize",
+      "getDescendants": "descendants",
+      "getEffectiveMinSize": "actualMinSize",
+      "getIndex": "index",
+      "getLeaves": "leaves",
+      "getParent": "parentStripe",
+      "getRoot": "root",
       "safeGet": "lookup"
     },
     "yfiles.graph.IDummyEdgeConverter": {
@@ -1786,7 +1763,6 @@
     "yfiles.graph.IEdge": {
       "getSourceNode": "sourceNode",
       "getTargetNode": "targetNode",
-      "oppositePortOwner": "opposite",
       "safeGet": "lookup"
     },
     "yfiles.graph.IFoldedGraph": {
@@ -1803,13 +1779,12 @@
       "addLabelWithParameterStyleAndTag": "addLabel",
       "addLabelWithParameterStylePreferredSizeAndTag": "addLabel",
       "addLabelWithTag": "addLabel",
-      "addPortAtLocationWithStyle": "addPortAt",
+      "addPortAtLocationWithStyle": "addPort",
       "addPortWithParameter": "addPort",
       "addPortWithParameterAndStyle": "addPort",
       "addPortWithParameterStyleAndTag": "addPort",
-      "adjustPreferredSize": "adjustLabelPreferredSize",
+      "appendBend": "addBend",
       "beginEditWithUndoNameRedoNameAndItems": "beginEdit",
-      "calculatePreferredSize": "calculateLabelPreferredSize",
       "calculatePreferredSizeWithStyleAndParameter": "calculateLabelPreferredSize",
       "calculatePreferredSizeWithStyleParameterAndTag": "calculateLabelPreferredSize",
       "createEdgeAtPorts": "createEdge",
@@ -1819,7 +1794,6 @@
       "createEdgeWithPortsStyleAndTag": "createEdge",
       "createLabelModelParameter": "createDefaultLabelLayoutParameter",
       "createLocationModelParameter": "createDefaultPortLocationParameter",
-      "createLocationModelParameterForLocation": "createDefaultPortLocationParameter",
       "createNodeWithBounds": "createNode",
       "createNodeWithBoundsAndStyle": "createNode",
       "createNodeWithBoundsAndTag": "createNode",
@@ -1830,14 +1804,6 @@
       "edgesAtOwner": "edgesAt",
       "edgesAtPort": "edgesAt",
       "getDecorator": "decorator",
-      "getEdgeAtOwners": "getEdge",
-      "getEdgeAtPorts": "getEdge",
-      "portDegree": "degree",
-      "portInDegree": "inDegree",
-      "portInEdgesAt": "inEdgesAt",
-      "portOutDegree": "outDegree",
-      "portOutEdgesAt": "outEdgesAt",
-      "portOwnerDegree": "degree",
       "removeBend": "remove",
       "removeEdge": "remove",
       "removeLabel": "remove",
@@ -1846,31 +1812,27 @@
       "removePort": "remove",
       "removePortOwner": "remove",
       "safeGet": "lookup",
-      "setCenter": "setNodeCenter",
       "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
+      "setLabelStyle": "setStyle",
       "setLocationModelParameter": "setPortLocationParameter",
       "setNodeStyle": "setStyle",
       "setPorts": "setEdgePorts",
       "setPortStyle": "setStyle",
       "setPreferredSize": "setLabelPreferredSize",
-      "setRelativeLocation": "setRelativePortLocation",
       "typedEdgesAtPort": "edgesAt"
     },
     "yfiles.graph.IGraphClipboardContext": {
       "safeGet": "lookup"
     },
     "yfiles.graph.IGroupedGraph": {
-      "adjustGroupNodeBounds": "adjustGroupNodeLayout",
       "autoAdjustGroupNodeBounds": "adjustGroupNodeLayout",
       "createGroupNodeWithParent": "createGroupNode",
       "createGroupNodeWithParentBoundsStyleAndTag": "createGroupNode",
       "createNodeWithParent": "createNode",
       "createNodeWithParentAndBounds": "createNode",
       "createNodeWithParentBoundsAndStyle": "createNode",
-      "createNodeWithParentBoundsStyleAndTag": "createNode",
-      "groupNodesArray": "groupNodes",
-      "groupNodesWithParent": "groupNodes"
+      "createNodeWithParentBoundsStyleAndTag": "createNode"
     },
     "yfiles.graph.ILabel": {
       "getIndex": "index",
@@ -1917,16 +1879,26 @@
       "getPorts": "getPortsInBox"
     },
     "yfiles.graph.IRow": {
-      "getChildren": "getChildStripes",
-      "getEffectiveMinSize": "getActualMinSize",
-      "getParent": "getParentStripe",
+      "getActualInsets": "actualInsets",
+      "getActualSize": "actualSize",
+      "getDescendants": "descendants",
+      "getEffectiveMinSize": "actualMinSize",
+      "getIndex": "index",
+      "getLeaves": "leaves",
+      "getParent": "parentStripe",
+      "getRoot": "root",
       "rows": "childRows",
       "safeGet": "lookup"
     },
     "yfiles.graph.IStripe": {
-      "getChildren": "getChildStripes",
-      "getEffectiveMinSize": "getActualMinSize",
-      "getParent": "getParentStripe",
+      "getActualInsets": "actualInsets",
+      "getActualSize": "actualSize",
+      "getDescendants": "descendants",
+      "getEffectiveMinSize": "actualMinSize",
+      "getIndex": "index",
+      "getLeaves": "leaves",
+      "getParent": "parentStripe",
+      "getRoot": "root",
       "safeGet": "lookup"
     },
     "yfiles.graph.IStripeSelection": {
@@ -1940,57 +1912,26 @@
       "addLabelWithParameterStyleAndTag": "addLabel",
       "addLabelWithParameterStylePreferredSizeAndTag": "addLabel",
       "addLabelWithTag": "addLabel",
-      "adjustPreferredSize": "adjustLabelPreferredSize",
-      "calculatePreferredSize": "calculateLabelPreferredSize",
-      "createColumnAtIndexWithSize": "createColumn",
-      "createColumnAtIndexWithSizeAndStyle": "createColumn",
-      "createColumnAtIndexWithSizeAndTag": "createColumn",
       "createColumnAtIndexWithSizeInsetsStyleAndTag": "createChildColumn",
-      "createColumnAtIndexWithSizeStyleAndTag": "createColumn",
-      "createColumnWithSize": "createColumn",
-      "createColumnWithSizeAndStyle": "createColumn",
-      "createColumnWithSizeAndTag": "createColumn",
-      "createColumnWithSizeStyleAndTag": "createColumn",
-      "createColumnWithStyle": "createColumn",
-      "createColumnWithStyleAndTag": "createColumn",
-      "createColumnWithTag": "createColumn",
-      "createRootColumn": "createColumn",
-      "createRootColumnAtIndexWithSize": "createColumn",
+      "createRootColumn": "rootColumn",
       "createRootColumnAtIndexWithSizeAndStyle": "createColumn",
-      "createRootColumnAtIndexWithSizeAndTag": "createColumn",
       "createRootColumnAtIndexWithSizeStyleAndTag": "createColumn",
-      "createRootColumnWithSize": "createColumn",
       "createRootColumnWithSizeAndStyle": "createColumn",
-      "createRootColumnWithSizeAndTag": "createColumn",
       "createRootColumnWithSizeStyleAndTag": "createColumn",
       "createRootColumnWithStyle": "createColumn",
       "createRootColumnWithStyleAndTag": "createColumn",
-      "createRootColumnWithTag": "createColumn",
-      "createRootRow": "createRow",
-      "createRootRowAtIndexWithSize": "createRow",
       "createRootRowAtIndexWithSizeAndTag": "createRow",
       "createRootRowAtIndexWithSizeStyleAndTag": "createRow",
-      "createRootRowWithSize": "createRow",
       "createRootRowWithSizeAndStyle": "createRow",
-      "createRootRowWithSizeAndTag": "createRow",
       "createRootRowWithSizeStyleAndTag": "createRow",
       "createRootRowWithStyle": "createRow",
       "createRootRowWithStyleAndTag": "createRow",
-      "createRootRowWithTag": "createRow",
-      "createRowAtIndexWithSize": "createRow",
-      "createRowAtIndexWithSizeAndStyle": "createRow",
-      "createRowAtIndexWithSizeAndTag": "createRow",
       "createRowAtIndexWithSizeInsetsStyleAndTag": "createChildRow",
-      "createRowAtIndexWithSizeStyleAndTag": "createRow",
-      "createRowWithSize": "createRow",
-      "createRowWithSizeAndStyle": "createRow",
-      "createRowWithSizeAndTag": "createRow",
-      "createRowWithSizeStyleAndTag": "createRow",
-      "createRowWithStyle": "createRow",
-      "createRowWithStyleAndTag": "createRow",
-      "createRowWithTag": "createRow",
       "removeLabel": "remove",
+      "removeRecursively": "remove",
+      "removeRecursivelyWithResize": "remove",
       "removeStripe": "remove",
+      "removeWithResize": "remove",
       "safeGet": "lookup",
       "setColumnParent": "setParent",
       "setColumnParentAtIndex": "setParent",
@@ -2048,7 +1989,6 @@
     "yfiles.graph.SimpleEdge": {
       "getSourceNode": "sourceNode",
       "getTargetNode": "targetNode",
-      "oppositePortOwner": "opposite",
       "safeGet": "lookup"
     },
     "yfiles.graph.SimpleLabel": {
@@ -2081,21 +2021,8 @@
       "addLabelWithParameterStyleAndTag": "addLabel",
       "addLabelWithParameterStylePreferredSizeAndTag": "addLabel",
       "addLabelWithTag": "addLabel",
-      "adjustPreferredSize": "adjustLabelPreferredSize",
-      "calculatePreferredSize": "calculateLabelPreferredSize",
-      "createColumnAtIndexWithSize": "createColumn",
-      "createColumnAtIndexWithSizeAndStyle": "createColumn",
-      "createColumnAtIndexWithSizeAndTag": "createColumn",
       "createColumnAtIndexWithSizeInsetsStyleAndTag": "createChildColumn",
-      "createColumnAtIndexWithSizeStyleAndTag": "createColumn",
       "createColumnLabelDefaults": "createColumnDefaults",
-      "createColumnWithSize": "createColumn",
-      "createColumnWithSizeAndStyle": "createColumn",
-      "createColumnWithSizeAndTag": "createColumn",
-      "createColumnWithSizeStyleAndTag": "createColumn",
-      "createColumnWithStyle": "createColumn",
-      "createColumnWithStyleAndTag": "createColumn",
-      "createColumnWithTag": "createColumn",
       "createDefaultColumnInsets": "createColumnDefaults",
       "createDefaultColumnLabelModelParameter": "createColumnDefaults",
       "createDefaultColumnLabelStyle": "createColumnDefaults",
@@ -2104,47 +2031,29 @@
       "createDefaultRowLabelModelParameter": "createRowDefaults",
       "createDefaultRowLabelStyle": "createRowDefaults",
       "createDefaultRowStyle": "createRowDefaults",
-      "createRootColumn": "createColumn",
-      "createRootColumnAtIndexWithSize": "createColumn",
+      "createRootColumn": "rootColumn",
       "createRootColumnAtIndexWithSizeAndStyle": "createColumn",
-      "createRootColumnAtIndexWithSizeAndTag": "createColumn",
       "createRootColumnAtIndexWithSizeStyleAndTag": "createColumn",
-      "createRootColumnWithSize": "createColumn",
       "createRootColumnWithSizeAndStyle": "createColumn",
-      "createRootColumnWithSizeAndTag": "createColumn",
       "createRootColumnWithSizeStyleAndTag": "createColumn",
       "createRootColumnWithStyle": "createColumn",
       "createRootColumnWithStyleAndTag": "createColumn",
-      "createRootColumnWithTag": "createColumn",
-      "createRootRow": "createRow",
-      "createRootRowAtIndexWithSize": "createRow",
       "createRootRowAtIndexWithSizeAndTag": "createRow",
       "createRootRowAtIndexWithSizeStyleAndTag": "createRow",
-      "createRootRowWithSize": "createRow",
       "createRootRowWithSizeAndStyle": "createRow",
-      "createRootRowWithSizeAndTag": "createRow",
       "createRootRowWithSizeStyleAndTag": "createRow",
       "createRootRowWithStyle": "createRow",
       "createRootRowWithStyleAndTag": "createRow",
-      "createRootRowWithTag": "createRow",
-      "createRowAtIndexWithSize": "createRow",
-      "createRowAtIndexWithSizeAndStyle": "createRow",
-      "createRowAtIndexWithSizeAndTag": "createRow",
       "createRowAtIndexWithSizeInsetsStyleAndTag": "createChildRow",
-      "createRowAtIndexWithSizeStyleAndTag": "createRow",
       "createRowLabelDefaults": "createRowDefaults",
-      "createRowWithSize": "createRow",
-      "createRowWithSizeAndStyle": "createRow",
-      "createRowWithSizeAndTag": "createRow",
-      "createRowWithSizeStyleAndTag": "createRow",
-      "createRowWithStyle": "createRow",
-      "createRowWithStyleAndTag": "createRow",
-      "createRowWithTag": "createRow",
       "onStripeAdded": "onStripeCreated",
       "registerDynamicUndoSupport": "installDynamicUndoSupport",
       "registerStaticUndoSupport": "installStaticUndoSupport",
       "removeLabel": "remove",
+      "removeRecursively": "remove",
+      "removeRecursivelyWithResize": "remove",
       "removeStripe": "remove",
+      "removeWithResize": "remove",
       "safeGet": "lookup",
       "setColumnParent": "setParent",
       "setColumnParentAtIndex": "setParent",
@@ -2180,13 +2089,13 @@
       "addUriToKeyDefinition": "setKeyDefinitionUri"
     },
     "yfiles.graphml.ChildParseContext": {
-      "deserializeWithTargetNode": "deserialize",
+      "deserialize": "deserializeCore",
+      "deserializeWithTargetNode": "deserializeCore",
       "safeGet": "lookup"
     },
     "yfiles.graphml.ChildWriteContext": {
       "safeGet": "lookup",
-      "serializeWithItem": "serialize",
-      "serializeWithItemAndType": "serialize"
+      "serialize": "serializeCore"
     },
     "yfiles.graphml.GraphMLAttribute": {
       "customTypeConverter": "markupExtensionConverter"
@@ -2214,21 +2123,18 @@
       "addRegistryOutputMapperWithURIAndTag": "addRegistryOutputMapper"
     },
     "yfiles.graphml.IParseContext": {
-      "deserializeWithTargetNode": "deserialize",
+      "deserialize": "deserializeCore",
+      "deserializeWithTargetNode": "deserializeCore",
       "safeGet": "lookup"
     },
     "yfiles.graphml.IWriteContext": {
       "safeGet": "lookup",
-      "serializeWithItem": "serialize",
-      "serializeWithItemAndType": "serialize"
+      "serialize": "serializeCore"
     },
     "yfiles.graphml.IXmlWriter": {
-      "writeAttributeStruct": "writeGraphMLXmlAttribute",
-      "writeAttributeWithNamespace": "writeAttribute",
+      "writeAttribute": "writeAttributeNS",
+      "writeAttributeWithNamespace": "writeAttributeNS",
       "writeStartElementWithPrefix": "writeStartElement"
-    },
-    "yfiles.graphml.WriteContextExtensions": {
-      "serializeWithItemAndType": "serialize"
     },
     "yfiles.hierarchic.incremental.AbstractPortConstraintOptimizer": {
       "mirrorMask": "mirrorMode"
@@ -2251,6 +2157,9 @@
     },
     "yfiles.hierarchic.incremental.GivenSequenceSequencer": {
       "sequenceComparator": "sequenceComparer"
+    },
+    "yfiles.hierarchic.incremental.GroupingSupport": {
+      "getDecendants": "getChildren"
     },
     "yfiles.hierarchic.incremental.IItemFactory": {
       "createBendNodeDataForDescriptor": "createBendNodeData",
@@ -2290,6 +2199,7 @@
       "calculateSelfLoopsForEdgeList": "calculateSelfLoops"
     },
     "yfiles.hierarchic.incremental.SimplexNodePlacer": {
+      "baryCenterMode": "barycenterMode",
       "bendReductionEnabled": "bendReduction",
       "exactPlacementEnforced": "exactPlacement",
       "maximalDuration": "maximumDuration"
@@ -2336,7 +2246,6 @@
       "unconfigureCoreLayout": "disposeCoreLayout"
     },
     "yfiles.hierarchic.WeightedLayerer": {
-      "makeDFSAcyclicForAlgorithmsGraph": "makeDFSAcyclic",
       "maximalDuration": "maximumDuration"
     },
     "yfiles.input.AbstractInputMode": {
@@ -2346,14 +2255,13 @@
       "addExistingPortsFromList": "addExistingPorts",
       "createCallbackForOwnerAndParameter": "createCandidate",
       "getCandidateAt": "getPortCandidateAt",
+      "getSourcePortCandidatesForEdge": "getSourcePortCandidates",
       "getSourcePortCandidatesForTarget": "getSourcePortCandidates",
+      "getTargetPortCandidatesForEdge": "getTargetPortCandidates",
       "getTargetPortCandidatesForSource": "getTargetPortCandidates"
     },
     "yfiles.input.ClickInputMode": {
       "requestMutextOnClick": "requestMutexOnClick"
-    },
-    "yfiles.input.CompoundKeyEventArgs": {
-      "keyCode": "key"
     },
     "yfiles.input.ConstrainedReshapeHandler": {
       "delegateHandler": "wrappedHandler"
@@ -2382,7 +2290,8 @@
     },
     "yfiles.input.DefaultPortCandidate": {
       "createInstance": "createPort",
-      "createInstanceWithParameterAndStyle": "createInstance"
+      "createInstanceWithParameterAndStyle": "createInstance",
+      "locationModelParameter": "locationParameter"
     },
     "yfiles.input.GraphCommands": {
       "ADD_LABEL_COMMAND": "ADD_LABEL",
@@ -2397,6 +2306,7 @@
       "EXIT_GROUP_COMMAND": "EXIT_GROUP",
       "EXPAND_GROUP_COMMAND": "EXPAND_GROUP",
       "GROUP_SELECTION_COMMAND": "GROUP_SELECTION",
+      "REVERSE_EDGE_COMMAND": "REVERSE_EDGE",
       "SELECT_ITEM_COMMAND": "SELECT_ITEM",
       "TOGGLE_ITEM_SELECTION_COMMAND": "TOGGLE_ITEM_SELECTION",
       "UNGROUP_SELECTION_COMMAND": "UNGROUP_SELECTION"
@@ -2439,8 +2349,10 @@
       "getMovementInfoWithPort": "getMovementInfo"
     },
     "yfiles.input.GraphViewerInputMode": {
+      "addWithPriority": "add",
       "clipboardCommandsEnabled": "allowClipboardOperations",
       "deselectAll": "clearSelection",
+      "getMutexOwner": "mutexOwner",
       "shouldBeClicked": "shouldClick",
       "shouldBeDoubleClicked": "shouldDoubleClick",
       "shouldBeFocused": "shouldFocus",
@@ -2454,11 +2366,13 @@
       "getButtonBounds": "getHitTestable",
       "invokeAction": "onClicked"
     },
+    "yfiles.input.IBendSelectionTester": {
+      "getBend": "getHitBend"
+    },
     "yfiles.input.IInputMode": {
       "stop": "tryStop"
     },
     "yfiles.input.IInputModeContext": {
-      "canvasControl": "canvas",
       "getGraph": "graph",
       "getGroupedGraph": "graph",
       "safeGet": "lookup"
@@ -2467,10 +2381,13 @@
       "isOrthogonallyEdited": "shouldEditOrthogonally"
     },
     "yfiles.input.IPortCandidate": {
-      "createInstance": "createPort"
+      "createInstance": "createPort",
+      "locationModelParameter": "locationParameter"
     },
     "yfiles.input.IPortCandidateProvider": {
+      "getSourcePortCandidatesForEdge": "getSourcePortCandidates",
       "getSourcePortCandidatesForTarget": "getSourcePortCandidates",
+      "getTargetPortCandidatesForEdge": "getTargetPortCandidates",
       "getTargetPortCandidatesForSource": "getTargetPortCandidates"
     },
     "yfiles.input.IReparentNodeHandler": {
@@ -2479,12 +2396,25 @@
     "yfiles.input.IReparentStripeHandler": {
       "canReparent": "shouldReparent"
     },
+    "yfiles.input.ItemDropInputMode": {
+      "getPreviewGraph": "previewGraph"
+    },
+    "yfiles.input.LabelPositionHandler": {
+      "setLabelModelParameter": "setLayoutParameter"
+    },
     "yfiles.input.LabelSnapContextHelper": {
       "addEdgePathSnapLinesWithDistance": "addEdgePathSnapLines"
+    },
+    "yfiles.input.MarqueeSelectionInputMode": {
+      "getSelectionRectangle": "selectionRectangle"
     },
     "yfiles.input.MovementInfo": {
       "movesHorizontallyInSyncWith": "movesHorizontallySynchronizedWith",
       "movesVerticallyInSyncWith": "movesVerticallySynchronizedWith"
+    },
+    "yfiles.input.MultiplexingInputMode": {
+      "addWithPriority": "add",
+      "getMutexOwner": "mutexOwner"
     },
     "yfiles.input.NavigationInputMode": {
       "collapsingGroupsAllowed": "allowCollapseGroup",
@@ -2508,6 +2438,7 @@
       "isOrthogonallyEdited": "shouldEditOrthogonally"
     },
     "yfiles.input.OverviewInputMode": {
+      "clientCanvas": "canvasComponent",
       "stop": "tryStop"
     },
     "yfiles.input.PortRelocationHandle": {
@@ -2528,19 +2459,27 @@
       "showStripePreview": "showPreview"
     },
     "yfiles.input.TableEditorInputMode": {
+      "addWithPriority": "add",
       "clickInputModePriority": "clickInputMode",
       "findStripeFiltered": "findStripe",
       "findStripesFiltered": "findStripes",
+      "getMutexOwner": "mutexOwner",
       "insertChildWithOwnerIndexAndSize": "insertChild",
+      "labelAddingAllowed": "allowAddLabel",
+      "labelEditingAllowed": "allowEditLabel",
       "reparentStripeInputModePriority": "reparentStripeInputMode",
       "resizeStripeInputModePriority": "resizeStripeInputMode",
       "shouldBeDeleted": "shouldDelete",
       "shouldLabelBeAdded": "shouldAddLabel",
-      "shouldLabelBeEdited": "shouldEditLabel"
+      "shouldLabelBeEdited": "shouldEditLabel",
+      "stripeDropInputModePriority": "priority"
     },
     "yfiles.input.TapInputMode": {
       "requestMutextOnTap": "requestMutexOnTap",
       "tapHandlingMode": "tapHandlingPolicy"
+    },
+    "yfiles.input.TextEditorInputMode": {
+      "autoSelectCanvasOnEditorClosed": "autoFocusCanvasOnEditorClosed"
     },
     "yfiles.input.Touch2DDevice": {
       "lastEventTime": "lastEventTimeJS"
@@ -2585,8 +2524,11 @@
       "selectedLabelsDpKey": "affectedLabelsDpKey"
     },
     "yfiles.lang.Class": {
+      "fullName": "name",
+      "getAttributesFor": "getAttributes",
       "getCustomAttributes": "getAttributes",
       "getCustomAttributesOfType": "getAttributes",
+      "isInterface": "isEnum",
       "namespace": "name"
     },
     "yfiles.layout.AbstractLayoutStage": {
@@ -2683,6 +2625,7 @@
       "moveToLastEdge": "moveToLast",
       "moveToLastNode": "moveToLast",
       "setCenterCoords": "setCenter",
+      "setEdgeLabelLayout": "setLabelLayout",
       "setEdgeLayout": "setLayout",
       "setLocationCoords": "setLocation",
       "setPathWithPointList": "setPath",
@@ -2886,11 +2829,16 @@
       "appendLayouter": "appendLayout",
       "doLayout": "applyLayout"
     },
+    "yfiles.layout.SliderEdgeLabelLayoutModel": {
+      "maximumDistance": "distance",
+      "minimumDistance": "distance"
+    },
     "yfiles.layout.Swimlanes": {
       "arrangeSwimlanesWithOrderingMode": "arrangeSwimlanes"
     },
     "yfiles.model.BridgeManager": {
-      "canvasControl": "canvas",
+      "canvasControl": "canvasComponent",
+      "crossingDetermination": "bridgeCrossingPolicy",
       "defaultCallback": "defaultBridgeCreator",
       "defaultCrossingStyle": "defaultBridgeCrossingStyle"
     },
@@ -2914,12 +2862,14 @@
     "yfiles.model.ISelectionModel": {
       "count": "size"
     },
+    "yfiles.model.ModelManager": {
+      "canvas": "canvasComponent"
+    },
     "yfiles.multipage.LayoutContext": {
       "layouter": "layout"
     },
     "yfiles.objectcollections.ICollection": {
       "count": "size",
-      "getEnumerableOfType": "ofType",
       "getObjectEnumerator": "getEnumerator"
     },
     "yfiles.objectcollections.IDictionary": {
@@ -2927,7 +2877,6 @@
       "containsWithValue": "has",
       "count": "size",
       "getDictionaryEnumerator": "getEnumerator",
-      "getEnumerableOfType": "ofType",
       "getObject": "get",
       "getObjectEnumerator": "getEnumerator",
       "objectKeys": "keys",
@@ -2936,7 +2885,6 @@
       "removeWithKey": "delete"
     },
     "yfiles.objectcollections.IEnumerable": {
-      "getEnumerableOfType": "ofType",
       "getObjectEnumerator": "getEnumerator"
     },
     "yfiles.objectcollections.IEnumerator": {
@@ -2946,7 +2894,6 @@
       "addWithValue": "add",
       "containsValue": "includes",
       "count": "size",
-      "getEnumerableOfType": "ofType",
       "getObject": "get",
       "getObjectEnumerator": "getEnumerator",
       "indexOfItem": "indexOf",
@@ -3294,12 +3241,6 @@
       "subgraphLayouter": "subgraphLayout",
       "subgraphLayouterEnabled": "subgraphLayoutEnabled"
     },
-    "yfiles.support.AbstractUndoUnit": {
-      "redoImpl": "redo"
-    },
-    "yfiles.support.DelegateUndoUnit": {
-      "redoImpl": "redo"
-    },
     "yfiles.support.IContextLookup": {
       "lookupForItem": "contextLookup"
     },
@@ -3309,26 +3250,12 @@
     "yfiles.support.ILookup": {
       "safeGet": "lookup"
     },
-    "yfiles.support.ILookupDecorator": {
-      "addWithFactory": "add",
-      "addWithFactoryAndNullIsFallback": "add",
-      "addWithWrapperFactory": "add",
-      "addWithWrapperFactoryAndDecorateNull": "add"
-    },
     "yfiles.support.LookupChain": {
-      "addWithFactoryAndNullIsFallback": "add",
-      "addWithWrapperFactoryAndDecorateNull": "add",
       "lookupForItem": "contextLookup"
-    },
-    "yfiles.support.TypedKey": {
-      "equalsWithOther": "equals"
     },
     "yfiles.support.UndoEngine": {
       "redoText": "redoName",
       "undoText": "undoName"
-    },
-    "yfiles.support.XmlName": {
-      "namespaceName": "namespace"
     },
     "yfiles.system.ApplicationCommands": {
       "DEL": "DELETE"
@@ -3336,22 +3263,20 @@
     "yfiles.system.Color": {
       "equalsColor": "equals"
     },
-    "yfiles.system.DashStyleValueSerializer": {
-      "getSerializerForContext": "getSerializerFor",
-      "getSerializerForTypeAndContext": "getSerializerFor",
-      "getSerializerForWithPropertyInfo": "getSerializerFor"
-    },
     "yfiles.system.DragEventArgs": {
       "allowedEffects": "effectAllowed"
+    },
+    "yfiles.system.ErrorHandling": {
+      "errorHandler": "handler"
     },
     "yfiles.system.IValueSerializerContext": {
       "getValueSerializerForPropertyInfo": "getValueSerializerFor"
     },
     "yfiles.system.Pen": {
-      "brush": "strokeStyle"
-    },
-    "yfiles.system.TimeSpan": {
-      "milliseconds": "totalMilliseconds"
+      "brush": "fill",
+      "dashCap": "lineCap",
+      "endLineCap": "lineCap",
+      "startLineCap": "lineCap"
     },
     "yfiles.system.ValueSerializer": {
       "getSerializerForContext": "getSerializerFor",
@@ -3552,6 +3477,9 @@
     }
   },
   "removedMembers": {
+    "DefaultLabelModelParameterFinder": [
+      "findBestParameterForLabelLayoutAndParameters"
+    ],
     "yfiles.algorithms.EdgeList": [
       "getCastedEnumerable",
       "getCastedEnumerable",
@@ -3862,6 +3790,11 @@
     "yfiles.drawing.GenericPortLocationModel": [
       "getCastedEnumerable"
     ],
+    "yfiles.drawing.RenderVisual": [
+      "svgElement",
+      "getRenderDataCache",
+      "setRenderDataCache"
+    ],
     "yfiles.genealogy.FamilyTreeLayouter": [
       "applyLayout",
       "calcLayout",
@@ -3869,6 +3802,9 @@
       "doLayoutWithGraphAndLayout",
       "canLayoutCore",
       "canLayout"
+    ],
+    "yfiles.geometry.Matrix2D": [
+      "transformValues"
     ],
     "yfiles.geometry.PointD": [
       "FromPoint",
@@ -4847,15 +4783,184 @@
     ]
   },
   "signatureChanges": {
+    "yfiles.drawing.ShapeNodeStyle": {
+      "WithRendererShapePenAndBrush": [
+        "renderer",
+        "shape",
+        "stroke",
+        "fill"
+      ],
+      "WithShapePenAndBrush": [
+        "shape",
+        "stroke",
+        "fill"
+      ]
+    },
+    "yfiles.drawing.BevelNodeStyle": {
+      "WithColor": [
+        "color"
+      ],
+      "WithRendererAndColor": [
+        "renderer",
+        "color"
+      ]
+    },
+    "yfiles.drawing.CollapsibleNodeStyleDecorator": {
+      "WithStyle": [
+        "wrapped"
+      ],
+      "WithStyleAndRenderer": [
+        "wrapped",
+        "renderer"
+      ]
+    },
+    "yfiles.drawing.GeneralPathNodeStyle": {
+      "WithPenAndBrush": [
+        "path",
+        "stroke",
+        "fill"
+      ],
+      "WithRendererPenAndBrush": [
+        "renderer",
+        "path",
+        "stroke",
+        "fill"
+      ]
+    },
+    "yfiles.drawing.ImageNodeStyle": {
+      "WithImageAndRenderer": [
+        "image",
+        "renderer"
+      ],
+      "WithRenderer": [
+        "renderer"
+      ]
+    },
+    "yfiles.drawing.PanelNodeStyle": {
+      "WithColor": [
+        "color"
+      ],
+      "WithColorAndInsetsColor": [
+        "color",
+        "labelInsetsColor"
+      ],
+      "WithRendererAndColor": [
+        "renderer",
+        "color",
+        "labelInsetsColor",
+        "insets"
+      ]
+    },
+    "yfiles.drawing.ShinyPlateNodeStyle": {
+      "WithBrush": [
+        "fill"
+      ],
+      "WithBrushAndPen": [
+        "fill",
+        "stroke"
+      ],
+      "WithRendererBrushRadiusAndInsets": [
+        "renderer",
+        "fill",
+        "radius",
+        "insets"
+      ]
+    },
+    "yfiles.drawing.ArcEdgeStyle": {
+      "WithPenAndHeight": [
+        "stroke",
+        "height"
+      ],
+      "WithRendererPenAndHeight": [
+        "renderer",
+        "stroke",
+        "height"
+      ]
+    },
+    "yfiles.drawing.PolylineEdgeStyle": {
+      "WithPen": [
+        "stroke"
+      ],
+      "WithRendererAndPen": [
+        "renderer",
+        "pen"
+      ]
+    },
+    "yfiles.drawing.IconLabelStyle": {
+      "FromRendererIconSizePlacementAndInnerStyle": [
+        "renderer",
+        "icon",
+        "iconSize",
+        "iconPlacement",
+        "wrapped"
+      ]
+    },
+    "yfiles.drawing.SimpleLabelStyle": {
+      "WithFont": [
+        "font"
+      ],
+      "WithFontAndBrush": [
+        "font",
+        "textFill"
+      ],
+      "WithFontAndSize": [
+        "font",
+        "textSize"
+      ],
+      "WithFontSizeAndBrush": [
+        "font",
+        "textSize",
+        "textFill"
+      ],
+      "WithRendererFontAndBrush": [
+        "renderer",
+        "font",
+        "textFill"
+      ],
+      "WithRendererFontSizeAndBrush": [
+        "renderer",
+        "font",
+        "textSize",
+        "textFill"
+      ]
+    },
     "yfiles.algorithms.BorderLine": {
       "getValueAtWithSegment": [
         1
+      ]
+    },
+    "yfiles.algorithms.RankAssignments": {
+      "simpleFromArray": [
+        0,
+        2
+      ],
+      "simplex": [
+        1,
+        2,
+        3
       ]
     },
     "yfiles.canvas.ICanvasObjectDescriptor": {
       "isDirty": [
         1,
         0
+      ]
+    },
+    "yfiles.drawing.CanvasOverviewGraphVisualCreator": {
+      "paintEdge": [
+        1,
+        0,
+        2
+      ],
+      "paintGroupNode": [
+        1,
+        0,
+        2
+      ],
+      "paintNode": [
+        1,
+        0,
+        2
       ]
     },
     "yfiles.drawing.CompositeLabelModel": {
@@ -4920,6 +5025,12 @@
         0
       ]
     },
+    "yfiles.drawing.IMarqueeTestable": {
+      "isInBox": [
+        1,
+        0
+      ]
+    },
     "yfiles.drawing.InteriorLabelModel": {
       "getGeometry": [
         1,
@@ -4953,6 +5064,126 @@
     "yfiles.drawing.SandwichLabelModel": {
       "getGeometry": [
         1,
+        0
+      ]
+    },
+    "yfiles.drawing.SimpleAbstractEdgeStyle": {
+      "createVisual": [
+        1,
+        0
+      ],
+      "getBounds": [
+        1,
+        0
+      ],
+      "isHit": [
+        2,
+        1,
+        0
+      ],
+      "isInBox": [
+        2,
+        1,
+        0
+      ],
+      "isVisible": [
+        2,
+        1,
+        0
+      ],
+      "updateVisual": [
+        1,
+        2,
+        0
+      ]
+    },
+    "yfiles.drawing.SimpleAbstractLabelStyle": {
+      "createVisual": [
+        1,
+        0
+      ],
+      "getBounds": [
+        1,
+        0
+      ],
+      "isHit": [
+        2,
+        1,
+        0
+      ],
+      "isInBox": [
+        2,
+        1,
+        0
+      ],
+      "isVisible": [
+        2,
+        1,
+        0
+      ],
+      "updateVisual": [
+        1,
+        2,
+        0
+      ]
+    },
+    "yfiles.drawing.SimpleAbstractNodeStyle": {
+      "createVisual": [
+        1,
+        0
+      ],
+      "getBounds": [
+        1,
+        0
+      ],
+      "isHit": [
+        2,
+        1,
+        0
+      ],
+      "isInBox": [
+        2,
+        1,
+        0
+      ],
+      "isVisible": [
+        2,
+        1,
+        0
+      ],
+      "updateVisual": [
+        1,
+        2,
+        0
+      ]
+    },
+    "yfiles.drawing.SimpleAbstractPortStyle": {
+      "createVisual": [
+        1,
+        0
+      ],
+      "getBounds": [
+        1,
+        0
+      ],
+      "isHit": [
+        2,
+        1,
+        0
+      ],
+      "isInBox": [
+        2,
+        1,
+        0
+      ],
+      "isVisible": [
+        2,
+        1,
+        0
+      ],
+      "updateVisual": [
+        1,
+        2,
         0
       ]
     },
@@ -5017,6 +5248,17 @@
         1
       ]
     },
+    "yfiles.geometry.Matrix2D": {
+      "rotateWithCenterAndOrder": [
+        0,
+        2
+      ]
+    },
+    "yfiles.geometry.PointD": {
+      "add": [
+        1
+      ]
+    },
     "yfiles.graph.AbstractGraphWrapper": {
       "addBend": [
         0,
@@ -5055,11 +5297,13 @@
         2,
         4,
         5
-      ],
-      "calculatePreferredSizeWithStyleAndParameter": [
-        0,
-        3,
-        2
+      ]
+    },
+    "yfiles.graph.DefaultEdgeIntersectionCalculator": {
+      "cropEdgePathWithEdgePathAtSourceAndArrow": [
+        1,
+        2,
+        0
       ]
     },
     "yfiles.graph.DefaultGraph": {
@@ -5100,11 +5344,6 @@
         2,
         4,
         5
-      ],
-      "calculatePreferredSizeWithStyleAndParameter": [
-        0,
-        3,
-        2
       ]
     },
     "yfiles.graph.DefaultPortCandidateDescriptor": {
@@ -5113,6 +5352,10 @@
         0
       ],
       "isHit": [
+        1,
+        0
+      ],
+      "isInBox": [
         1,
         0
       ],
@@ -5159,11 +5402,6 @@
         2,
         4,
         5
-      ],
-      "calculatePreferredSizeWithStyleAndParameter": [
-        0,
-        3,
-        2
       ]
     },
     "yfiles.graph.GraphClipboard": {
@@ -5179,6 +5417,17 @@
         1,
         2,
         4
+      ]
+    },
+    "yfiles.graph.GraphCopier": {
+      "copyGraph": [
+        0,
+        2
+      ],
+      "copyNodeWithParent": [
+        0,
+        2,
+        3
       ]
     },
     "yfiles.graph.IClipboardIdProvider": {
@@ -5229,15 +5478,20 @@
         2,
         4,
         5
-      ],
-      "calculatePreferredSizeWithStyleAndParameter": [
-        0,
-        3,
-        2
       ]
     },
     "yfiles.graph.ILabelModel": {
       "getGeometry": [
+        1,
+        0
+      ]
+    },
+    "yfiles.graph.IPortSelectionTester": {
+      "getPort": [
+        1,
+        0
+      ],
+      "getPorts": [
         1,
         0
       ]
@@ -5276,20 +5530,6 @@
         4,
         5
       ],
-      "createColumnAtIndexWithSize": [
-        2,
-        1
-      ],
-      "createColumnAtIndexWithSizeAndStyle": [
-        2,
-        3,
-        1
-      ],
-      "createColumnAtIndexWithSizeAndTag": [
-        2,
-        3,
-        1
-      ],
       "createColumnAtIndexWithSizeInsetsStyleAndTag": [
         0,
         2,
@@ -5299,87 +5539,6 @@
         6,
         1
       ],
-      "createColumnAtIndexWithSizeStyleAndTag": [
-        2,
-        3,
-        4,
-        1
-      ],
-      "createColumnWithSize": [
-        1
-      ],
-      "createColumnWithSizeAndStyle": [
-        1,
-        2
-      ],
-      "createColumnWithSizeAndTag": [
-        1,
-        2
-      ],
-      "createColumnWithSizeStyleAndTag": [
-        1,
-        2,
-        3
-      ],
-      "createColumnWithStyle": [
-        1
-      ],
-      "createColumnWithStyleAndTag": [
-        1,
-        2
-      ],
-      "createColumnWithTag": [
-        1
-      ],
-      "createRootColumnAtIndexWithSize": [
-        1,
-        0
-      ],
-      "createRootColumnAtIndexWithSizeAndStyle": [
-        1,
-        2,
-        0
-      ],
-      "createRootColumnAtIndexWithSizeAndTag": [
-        1,
-        2,
-        0
-      ],
-      "createRootColumnAtIndexWithSizeStyleAndTag": [
-        1,
-        2,
-        3,
-        0
-      ],
-      "createRootRowAtIndexWithSize": [
-        1,
-        0
-      ],
-      "createRootRowAtIndexWithSizeAndTag": [
-        1,
-        2,
-        0
-      ],
-      "createRootRowAtIndexWithSizeStyleAndTag": [
-        1,
-        2,
-        3,
-        0
-      ],
-      "createRowAtIndexWithSize": [
-        2,
-        1
-      ],
-      "createRowAtIndexWithSizeAndStyle": [
-        2,
-        3,
-        1
-      ],
-      "createRowAtIndexWithSizeAndTag": [
-        2,
-        3,
-        1
-      ],
       "createRowAtIndexWithSizeInsetsStyleAndTag": [
         0,
         2,
@@ -5387,38 +5546,6 @@
         4,
         5,
         6,
-        1
-      ],
-      "createRowAtIndexWithSizeStyleAndTag": [
-        2,
-        3,
-        4,
-        1
-      ],
-      "createRowWithSize": [
-        1
-      ],
-      "createRowWithSizeAndStyle": [
-        1,
-        2
-      ],
-      "createRowWithSizeAndTag": [
-        1,
-        2
-      ],
-      "createRowWithSizeStyleAndTag": [
-        1,
-        2,
-        3
-      ],
-      "createRowWithStyle": [
-        1
-      ],
-      "createRowWithStyleAndTag": [
-        1,
-        2
-      ],
-      "createRowWithTag": [
         1
       ]
     },
@@ -5467,20 +5594,6 @@
         4,
         5
       ],
-      "createColumnAtIndexWithSize": [
-        2,
-        1
-      ],
-      "createColumnAtIndexWithSizeAndStyle": [
-        2,
-        3,
-        1
-      ],
-      "createColumnAtIndexWithSizeAndTag": [
-        2,
-        3,
-        1
-      ],
       "createColumnAtIndexWithSizeInsetsStyleAndTag": [
         0,
         2,
@@ -5488,87 +5601,6 @@
         4,
         5,
         6,
-        1
-      ],
-      "createColumnAtIndexWithSizeStyleAndTag": [
-        2,
-        3,
-        4,
-        1
-      ],
-      "createColumnWithSize": [
-        1
-      ],
-      "createColumnWithSizeAndStyle": [
-        1,
-        2
-      ],
-      "createColumnWithSizeAndTag": [
-        1,
-        2
-      ],
-      "createColumnWithSizeStyleAndTag": [
-        1,
-        2,
-        3
-      ],
-      "createColumnWithStyle": [
-        1
-      ],
-      "createColumnWithStyleAndTag": [
-        1,
-        2
-      ],
-      "createColumnWithTag": [
-        1
-      ],
-      "createRootColumnAtIndexWithSize": [
-        1,
-        0
-      ],
-      "createRootColumnAtIndexWithSizeAndStyle": [
-        1,
-        2,
-        0
-      ],
-      "createRootColumnAtIndexWithSizeAndTag": [
-        1,
-        2,
-        0
-      ],
-      "createRootColumnAtIndexWithSizeStyleAndTag": [
-        1,
-        2,
-        3,
-        0
-      ],
-      "createRootRowAtIndexWithSize": [
-        1,
-        0
-      ],
-      "createRootRowAtIndexWithSizeAndTag": [
-        1,
-        2,
-        0
-      ],
-      "createRootRowAtIndexWithSizeStyleAndTag": [
-        1,
-        2,
-        3,
-        0
-      ],
-      "createRowAtIndexWithSize": [
-        2,
-        1
-      ],
-      "createRowAtIndexWithSizeAndStyle": [
-        2,
-        3,
-        1
-      ],
-      "createRowAtIndexWithSizeAndTag": [
-        2,
-        3,
         1
       ],
       "createRowAtIndexWithSizeInsetsStyleAndTag": [
@@ -5579,50 +5611,16 @@
         5,
         6,
         1
-      ],
-      "createRowAtIndexWithSizeStyleAndTag": [
-        2,
-        3,
-        4,
-        1
-      ],
-      "createRowWithSize": [
-        1
-      ],
-      "createRowWithSizeAndStyle": [
-        1,
-        2
-      ],
-      "createRowWithSizeAndTag": [
-        1,
-        2
-      ],
-      "createRowWithSizeStyleAndTag": [
-        1,
-        2,
-        3
-      ],
-      "createRowWithStyle": [
-        1
-      ],
-      "createRowWithStyleAndTag": [
-        1,
-        2
-      ],
-      "createRowWithTag": [
-        1
       ]
     },
     "yfiles.graphml.ChildParseContext": {
-      "deserialize": [
-        0,
-        2
+      "getDeserializationProperty": [
+        1
       ]
     },
     "yfiles.graphml.ChildWriteContext": {
-      "serialize": [
-        0,
-        2
+      "getSerializationProperty": [
+        1
       ]
     },
     "yfiles.graphml.GraphElementIdAcceptor": {
@@ -5675,6 +5673,9 @@
       ]
     },
     "yfiles.graphml.GraphMLParser": {
+      "getDeserializationProperty": [
+        1
+      ],
       "parseFromDocument": [
         1,
         0,
@@ -5684,6 +5685,11 @@
         1,
         0,
         2
+      ]
+    },
+    "yfiles.graphml.GraphMLWriter": {
+      "getSerializationProperty": [
+        1
       ]
     },
     "yfiles.graphml.IGraphElementIdAcceptor": {
@@ -5727,21 +5733,13 @@
       ]
     },
     "yfiles.graphml.IParseContext": {
-      "deserialize": [
-        0,
-        2
+      "getDeserializationProperty": [
+        1
       ]
     },
     "yfiles.graphml.IWriteContext": {
-      "serialize": [
-        0,
-        2
-      ]
-    },
-    "yfiles.graphml.IXmlWriter": {
-      "writeAttributeWithNamespace": [
-        1,
-        3
+      "getSerializationProperty": [
+        1
       ]
     },
     "yfiles.input.LabelPositionHandler": {
@@ -5815,8 +5813,8 @@
       "safeGet": "Object"
     },
     "yfiles.canvas.GraphControl": {
+      "createSelectionPaintManager": "yfiles.view.IGraphSelection",
       "getCanvasObjects": "yfiles.collections.IEnumerable<yfiles.view.ICanvasObject>",
-      "morphLayout": "Promise<Object>",
       "safeGet": "Object"
     },
     "yfiles.canvas.GraphOverviewControl": {
@@ -5960,12 +5958,6 @@
       "transformInplace": "yfiles.geometry.IMutablePoint",
       "transformPoint": "yfiles.geometry.IMutablePoint"
     },
-    "yfiles.geometry.PointD": {
-      "toPoint2D": "yfiles.algorithms.Point2D"
-    },
-    "yfiles.geometry.RectD": {
-      "toRectangle2D": "yfiles.algorithms.Rectangle2D"
-    },
     "yfiles.graph.AbstractGraphWrapper": {
       "safeGet": "Object"
     },
@@ -5976,13 +5968,14 @@
       "getDouble": "Object"
     },
     "yfiles.graph.DefaultEdgeIntersectionCalculator": {
-      "cropEdgePath": "yfiles.geometry.GeneralPath"
+      "cropEdgePath": "yfiles.geometry.GeneralPath",
+      "cropEdgePathWithEdgePathAtSourceAndArrow": "yfiles.geometry.GeneralPath"
     },
     "yfiles.graph.DefaultGraph": {
       "safeGet": "Object"
     },
     "yfiles.graph.DefaultStripeInputVisualizationHelper": {
-      "findTemplate": "yfiles.view.IDataTemplate"
+      "findTemplate": "yfiles.view.IVisualTemplate"
     },
     "yfiles.graph.FilteredGraphWrapper": {
       "safeGet": "Object"
@@ -6030,7 +6023,6 @@
       "safeGet": "Object"
     },
     "yfiles.graph.IMapperRegistry": {
-      "addMapperWithTag": "yfiles.collections.Mapper<K,V>",
       "getMapperMetadata": "yfiles.graph.MapperMetadata"
     },
     "yfiles.graph.INode": {
@@ -6061,7 +6053,6 @@
       "start": "Promise<Object>"
     },
     "yfiles.graph.MapperRegistry": {
-      "addMapperWithTag": "yfiles.collections.Mapper<K,V>",
       "getMapperMetadata": "yfiles.graph.MapperMetadata"
     },
     "yfiles.graph.SimpleBend": {
@@ -6096,25 +6087,31 @@
       "safeGet": "Object"
     },
     "yfiles.graphml.ChildParseContext": {
+      "getDeserializationProperty": "Object",
       "safeGet": "Object"
     },
     "yfiles.graphml.ChildWriteContext": {
+      "getSerializationProperty": "Object",
       "safeGet": "Object"
     },
     "yfiles.graphml.GraphMLParser": {
+      "getDeserializationProperty": "Object",
       "parseFromDocument": "Promise<yfiles.graph.IGraph>",
       "parseFromURL": "Promise<yfiles.graph.IGraph>"
     },
     "yfiles.graphml.GraphMLWriter": {
-      "getOutputHandlers": "yfiles.collections.IEnumerable<yfiles.graphml.IOutputHandler>"
+      "getOutputHandlers": "yfiles.collections.IEnumerable<yfiles.graphml.IOutputHandler>",
+      "getSerializationProperty": "Object"
     },
     "yfiles.graphml.IParseContext": {
+      "getDeserializationProperty": "Object",
       "safeGet": "Object"
     },
     "yfiles.graphml.IReferenceHandler": {
       "registerResource": "yfiles.graphml.SharingState"
     },
     "yfiles.graphml.IWriteContext": {
+      "getSerializationProperty": "Object",
       "safeGet": "Object"
     },
     "yfiles.hierarchic.IncrementalHierarchicLayouter": {
@@ -6157,8 +6154,7 @@
       "getMovementInfoWithPort": "yfiles.input.MovementInfo"
     },
     "yfiles.input.GraphViewerInputMode": {
-      "deselectAll": "",
-      "getMutexOwner": "yfiles.input.IInputMode"
+      "deselectAll": ""
     },
     "yfiles.input.HandleInputMode": {
       "createVisual": "yfiles.view.SvgVisual"
@@ -6183,9 +6179,6 @@
     },
     "yfiles.input.LabelPositionHandler": {
       "handleMove": ""
-    },
-    "yfiles.input.MultiplexingInputMode": {
-      "getMutexOwner": "yfiles.input.IInputMode"
     },
     "yfiles.input.OrthogonalEdgeEditingContext": {
       "addImplicitlyMovedBend": "yfiles.input.MovementInfo",
@@ -6213,8 +6206,7 @@
     },
     "yfiles.input.TableEditorInputMode": {
       "createLabel": "Promise<yfiles.graph.ILabel>",
-      "editLabel": "Promise<yfiles.graph.ILabel>",
-      "getMutexOwner": "yfiles.input.IInputMode"
+      "editLabel": "Promise<yfiles.graph.ILabel>"
     },
     "yfiles.input.TableReshapeHandler": {
       "handleReshape": ""
@@ -6299,17 +6291,36 @@
   },
   "propertyTypeChanges": {
     "yfiles.algorithms.AbortHandler": {
+      "ABORT_HANDLER_DP_KEY": "yfiles.algorithms.GraphDpKey<yfiles.algorithms.AbortHandler>",
       "cancelDuration": "yfiles.lang.TimeSpan",
       "stopDuration": "yfiles.lang.TimeSpan"
     },
     "yfiles.canvas.CanvasControl": {
-      "centerZoomEventRecognizer": "function(Object,yfiles.lang.EventArgs):boolean"
+      "centerZoomEventRecognizer": "function(Object,yfiles.lang.EventArgs):boolean",
+      "doubleTapTime": "yfiles.lang.TimeSpan",
+      "dragTime": "yfiles.lang.TimeSpan",
+      "longPressTime": "yfiles.lang.TimeSpan"
+    },
+    "yfiles.canvas.DefsManager": {
+      "cleanupTimerInterval": "yfiles.lang.TimeSpan"
     },
     "yfiles.canvas.GraphControl": {
-      "centerZoomEventRecognizer": "function(Object,yfiles.lang.EventArgs):boolean"
+      "centerZoomEventRecognizer": "function(Object,yfiles.lang.EventArgs):boolean",
+      "doubleTapTime": "yfiles.lang.TimeSpan",
+      "dragTime": "yfiles.lang.TimeSpan",
+      "longPressTime": "yfiles.lang.TimeSpan"
     },
     "yfiles.canvas.GraphOverviewControl": {
-      "centerZoomEventRecognizer": "function(Object,yfiles.lang.EventArgs):boolean"
+      "centerZoomEventRecognizer": "function(Object,yfiles.lang.EventArgs):boolean",
+      "doubleTapTime": "yfiles.lang.TimeSpan",
+      "dragTime": "yfiles.lang.TimeSpan",
+      "longPressTime": "yfiles.lang.TimeSpan"
+    },
+    "yfiles.canvas.IAnimation": {
+      "preferredDuration": "yfiles.lang.TimeSpan"
+    },
+    "yfiles.canvas.ViewportAnimation": {
+      "preferredDuration": "yfiles.lang.TimeSpan"
     },
     "yfiles.circular.CircularLayouter": {
       "CIRCLE_ID_HOLDER_DP_KEY": "yfiles.algorithms.NodeDpKey<number>",
@@ -6352,13 +6363,13 @@
     },
     "yfiles.graph.DefaultStripeInputVisualizationHelper": {
       "DRAG_SOURCE_STRIPE_TEMPLATE_KEY": "string",
-      "dragSourceStripeTemplate": "yfiles.view.IDataTemplate",
+      "dragSourceStripeTemplate": "yfiles.view.IVisualTemplate",
       "DROP_TARGET_STRIPE_TEMPLATE_KEY": "string",
-      "dropTargetStripeTemplate": "yfiles.view.IDataTemplate",
+      "dropTargetStripeTemplate": "yfiles.view.IVisualTemplate",
       "RESIZE_STRIPE_TEMPLATE_KEY": "string",
-      "resizeStripeTemplate": "yfiles.view.IDataTemplate",
+      "resizeStripeTemplate": "yfiles.view.IVisualTemplate",
       "SELECTED_STRIPE_TEMPLATE_KEY": "string",
-      "selectedStripeTemplate": "yfiles.view.IDataTemplate"
+      "selectedStripeTemplate": "yfiles.view.IVisualTemplate"
     },
     "yfiles.graph.FilteredGraphWrapper": {
       "edgeLabels": "yfiles.collections.IEnumerable<yfiles.graph.ILabel>",
@@ -6395,6 +6406,7 @@
       "style": "yfiles.styles.IStripeStyle"
     },
     "yfiles.graph.LayoutExecutor": {
+      "duration": "yfiles.lang.TimeSpan",
       "layoutGraph": "yfiles.layout.CopiedLayoutGraph"
     },
     "yfiles.graph.LayoutGraphAdapter": {
@@ -6422,14 +6434,51 @@
     "yfiles.graphml.GraphMLAttribute": {
       "shareable": "yfiles.graphml.GraphMLSharingPolicy"
     },
+    "yfiles.graphml.GraphMLIOHandler": {
+      "deserializationPropertyOverrides": "yfiles.collections.IMap<string,Object>",
+      "serializationPropertyOverrides": "yfiles.collections.IMap<string,Object>"
+    },
     "yfiles.graphml.Property": {
       "serializationVisibility": "yfiles.graphml.GraphMLMemberVisibility"
+    },
+    "yfiles.graphml.SerializationProperties": {
+      "BASE_URI": "string",
+      "CACHE_EXTERNAL_REFERENCES": "string",
+      "CURRENT_KEY_SCOPE": "string",
+      "DISABLE_GRAPH_SETTINGS": "string",
+      "DISABLE_STRIPE_USER_TAGS": "string",
+      "DISABLE_USER_TAGS": "string",
+      "IGNORE_XAML_DESERIALIZATION_ERRORS": "string",
+      "REPRESENTED_EDGE": "string",
+      "REWRITE_RELATIVE_RESOURCE_URIS": "string",
+      "UNDEFINED_HANDLING": "string",
+      "WRITE_EDGE_STYLE_DEFAULT": "string",
+      "WRITE_LABEL_SIZE_PREDICATE": "string",
+      "WRITE_NODE_STYLE_DEFAULT": "string",
+      "WRITE_PORT_STYLE_DEFAULT": "string",
+      "WRITE_STRIPE_DEFAULTS": "string"
+    },
+    "yfiles.hierarchic.BFSLayerer": {
+      "CORE_NODES_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>"
+    },
+    "yfiles.hierarchic.GivenLayersLayerer": {
+      "LAYER_ID_DP_KEY": "yfiles.algorithms.NodeDpKey<number>"
     },
     "yfiles.hierarchic.incremental.AspectRatioComponentLayerer": {
       "singleComponentLayerer": "yfiles.hierarchic.ILayerer"
     },
+    "yfiles.hierarchic.incremental.INodeData": {
+      "incrementalHint": "Object"
+    },
     "yfiles.hierarchic.incremental.MultiComponentLayerer": {
       "singleComponentLayerer": "yfiles.hierarchic.ILayerer"
+    },
+    "yfiles.hierarchic.incremental.SelfloopCalculator": {
+      "MINIMUM_EDGE_DISTANCE_DP_KEY": "yfiles.algorithms.EdgeDpKey<number>",
+      "MINIMUM_FIRST_SEGMENT_LENGTH_DP_KEY": "yfiles.algorithms.EdgeDpKey<number>",
+      "MINIMUM_LAST_SEGMENT_LENGTH_DP_KEY": "yfiles.algorithms.EdgeDpKey<number>",
+      "MINIMUM_NODE_DISTANCE_DP_KEY": "yfiles.algorithms.NodeDpKey<number>",
+      "MINIMUM_OCTILINEAR_SEGMENT_LENGTH_DP_KEY": "yfiles.algorithms.EdgeDpKey<number>"
     },
     "yfiles.hierarchic.IncrementalHierarchicLayouter": {
       "CRITICAL_EDGE_DP_KEY": "yfiles.algorithms.EdgeDpKey<number>",
@@ -6501,6 +6550,7 @@
       "EXIT_GROUP_COMMAND": "yfiles.input.ICommand",
       "EXPAND_GROUP_COMMAND": "yfiles.input.ICommand",
       "GROUP_SELECTION_COMMAND": "yfiles.input.ICommand",
+      "REVERSE_EDGE_COMMAND": "yfiles.input.ICommand",
       "SELECT_ITEM_COMMAND": "yfiles.input.ICommand",
       "TOGGLE_ITEM_SELECTION_COMMAND": "yfiles.input.ICommand",
       "UNGROUP_SELECTION_COMMAND": "yfiles.input.ICommand"
@@ -6555,9 +6605,9 @@
     },
     "yfiles.input.LabelPositionHandler": {
       "CANDIDATE_TEMPLATE_KEY": "string",
-      "candidateTemplate": "yfiles.view.IDataTemplate",
+      "candidateTemplate": "yfiles.view.IVisualTemplate",
       "HIGHLIGHT_TEMPLATE_KEY": "string",
-      "highlightTemplate": "yfiles.view.IDataTemplate"
+      "highlightTemplate": "yfiles.view.IVisualTemplate"
     },
     "yfiles.input.MarqueeSelectionInputMode": {
       "cancelRecognizer": "function(Object,yfiles.lang.EventArgs):boolean",
@@ -6568,10 +6618,13 @@
       "pressedRecognizerTouch": "function(Object,yfiles.lang.EventArgs):boolean",
       "releasedRecognizer": "function(Object,yfiles.lang.EventArgs):boolean",
       "releasedRecognizerTouch": "function(Object,yfiles.lang.EventArgs):boolean",
-      "template": "yfiles.view.IDataTemplate"
+      "template": "yfiles.view.IVisualTemplate"
     },
     "yfiles.input.Mouse2DEventArgs": {
       "eventType": "yfiles.view.MouseEventTypes"
+    },
+    "yfiles.input.MouseHoverInputMode": {
+      "duration": "yfiles.lang.TimeSpan"
     },
     "yfiles.input.MoveInputMode": {
       "cancelRecognizer": "function(Object,yfiles.lang.EventArgs):boolean",
@@ -6664,7 +6717,7 @@
       "SNAP_TO_GRID_KEY": "string"
     },
     "yfiles.input.OverviewInputMode": {
-      "template": "yfiles.view.IDataTemplate",
+      "template": "yfiles.view.IVisualTemplate",
       "VIEWPORT_TEMPLATE_KEY": "string"
     },
     "yfiles.input.PointBasedSnapLine": {
@@ -6736,9 +6789,6 @@
       "reparentStripeInputModePriority": "yfiles.input.ReparentStripeInputMode",
       "resizeStripeInputModePriority": "yfiles.input.ResizeStripeInputMode"
     },
-    "yfiles.input.TextEditorInputMode": {
-      "TEXT_BOX_STYLE_KEY": "string"
-    },
     "yfiles.input.Touch2DEvents": {
       "LOST_CAPTURE": "yfiles.input.EventRecognizer",
       "LOST_CAPTURE_PRIMARY": "yfiles.input.EventRecognizer",
@@ -6762,6 +6812,18 @@
       "TOUCH_UP_PRIMARY": "yfiles.input.EventRecognizer",
       "TOUCH_UP_SECONDARY": "yfiles.input.EventRecognizer"
     },
+    "yfiles.labeling.AbstractLabelingAlgorithm": {
+      "LABEL_MODEL_DP_KEY": "yfiles.algorithms.ILabelLayoutDpKey<Object>"
+    },
+    "yfiles.labeling.GreedyMISLabeling": {
+      "LABEL_MODEL_DP_KEY": "yfiles.algorithms.ILabelLayoutDpKey<Object>"
+    },
+    "yfiles.labeling.MISLabelingAlgorithm": {
+      "LABEL_MODEL_DP_KEY": "yfiles.algorithms.ILabelLayoutDpKey<Object>"
+    },
+    "yfiles.labeling.SALabeling": {
+      "LABEL_MODEL_DP_KEY": "yfiles.algorithms.ILabelLayoutDpKey<Object>"
+    },
     "yfiles.layout.BendConverter": {
       "SCOPE_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>"
     },
@@ -6772,14 +6834,48 @@
     "yfiles.layout.CompositeLayoutStage": {
       "layoutStages": "yfiles.collections.IList<Object>"
     },
+    "yfiles.layout.FixedGroupLayoutStage": {
+      "FIXED_GROUP_NODES_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>"
+    },
+    "yfiles.layout.FixNodeLayoutStage": {
+      "FIXED_NODE_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>"
+    },
+    "yfiles.layout.GroupingKeys": {
+      "GROUP_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>",
+      "GROUP_NODE_INSETS_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.algorithms.Insets>",
+      "MINIMUM_NODE_SIZE_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.algorithms.YDimension>",
+      "NODE_ID_DP_KEY": "yfiles.algorithms.NodeDpKey<Object>",
+      "PARENT_NODE_ID_DP_KEY": "yfiles.algorithms.NodeDpKey<Object>"
+    },
+    "yfiles.layout.IntersectionCalculatorKeys": {
+      "SOURCE_INTERSECTION_CALCULATOR_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.layout.IIntersectionCalculator>",
+      "TARGET_INTERSECTION_CALCULATOR_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.layout.IIntersectionCalculator>"
+    },
+    "yfiles.layout.LabelLayoutKeys": {
+      "EDGE_LABEL_LAYOUT_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.layout.LabelLayoutData>",
+      "NODE_LABEL_LAYOUT_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.layout.LabelLayoutData>"
+    },
+    "yfiles.layout.NodeHalo": {
+      "NODE_HALO_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.layout.NodeHalo>"
+    },
     "yfiles.layout.ParallelEdgeLayouter": {
+      "LEADING_EDGE_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>",
       "SCOPE_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>"
     },
     "yfiles.layout.PartitionCellId": {
       "cells": "yfiles.collections.IEnumerable<yfiles.layout.PartitionCellIdEntry>"
     },
+    "yfiles.layout.PartitionGrid": {
+      "PARTITION_GRID_DP_KEY": "yfiles.algorithms.GraphDpKey<yfiles.layout.PartitionGrid>"
+    },
     "yfiles.layout.PortCandidateSet": {
       "entries": "yfiles.collections.IEnumerator<Object>"
+    },
+    "yfiles.layout.PortConstraintKeys": {
+      "SOURCE_GROUP_ID_DP_KEY": "yfiles.algorithms.EdgeDpKey<Object>",
+      "SOURCE_PORT_CONSTRAINT_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.layout.PortConstraint>",
+      "TARGET_GROUP_ID_DP_KEY": "yfiles.algorithms.EdgeDpKey<Object>",
+      "TARGET_PORT_CONSTRAINT_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.layout.PortConstraint>"
     },
     "yfiles.multipage.LayoutContext": {
       "layouter": "yfiles.multipage.MultiPageLayout"
@@ -6787,21 +6883,45 @@
     "yfiles.objectcollections.IEnumerator": {
       "currentObject": "T"
     },
+    "yfiles.organic.OrganicLayouter": {
+      "FIXED_GROUP_NODES_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>",
+      "PREFERRED_EDGE_LENGTH_DP_KEY": "yfiles.algorithms.EdgeDpKey<number>"
+    },
+    "yfiles.organic.OrganicRemoveOverlapsStage": {
+      "FIXED_NODE_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>"
+    },
     "yfiles.organic.SmartOrganicLayouter": {
       "GROUP_NODE_MODE_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.organic.GroupNodeMode>",
       "NODE_SUBSET_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>",
       "PREFERRED_EDGE_LENGTH_DP_KEY": "yfiles.algorithms.EdgeDpKey<number>",
       "scope": "yfiles.organic.Scope"
     },
+    "yfiles.orthogonal.DirectedOrthogonalLayouter": {
+      "DIRECTED_EDGE_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>",
+      "EDGE_LAYOUT_DESCRIPTOR_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.orthogonal.EdgeLayoutDescriptor>"
+    },
+    "yfiles.orthogonal.OrthogonalGroupLayouter": {
+      "EDGE_LAYOUT_DESCRIPTOR_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.orthogonal.EdgeLayoutDescriptor>"
+    },
     "yfiles.orthogonal.OrthogonalLayouter": {
       "EDGE_LAYOUT_DESCRIPTOR_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.orthogonal.EdgeLayoutDescriptor>"
     },
     "yfiles.partial.PartialLayouter": {
       "COMPONENT_ASSIGNMENT_DP_KEY": "yfiles.algorithms.NodeDpKey<Object>",
+      "DIRECTED_EDGES_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>",
       "PARTIAL_EDGES_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>",
-      "PARTIAL_NODES_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>"
+      "PARTIAL_NODES_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>",
+      "ROUTE_EDGE_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>"
+    },
+    "yfiles.radial.RadialLayouter": {
+      "NODE_INFO_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.radial.RadialLayoutNodeInfo>"
+    },
+    "yfiles.router.BusRepresentations": {
+      "SOURCE_ID_DP_KEY": "yfiles.algorithms.EdgeDpKey<Object>",
+      "TARGET_ID_DP_KEY": "yfiles.algorithms.EdgeDpKey<Object>"
     },
     "yfiles.router.BusRouter": {
+      "EDGE_DESCRIPTOR_DP_KEY": "yfiles.algorithms.EdgeDpKey<yfiles.router.BusDescriptor>",
       "EDGE_SUBSET_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>",
       "scope": "yfiles.router.Scope"
     },
@@ -6853,12 +6973,19 @@
     "yfiles.tree.AbstractRotatableNodePlacer": {
       "createdChildrenF": "yfiles.collections.IList<Object>"
     },
+    "yfiles.tree.BalloonLayouter": {
+      "INTERLEAVED_NODES_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>"
+    },
     "yfiles.tree.DelegatingNodePlacer": {
       "createdChildrenF": "yfiles.collections.IList<Object>",
       "LEFT_RIGHT_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>"
     },
     "yfiles.tree.GenericTreeLayouter": {
-      "CHILD_COMPARATOR_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.collections.IComparer<Object>>"
+      "CHILD_COMPARATOR_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.collections.IComparer<Object>>",
+      "CRITICAL_EDGE_DP_KEY": "yfiles.algorithms.EdgeDpKey<number>",
+      "MULTI_PARENT_DESCRIPTOR_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.tree.MultiParentDescriptor>",
+      "NODE_PLACER_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.tree.INodePlacer>",
+      "PORT_ASSIGNMENT_DP_KEY": "yfiles.algorithms.NodeDpKey<yfiles.tree.IPortAssignment>"
     },
     "yfiles.tree.GenericTreeLayouter.SubtreeShape": {
       "coreBounds": "yfiles.algorithms.Rectangle2D"
@@ -6871,10 +6998,14 @@
       "createdChildrenF": "yfiles.collections.IList<Object>"
     },
     "yfiles.tree.LeftRightPlacer": {
-      "createdChildrenF": "yfiles.collections.IList<Object>"
+      "createdChildrenF": "yfiles.collections.IList<Object>",
+      "LEFT_RIGHT_DP_KEY": "yfiles.algorithms.NodeDpKey<boolean>"
     },
     "yfiles.tree.SimpleNodePlacer": {
       "createdChildrenF": "yfiles.collections.IList<Object>"
+    },
+    "yfiles.tree.TreeReductionStage": {
+      "NON_TREE_EDGES_DP_KEY": "yfiles.algorithms.EdgeDpKey<boolean>"
     }
   },
   "methodsProperties": {
@@ -6891,11 +7022,29 @@
     "yfiles.algorithms.YList": {
       "last": "method"
     },
-    "yfiles.canvas.ICanvasObjectGroup": {
-      "last": "method"
+    "yfiles.canvas.CanvasControl": {
+      "getCurrentTouchDevices": "property",
+      "isDeviceDown": "property"
+    },
+    "yfiles.canvas.GraphControl": {
+      "getCurrentTouchDevices": "property",
+      "isDeviceDown": "property"
+    },
+    "yfiles.canvas.GraphOverviewControl": {
+      "getCurrentTouchDevices": "property",
+      "isDeviceDown": "property"
     },
     "yfiles.collections.IEnumerable": {
       "getElementCount": "property"
+    },
+    "yfiles.drawing.GeneralPath": {
+      "isEmpty": "property",
+      "isVisible": "property"
+    },
+    "yfiles.drawing.GeneralPath.PathCursor": {
+      "getCurrentEndPointX": "property",
+      "getCurrentEndPointY": "property",
+      "getPathType": "property"
     },
     "yfiles.geometry.IMutableOrientedRectangle": {
       "getAnchorLocation": "property"
@@ -6955,6 +7104,17 @@
     "yfiles.graph.IBend": {
       "getIndex": "property"
     },
+    "yfiles.graph.IColumn": {
+      "getActualInsets": "property",
+      "getActualSize": "property",
+      "getDescendants": "property",
+      "getEffectiveMinSize": "property",
+      "getIndex": "property",
+      "getLeaves": "property",
+      "getParent": "property",
+      "getRoot": "property",
+      "isRoot": "property"
+    },
     "yfiles.graph.IEdge": {
       "getSourceNode": "property",
       "getTargetNode": "property",
@@ -6963,11 +7123,33 @@
     "yfiles.graph.IGraph": {
       "getDecorator": "property"
     },
-    "yfiles.graph.IGroupedGraph": {
-      "autoAdjustGroupNodeBounds": "method"
-    },
     "yfiles.graph.ILabel": {
       "getIndex": "property"
+    },
+    "yfiles.graph.IRow": {
+      "getActualInsets": "property",
+      "getActualSize": "property",
+      "getDescendants": "property",
+      "getEffectiveMinSize": "property",
+      "getIndex": "property",
+      "getLeaves": "property",
+      "getParent": "property",
+      "getRoot": "property",
+      "isRoot": "property"
+    },
+    "yfiles.graph.IStripe": {
+      "getActualInsets": "property",
+      "getActualSize": "property",
+      "getDescendants": "property",
+      "getEffectiveMinSize": "property",
+      "getIndex": "property",
+      "getLeaves": "property",
+      "getParent": "property",
+      "getRoot": "property",
+      "isRoot": "property"
+    },
+    "yfiles.graph.ITable": {
+      "createRootColumn": "property"
     },
     "yfiles.graph.SimpleBend": {
       "getIndex": "property"
@@ -6980,18 +7162,36 @@
     "yfiles.graph.SimpleLabel": {
       "getIndex": "property"
     },
+    "yfiles.graph.Table": {
+      "createRootColumn": "property"
+    },
     "yfiles.hierarchic.IncrementalHierarchicLayouter": {
       "mirrorMask": "method"
+    },
+    "yfiles.input.GraphViewerInputMode": {
+      "getMutexOwner": "property"
     },
     "yfiles.input.IInputModeContext": {
       "getGraph": "property",
       "getGroupedGraph": "property"
+    },
+    "yfiles.input.ItemDropInputMode": {
+      "getPreviewGraph": "property"
+    },
+    "yfiles.input.MarqueeSelectionInputMode": {
+      "getSelectionRectangle": "property"
+    },
+    "yfiles.input.MultiplexingInputMode": {
+      "getMutexOwner": "property"
     },
     "yfiles.input.NodeDropInputMode": {
       "getDraggedNode": "property"
     },
     "yfiles.input.StripeDropInputMode": {
       "getDraggedStripe": "property"
+    },
+    "yfiles.input.TableEditorInputMode": {
+      "getMutexOwner": "property"
     },
     "yfiles.model.DefaultCollectionModel": {
       "getItems": "property"

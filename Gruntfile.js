@@ -24,15 +24,19 @@ module.exports = function(grunt) {
           cwd: contentSrc,
           src: ["**/*.js", "!**/lib/**", "!**/node_modules/**"],
           dest: contentDest
-        }]
+        }],
         // in order to only convert a single file, do this:
         /*
         files: [{
           expand: true,
           src: ["MySingleSourceFile.js"],
           dest: contentDest
-        }]
+        }],
         */
+        // In order to automatically convert yFiles class declarations to ES-6 classes do this:
+        options: {
+          convertClassDeclarations: true,
+        }
       }
     }
   });

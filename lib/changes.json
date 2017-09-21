@@ -175,6 +175,7 @@
     "yfiles.EnumDefinition": "yfiles.lang.EnumDefinition",
     "yfiles.geometry.GeomSupport": "yfiles.geometry.GeomUtilities",
     "yfiles.geometry.IContainsTest": "yfiles.input.IContainsBendTester",
+    "yfiles.geometry.ImmutableOrientedRectangle": "yfiles.geometry.OrientedRectangle",
     "yfiles.geometry.InsetsD": "yfiles.geometry.Insets",
     "yfiles.geometry.Matrix2D": "yfiles.geometry.Matrix",
     "yfiles.geometry.Point": "yfiles.geometry.MutablePoint",
@@ -826,6 +827,7 @@
     },
     "yfiles.algorithms.NodeList": {
       "addAllFromCursor": "addAll",
+      "contains": "includes",
       "first": "firstObject",
       "last": "popLast",
       "removeItemPointedToByCursor": "removeAtCursor",
@@ -1220,6 +1222,7 @@
       "getElementSum": "sum",
       "getEnumerableAsArray": "toArray",
       "getEnumerableAsList": "toList",
+      "getFirstElement": "first",
       "getFirstElementOrDefaultWithPredicate": "firstOrDefault",
       "getFirstElementWithPredicate": "first",
       "getLastElement": "last",
@@ -1277,6 +1280,9 @@
       "safeGet": "lookup"
     },
     "yfiles.drawing.FreeNodeLabelModel": {
+      "createNodeRatioAnchored": "createParameter",
+      "createSmartNodeRatioAnchored": "createCanonicalParameter",
+      "createSmartNodeRatioAnchoredWithLocation": "createCanonicalParameter",
       "safeGet": "lookup"
     },
     "yfiles.drawing.GeneralPath": {
@@ -1324,6 +1330,9 @@
     },
     "yfiles.drawing.IIconLabelStyle": {
       "innerStyleInsets": "wrappedInsets"
+    },
+    "yfiles.drawing.ImageNodeStyle": {
+      "outlineShape": "normalizedOutline"
     },
     "yfiles.drawing.InteriorLabelModel": {
       "safeGet": "lookup"
@@ -1431,15 +1440,18 @@
       "getTopRight": "topRight"
     },
     "yfiles.geometry.IOrientedRectangle": {
-      "getAnchorLocation": "anchorLocation"
+      "getAnchorLocation": "anchorLocation",
+      "getBounds": "bounds"
     },
     "yfiles.geometry.IRectangle": {
       "getBottomLeft": "bottomLeft",
       "getBottomRight": "bottomRight",
       "getMaxX": "maxX",
       "getMaxY": "maxY",
+      "getRectangleCenter": "center",
       "getTopLeft": "topLeft",
-      "getTopRight": "topRight"
+      "getTopRight": "topRight",
+      "toRectD": "toRect"
     },
     "yfiles.geometry.Matrix2D": {
       "rotateWithCenter": "rotate",
@@ -1468,6 +1480,8 @@
       "getTopRight": "topRight"
     },
     "yfiles.geometry.RectD": {
+      "addRectangle": "add",
+      "addRectD": "add",
       "containsPointDEps": "containsWithEps",
       "convertToRectangle": "convertToMutableRectangle",
       "getBottomLeft": "bottomLeft",
@@ -1615,6 +1629,7 @@
       "onLabelChanged": "onLabelTagChanged",
       "onNodeChanged": "onNodeTagChanged",
       "onPortChanged": "onPortTagChanged",
+      "portInEdgesAt": "inEdgesAt",
       "removeBend": "remove",
       "removeEdge": "remove",
       "removeLabel": "remove",
@@ -1623,6 +1638,8 @@
       "removePort": "remove",
       "removePortOwner": "remove",
       "safeGet": "lookup",
+      "setBounds": "setNodeLayout",
+      "setCenter": "setNodeCenter",
       "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
       "setLabelStyle": "setStyle",
@@ -1804,6 +1821,7 @@
       "edgesAtOwner": "edgesAt",
       "edgesAtPort": "edgesAt",
       "getDecorator": "decorator",
+      "portInEdgesAt": "inEdgesAt",
       "removeBend": "remove",
       "removeEdge": "remove",
       "removeLabel": "remove",
@@ -1812,6 +1830,8 @@
       "removePort": "remove",
       "removePortOwner": "remove",
       "safeGet": "lookup",
+      "setBounds": "setNodeLayout",
+      "setCenter": "setNodeCenter",
       "setEdgeStyle": "setStyle",
       "setLabelModelParameter": "setLabelLayoutParameter",
       "setLabelStyle": "setStyle",
@@ -1889,6 +1909,31 @@
       "getRoot": "root",
       "rows": "childRows",
       "safeGet": "lookup"
+    },
+    "yfiles.graph.IGraphSelection": {
+      "enumerableContains": "includes",
+      "enumerableContainsElements": "some",
+      "enumerableContainsMatch": "some",
+      "enumerableMatchesAll": "every",
+      "forEachWithIndex": "forEach",
+      "getAggregation": "reduce",
+      "getElementAt": "elementAt",
+      "getElementCount": "size",
+      "getElementSum": "sum",
+      "getEnumerableAsArray": "toArray",
+      "getEnumerableAsList": "toList",
+      "getFirstElement": "first",
+      "getFirstElementOrDefaultWithPredicate": "firstOrDefault",
+      "getFirstElementWithPredicate": "first",
+      "getLastElement": "last",
+      "getLastElementOrDefault": "last",
+      "getMatchingElements": "filter",
+      "getMultiProjection": "selectMany",
+      "getObjectEnumerator": "getEnumerator",
+      "getProjection": "map",
+      "getProjectionWithIndex": "map",
+      "getReversedEnumerable": "toReversed",
+      "getTakeWhileEnumerable": "takeWhile"
     },
     "yfiles.graph.IStripe": {
       "getActualInsets": "actualInsets",
@@ -2850,7 +2895,29 @@
     },
     "yfiles.model.IListEnumerable": {
       "count": "size",
-      "getItem": "get"
+      "enumerableContains": "includes",
+      "enumerableContainsElements": "some",
+      "enumerableContainsMatch": "some",
+      "enumerableMatchesAll": "every",
+      "forEachWithIndex": "forEach",
+      "getAggregation": "reduce",
+      "getElementAt": "elementAt",
+      "getElementCount": "size",
+      "getElementSum": "sum",
+      "getEnumerableAsArray": "toArray",
+      "getEnumerableAsList": "toList",
+      "getFirstElementOrDefaultWithPredicate": "firstOrDefault",
+      "getFirstElementWithPredicate": "first",
+      "getItem": "get",
+      "getLastElement": "last",
+      "getLastElementOrDefault": "last",
+      "getMatchingElements": "filter",
+      "getMultiProjection": "selectMany",
+      "getObjectEnumerator": "getEnumerator",
+      "getProjection": "map",
+      "getProjectionWithIndex": "map",
+      "getReversedEnumerable": "toReversed",
+      "getTakeWhileEnumerable": "takeWhile"
     },
     "yfiles.model.IMapper": {
       "getItem": "get",
@@ -2860,7 +2927,30 @@
       "safeGet": "lookup"
     },
     "yfiles.model.ISelectionModel": {
-      "count": "size"
+      "count": "size",
+      "enumerableContains": "includes",
+      "enumerableContainsElements": "some",
+      "enumerableContainsMatch": "some",
+      "enumerableMatchesAll": "every",
+      "forEachWithIndex": "forEach",
+      "getAggregation": "reduce",
+      "getElementAt": "elementAt",
+      "getElementCount": "size",
+      "getElementSum": "sum",
+      "getEnumerableAsArray": "toArray",
+      "getEnumerableAsList": "toList",
+      "getFirstElement": "first",
+      "getFirstElementOrDefaultWithPredicate": "firstOrDefault",
+      "getFirstElementWithPredicate": "first",
+      "getLastElement": "last",
+      "getLastElementOrDefault": "last",
+      "getMatchingElements": "filter",
+      "getMultiProjection": "selectMany",
+      "getObjectEnumerator": "getEnumerator",
+      "getProjection": "map",
+      "getProjectionWithIndex": "map",
+      "getReversedEnumerable": "toReversed",
+      "getTakeWhileEnumerable": "takeWhile"
     },
     "yfiles.model.ModelManager": {
       "canvas": "canvasComponent"
@@ -3241,6 +3331,9 @@
       "subgraphLayouter": "subgraphLayout",
       "subgraphLayouterEnabled": "subgraphLayoutEnabled"
     },
+    "yfiles.support.ICompoundEdit": {
+      "end": "commit"
+    },
     "yfiles.support.IContextLookup": {
       "lookupForItem": "contextLookup"
     },
@@ -3254,6 +3347,7 @@
       "lookupForItem": "contextLookup"
     },
     "yfiles.support.UndoEngine": {
+      "autoAddTimeSpan": "autoMergeTime",
       "redoText": "redoName",
       "undoText": "undoName"
     },
@@ -3277,6 +3371,9 @@
       "dashCap": "lineCap",
       "endLineCap": "lineCap",
       "startLineCap": "lineCap"
+    },
+    "yfiles.system.RoutedCommand": {
+      "executeOnTarget": "execute"
     },
     "yfiles.system.ValueSerializer": {
       "getSerializerForContext": "getSerializerFor",
@@ -3686,6 +3783,10 @@
       "invalidate",
       "getCastedEnumerable"
     ],
+    "yfiles.canvas.SvgExport": [
+      "setScaleForHeight",
+      "setScaleForWidth"
+    ],
     "yfiles.circular.CircularLayouter": [
       "applyLayout",
       "calcLayout",
@@ -3787,6 +3888,10 @@
     "yfiles.drawing.DefaultPositionHandler": [
       "setPosition"
     ],
+    "yfiles.drawing.FreeNodeLabelModel": [
+      "createNodeCenterAnchored",
+      "createNodeLayoutAnchored"
+    ],
     "yfiles.drawing.GenericPortLocationModel": [
       "getCastedEnumerable"
     ],
@@ -3803,13 +3908,20 @@
       "canLayoutCore",
       "canLayout"
     ],
+    "yfiles.geometry.IOrientedRectangle": [
+      "getTopLeftLocation"
+    ],
     "yfiles.geometry.Matrix2D": [
       "transformValues"
     ],
     "yfiles.geometry.PointD": [
       "FromPoint",
+      "fromPoint",
       "FromPointD",
       "subtract"
+    ],
+    "yfiles.geometry.RectD": [
+      "FromTopLeftAndSize"
     ],
     "yfiles.graph.AbstractGraphWrapper": [
       "appendBends",
@@ -4575,6 +4687,9 @@
     "yfiles.support.GenericYList": [
       "getCastedEnumerable"
     ],
+    "yfiles.support.ICompoundEdit": [
+      "dispose"
+    ],
     "yfiles.support.SingleEnumerable": [
       "getCastedEnumerable"
     ],
@@ -4589,6 +4704,9 @@
       "getCastedEnumerable",
       "getCastedEnumerable",
       "getCastedEnumerable"
+    ],
+    "yfiles.support.UndoEngine": [
+      "currentCompoundEdit"
     ],
     "yfiles.system.ApplicationCommands": [
       "SAVE_AS"
@@ -6336,6 +6454,7 @@
       "image": "string"
     },
     "yfiles.drawing.ImageNodeStyle": {
+      "fallbackImage": "string",
       "image": "string"
     },
     "yfiles.drawing.ImageNodeStyleRenderer": {
@@ -7059,13 +7178,15 @@
       "isEmpty": "property"
     },
     "yfiles.geometry.IOrientedRectangle": {
-      "getAnchorLocation": "property"
+      "getAnchorLocation": "property",
+      "getBounds": "property"
     },
     "yfiles.geometry.IRectangle": {
       "getBottomLeft": "property",
       "getBottomRight": "property",
       "getMaxX": "property",
       "getMaxY": "property",
+      "getRectangleCenter": "property",
       "getTopLeft": "property",
       "getTopRight": "property",
       "isEmpty": "property"

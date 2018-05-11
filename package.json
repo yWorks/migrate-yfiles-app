@@ -13,8 +13,8 @@
   "dependencies": {
     "async": "^2.0.1",
     "es6-shim": "^0.35.1",
-    "escodegen": "^1.8.1",
-    "esprima": "^3.0.0",
+    "escodegen": "^1.9.1",
+    "esprima": "^4.0.0",
     "estraverse": "^4.2.0",
     "glob": "latest",
     "grunt": "^1.0.1",

@@ -21,7 +21,7 @@
     "load-grunt-tasks": "^3.5.2",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "tern": "^0.20.0"
+    "tern": "^0.23.0"
   },
   "private": true,
   "author": {

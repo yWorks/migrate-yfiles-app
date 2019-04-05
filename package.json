@@ -1,7 +1,7 @@
 {
   "name": "yfiles-migration-tool",
-  "description": "Automatically migrate yFiles for HTML 2.0.x code to yFiles for HTML 2.1",
-  "version": "2.0.0",
+  "description": "Automatically migrate yFiles for HTML 2.1.x code to yFiles for HTML 2.2",
+  "version": "3.0.0",
   "homepage": "https://www.yworks.com/yfileshtml",
   "engines": {
     "node": ">= 0.8.0"

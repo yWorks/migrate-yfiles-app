@@ -1,368 +1,516 @@
 {
-  "namespaceChanges": {},
+  "namespaceChanges": {
+    "yfiles.algorithms.BfsDirection": "yfiles.algorithms.TraversalDirection"
+  },
   "removedTypes": [
-    "yfiles.algorithms.GraphEventType",
-    "yfiles.binding.GraphBuilderBase",
-    "yfiles.hierarchic.GroupingSupport",
-    "yfiles.hierarchic.IVisitor",
-    "yfiles.view.TextDecorations"
+    "yfiles.layout.SingleItemCollection"
   ],
+  "newMembers": {
+    "yfiles.collections.IEnumerable": [
+      "append",
+      "distinct",
+      "from",
+      "groupBy",
+      "ofRange",
+      "ofRepeat",
+      "orderBy",
+      "orderByDescending",
+      "prepend",
+      "reduceRight(function(system.Func5,TAccumulate)",
+      "reduceRight(system.Func5)",
+      "skip",
+      "skipWhile",
+      "take"
+    ],
+    "yfiles.collections.List": [
+      "copyWithin",
+      "fill",
+      "pop",
+      "push",
+      "shift",
+      "slice",
+      "splice",
+      "unshift"
+    ],
+    "yfiles.geometry.Insets": [
+      "divide",
+      "from"
+    ],
+    "yfiles.geometry.Point": [
+      "from"
+    ],
+    "yfiles.geometry.Rect": [
+      "from"
+    ],
+    "yfiles.geometry.Size": [
+      "from"
+    ],
+    "yfiles.graph.GraphClipboard": [
+      "clipboardContext",
+      "getId"
+    ],
+    "yfiles.graphml.GraphMLIOHandler": [
+      "addGraphInputData(yfiles.lang.Class,string,system.Action2,system.EventHandler1,string)",
+      "addGraphInputData(yfiles.lang.Class,system.Predicate,system.Action2,system.EventHandler1)",
+      "addGraphOutputData(yfiles.lang.Class,string,system.Func2,system.EventHandler1,yfiles.graphml.KeyType,string)",
+      "addGraphOutputData(yfiles.lang.Class,string,TValue,system.EventHandler1,yfiles.graphml.KeyType,string)"
+    ],
+    "yfiles.graphml.XmlName": [
+      "toString"
+    ],
+    "yfiles.hierarchic.DefaultLayerSequencer": [
+      "getCrossingCost"
+    ],
+    "yfiles.hierarchic.HierarchicLayout": [
+      "BUS_DESCRIPTOR_DP_KEY",
+      "EDGE_CROSSING_COST_DP_KEY",
+      "getOriginalEdge",
+      "GROUP_BORDER_CROSSING_COST_DP_KEY",
+      "UNIFORM_PORT_ASSIGNMENT_GROUPS_DP_KEY"
+    ],
+    "yfiles.hierarchic.HierarchicLayoutData": [
+      "buses",
+      "busRootOffsets",
+      "edgeCrossingCosts",
+      "groupBorderCrossingCosts",
+      "nodesBeforeBus",
+      "reduceCriticalEdgeCrossings",
+      "uniformPortAssignmentGroups"
+    ],
+    "yfiles.hierarchic.IEdgeData": [
+      "criticalEdgePriority",
+      "crossingCost"
+    ],
+    "yfiles.hierarchic.IItemFactory": [
+      "createBusDummyEdge",
+      "createBusDummyEdgeData",
+      "createBusDummyNode",
+      "createBusDummyNodeData",
+      "setTemporaryCriticalEdgePriority",
+      "setTemporaryCrossingCost"
+    ],
+    "yfiles.hierarchic.NodeDataType": [
+      "BUS_STRUCTURE_DUMMY"
+    ],
+    "yfiles.input.CreateEdgeInputMode": [
+      "edgeDirectionPolicy",
+      "onReversedEdgeCreationChanged",
+      "reversedEdgeCreation",
+      "showTargetHighlight",
+      "toggleDirectionRecognizer",
+      "updateTargetHighlight"
+    ],
+    "yfiles.input.GraphEditorInputMode": [
+      "addLabel(yfiles.graph.ILabelOwner,string,yfiles.graph.ILabelModelParameter,yfiles.styles.ILabelStyle,yfiles.geometry.Size,Object)",
+      "createLabelCore",
+      "editLabelCore",
+      "lowerSelection",
+      "raiseSelection",
+      "selectionToBack",
+      "selectionToFront",
+      "textEditorInputModeConfigurator"
+    ],
+    "yfiles.input.HandleInputMode": [
+      "renderMode"
+    ],
+    "yfiles.input.ICommand": [
+      "LOWER",
+      "RAISE",
+      "TO_BACK",
+      "TO_FRONT"
+    ],
+    "yfiles.input.KeyboardInputMode": [
+      "addKeyBinding(yfiles.view.Key,yfiles.view.ModifierKeys,yfiles.input.ExecuteCommandHandler,yfiles.input.CanExecuteCommandHandler)",
+      "addRecognizerBinding(yfiles.input.EventRecognizer,yfiles.input.ExecuteCommandHandler,yfiles.input.CanExecuteCommandHandler)"
+    ],
+    "yfiles.input.MoveLabelInputMode": [
+      "allowUnselected"
+    ],
+    "yfiles.input.NavigationInputMode": [
+      "scrollToSelection"
+    ],
+    "yfiles.input.PortRelocationHandle": [
+      "showPortCandidates",
+      "showTargetHighlight",
+      "updateHighlight"
+    ],
+    "yfiles.input.PortRelocationHandleProvider": [
+      "showPortCandidates",
+      "showTargetHighlight"
+    ],
+    "yfiles.input.SnapLine": [
+      "visualizationType"
+    ],
+    "yfiles.lang.Class": [
+      "ensure"
+    ],
+    "yfiles.lang.Workarounds": [
+      "ie205775"
+    ],
+    "yfiles.layout.ItemCollection": [
+      "item"
+    ],
+    "yfiles.layout.LayoutData": [
+      "combineWith"
+    ],
+    "yfiles.layout.LayoutExecutor": [
+      "portAdjustmentPolicy"
+    ],
+    "yfiles.layout.LayoutGraphAdapter": [
+      "portAdjustmentPolicy"
+    ],
+    "yfiles.layout.PartitionGridData": [
+      "optimizeColumnOrder",
+      "optimizeRowOrder"
+    ],
+    "yfiles.layout.PlaceNodesAtBarycenterStage": [
+      "AFFECTED_NODES_SIZE_DP_KEY",
+      "considerGrouping",
+      "removeBends",
+      "resetPorts"
+    ],
+    "yfiles.layout.PlaceNodesAtBarycenterStageData": [
+      "affectedNodesSizes"
+    ],
+    "yfiles.layout.RecursiveGroupLayout": [
+      "GROUP_NODE_PARTITION_GRID_DP_KEY"
+    ],
+    "yfiles.layout.RecursiveGroupLayoutData": [
+      "groupNodePartitionGrids",
+      "partitionGridData"
+    ],
+    "yfiles.organic.InteractiveOrganicLayout": [
+      "compactnessFactor"
+    ],
+    "yfiles.organic.OrganicLayout": [
+      "create3DLayout",
+      "NODE_INERTIA_DP_KEY",
+      "NODE_STRESS_DP_KEY",
+      "Z_COORDINATE_DP_KEY"
+    ],
+    "yfiles.organic.OrganicLayoutData": [
+      "nodeInertia",
+      "nodeStress",
+      "zCoordinates"
+    ],
+    "yfiles.orthogonal.OrthogonalLayout": [
+      "EDGE_BEND_COST_DP_KEY",
+      "EDGE_CROSSING_COST_DP_KEY",
+      "preferParallelRoutes"
+    ],
+    "yfiles.orthogonal.OrthogonalLayoutData": [
+      "edgeBendCosts",
+      "edgeCrossingCosts"
+    ],
+    "yfiles.router.ChannelEdgeRouterData": [
+      "abortHandler",
+      "sourcePortCandidates",
+      "sourcePortConstraints",
+      "targetPortCandidates",
+      "targetPortConstraints"
+    ],
+    "yfiles.router.DynamicObstacleDecomposition": [
+      "fireUnlockCellEvent"
+    ],
+    "yfiles.router.EdgeCellInfo": [
+      "item"
+    ],
+    "yfiles.router.EdgeRouter": [
+      "BUS_DESCRIPTOR_DP_KEY",
+      "integratedEdgeLabeling"
+    ],
+    "yfiles.router.IDecompositionListener": [
+      "onCellUnlocked"
+    ],
+    "yfiles.router.Path": [
+      "distance",
+      "edges",
+      "end",
+      "nodes",
+      "start"
+    ],
+    "yfiles.router.PathSearchContext": [
+      "currentRequest"
+    ],
+    "yfiles.router.PathSearchExtension": [
+      "cancelCurrentPathRequest",
+      "initializeCurrentPathRequest"
+    ],
+    "yfiles.router.PolylineEdgeRouterData": [
+      "buses",
+      "edgeLabelPreferredPlacement",
+      "sourcePortGroupIds",
+      "targetPortGroupIds"
+    ],
+    "yfiles.router.SegmentInfo": [
+      "edge"
+    ],
+    "yfiles.styles.DefaultLabelStyle": [
+      "enlargementAbsolute",
+      "enlargementRelative",
+      "insets",
+      "maximumSize",
+      "minimumSize"
+    ],
+    "yfiles.styles.DefaultLabelStyleRenderer": [
+      "quantizePreferredSize"
+    ],
+    "yfiles.styles.NodeStylePortStyleAdapter": [
+      "offset"
+    ],
+    "yfiles.styles.TemplatePortStyleBase": [
+      "offset"
+    ],
+    "yfiles.styles.TemplatePortStyleRenderer": [
+      "getOffset"
+    ],
+    "yfiles.tree.GridNodePlacer": [
+      "automaticRowAssignment",
+      "BUS_ALIGNED",
+      "busPlacement"
+    ],
+    "yfiles.tree.LeftRightNodePlacer": [
+      "branchCount"
+    ],
+    "yfiles.tree.TreeLayoutData": [
+      "leftRightNodePlacerLeftNodes"
+    ],
+    "yfiles.view.GraphModelManager": [
+      "createEdgeLabelModelManager",
+      "createEdgeModelManager",
+      "createNodeLabelModelManager",
+      "createNodeModelManager",
+      "createPortLabelModelManager",
+      "createPortModelManager",
+      "lower(yfiles.collections.IEnumerable)",
+      "lower(yfiles.graph.IModelItem)",
+      "raise(yfiles.collections.IEnumerable)",
+      "raise(yfiles.graph.IModelItem)",
+      "toBack(yfiles.collections.IEnumerable)",
+      "toBack(yfiles.graph.IModelItem)",
+      "toFront(yfiles.collections.IEnumerable)",
+      "toFront(yfiles.graph.IModelItem)"
+    ],
+    "yfiles.view.GraphOverviewComponent": [
+      "createWebGLVisualCreator"
+    ],
+    "yfiles.view.GridVisualCreator": [
+      "renderMode"
+    ],
+    "yfiles.view.SvgDefsManager": [
+      "cleanUpDuration"
+    ],
+    "yfiles.view.ToolTip": [
+      "updateLocation"
+    ]
+  },
   "newTypes": [
-    "yfiles.binding.EdgeLabelProvider",
-    "yfiles.binding.GraphBuilderItemEventArgs",
-    "yfiles.geometry.SmoothingPolicy",
-    "yfiles.graph.FreePortLabelModel",
-    "yfiles.graph.InsideOutsidePortLabelModel",
-    "yfiles.graph.StripeDecorator",
-    "yfiles.graph.StripeLabelDecorator",
-    "yfiles.graph.TableDecorator",
-    "yfiles.hierarchic.LayerConstraintData",
-    "yfiles.hierarchic.SequenceConstraintData",
-    "yfiles.input.ILassoTestable",
-    "yfiles.input.ItemTappedEventArgs",
-    "yfiles.input.LabelDropInputMode",
-    "yfiles.input.LassoSelectionEventArgs",
-    "yfiles.input.LassoSelectionInputMode",
-    "yfiles.input.LassoTestables",
-    "yfiles.input.PortDropInputMode",
-    "yfiles.input.ShowPortCandidates",
-    "yfiles.input.SnapPanningBehaviors",
-    "yfiles.input.TableHitTestResult",
-    "yfiles.input.TableItemClickedEventArgs",
-    "yfiles.input.TableItemTappedEventArgs",
-    "yfiles.input.TextBoxPlacementPolicy",
-    "yfiles.input.Visualization",
-    "yfiles.lang.License",
-    "yfiles.lang.TypeAttribute",
-    "yfiles.lang.Workarounds",
-    "yfiles.layout.ItemCollectionMapping",
-    "yfiles.layout.PlaceNodesAtBarycenterStage",
-    "yfiles.layout.PortLabelPolicy",
-    "yfiles.layout.TabularLayout",
-    "yfiles.layout.TabularLayoutData",
-    "yfiles.layout.TabularLayoutPolicy",
-    "yfiles.layout.TabularNodeLayoutDescriptor",
-    "yfiles.layout.TemporaryGroupNodeInsertionData",
-    "yfiles.layout.TemporaryGroupNodeInsertionStage",
-    "yfiles.orthogonal.ChainLayoutStyle",
-    "yfiles.orthogonal.CycleLayoutStyle",
-    "yfiles.orthogonal.SubstructureOrientation",
-    "yfiles.orthogonal.TreeLayoutStyle",
-    "yfiles.styles.WebGLImageNodeStyle",
-    "yfiles.styles.WebGLPolylineEdgeStyle",
-    "yfiles.styles.WebGLShapeNodeStyle",
-    "yfiles.styles.WebGLTaperedEdgeStyle",
-    "yfiles.tree.CompactNodePlacer",
-    "yfiles.tree.NodeWeightComparer",
-    "yfiles.tree.TilingPolicy",
-    "yfiles.tree.TreeMapLayout",
-    "yfiles.tree.TreeMapLayoutData",
-    "yfiles.view.HierarchicNestingPolicy",
-    "yfiles.view.LabelLayerPolicy",
-    "yfiles.view.PortLayerPolicy",
-    "yfiles.view.WebGLSupport",
-    "yfiles.view.WebGLVisual"
+    "yfiles.analysis.AllPairsShortestPaths",
+    "yfiles.analysis.AllPairsShortestPathsResult",
+    "yfiles.analysis.BetweennessCentrality",
+    "yfiles.analysis.BetweennessCentralityResult",
+    "yfiles.analysis.Bfs",
+    "yfiles.analysis.BfsLayer",
+    "yfiles.analysis.BfsResult",
+    "yfiles.analysis.BiconnectedComponent",
+    "yfiles.analysis.BiconnectedComponentClustering",
+    "yfiles.analysis.BiconnectedComponentClusteringResult",
+    "yfiles.analysis.BiconnectedComponents",
+    "yfiles.analysis.BiconnectedComponentsResult",
+    "yfiles.analysis.Bipartition",
+    "yfiles.analysis.BipartitionPartition",
+    "yfiles.analysis.BipartitionResult",
+    "yfiles.analysis.Chains",
+    "yfiles.analysis.ChainsResult",
+    "yfiles.analysis.ClosenessCentrality",
+    "yfiles.analysis.ClosenessCentralityResult",
+    "yfiles.analysis.Cluster",
+    "yfiles.analysis.Component",
+    "yfiles.analysis.ConnectedComponents",
+    "yfiles.analysis.ConnectedComponentsResult",
+    "yfiles.analysis.Cycle",
+    "yfiles.analysis.CycleEdges",
+    "yfiles.analysis.CycleEdgesResult",
+    "yfiles.analysis.CycleResult",
+    "yfiles.analysis.DegreeCentrality",
+    "yfiles.analysis.DegreeCentralityResult",
+    "yfiles.analysis.DendrogramNode",
+    "yfiles.analysis.EdgeBetweennessClustering",
+    "yfiles.analysis.EdgeBetweennessClusteringResult",
+    "yfiles.analysis.FeedbackEdgeSet",
+    "yfiles.analysis.FeedbackEdgeSetResult",
+    "yfiles.analysis.GraphCentrality",
+    "yfiles.analysis.GraphCentralityResult",
+    "yfiles.analysis.GraphStructureAnalyzer",
+    "yfiles.analysis.HierarchicalClustering",
+    "yfiles.analysis.HierarchicalClusteringResult",
+    "yfiles.analysis.IndependentSet",
+    "yfiles.analysis.IndependentSets",
+    "yfiles.analysis.IndependentSetsResult",
+    "yfiles.analysis.KMeansClustering",
+    "yfiles.analysis.KMeansClusteringDistanceMetric",
+    "yfiles.analysis.KMeansClusteringResult",
+    "yfiles.analysis.LinkageMethod",
+    "yfiles.analysis.LongestPath",
+    "yfiles.analysis.LongestPathResult",
+    "yfiles.analysis.MaximumFlow",
+    "yfiles.analysis.MaximumFlowResult",
+    "yfiles.analysis.MinimumCostFlow",
+    "yfiles.analysis.MinimumCostFlowResult",
+    "yfiles.analysis.Neighborhood",
+    "yfiles.analysis.NeighborhoodResult",
+    "yfiles.analysis.Paths",
+    "yfiles.analysis.PathsResult",
+    "yfiles.analysis.Reachability",
+    "yfiles.analysis.ReachabilityResult",
+    "yfiles.analysis.ResultItemCollection",
+    "yfiles.analysis.ResultItemMapping",
+    "yfiles.analysis.ShortestPath",
+    "yfiles.analysis.ShortestPathResult",
+    "yfiles.analysis.SingleSourceShortestPaths",
+    "yfiles.analysis.SingleSourceShortestPathsResult",
+    "yfiles.analysis.SpanningTree",
+    "yfiles.analysis.SpanningTreeResult",
+    "yfiles.analysis.StronglyConnectedComponents",
+    "yfiles.analysis.StronglyConnectedComponentsResult",
+    "yfiles.analysis.TransitiveClosure",
+    "yfiles.analysis.TransitiveClosureEdge",
+    "yfiles.analysis.TransitiveClosureResult",
+    "yfiles.analysis.TransitiveReduction",
+    "yfiles.analysis.TransitiveReductionResult",
+    "yfiles.analysis.TreeAnalyzer",
+    "yfiles.analysis.WeightCentrality",
+    "yfiles.analysis.WeightCentralityResult",
+    "yfiles.hierarchic.BusDescriptor",
+    "yfiles.input.EdgeDirectionPolicy",
+    "yfiles.input.IBendGridConstraintProvider",
+    "yfiles.input.ILabelGridConstraintProvider",
+    "yfiles.input.ILabelOwnerGridConstraintProvider",
+    "yfiles.input.INodeGridConstraintProvider",
+    "yfiles.input.IPortGridConstraintProvider",
+    "yfiles.input.SnapLineVisualizationType",
+    "yfiles.layout.GenericPartitionGridStage",
+    "yfiles.layout.GenericPartitionGridStageData",
+    "yfiles.layout.GivenCoordinatesStage",
+    "yfiles.layout.GivenCoordinatesStageData",
+    "yfiles.layout.PortAdjustmentPolicy",
+    "yfiles.router.ChannelOrientation",
+    "yfiles.router.ChannelRoutingTool",
+    "yfiles.router.EdgeRouterBusDescriptor",
+    "yfiles.router.PathRequest",
+    "yfiles.styles.GraphOverviewWebGLVisualCreator",
+    "yfiles.tree.BusPlacement",
+    "yfiles.view.PortStyleDecorationInstaller",
+    "yfiles.view.RenderModes"
   ],
   "memberRenamings": {
-    "yfiles.circular.SingleCycleLayout": {
-      "fromSketchModeEnabled": "fromSketchMode"
+    "yfiles.collections.IEnumerable": {
+      "selectMany": "flatMap"
     },
-    "yfiles.graph.EdgePathLabelModel": {
-      "autoRotationEnabled": "autoRotation"
+    "yfiles.layout.LayoutExecutor": {
+      "improvePortAssignment": "portAdjustmentPolicy"
     },
-    "yfiles.graph.EdgeSegmentLabelModel": {
-      "autoRotationEnabled": "autoRotation"
+    "yfiles.layout.LayoutGraphAdapter": {
+      "improvePortAssignment": "portAdjustmentPolicy"
     },
-    "yfiles.graph.IPortDefaults": {
-      "autoCleanup": "autoCleanUp"
-    },
-    "yfiles.graph.PortDefaults": {
-      "autoCleanup": "autoCleanUp"
-    },
-    "yfiles.input.ItemDropInputMode": {
-      "cleanup": "cleanUp",
-      "cleanupDropTarget": "cleanUpDropTarget",
-      "cleanupPreview": "cleanUpPreview",
-      "cleanupSnapContext": "cleanUpSnapContext"
-    },
-    "yfiles.input.KeyEventRecognizers": {
-      "ALT_PRESSED": "ALT_IS_DOWN",
-      "CONTROL_PRESSED": "CTRL_IS_DOWN",
-      "DELETE_PRESSED": "DELETE_DOWN",
-      "ESCAPE_PRESSED": "ESCAPE_PRESS",
-      "ESCAPE_RELEASED": "ESCAPE_UP",
-      "ESCAPE_TYPED": "ESCAPE_PRESS",
-      "KEY_PRESSED": "KEY_PRESS",
-      "KEY_RELEASED": "KEY_UP",
-      "KEY_TYPED": "KEY_PRESS",
-      "META_PRESSED": "META_IS_DOWN",
-      "SHIFT_PRESSED": "SHIFT_IS_DOWN"
-    },
-    "yfiles.input.MouseEventRecognizers": {
-      "CLICKED": "CLICK",
-      "DRAGGED": "DRAG",
-      "ENTERED": "ENTER",
-      "EXITED": "LEAVE",
-      "LEFT_CLICKED": "LEFT_CLICK",
-      "LEFT_DOUBLE_CLICKED": "LEFT_DOUBLE_CLICK",
-      "LEFT_DRAGGED": "LEFT_DRAG",
-      "LEFT_PRESSED": "LEFT_DOWN",
-      "LEFT_RELEASED": "LEFT_UP",
-      "MIDDLE_CLICKED": "MIDDLE_CLICK",
-      "MIDDLE_DOUBLE_CLICKED": "MIDDLE_DOUBLE_CLICK",
-      "MIDDLE_DRAGGED": "MIDDLE_DRAG",
-      "MOVED": "MOVE",
-      "MOVED_OR_DRAGGED": "MOVE_OR_DRAG",
-      "MULTI_CLICKED": "MULTI_CLICK",
-      "PRESSED": "DOWN",
-      "RELEASED": "UP",
-      "RIGHT_CLICKED": "RIGHT_CLICK",
-      "RIGHT_DOUBLE_CLICKED": "RIGHT_DOUBLE_CLICK",
-      "RIGHT_DRAGGED": "RIGHT_DRAG",
-      "RIGHT_PRESSED": "RIGHT_DOWN",
-      "RIGHT_RELEASED": "RIGHT_UP"
-    },
-    "yfiles.input.OrthogonalEdgeEditingContext": {
-      "cleanupEdgePaths": "cleanUpEdgePaths"
-    },
-    "yfiles.view.SvgDefsManager": {
-      "cleanupTimerInterval": "cleanUpTimerInterval",
-      "cleanupDefs": "cleanUpDefs"
-    },
-    "yfiles.input.ReparentStripePositionHandler": {
-      "createSourceGhostVisualization": "createSourceGhost",
-      "createTargetGhostVisualization": "createTargetGhost",
-      "updateSourceVisualization": "updateSourceGhost",
-      "updateTargetVisualization": "updateTargetGhost",
-      "updateTargetVisualizationBounds": "updateTargetGhostBounds"
-    },
-    "yfiles.input.TouchEventRecognizers": {
-      "TOUCH_DOUBLE_TAPPED_PRIMARY": "TOUCH_DOUBLE_TAP_PRIMARY",
-      "TOUCH_DOUBLE_TAPPED_SECONDARY": "TOUCH_DOUBLE_TAP_SECONDARY",
-      "TOUCH_ENTERED_PRIMARY": "TOUCH_ENTER_PRIMARY",
-      "TOUCH_ENTERED_SECONDARY": "TOUCH_ENTER_SECONDARY",
-      "TOUCH_EXITED_PRIMARY": "TOUCH_LEAVE_PRIMARY",
-      "TOUCH_EXITED_SECONDARY": "TOUCH_LEAVE_SECONDARY",
-      "TOUCH_LONG_PRESSED_PRIMARY": "TOUCH_LONG_PRESS_PRIMARY",
-      "TOUCH_LONG_PRESSED_SECONDARY": "TOUCH_LONG_PRESS_SECONDARY",
-      "TOUCH_MOVED_PRIMARY": "TOUCH_MOVE_PRIMARY",
-      "TOUCH_MOVED_SECONDARY": "TOUCH_MOVE_SECONDARY",
-      "TOUCH_MULTI_TAPPED_PRIMARY": "TOUCH_MULTI_TAP_PRIMARY",
-      "TOUCH_MULTI_TAPPED_SECONDARY": "TOUCH_MULTI_TAP_SECONDARY",
-      "TOUCH_TAPPED_PRIMARY": "TOUCH_TAP_PRIMARY",
-      "TOUCH_TAPPED_SECONDARY": "TOUCH_TAP_SECONDARY"
-    },
-    "yfiles.layout.DiscreteEdgeLabelLayoutModel": {
-      "autoRotationEnabled": "autoRotation"
-    },
-    "yfiles.layout.LabelLayoutTranslator": {
-      "autoFlippingEnabled": "autoFlipping"
-    },
-    "yfiles.layout.SliderEdgeLabelLayoutModel": {
-      "autoRotationEnabled": "autoRotation"
-    },
-    "yfiles.router.ChannelBasedPathRouting": {
-      "cleanup": "cleanUp"
-    },
-    "yfiles.router.GraphPartitionExtensionAdapter": {
-      "cleanup": "cleanUp"
-    },
-    "yfiles.router.IGraphPartitionExtension": {
-      "cleanup": "cleanUp"
-    },
-    "yfiles.view.Animator": {
-      "destroy": "stop"
-    },
-    "yfiles.view.CanvasComponent": {
-      "addKeyPressedListener": "addKeyPressListener",
-      "animateScrollTo": "zoomTo",
-      "globalToLocal": "toViewFromPage",
-      "localToGlobal": "toPageFromView",
-      "mouseCaptureEnabled": "mouseCapture",
-      "removeKeyPressedListener": "removeKeyPressListener"
-    },
-    "yfiles.view.GraphComponent": {
-      "addKeyPressedListener": "addKeyPressListener",
-      "animateScrollTo": "zoomTo",
-      "globalToLocal": "toViewFromPage",
-      "localToGlobal": "toPageFromView",
-      "mouseCaptureEnabled": "mouseCapture",
-      "removeKeyPressedListener": "removeKeyPressListener"
+    "yfiles.tree.TreeLayoutData": {
+      "leftRightPlacersLeftNodes": "leftRightNodePlacerLeftNodes"
     },
     "yfiles.view.GraphOverviewComponent": {
-      "addKeyPressedListener": "addKeyPressListener",
-      "animateScrollTo": "zoomTo",
-      "globalToLocal": "toViewFromPage",
-      "localToGlobal": "toPageFromView",
-      "mouseCaptureEnabled": "mouseCapture",
-      "removeKeyPressedListener": "removeKeyPressListener"
+      "svgRendering": "renderMode"
     },
-    "yfiles.view.IAnimation": {
-      "cleanup": "cleanUp"
+    "yfiles.graph.IGraph": {
+      "getPortLabels": "portLabels"
     },
-    "yfiles.view.KeyEventType": {
-      "PRESSED": "DOWN",
-      "RELEASED": "UP",
-      "TYPED": "PRESS"
-    },
-    "yfiles.view.ShowFocusPolicy": {
-      "WHEN_FOCUSED": "ONLY_WHEN_FOCUSED"
-    },
-    "yfiles.view.TableAnimation": {
-      "cleanup": "cleanUp"
-    },
-    "yfiles.view.ViewportAnimation": {
-      "cleanup": "cleanUp"
+    "yfiles.graph.ITable": {
+      "getAccumulatedInsets": "accumulatedInsets",
+      "getDecorator": "decorator"
     }
   },
   "removedMembers": {
-    "yfiles.input.OverviewInputMode": [
-      "autoMouseWheelZoom"
+    "yfiles.algorithms.YList": [
+      "subList"
     ],
-    "yfiles.graphml.Property": [
-      "defaultValue"
+    "yfiles.geometry.Insets": [
+      "clone"
     ],
-    "yfiles.algorithms.GraphPartitionManager": [
-      "fireGraphEventsEnabled"
+    "yfiles.geometry.Point": [
+      "clone"
     ],
-    "yfiles.binding.AdjacentNodesGraphBuilder": [
-      "updateEdge"
+    "yfiles.geometry.Rect": [
+      "clone"
     ],
-    "yfiles.collections.List": [
-      "capacity"
+    "yfiles.geometry.Size": [
+      "clone"
     ],
-    "yfiles.graph.ITable": [
-      "relativeLocation"
+    "yfiles.input.SnapLine": [
+      "GRID_LINE_FIXED_LINE_KEY",
+      "resourceKey",
+      "SNAP_LINE_BLANK_VARIABLE_LINE_KEY",
+      "SNAP_LINE_CENTER_BETWEEN_BOUNDS_KEY",
+      "SNAP_LINE_CENTER_BETWEEN_CENTERS_KEY",
+      "SNAP_LINE_EDGE_SEGMENT_KEY",
+      "SNAP_LINE_EQUAL_DISTANCE_BETWEEN_BOUNDS_KEY",
+      "SNAP_LINE_EQUAL_DISTANCE_BETWEEN_CENTERS_KEY",
+      "SNAP_LINE_EQUAL_HEIGHT_KEY",
+      "SNAP_LINE_EQUAL_WIDTH_KEY",
+      "SNAP_LINE_EXTENDED_VARIABLE_LINE_KEY",
+      "SNAP_LINE_FIXED_DISTANCE_KEY",
+      "SNAP_LINE_FIXED_LINE_KEY",
+      "SNAP_LINE_VARIABLE_LINE_KEY",
+      "SNAP_TO_GRID_KEY"
     ],
-    "yfiles.graph.PortDefaults": [
-      "GetDefaultStyleInstance"
+    "yfiles.radial.RadialLayoutData": [
+      "sourceGroups",
+      "targetGroups"
     ],
-    "yfiles.graph.Table": [
-      "relativeLocation"
+    "yfiles.router.DynamicObstacleDecomposition": [
+      "getExistingCells"
     ],
-    "yfiles.graphml.GraphMLSupport": [
-      "getGraphMLIOHandler"
+    "yfiles.router.EdgeCellInfo": [
+      "edge"
     ],
-    "yfiles.input.CreateEdgeInputMode": [
-      "getSourcePortCandidate",
-      "getSourcePortCandidateProvider"
+    "yfiles.router.OrganicEdgeRouter": [
+      "checkNodeSize"
     ],
-    "yfiles.input.GraphEditorInputMode": [
-      "onMoveInputModeDragCanceled",
-      "onMoveInputModeDragFinished"
+    "yfiles.router.SegmentInfoBase": [
+      "edge"
     ],
-    "yfiles.input.MoveLabelInputMode": [
-      "createLabelHitTestable"
-    ],
-    "yfiles.input.MoveViewportInputMode": [
-      "inertiaDamping",
-      "inertiaFactor",
-      "inertiaThreshold"
-    ],
-    "yfiles.input.OverviewInputMode": [
-      "autoMouseWheelZoom"
-    ],
-    "yfiles.input.PortRelocationHandle": [
-      "showDummyEdge"
-    ],
-    "yfiles.organic.InteractiveOrganicLayout": [
-      "workingRatio"
-    ],
-    "yfiles.orthogonal.LayoutStyle": [
-      "NORMAL_TREE"
-    ],
-    "yfiles.styles.CollapsibleNodeStyleDecoratorRenderer": [
-      "createSelectionInstaller"
-    ],
-    "yfiles.view.CanvasComponent": [
-      "GotFocus",
-      "LostFocus",
-      "AutoDragChanged",
-      "HitTestRadiusChanged",
-      "MouseWheelScrollFactorChanged",
-      "addMouseWheelScrollFactorChangedListener",
-      "addMouseWheelZoomFactorChangedListener",
-      "MouseWheelZoomFactorChanged",
-      "removeMouseWheelScrollFactorChangedListener",
-      "removeMouseWheelZoomFactorChangedListener"
-    ],
-    "yfiles.view.GraphComponent": [
-      "GotFocus",
-      "LostFocus",
-      "AutoDragChanged",
-      "HitTestRadiusChanged",
-      "MouseWheelScrollFactorChanged",
-      "addMouseWheelScrollFactorChangedListener",
-      "addMouseWheelZoomFactorChangedListener",
-      "MouseWheelZoomFactorChanged",
-      "removeMouseWheelScrollFactorChangedListener",
-      "removeMouseWheelZoomFactorChangedListener"
-    ],
-    "yfiles.view.GraphModelManager": [
-      "useHierarchicEdgeNesting",
-      "useHierarchicNodeNesting"
-    ],
-    "yfiles.view.GraphOverviewComponent": [
-      "GotFocus",
-      "LostFocus",
-      "AutoDragChanged",
-      "HitTestRadiusChanged",
-      "MouseWheelScrollFactorChanged",
-      "addMouseWheelScrollFactorChangedListener",
-      "addMouseWheelZoomFactorChangedListener",
-      "MouseWheelZoomFactorChanged",
-      "removeMouseWheelScrollFactorChangedListener",
-      "removeMouseWheelZoomFactorChangedListener"
+    "yfiles.router.PathSearchResult": [
+      "getEdgeInfo(yfiles.router.Path)"
     ]
   },
-  "newMembers": {
-    "length": 0
-  },
   "signatureChanges": {
-    "yfiles.input.IPortCandidateProvider":{
-      "getSourcePortCandidates": [0,1],
-      "getTargetPortCandidates": [0,1]
-    },
-    "yfiles.binding.TreeBuilder": {
-      "updateEdge": [
-        0,
-        1,
-        4
-      ]
-    },
-    "yfiles.graph.GraphClipboard": {
-      "paste": [
-        1,
-        2,
-        3,
-        4,
-        0
-      ]
-    },
-    "yfiles.graph.GraphCopier": {
-      "copyNode": [
+    "yfiles.algorithms.Bfs": {
+      "getLayers(yfiles.algorithms.Graph,yfiles.algorithms.NodeList,yfiles.algorithms.BfsDirection,yfiles.algorithms.INodeMap,number)": [
         0,
         1,
         2,
+        "yfiles.algorithms.TraversalDirection",
         4
-      ]
-    },
-    "yfiles.input.CreateEdgeInputMode": {
-      "getTargetPortCandidateProvider": [
-        0,
-        2
       ]
     }
   },
-  "returnTypeChanges": {},
+  "constructorMappings": {},
+  "compatMethods": {},
+  "methodsProperties": {
+    "yfiles.graph.IGraph": {
+      "getPortLabels": "property"
+    },
+    "yfiles.graph.ITable": {
+      "getAccumulatedInsets": "property",
+      "getDecorator": "property"
+    }
+  },
   "propertyTypeChanges": {
-    "yfiles.input.CreateEdgeInputMode": {
-      "showPortCandidates": "yfiles.input.ShowPortCandidates"
+    "yfiles.layout.LayoutExecutor": {
+      "improvePortAssignment": "yfiles.layout.PortAdjustmentPolicy"
     },
-    "yfiles.input.OverviewInputMode": {
-      "autoMouseWheelZoom": "yfiles.view.MouseWheelBehaviors"
+    "yfiles.layout.LayoutGraphAdapter": {
+      "improvePortAssignment": "yfiles.layout.PortAdjustmentPolicy"
+    },
+    "yfiles.view.GraphOverviewComponent": {
+      "svgRendering": "yfiles.view.RenderModes"
     }
-  },
-  "methodsProperties": {},
-  "compatMethods": {}
+  }
 }

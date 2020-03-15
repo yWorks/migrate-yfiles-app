@@ -11,17 +11,20 @@
     "run": "grunt"
   },
   "dependencies": {
-    "async": "^2.0.1",
-    "es6-shim": "^0.35.1",
-    "escodegen": "^1.9.1",
-    "esprima": "^4.0.0",
-    "estraverse": "^4.2.0",
-    "glob": "latest",
-    "grunt": "^1.0.1",
-    "load-grunt-tasks": "^3.5.2",
-    "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
-    "tern": "^0.23.0"
+    "async": "^3.2.0",
+    "es6-shim": "^0.35.5",
+    "escodegen": "^1.14.1",
+    "esprima": "^4.0.1",
+    "estraverse": "^4.3.0",
+    "glob": "^7.1.6",
+    "grunt": "^1.0.4",
+    "load-grunt-tasks": "^5.1.0",
+    "minimist": "^1.2.5",
+    "mkdirp": "^1.0.3",
+    "tern": "^0.24.3"
+  },
+  "resolutions": {
+    "**/**/acorn": "^5.7.4"
   },
   "private": true,
   "author": {

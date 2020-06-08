@@ -40,7 +40,7 @@ This is useful if you are sure that the code is already correct.
 | ---  | --- | --- | 
 | `-f` | `--from` | The version of yFiles for HTML from which to migrate. Available options: 1.3, 1.4, 2.0, 2.1 |
 | `-s` | `--src`  | The input file/directory to be transformed. |
-| `-d` | `--dest` | The destination directory where all transformed files will be written to. This has to be empty unless the `--incremental` or `--force` options are specified. |
+| `-d` | `--dest` | The destination directory where all transformed files will be written to.<br>This has to be empty unless the `--incremental` or `--force` options are specified. |
 
 
 ### Optional Arguments

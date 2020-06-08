@@ -1,0 +1,1 @@
+graphControl.add(group, visual)

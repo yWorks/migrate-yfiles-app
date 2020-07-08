@@ -48,6 +48,7 @@ This is useful if you are sure that the code is already correct.
 | --- | --- | --- | 
 | `-i`  | `--incremental` | Run the migration tool in [incremental mode](#incremental-mode). |
 | `-e`  | `--extensions`  | Which file extensions to transform. Default: `.js` and `.ts`|
+|       | `--ignore-pattern` | Ignore files that match the provided glob expression (default: `**/node_modules/**`).
 | `-l`  | `--singleline`  | Write log messages in a single line instead of printing the source location to a second line. |
 | `-v`  | `--verbose`  | Log verbose jscodeshift messages |
 |       | `--force`       | Overwrite files in the destination directory.

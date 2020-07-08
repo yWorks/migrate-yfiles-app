@@ -32,7 +32,8 @@ module.exports = function prepareTests(dir, options = {}) {
       transforms: config.transforms,
       extensions: config.extensions,
       incremental: config.incremental,
-      verbose: config.verbose
+      verbose: config.verbose,
+      ignorePattern: config.ignorePattern
     })
   }
 

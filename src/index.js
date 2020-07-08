@@ -16,7 +16,8 @@ module.exports = async function migrate({
   extensions,
   incremental,
   force,
-  verbose
+  verbose,
+  ignorePattern
 }) {
   const srcExists = fs.existsSync(src)
   const destExists = fs.existsSync(dest)
@@ -65,6 +66,8 @@ module.exports = async function migrate({
     '--parser=ts',
     '--transforms',
     transforms.join(','),
+    '--ignore-pattern',
+    ignorePattern,
     dest
   ]
   if (singleline) {

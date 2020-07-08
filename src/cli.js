@@ -46,6 +46,12 @@ const argv = require('yargs')
     choices: ['js', 'ts'],
     default: ['js', 'ts']
   })
+  .option('ignore-pattern', {
+    group: optionalGroup,
+    description: 'Ignore files that match the provided glob expression',
+    type: 'string',
+    default: '**/node_modules/**'
+  })
   .option('singleline', {
     group: optionalGroup,
     alias: 'l',

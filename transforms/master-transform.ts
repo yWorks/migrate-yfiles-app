@@ -105,7 +105,7 @@ export default function transformer(file, api, options: Options) {
         debug(`Skipping external transform '${name}' due to incremental mode`)
         continue
       }
-      if (!stringSource) {
+      if (typeof stringSource !== 'string') {
         stringSource = sources.toSource()
         sources = null
       }
@@ -138,7 +138,7 @@ export default function transformer(file, api, options: Options) {
     }
   }
 
-  if (!stringSource) {
+  if (typeof stringSource !== 'string') {
     stringSource = sources.toSource()
   }
 

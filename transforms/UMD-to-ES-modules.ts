@@ -123,7 +123,7 @@ function isCJSCode(j, ast) {
   const requireCalls = ast.find(j.CallExpression, { callee: { name: 'require' } })
 
   const allRequiresHaveOnlyOneStringArg = requireCalls.every(
-    path => path.node.arguments.length === 1 && path.node.arguments[0].type === 'StringLiteral'
+    path => path.node.arguments.length === 1 && path.node.arguments[0].type !== 'ArrayExpression'
   )
   const noDefines =
     ast.find(j.CallExpression, {
@@ -135,7 +135,7 @@ function isCJSCode(j, ast) {
 }
 
 function removeUseStrict(j, ast) {
-  ast.find(j.Directive, {value: { value: 'use strict'}}).remove()
+  ast.find(j.Directive, { value: { value: 'use strict' } }).remove()
 }
 
 function removeObsoleteComments(j, ast) {
@@ -270,7 +270,9 @@ function unwrapAMDCalls(j, ast) {
     return 0
   })
   sortedSources.forEach(path => {
-    if (path.value.expression.arguments[0].elements.every(value => value.type === 'StringLiteral')) {
+    if (
+      path.value.expression.arguments[0].elements.every(value => value.type === 'StringLiteral')
+    ) {
       const firstExpression = path.value.expression.arguments[1].body.body[0]
       if (firstExpression) {
         firstExpression.comments = path.value.comments
@@ -283,7 +285,11 @@ function unwrapAMDCalls(j, ast) {
 
 function replaceYFilesCJSRequires(j, ast) {
   function isYFilesRequire(callExpr) {
-    return callExpr.arguments.length === 1 && callExpr.arguments[0].value.includes('yfiles')
+    return (
+      callExpr.arguments.length === 1 &&
+      callExpr.arguments[0].type === 'StringLiteral' &&
+      callExpr.arguments[0].value.includes('yfiles')
+    )
   }
   ast
     .find(j.VariableDeclaration, {

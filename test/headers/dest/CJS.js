@@ -7,6 +7,9 @@ const {
 require('../../../resources/license.js')
 const GraphToJSON = require('../GraphToJSON.js')
 
+const foo = "zfiles"
+require(foo)
+
 // Create a minimal Express server
 const express = require('express')
 const bodyParser = require('body-parser')

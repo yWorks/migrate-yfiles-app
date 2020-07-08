@@ -5,6 +5,9 @@ const yfiles = require('../../../../lib/yfiles/view-component')
 require('../../../../lib/yfiles/layout-hierarchic')
 require('../../../../lib/yfiles/view-layout-bridge')
 
+const foo = "zfiles"
+require(foo)
+
 // Create a minimal Express server
 const express = require('express')
 const bodyParser = require('body-parser')

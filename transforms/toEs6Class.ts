@@ -441,7 +441,7 @@ export function doTransform({
       logMigrationMessage(
         filePath,
         newExpressionPath,
-        `Skipping class with $meta attributes.`,
+        `Skipping class with $meta attributes. Please migrate this class manually. See https://docs.yworks.com/yfileshtml/#/dguide/class_framework#framework_attributes for details about defining meta information for yFiles types.`,
         findCommentParent(newExpressionPath)
       )
       return

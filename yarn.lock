@@ -2546,7 +2546,7 @@ isobject@^3.0.0, isobject@^3.0.1:
 
 "js-codemod@https://github.com/cpojer/js-codemod":
   version "8.0.0"
-  resolved "https://github.com/cpojer/js-codemod#f08370ce77b5246a481772f138eaa0a92aa6e450"
+  resolved "https://github.com/cpojer/js-codemod#e3bd02bb5ba4b2ed98dea2b215af3b291f744863"
   dependencies:
     jscodeshift "^0.3.30"
     nuclide-format-js "0.0.36"

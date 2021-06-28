@@ -1,9 +1,6 @@
 import { hasConflictingRegistration } from 'jscodeshift/src/Collection'
-
-const debug = require('debug')('migrate-yfiles-app:transformer')
-import * as path from 'path'
 import { MIGRATIONS_FOR_VERSION } from './util'
-import {fromPaths, Collection} from 'jscodeshift/dist/Collection'
+import { fromPaths } from 'jscodeshift/dist/Collection'
 
 import { doTransform as memberRenamings } from './memberRenamings'
 import { doTransform as namespaceChanges } from './namespaceChanges'
@@ -20,6 +17,8 @@ import { doTransform as customTransform } from './custom-transform'
 
 import noVars from 'js-codemod/transforms/no-vars'
 import arrowFunctions from 'js-codemod/transforms/arrow-function'
+
+const debug = require('debug')('migrate-yfiles-app:transformer')
 
 const allTransforms = [
   // these use mappings
@@ -46,7 +45,7 @@ const allTransforms = [
   // these have already run, but need to run a second time to output warnings
   // has to happen here to that line/column numbers are correct
   { name: 'signatureChanges', fn: signatureChanges, needsMappings: true, secondPass: true },
-  { name: 'memberRenamings', fn: memberRenamings, needsMappings: true, secondPass: true }
+  { name: 'memberRenamings', fn: memberRenamings, needsMappings: true, secondPass: true },
 ]
 
 export interface Options {
@@ -62,27 +61,18 @@ export default function transformer(file, api, options: Options) {
 
   if (!hasConflictingRegistration('findObjectMembers')) {
     j.registerMethods({
-      findObjectMembers (filter) {
+      findObjectMembers(filter) {
         const c1 = this.find(j.ObjectProperty, filter)
         const c2 = this.find(j.ObjectMethod, filter)
         const c3 = this.find(j.ClassMethod, filter)
-        return fromPaths(c1.paths().concat(c2.paths(),c3.paths()))
-      }
+        return fromPaths(c1.paths().concat(c2.paths(), c3.paths()))
+      },
     })
   }
 
   let sources = j(file.source)
   let stringSource = null
   const transforms = options.transforms.split(',')
-
-  const allMappings = MIGRATIONS_FOR_VERSION[options.from].map(mappingName => {
-    const [from, to] = mappingName.match(/\d\.\d/g)
-    return {
-      mappings: require(path.join(__dirname, '../mappings', mappingName)),
-      from,
-      to
-    }
-  })
 
   for (const { name, fn, needsMappings, external, secondPass } of allTransforms) {
     const tryApplyTransform = (fn, ...args) => {
@@ -118,7 +108,7 @@ export default function transformer(file, api, options: Options) {
         stringSource = null
       }
       if (needsMappings) {
-        for (const { mappings, from, to } of allMappings) {
+        for (const { mappings, from, to } of MIGRATIONS_FOR_VERSION[options.from]) {
           sources =
             tryApplyTransform(fn, {
               api,
@@ -128,7 +118,7 @@ export default function transformer(file, api, options: Options) {
               from,
               to,
               options,
-              secondPass
+              secondPass,
             }) || sources
         }
       } else {

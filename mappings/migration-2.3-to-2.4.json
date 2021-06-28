@@ -1,0 +1,333 @@
+{
+  "namespaceChanges": {
+    "yfiles.router.PolylineEdgeRouterData": "yfiles.router.EdgeRouterData"
+  },
+  "removedTypes": [],
+  "newTypes": [
+    "yfiles.algorithms.ParallelEdges",
+    "yfiles.analysis.Subtree",
+    "yfiles.analysis.TreeAnalysis",
+    "yfiles.analysis.TreeAnalysisResult",
+    "yfiles.circular.NodeTypeAwareSequencer",
+    "yfiles.graph.EdgePathPortLocationModel",
+    "yfiles.input.NodeInsetsProvider",
+    "yfiles.input.QueryClosestHandleEventArgs",
+    "yfiles.layout.GenericLayoutData",
+    "yfiles.layout.LayoutExecutorAsync",
+    "yfiles.layout.LayoutExecutorAsyncWorker",
+    "yfiles.layout.PortPlacementStageData",
+    "yfiles.layout.SelfLoopRouterData",
+    "yfiles.layout.SubgraphLayoutData",
+    "yfiles.layout.WorkerHandler",
+    "yfiles.layout.WorkerMessageHandler",
+    "yfiles.organic.OrganicLayoutClusteringPolicy",
+    "yfiles.router.RoutingPolicy",
+    "yfiles.view.ViewportChanges",
+    "yfiles.view.WebGL2Animation",
+    "yfiles.view.WebGL2ArcEdgeStyle",
+    "yfiles.view.WebGL2ArrowType",
+    "yfiles.view.WebGL2BridgeEdgeStyle",
+    "yfiles.view.WebGL2DefaultLabelStyle",
+    "yfiles.view.WebGL2FadeAnimationType",
+    "yfiles.view.WebGL2GraphModelManager",
+    "yfiles.view.WebGL2IconLabelStyle",
+    "yfiles.view.WebGL2IconNodeStyle",
+    "yfiles.view.WebGL2LabelShape",
+    "yfiles.view.WebGL2NodeEffect",
+    "yfiles.view.WebGL2PolylineEdgeStyle",
+    "yfiles.view.WebGL2SelectionIndicatorManager",
+    "yfiles.view.WebGL2ShapeNodeShape",
+    "yfiles.view.WebGL2ShapeNodeStyle",
+    "yfiles.view.WebGL2Stroke",
+    "yfiles.view.WebGL2Visual"
+  ],
+  "memberRenamings": {
+    "yfiles.view.CanvasComponent": {
+      "addFitContentViewMarginsChangedListener": "addContentMarginsChangedListener",
+      "fitContentViewMargins": "contentMargins",
+      "removeFitContentViewMarginsChangedListener": "removeContentMarginsChangedListener"
+    },
+    "yfiles.view.GraphComponent": {
+      "addFitContentViewMarginsChangedListener": "addContentMarginsChangedListener",
+      "fitContentViewMargins": "contentMargins",
+      "removeFitContentViewMarginsChangedListener": "removeContentMarginsChangedListener"
+    },
+    "yfiles.view.GraphOverviewComponent": {
+      "addFitContentViewMarginsChangedListener": "addContentMarginsChangedListener",
+      "fitContentViewMargins": "contentMargins",
+      "removeFitContentViewMarginsChangedListener": "removeContentMarginsChangedListener"
+    }
+  },
+  "removedMembers": {
+    "yfiles.input.HandleInputMode": [
+      "isHovering"
+    ],
+    "yfiles.input.TextEditorInputMode": [
+      "getTextBoxBounds"
+    ],
+    "yfiles.lang.IComparable": [
+      "create"
+    ],
+    "yfiles.layout.ContextItemMapping": [
+      "provideMapperForContext"
+    ],
+    "yfiles.layout.ItemCollection": [
+      "provideMapper"
+    ],
+    "yfiles.layout.ItemMapping": [
+      "provideMapper"
+    ],
+    "yfiles.layout.LayoutData": [
+      "apply"
+    ]
+  },
+  "newMembers": {
+    "yfiles.binding.EdgeCreator": [
+      "bendsProvider",
+      "getBends",
+      "getUpdatedBends",
+      "updateBends"
+    ],
+    "yfiles.circular.CircularLayoutData": [
+      "nodeTypes"
+    ],
+    "yfiles.graph.DefaultFolderNodeConverter": [
+      "portLabelLayoutParameter",
+      "portLabelStyle"
+    ],
+    "yfiles.graph.DefaultFoldingEdgeConverter": [
+      "portLabelLayoutParameter",
+      "portLabelStyle"
+    ],
+    "yfiles.graph.FoldingEdgeConverterBase": [
+      "portLabelLayoutParameter",
+      "portLabelStyle"
+    ],
+    "yfiles.graph.MergingFoldingEdgeConverter": [
+      "portLabelLayoutParameter",
+      "portLabelStyle"
+    ],
+    "yfiles.hierarchic.HierarchicLayoutData": [
+      "nodeTypes"
+    ],
+    "yfiles.hierarchic.RoutingStyle": [
+      "curveShortcuts",
+      "curveUTurnSymmetry"
+    ],
+    "yfiles.input.HandleInputMode": [
+      "getClosestHandleAt",
+      "onQueryClosestHandle",
+      "QueryClosestHandle"
+    ],
+    "yfiles.input.LabelTextValidatingEventArgs": [
+      "validatedText"
+    ],
+    "yfiles.input.MouseHoverInputMode": [
+      "toolTipParentElement"
+    ],
+    "yfiles.lang.Workarounds": [
+      "loadDefaultCSS"
+    ],
+    "yfiles.layout.ComponentArrangementStyles": [
+      "MULTI_ROWS_TYPE_SEPARATED"
+    ],
+    "yfiles.layout.ComponentLayoutData": [
+      "nodeTypes"
+    ],
+    "yfiles.layout.LayoutExecutor": [
+      "sequentialExecution"
+    ],
+    "yfiles.layout.LayoutGraphAdapter": [
+      "ORIGINAL_TAG_DP_KEY"
+    ],
+    "yfiles.layout.LayoutKeys": [
+      "NODE_TYPE_DP_KEY"
+    ],
+    "yfiles.layout.SubgraphLayout": [
+      "affectedEdgesDpKey",
+      "SUBGRAPH_EDGES_DP_KEY"
+    ],
+    "yfiles.organic.ChainSubstructureStyle": [
+      "RECTANGULAR_NESTED",
+      "STRAIGHT_LINE_NESTED"
+    ],
+    "yfiles.organic.CycleSubstructureStyle": [
+      "CIRCULAR_NESTED"
+    ],
+    "yfiles.organic.OrganicLayout": [
+      "chainSubstructureSize",
+      "clusteringPolicy",
+      "cycleSubstructureSize",
+      "parallelSubstructureSize",
+      "parallelSubstructureTypeSeparation",
+      "starSubstructureSize",
+      "starSubstructureTypeSeparation"
+    ],
+    "yfiles.organic.OrganicLayoutData": [
+      "nodeTypes"
+    ],
+    "yfiles.organic.Scope": [
+      "MAINLY_SUBSET_GEOMETRIC"
+    ],
+    "yfiles.organic.StarSubstructureStyle": [
+      "CIRCULAR_NESTED",
+      "RADIAL_NESTED"
+    ],
+    "yfiles.orthogonal.OrthogonalLayoutData": [
+      "nodeTypes"
+    ],
+    "yfiles.partial.PartialLayout": [
+      "allowMovingFixedElements"
+    ],
+    "yfiles.router.BusDescriptor": [
+      "routingPolicy"
+    ],
+    "yfiles.router.ChannelEdgeRouter": [
+      "routingPolicy"
+    ],
+    "yfiles.router.CurveEdgeLayoutDescriptor": [
+      "curveShortcuts",
+      "curveUTurnSymmetry"
+    ],
+    "yfiles.router.EdgeLayoutDescriptor": [
+      "curveShortcuts",
+      "curveUTurnSymmetry",
+      "routingPolicy"
+    ],
+    "yfiles.router.OrganicEdgeRouter": [
+      "considerExistingBends"
+    ],
+    "yfiles.router.ParallelEdgeRouter": [
+      "ROUTED_PARALLEL_EDGES_DP_KEY"
+    ],
+    "yfiles.router.ParallelEdgeRouterData": [
+      "routedParallelEdges"
+    ],
+    "yfiles.router.PenaltySettings": [
+      "adjacentEdgeCrossingPenalty",
+      "selfCrossingPenalty",
+      "sketchViolationPenalty"
+    ],
+    "yfiles.tree.BalloonLayoutData": [
+      "outEdgeComparer"
+    ],
+    "yfiles.tree.ClassicTreeLayout": [
+      "minimumFirstSegmentLength",
+      "minimumLastSegmentLength"
+    ],
+    "yfiles.tree.TreeLayoutData": [
+      "nodeTypes"
+    ],
+    "yfiles.view.CanvasComponent": [
+      "ensureVisible(yfiles.collections.IEnumerable,yfiles.geometry.Insets)",
+      "getViewportAnimationDuration",
+      "mouseWheelViewportAnimations"
+    ],
+    "yfiles.view.GraphComponent": [
+      "ensureVisible(yfiles.collections.IEnumerable,yfiles.geometry.Insets)",
+      "getViewportAnimationDuration",
+      "mouseWheelViewportAnimations"
+    ],
+    "yfiles.view.GraphModelManager": [
+      "canvasComponent",
+      "install",
+      "uninstall"
+    ],
+    "yfiles.view.GraphOverviewComponent": [
+      "ensureVisible(yfiles.collections.IEnumerable,yfiles.geometry.Insets)",
+      "getViewportAnimationDuration",
+      "mouseWheelViewportAnimations"
+    ],
+    "yfiles.view.IAnimation": [
+      "createDelay",
+      "createDelayedAnimation",
+      "fromDelegate"
+    ],
+    "yfiles.view.ICanvasObjectDescriptor": [
+      "ALWAYS_DIRTY_VISUAL"
+    ],
+    "yfiles.view.SvgExport": [
+      "projection",
+      "worldPoints"
+    ],
+    "yfiles.view.TableAnimation": [
+      "createDelay",
+      "createDelayedAnimation",
+      "fromDelegate"
+    ],
+    "yfiles.view.ViewportAnimation": [
+      "createDelay",
+      "createDelayedAnimation",
+      "fromDelegate"
+    ],
+    "yfiles.view.WebGL2Animation": [
+      "createDelay",
+      "createDelayedAnimation",
+      "fromDelegate"
+    ],
+    "yfiles.view.WebGL2GraphModelManager": [
+      "canvas",
+      "install",
+      "uninstall"
+    ],
+    "yfiles.view.WebGLSupport": [
+      "deleteProgram"
+    ]
+  },
+  "signatureChanges": {},
+  "returnTypeChanges": {
+    "yfiles.algorithms.EdgeList": {
+      "getInfo": "any",
+      "peek": "any",
+      "removeCell": "any"
+    },
+    "yfiles.algorithms.NodeList": {
+      "getInfo": "any",
+      "peek": "any",
+      "removeCell": "any"
+    },
+    "yfiles.algorithms.YList": {
+      "getInfo": "any",
+      "peek": "any",
+      "removeCell": "any"
+    },
+    "yfiles.input.GraphEditorInputMode": {
+      "onLabelTextEdited": "Promise<boolean>"
+    },
+    "yfiles.input.HandleInputMode": {
+      "beginDragging": "Promise<boolean>"
+    },
+    "yfiles.input.MouseHoverInputMode": {
+      "onShow": "Promise<boolean>",
+      "show": "Promise<boolean>"
+    },
+    "yfiles.lang.Class": {
+      "newInstance": "T"
+    },
+    "yfiles.lang.Enum": {
+      "parse": "number"
+    },
+    "yfiles.view.DragSource": {
+      "startDrag": "Promise<boolean>"
+    }
+  },
+  "propertyTypeChanges": {
+    "yfiles.algorithms.EdgeList": {
+      "firstObject": "any",
+      "lastObject": "any"
+    },
+    "yfiles.algorithms.ListCell": {
+      "info": "any"
+    },
+    "yfiles.algorithms.NodeList": {
+      "firstObject": "any",
+      "lastObject": "any"
+    },
+    "yfiles.algorithms.YList": {
+      "firstObject": "any",
+      "lastObject": "any"
+    }
+  },
+  "methodsProperties": {},
+  "compatMethods": {}
+}

@@ -1,5 +1,5 @@
 # yFiles for HTML migration tool
-Migrate outdated yFiles for HTML code to **yFiles for HTML 2.3**.
+Migrate outdated yFiles for HTML code to **yFiles for HTML 2.4**.
 
 The source of this tool is available at [GitHub](https://github.com/yWorks/migrate-yfiles-app). 
 
@@ -38,7 +38,7 @@ This is useful if you are sure that the code is already correct.
 
 |      |     |     |
 | ---  | --- | --- | 
-| `-f` | `--from` | The version of yFiles for HTML from which to migrate. Available options: 1.3, 1.4, 2.0, 2.1, 2.2 |
+| `-f` | `--from` | The version of yFiles for HTML from which to migrate. Available options: 1.3, 1.4, 2.0, 2.1, 2.2, 2.3 |
 | `-s` | `--src`  | The input file/directory to be transformed. |
 | `-d` | `--dest` | The destination directory where all transformed files will be written to.<br>This has to be empty unless the `--incremental` or `--force` options are specified. |
 

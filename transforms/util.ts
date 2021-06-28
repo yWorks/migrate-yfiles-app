@@ -1,14 +1,24 @@
 import j from 'jscodeshift'
-import { ASTNode, ASTPath, Node } from 'jscodeshift/src/core'
+import { ASTNode, ASTPath } from 'jscodeshift/src/core'
+import path from 'path'
+import fs from 'fs'
 
 import colors from 'colors/safe'
-import { Options } from './master-transform'
 
-export const MIGRATIONS_FOR_VERSION = {
-  '1.3': ['migration-1.3-to-2.0.json', 'migration-2.0-to-2.1.json', 'migration-2.1-to-2.2.json'],
-  '2.0': ['migration-2.0-to-2.1.json', 'migration-2.1-to-2.2.json'],
-  '2.1': ['migration-2.1-to-2.2.json', 'migration-2.2-to-2.3.json'],
-  '2.2': ['migration-2.2-to-2.3.json']
+import meta from '../mappings/meta.json'
+
+export const MIGRATIONS_FOR_VERSION = {}
+const migrationVersions = meta.versions.filter(v => v !== '1.4')
+for (let i = migrationVersions.length - 2; i >= 0; i--) {
+  const from = migrationVersions[i]
+  const to = migrationVersions[i + 1]
+  const mappingPath = path.join(__dirname, '../mappings', `migration-${from}-to-${to}.json`)
+  const entry = {
+    mappings: require(mappingPath),
+    from,
+    to,
+  }
+  MIGRATIONS_FOR_VERSION[from] = (MIGRATIONS_FOR_VERSION[to] || []).concat(entry)
 }
 // 1.4 didn't have breaking changes, but we offer it as an option anyway
 MIGRATIONS_FOR_VERSION['1.4'] = MIGRATIONS_FOR_VERSION['1.3']
@@ -16,7 +26,7 @@ MIGRATIONS_FOR_VERSION['1.4'] = MIGRATIONS_FOR_VERSION['1.3']
 export function ensureYFilesImport(ast, ...classNames) {
   const importDeclarations = ast.find(j.ImportDeclaration, {
     source: { type: 'Literal', value: 'yfiles' },
-    specifiers: [{ type: 'ImportSpecifier' }]
+    specifiers: [{ type: 'ImportSpecifier' }],
   })
   let importDecl
   if (importDeclarations.length === 1) {
@@ -71,7 +81,7 @@ export const msgUtil = options => {
           console.log(`${message.replace(/\.$/, '')}\n\tat ${location}`)
         }
       }
-    }
+    },
   }
 }
 
@@ -91,7 +101,7 @@ function getPathLocation(astPathOrNode: ASTPath | ASTNode) {
   } else {
     return {
       line: 1,
-      column: 1
+      column: 1,
     }
   }
 }
@@ -108,7 +118,7 @@ export function findCommentParent(path: ASTPath): ASTNode {
     'ExpressionStatement',
     'VariableDeclaration',
     'Property',
-    'ReturnStatement'
+    'ReturnStatement',
   ]
   while (p && !parentTypesWithComments.includes(p.node.type) && !('comments' in p.node)) {
     p = p.parentPath

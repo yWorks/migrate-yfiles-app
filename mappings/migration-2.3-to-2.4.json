@@ -274,7 +274,11 @@
       "deleteProgram"
     ]
   },
-  "signatureChanges": {},
+  "signatureChanges": {
+    "yfiles.lang.Enum": {
+      "getName": [0, "number"]
+    }
+  },
   "returnTypeChanges": {
     "yfiles.algorithms.EdgeList": {
       "getInfo": "any",

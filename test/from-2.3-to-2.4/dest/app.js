@@ -1,4 +1,14 @@
+import {
+  EdgeRouterData,
+  TransitiveEdge,
+  DistanceMetric,
+} from 'yfiles'
+
 const gc = new GraphComponent()
+new EdgeRouterData()
+new yfiles.router.EdgeRouterData()
+new foo.bar.PolylineEdgeRouterData()
+class Foo extends EdgeRouterData {}
 
 const listener = () => {
   console.log('hello')

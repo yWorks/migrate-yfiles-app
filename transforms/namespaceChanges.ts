@@ -6,7 +6,7 @@ export function doTransform({
   ast,
   filePath,
   mappings,
-  options
+  options,
 }: {
   api: any
   ast: any
@@ -20,16 +20,40 @@ export function doTransform({
   const { namespaceChanges } = mappings
   const j = api.jscodeshift
 
-  const lastSegmentSet = new Set()
-  const nameMap = new Map()
-  for (const [key, value] of Object.entries(namespaceChanges)) {
-    nameMap.set(key, value)
-    lastSegmentSet.add(key.split('.').pop())
+  const fqnNameMap = new Map()
+  const nonFqnNameMap = new Map()
+  for (const [key, value] of Object.entries(namespaceChanges) as [string, string][]) {
+    fqnNameMap.set(key, value)
+    const nonFqnKey = key.split('.').pop()
+    const nonFqnValue = value.split('.').pop()
+    nonFqnNameMap.set(nonFqnKey, nonFqnValue)
   }
 
   ast
+    .find(j.Identifier, {
+      name: n => nonFqnNameMap.has(n),
+    })
+    .replaceWith(path => {
+      if (path.parentPath && j.MemberExpression.check(path.parentPath.value)) {
+        return path.value
+      }
+      const oldName = path.value.name
+      const newName = nonFqnNameMap.get(oldName)
+      if (incremental) {
+        logMigrationMessage(
+          filePath,
+          path.value,
+          createLogMessage`The type '${oldName}' has been renamed to '${newName}'.`,
+          findCommentParent(path)
+        )
+        return path.value
+      }
+      return j.identifier(newName)
+    })
+
+  ast
     .find(j.MemberExpression, {
-      property: { type: 'Identifier', name: n => lastSegmentSet.has(n) }
+      property: { type: 'Identifier', name: n => nonFqnNameMap.has(n) },
     })
     .replaceWith(path => {
       const fqnParts = [path.value.property.name]
@@ -40,8 +64,8 @@ export function doTransform({
       }
       fqnParts.unshift(current.object.name)
       const fqn = fqnParts.join('.')
-      if (nameMap.has(fqn)) {
-        const newName = nameMap.get(fqn)
+      if (fqnNameMap.has(fqn)) {
+        const newName = fqnNameMap.get(fqn)
         if (incremental) {
           logMigrationMessage(
             filePath,

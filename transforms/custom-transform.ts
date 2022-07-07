@@ -10,7 +10,7 @@ export function doTransform({
   api,
   ast,
   filePath: filePathParam,
-  options
+  options,
 }: {
   api: any
   ast: any
@@ -40,6 +40,10 @@ export function doTransform({
     handleOldGraphBuildersReplaced(ast)
   }
 
+  if (parseFloat(options.from) < 2.5) {
+    handleModelManager(ast)
+  }
+
   handleLicenses(ast)
   handleYfilesModule(ast)
 
@@ -51,7 +55,7 @@ export function doTransform({
     ast
       .find(j.CallExpression, {
         callee: memberPred('yfiles.module'),
-        arguments: [{ type: 'StringLiteral' }]
+        arguments: [{ type: 'StringLiteral' }],
       })
       .replaceWith(path => {
         if (incremental) {
@@ -88,8 +92,8 @@ export function doTransform({
               expression: {
                 type: 'AssignmentExpression',
                 left: { type: 'MemberExpression', object: iPred(exportsName), property: iPred() },
-                operator: '='
-              }
+                operator: '=',
+              },
             })
             .replaceWith(exprPath => {
               const assignment: AssignmentExpression = <AssignmentExpression>(
@@ -102,7 +106,7 @@ export function doTransform({
               return withComments(
                 j.exportNamedDeclaration(
                   j.variableDeclaration('const', [
-                    j.variableDeclarator(j.identifier(varName), exportValue)
+                    j.variableDeclarator(j.identifier(varName), exportValue),
                   ])
                 ),
                 exprPath.value
@@ -138,7 +142,7 @@ export function doTransform({
   function handleRenderDataCache(ast) {
     ast
       .find(j.CallExpression, {
-        callee: { type: 'MemberExpression', property: iPred('setRenderDataCache') }
+        callee: { type: 'MemberExpression', property: iPred('setRenderDataCache') },
       })
       .filter(path => path.value.arguments.length === 1)
       .replaceWith(path => {
@@ -167,8 +171,8 @@ export function doTransform({
       .find(j.CallExpression, {
         callee: {
           type: 'MemberExpression',
-          property: iPred('getRenderDataCache')
-        }
+          property: iPred('getRenderDataCache'),
+        },
       })
       .filter(path => path.value.arguments.length === 0)
       .replaceWith(path => {
@@ -210,20 +214,20 @@ export function doTransform({
                     type: 'LogicalExpression',
                     operator: '||',
                     left: memberPred('g.yfiles'),
-                    right: { type: 'ObjectExpression' }
-                  }
-                }
+                    right: { type: 'ObjectExpression' },
+                  },
+                },
               },
               {
                 type: 'ExpressionStatement',
                 expression: {
                   type: 'AssignmentExpression',
                   left: memberPred('g.yfiles.license'),
-                  right: { type: 'ObjectExpression' }
-                }
-              }
-            ]
-          }
+                  right: { type: 'ObjectExpression' },
+                },
+              },
+            ],
+          },
         })
         .forEach(path => {
           let programPath = path
@@ -240,7 +244,7 @@ export function doTransform({
                 j.memberExpression(j.identifier('License'), j.identifier('value')),
                 licenseData
               )
-            )
+            ),
           ]
         })
     }
@@ -260,11 +264,11 @@ export function doTransform({
                 expression: {
                   type: 'AssignmentExpression',
                   left: memberPred('yfiles.license'),
-                  right: { type: 'ObjectExpression' }
-                }
-              }
-            ]
-          }
+                  right: { type: 'ObjectExpression' },
+                },
+              },
+            ],
+          },
         })
         .forEach(path => {
           let programPath = path
@@ -280,7 +284,7 @@ export function doTransform({
                 j.memberExpression(j.identifier('License'), j.identifier('value')),
                 licenseData
               )
-            )
+            ),
           ]
         })
     }
@@ -291,7 +295,7 @@ export function doTransform({
     ast
       .find(j.AssignmentExpression, {
         left: memberPred('yfiles.license'),
-        right: { type: 'ObjectExpression' }
+        right: { type: 'ObjectExpression' },
       })
       .forEach(path => {
         ensureYFilesImport(ast, 'License')
@@ -302,7 +306,7 @@ export function doTransform({
   function handleGraphControlAdd(ast) {
     ast
       .find(j.CallExpression, {
-        callee: { type: 'MemberExpression', property: iPred('add') }
+        callee: { type: 'MemberExpression', property: iPred('add') },
       })
       .filter(path => path.value.arguments.length === 2)
       .forEach(path => {
@@ -316,7 +320,7 @@ export function doTransform({
 
     ast
       .find(j.CallExpression, {
-        callee: { type: 'MemberExpression', property: iPred('addToGroup') }
+        callee: { type: 'MemberExpression', property: iPred('addToGroup') },
       })
       .filter(path => path.value.arguments.length === 3)
       .forEach(path => {
@@ -334,8 +338,8 @@ export function doTransform({
       .find(j.ExpressionStatement, {
         expression: {
           type: 'AssignmentExpression',
-          left: { type: 'MemberExpression', object: iPred(), property: iPred('finishHandler') }
-        }
+          left: { type: 'MemberExpression', object: iPred(), property: iPred('finishHandler') },
+        },
       })
       .forEach(path => {
         const parent = path.parentPath.value
@@ -378,7 +382,7 @@ export function doTransform({
       ast
         .find(j.MemberExpression, {
           object: memberPred('yfiles.system'),
-          property: iPred(n => n.endsWith('Exception'))
+          property: iPred(n => n.endsWith('Exception')),
         })
         .forEach(path => {
           logMigrationMessage(
@@ -397,10 +401,10 @@ export function doTransform({
           callee: {
             type: 'MemberExpression',
             object: memberPred('yfiles.system'),
-            property: iPred()
+            property: iPred(),
           },
-          arguments: [{ type: t => t === 'StringLiteral' || t === 'Identifier' }]
-        }
+          arguments: [{ type: t => t === 'StringLiteral' || t === 'Identifier' }],
+        },
       })
       .replaceWith(path => {
         const exceptionName = path.value.argument.callee.property.name
@@ -416,7 +420,7 @@ export function doTransform({
     ast
       .find(j.MemberExpression, {
         object: memberPred('yfiles.system'),
-        property: iPred(n => n.endsWith('Exception'))
+        property: iPred(n => n.endsWith('Exception')),
       })
       .replaceWith(path => j.identifier('Exception'))
   }
@@ -424,7 +428,7 @@ export function doTransform({
   function handleDragDrop(ast) {
     ast
       .find(j.CallExpression, {
-        callee: memberPred('yfiles.system.DragDrop.doDragDrop')
+        callee: memberPred('yfiles.system.DragDrop.doDragDrop'),
       })
       .filter(path => path.value.arguments.length === 3)
       .replaceWith(path => {
@@ -452,11 +456,11 @@ export function doTransform({
           type: 'MemberExpression',
           object: {
             type: 'NewExpression',
-            callee: iPred('FreeNodePortLocationModel')
+            callee: iPred('FreeNodePortLocationModel'),
           },
-          property: iPred('createScaledParameter')
+          property: iPred('createScaledParameter'),
         },
-        arguments: [iPred()]
+        arguments: [iPred()],
       })
       .replaceWith(path => {
         if (incremental) {
@@ -495,7 +499,7 @@ export function doTransform({
       .findObjectMembers({
         key: k =>
           (k.type === 'Identifier' && namesToCheck.includes(k.name)) ||
-          (k.type === 'StringLiteral' && namesToCheck.includes(k.value))
+          (k.type === 'StringLiteral' && namesToCheck.includes(k.value)),
       })
       .filter(
         path =>
@@ -520,7 +524,7 @@ export function doTransform({
     ast
       .find(j.NewExpression, {
         callee: memberPred('yfiles.graph.CopiedLayoutIGraph.FromGraph'),
-        arguments: [iPred()]
+        arguments: [iPred()],
       })
       .replaceWith(path => {
         if (incremental) {
@@ -545,7 +549,7 @@ export function doTransform({
     ast
       .find(j.NewExpression, {
         callee: memberPred('yfiles.graph.CopiedLayoutIGraph.FromAdapter'),
-        arguments: [iPred()]
+        arguments: [iPred()],
       })
       .replaceWith(path => {
         if (incremental) {
@@ -573,7 +577,7 @@ export function doTransform({
   function handleBinding(ast) {
     ast
       .find(j.NewExpression, {
-        callee: memberPred('yfiles.binding.Binding')
+        callee: memberPred('yfiles.binding.Binding'),
       })
       .replaceWith(path => {
         if (incremental) {
@@ -600,8 +604,8 @@ export function doTransform({
           object: iPred(),
           property: iPred(
             n => n === 'applyLayoutWithControl' || n === 'applyLayoutWithControlAndCallback'
-          )
-        }
+          ),
+        },
       })
       .filter(path => {
         const args = path.value.arguments
@@ -611,7 +615,7 @@ export function doTransform({
         const [layoutArg, durationArg, gcArg, handlerArg] = path.value.arguments
         const morphCall = j.callExpression(j.memberExpression(gcArg, j.identifier('morphLayout')), [
           layoutArg,
-          durationArg
+          durationArg,
         ])
         if (handlerArg) {
           return j.callExpression(j.memberExpression(morphCall, j.identifier('then')), [handlerArg])
@@ -637,17 +641,17 @@ export function doTransform({
           callee: {
             type: 'MemberExpression',
             object: iPred(),
-            property: iPred('addConcurrentWithPriority')
+            property: iPred('addConcurrentWithPriority'),
           },
           arguments: [
             {},
             {
               type: 'MemberExpression',
               object: iPred(),
-              property: iPred(n => n.endsWith('ModePriority'))
-            }
-          ]
-        }
+              property: iPred(n => n.endsWith('ModePriority')),
+            },
+          ],
+        },
       })
       .replaceWith(path => {
         const callExpr = path.value.expression
@@ -686,7 +690,7 @@ export function doTransform({
     }
     ast
       .find(j.Identifier, {
-        name: name => ['GraphBuilder', 'TreeBuilder', 'AdjacentNodesGraphBuilder'].includes(name)
+        name: name => ['GraphBuilder', 'TreeBuilder', 'AdjacentNodesGraphBuilder'].includes(name),
       })
       .forEach(path => {
         if (path.parentPath.value.type === 'ImportSpecifier') {
@@ -696,8 +700,34 @@ export function doTransform({
         logMigrationMessage(
           filePath,
           path,
-          createLogMessage`The ${graphBuilderName} class has been replaced with a more powerful but incompatible class in version 2.3. Either migrate to the new API or use the compatibility demo class ${'Simple' +
-            graphBuilderName} available in the /utils/SimpleGraphBuilder file.`
+          createLogMessage`The ${graphBuilderName} class has been replaced with a more powerful but incompatible class in version 2.3. Either migrate to the new API or use the compatibility demo class ${
+            'Simple' + graphBuilderName
+          } available in the /utils/SimpleGraphBuilder file.`
+        )
+      })
+  }
+
+  function handleModelManager(ast) {
+    ast
+      .find(j.NewExpression, {
+        callee: {
+          type: 'Identifier',
+          name: n =>
+            [
+              'FocusIndicatorManager',
+              'HighlightIndicatorManager',
+              'SelectionIndicatorManager',
+              'WebGL2SelectionIndicatorManager',
+            ].includes(n),
+        },
+      })
+      .filter(path => path.value.arguments.length === 1)
+      .forEach(path => {
+        const managerName = path.value.callee.name
+        logMigrationMessage(
+          filePath,
+          path,
+          createLogMessage`The CanvasComponent parameter has been removed from the ${managerName} constructor in version 2.5. Instead, you can call the new ${'install(canvasComponent)'} method with the CanvasComponent as parameter`
         )
       })
   }
@@ -713,7 +743,7 @@ export function doTransform({
     let result: any = {
       type: 'MemberExpression',
       object: iPred(parts.shift()),
-      property: iPred(parts.shift())
+      property: iPred(parts.shift()),
     }
     while (parts.length) {
       result = { type: 'MemberExpression', object: result, property: iPred(parts.shift()) }

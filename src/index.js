@@ -98,7 +98,9 @@ module.exports = async function migrate({
   })
 
   codeshift.stderr.on('data', data => {
-    console.error(data.toString())
+    const s = data.toString()
+    hasError |= /Could not apply transform/.test(s)
+    console.error(s)
   })
 
   const exitCode = await new Promise(resolve => {

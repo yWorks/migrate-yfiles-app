@@ -1,6 +1,6 @@
 {
   "name": "@yworks/migrate-yfiles-app",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "description": "Semi-automatically migrate yFiles for HTML code to the latest version",
   "main": "src/index.js",
   "bin": {

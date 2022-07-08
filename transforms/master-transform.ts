@@ -1,5 +1,5 @@
 import { hasConflictingRegistration } from 'jscodeshift/src/Collection'
-import { MIGRATIONS_FOR_VERSION } from './util'
+import { logOptions, MIGRATIONS_FOR_VERSION } from './util'
 import { fromPaths } from 'jscodeshift/dist/Collection'
 
 import { doTransform as memberRenamings } from './memberRenamings'
@@ -17,6 +17,7 @@ import { doTransform as customTransform } from './custom-transform'
 
 import noVars from 'js-codemod/transforms/no-vars'
 import arrowFunctions from 'js-codemod/transforms/arrow-function'
+import { JSCodeshift } from 'jscodeshift/src/core'
 
 const debug = require('debug')('migrate-yfiles-app:transformer')
 
@@ -57,7 +58,14 @@ export interface Options {
 }
 
 export default function transformer(file, api, options: Options) {
-  const j = api.jscodeshift
+  const j: JSCodeshift = api.jscodeshift
+
+  if (options.nocolor) {
+    logOptions.nocolor = true
+  }
+  if (options.singleline) {
+    logOptions.singleline = true
+  }
 
   if (!hasConflictingRegistration('findObjectMembers')) {
     j.registerMethods({

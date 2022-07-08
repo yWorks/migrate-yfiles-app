@@ -1,4 +1,9 @@
-import { findCommentParent, getTypesUnionString, msgUtil } from './util'
+import {
+  findCommentParent,
+  getTypesUnionString,
+  logMigrationMessage,
+  createLogMessage,
+} from './util'
 import { Options } from './master-transform'
 
 const AMBIGUOUS_MARKER = 'ambiguous'
@@ -10,18 +15,16 @@ export function doTransform({
   filePath,
   to,
   options,
-  secondPass
+  secondPass,
 }: {
   api: any
   ast: any
   mappings: any
   filePath: string
   to: string
-  options: Options,
+  options: Options
   secondPass: boolean
 }) {
-  const { logMigrationMessage, createLogMessage } = msgUtil(options)
-
   const incremental = options.incremental
   const j = api.jscodeshift
   const { signatureChanges } = mappings
@@ -48,8 +51,8 @@ export function doTransform({
       .find(j.NewExpression, {
         callee: {
           type: 'MemberExpression',
-          property: { type: 'Identifier', name: n => nameMap.has(n) }
-        }
+          property: { type: 'Identifier', name: n => nameMap.has(n) },
+        },
       })
       .forEach(path => {
         path.value.callee = path.value.callee.object
@@ -60,8 +63,8 @@ export function doTransform({
     .find(j.CallExpression, {
       callee: {
         type: 'MemberExpression',
-        property: { type: 'Identifier', name: n => nameMap.has(n) }
-      }
+        property: { type: 'Identifier', name: n => nameMap.has(n) },
+      },
     })
     .forEach(path => {
       const functionName = path.value.callee.property.name

@@ -45,43 +45,44 @@ export function ensureYFilesImport(ast, ...classNames) {
   importDecl.specifiers.sort((a, b) => a.imported.name.localeCompare(b.imported.name))
 }
 
-export const msgUtil = options => {
-  return {
-    createLogMessage: (
-      strings: TemplateStringsArray,
-      red: string,
-      green: string = null,
-      version: string = ''
-    ): string => {
-      const redColored = options.nocolor ? red : colors.brightRed(red)
-      const greenColored = green ? (options.nocolor ? green : colors.green(green)) : ''
-      return `${strings[0]}${redColored}${strings[1]}${greenColored}${
-        strings.length > 2 ? strings[2] : ''
-      }${version}`
-    },
+export const logOptions = {
+  nocolor: false,
+  singleline: false,
+}
 
-    logMigrationMessage: (
-      filePath,
-      astPathOrNode: ASTPath | ASTNode,
-      message: string,
-      parentExpression: ASTNode = null
-    ) => {
-      const ignored =
-        parentExpression &&
-        parentExpression['comments'] &&
-        parentExpression['comments'].some(comment => comment.value.includes('@migration-ignore'))
-      if (!ignored) {
-        const { line, column } = getPathLocation(astPathOrNode)
-        const locationStr = `${filePath}:${line}:${column + 1}`
-        const location = options.nocolor ? locationStr : colors.cyan(locationStr)
+export function createLogMessage(
+  strings: TemplateStringsArray,
+  red: string,
+  green: string = null,
+  version: string = ''
+): string {
+  const redColored = logOptions.nocolor ? red : colors.brightRed(red)
+  const greenColored = green ? (logOptions.nocolor ? green : colors.green(green)) : ''
+  return `${strings[0]}${redColored}${strings[1]}${greenColored}${
+    strings.length > 2 ? strings[2] : ''
+  }${version}`
+}
 
-        if (options.singleline) {
-          console.log(`${location} - ${message}`)
-        } else {
-          console.log(`${message.replace(/\.$/, '')}\n\tat ${location}`)
-        }
-      }
-    },
+export function logMigrationMessage(
+  filePath,
+  astPathOrNode: ASTPath | ASTNode,
+  message: string,
+  parentExpression: ASTNode = null
+) {
+  const ignored =
+    parentExpression &&
+    parentExpression['comments'] &&
+    parentExpression['comments'].some(comment => comment.value.includes('@migration-ignore'))
+  if (!ignored) {
+    const { line, column } = getPathLocation(astPathOrNode)
+    const locationStr = `${filePath}:${line}:${column + 1}`
+    const location = logOptions.nocolor ? locationStr : colors.cyan(locationStr)
+
+    if (logOptions.singleline) {
+      console.log(`${location} - ${message}`)
+    } else {
+      console.log(`${message.replace(/\.$/, '')}\n\tat ${location}`)
+    }
   }
 }
 
@@ -131,4 +132,19 @@ export function findCommentParent(path: ASTPath): ASTNode {
  */
 function isAstPath(thing: any): thing is ASTPath {
   return 'parentPath' in thing
+}
+
+/**
+ * Converts identifier names into predicates that can be used with `j.find()`.
+ */
+export function iPred(name?: string | ((n: string) => boolean) | string[]) {
+  const result = { type: 'Identifier' } as any
+  if (name) {
+    if (Array.isArray(name)) {
+      result.name = n => name.includes(n)
+    } else {
+      result.name = name
+    }
+  }
+  return result
 }

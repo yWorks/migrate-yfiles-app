@@ -1,4 +1,9 @@
-import { findCommentParent, getTypesUnionString, msgUtil } from './util'
+import {
+  findCommentParent,
+  getTypesUnionString,
+  logMigrationMessage,
+  createLogMessage,
+} from './util'
 import { Options } from './master-transform'
 
 export function doTransform({
@@ -7,7 +12,7 @@ export function doTransform({
   mappings,
   filePath,
   to,
-  options
+  options,
 }: {
   api: any
   ast: any
@@ -16,8 +21,6 @@ export function doTransform({
   to: any
   options: Options
 }) {
-  const { logMigrationMessage, createLogMessage } = msgUtil(options)
-
   const j = api.jscodeshift
   const { propertyTypeChanges } = mappings
 
@@ -35,7 +38,7 @@ export function doTransform({
 
   ast
     .find(j.MemberExpression, {
-      property: { type: 'Identifier', name: n => nameMap.has(n) }
+      property: { type: 'Identifier', name: n => nameMap.has(n) },
     })
     .forEach(path => {
       const propertyName = path.value.property.name

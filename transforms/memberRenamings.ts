@@ -1,4 +1,9 @@
-import { findCommentParent, getTypesUnionString, msgUtil } from './util'
+import {
+  findCommentParent,
+  getTypesUnionString,
+  logMigrationMessage,
+  createLogMessage,
+} from './util'
 import { Options } from './master-transform'
 
 export function doTransform({
@@ -9,7 +14,7 @@ export function doTransform({
   from,
   to,
   options,
-  secondPass
+  secondPass,
 }: {
   api: any
   ast: any
@@ -17,10 +22,9 @@ export function doTransform({
   mappings: any
   from: any
   to: any
-  options: Options,
+  options: Options
   secondPass: boolean
 }) {
-  const { logMigrationMessage, createLogMessage } = msgUtil(options)
   const { memberRenamings } = mappings
   const partialRenames = (mappings.partialRenames || []) as string[]
   const j = api.jscodeshift
@@ -73,9 +77,11 @@ export function doTransform({
     })
 
   // { oldName: value } -> { newName: value }
-  ast.findObjectMembers({ key: { type: 'Identifier', name: n => nameMap.has(n) } }).forEach(path => {
-    renameIdentifier(path.value.key, path)
-  })
+  ast
+    .findObjectMembers({ key: { type: 'Identifier', name: n => nameMap.has(n) } })
+    .forEach(path => {
+      renameIdentifier(path.value.key, path)
+    })
 
   return ast
 }

@@ -1,4 +1,4 @@
-import { findCommentParent, msgUtil } from './util'
+import { findCommentParent, logMigrationMessage, createLogMessage } from './util'
 import { Options } from './master-transform'
 
 export function doTransform({
@@ -14,8 +14,6 @@ export function doTransform({
   mappings: any
   options: Options
 }) {
-  const { logMigrationMessage, createLogMessage } = msgUtil(options)
-
   const incremental = options.incremental
   const { namespaceChanges } = mappings
   const j = api.jscodeshift

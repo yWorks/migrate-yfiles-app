@@ -16,5 +16,6 @@ new Exception().cause
 
 const mm = new HighlightIndicatorManager(gc)
 
-mm.installItem(item)
+mm.install(item)
+mm.install(gc, context)
 

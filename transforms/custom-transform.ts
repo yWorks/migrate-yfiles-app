@@ -1,7 +1,15 @@
-import { ensureYFilesImport, findCommentParent, msgUtil, withComments } from './util'
+import {
+  ensureYFilesImport,
+  findCommentParent,
+  logMigrationMessage,
+  createLogMessage,
+  withComments,
+  iPred,
+} from './util'
 import { Options } from './master-transform'
 import j from 'jscodeshift'
 import { AssignmentExpression } from 'jscodeshift/src/core'
+import { apply25Transforms } from './custom-2.5'
 
 let incremental = false
 let filePath = ''
@@ -17,8 +25,6 @@ export function doTransform({
   filePath: string
   options: Options
 }) {
-  const { logMigrationMessage, createLogMessage } = msgUtil(options)
-
   incremental = options.incremental
   filePath = filePathParam
 
@@ -41,7 +47,7 @@ export function doTransform({
   }
 
   if (parseFloat(options.from) < 2.5) {
-    handleModelManager(ast)
+    apply25Transforms(api, ast, filePath, options)
   }
 
   handleLicenses(ast)
@@ -707,31 +713,6 @@ export function doTransform({
       })
   }
 
-  function handleModelManager(ast) {
-    ast
-      .find(j.NewExpression, {
-        callee: {
-          type: 'Identifier',
-          name: n =>
-            [
-              'FocusIndicatorManager',
-              'HighlightIndicatorManager',
-              'SelectionIndicatorManager',
-              'WebGL2SelectionIndicatorManager',
-            ].includes(n),
-        },
-      })
-      .filter(path => path.value.arguments.length === 1)
-      .forEach(path => {
-        const managerName = path.value.callee.name
-        logMigrationMessage(
-          filePath,
-          path,
-          createLogMessage`The CanvasComponent parameter has been removed from the ${managerName} constructor in version 2.5. Instead, you can call the new ${'install(canvasComponent)'} method with the CanvasComponent as parameter`
-        )
-      })
-  }
-
   /**
    * Converts member expression strings like "one.two.three" into a predicate that can be used with `j.find()`.
    */
@@ -747,17 +728,6 @@ export function doTransform({
     }
     while (parts.length) {
       result = { type: 'MemberExpression', object: result, property: iPred(parts.shift()) }
-    }
-    return result
-  }
-
-  /**
-   * Converts identifier names into predicates that can be used with `j.find()`.
-   */
-  function iPred(name?: string | ((n: string) => boolean)) {
-    const result = { type: 'Identifier' } as any
-    if (name) {
-      result.name = name
     }
     return result
   }

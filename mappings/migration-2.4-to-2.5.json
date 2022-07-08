@@ -456,12 +456,6 @@
     "yfiles.lang.Exception": {
       "innerException": "cause"
     },
-    "yfiles.view.ModelManager": {
-      "install": "installItem",
-      "uninstall": "uninstallItem",
-      "add": "addItem",
-      "remove": "removeItem"
-    },
     "yfiles.view.WebGL2GraphModelManager": {
       "createNodeEffectFadeAnimation": "createEffectFadeAnimation",
       "createNodeEffectPulseAnimation": "createEffectPulseAnimation"

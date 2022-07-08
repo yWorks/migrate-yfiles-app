@@ -1,5 +1,5 @@
 import { JSCodeshift } from 'jscodeshift/src/core'
-import { findCommentParent, msgUtil } from './util'
+import { findCommentParent, logMigrationMessage, createLogMessage } from './util'
 import { Options } from './master-transform'
 
 export function doTransform({
@@ -8,7 +8,7 @@ export function doTransform({
   mappings,
   filePath,
   to,
-  options
+  options,
 }: {
   api: any
   ast: any
@@ -17,8 +17,6 @@ export function doTransform({
   to: any
   options: Options
 }) {
-  const { logMigrationMessage, createLogMessage } = msgUtil(options)
-
   const incremental = options.incremental
   const j: JSCodeshift = api.jscodeshift
   const { methodsProperties } = mappings
@@ -46,8 +44,8 @@ export function doTransform({
     .find(j.AssignmentExpression, {
       left: {
         type: 'MemberExpression',
-        property: { type: 'Identifier', name: n => nameMaps.method.has(n) }
-      }
+        property: { type: 'Identifier', name: n => nameMaps.method.has(n) },
+      },
     })
     .replaceWith(path => {
       if (incremental) {
@@ -66,7 +64,7 @@ export function doTransform({
   // foo(a.property) -> foo(a.property())
   ast
     .find(j.MemberExpression, {
-      property: { type: 'Identifier', name: n => nameMaps.method.has(n) }
+      property: { type: 'Identifier', name: n => nameMaps.method.has(n) },
     })
     .filter(path => path.parentPath.value.type !== 'CallExpression')
     .replaceWith(path => {
@@ -87,8 +85,8 @@ export function doTransform({
     .find(j.CallExpression, {
       callee: {
         type: 'MemberExpression',
-        property: { type: 'Identifier', name: n => nameMaps.property.has(n) }
-      }
+        property: { type: 'Identifier', name: n => nameMaps.property.has(n) },
+      },
     })
     .replaceWith(path => {
       const method = path.value.callee.property

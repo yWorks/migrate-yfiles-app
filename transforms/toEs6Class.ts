@@ -15,27 +15,32 @@ import {
   JSCodeshift,
   MethodDefinition,
   ObjectExpression,
-  ObjectMethod, ObjectProperty,
-  Property
+  ObjectMethod,
+  ObjectProperty,
+  Property,
 } from 'jscodeshift/src/core'
 import { print } from 'recast'
 import { ExpressionKind, StatementKind, PatternKind } from 'ast-types/gen/kinds'
-import { ensureYFilesImport, findCommentParent, msgUtil, withComments } from './util'
+import {
+  ensureYFilesImport,
+  findCommentParent,
+  iPred,
+  logMigrationMessage,
+  withComments,
+} from './util'
 import { Collection } from 'jscodeshift/src/Collection'
 
 export function doTransform({
   api,
   ast,
   filePath,
-  options
+  options,
 }: {
   api: any
   ast: any
   filePath: string
   options: Options
 }) {
-  const { logMigrationMessage } = msgUtil(options)
-
   if (options.incremental) {
     return ast
   }
@@ -49,7 +54,7 @@ export function doTransform({
     return prop ? prop.value : null
   }
 
-  const getProperty = function(collection, propertyName, onlyDirect = true): Property {
+  const getProperty = function (collection, propertyName, onlyDirect = true): Property {
     const r = collection
       .find(j.ObjectProperty, {
         key: node => {
@@ -57,7 +62,7 @@ export function doTransform({
             (node.type === 'Identifier' && node.name === propertyName) ||
             (node.type === 'StringLiteral' && node.value === propertyName)
           )
-        }
+        },
       })
       .filter(path => {
         return !onlyDirect || path.parentPath.parentPath.value === collection.get().value
@@ -106,8 +111,8 @@ export function doTransform({
             return node.type === 'Identifier' || node.type === 'StringLiteral'
           },
           value: {
-            type: 'FunctionExpression'
-          }
+            type: 'FunctionExpression',
+          },
         })
         .forEach(path => {
           const name = getPropertyName(path.value)
@@ -125,7 +130,7 @@ export function doTransform({
             )
             const throws = j.throwStatement(
               j.newExpression(j.identifier('Error'), [
-                j.literal(`Migrate named constructor ${name}!`)
+                j.literal(`Migrate named constructor ${name}!`),
               ])
             )
             impl.body.unshift(throws)
@@ -135,8 +140,8 @@ export function doTransform({
             j(fn)
               .find(j.CallExpression, {
                 callee: {
-                  type: 'Super'
-                }
+                  type: 'Super',
+                },
               })
               .replaceWith(path => {
                 const p = print(path.value).code
@@ -184,7 +189,14 @@ export function doTransform({
   }
 
   const addGetter = (classBody, name, get, isStatic) => {
-    const getter = j.classMethod('get', j.identifier(name), [], get.body || get.value.body, false, isStatic)
+    const getter = j.classMethod(
+      'get',
+      j.identifier(name),
+      [],
+      get.body || get.value.body,
+      false,
+      isStatic
+    )
     classBody.push(getter)
     return getter
   }
@@ -229,9 +241,9 @@ export function doTransform({
         type: 'MemberExpression',
         property: {
           type: 'Identifier',
-          name: 'call'
-        }
-      }
+          name: 'call',
+        },
+      },
     })
   }
 
@@ -274,7 +286,7 @@ export function doTransform({
     }
   }
 
-  const getPropertyName = (propertyNode: ObjectProperty|ObjectMethod): string => {
+  const getPropertyName = (propertyNode: ObjectProperty | ObjectMethod): string => {
     if (propertyNode.key.type === 'Identifier') {
       return propertyNode.key.name
     } else if (propertyNode.key.type === 'StringLiteral') {
@@ -308,15 +320,15 @@ export function doTransform({
       return path.parentPath.parentPath.value === oldBody
     })
     const fields = []
-    childProperties.forEach((path: ASTPath<ObjectMethod|ObjectProperty>) => {
-
+    childProperties.forEach((path: ASTPath<ObjectMethod | ObjectProperty>) => {
       const propertyNode = path.value
       const propertyName = getPropertyName(propertyNode)
 
-      function isMethod(property):property is ObjectMethod {
+      function isMethod(property): property is ObjectMethod {
         return propertyNode.type === 'ObjectMethod'
       }
-      const isFunctionMember: boolean = isMethod(propertyNode) || propertyNode.value.type === 'FunctionExpression'
+      const isFunctionMember: boolean =
+        isMethod(propertyNode) || propertyNode.value.type === 'FunctionExpression'
 
       if (ignoredKeys.includes(propertyName)) {
         // ignore
@@ -395,9 +407,7 @@ export function doTransform({
     if (constructor) {
       const constructorBody = (constructor.value.body as any).body
 
-      const superCallExpression = j(constructor)
-        .find(j.Super)
-        .closest(j.ExpressionStatement)
+      const superCallExpression = j(constructor).find(j.Super).closest(j.ExpressionStatement)
 
       if (fields.length) {
         if (superCallExpression.size()) {
@@ -450,7 +460,7 @@ export function doTransform({
     const context: ClassContext = {
       name: null,
       clinit: null,
-      staticFields: []
+      staticFields: [],
     }
 
     // var MyClass = new yfiles.lang.ClassDefinition()
@@ -524,7 +534,7 @@ export function doTransform({
             (args.length === 1 && args[0].type === 'FunctionExpression') ||
             args[0].type === 'ArrowFunctionExpression'
           )
-        }
+        },
       })
       .forEach(
         replaceClass(newExpressionPath => {
@@ -538,8 +548,8 @@ export function doTransform({
           } else if (body.type === 'BlockStatement') {
             const collection = j(body).find(j.ReturnStatement, {
               argument: {
-                type: 'ObjectExpression'
-              }
+                type: 'ObjectExpression',
+              },
             })
             return collection.get('argument').value
           }
@@ -549,7 +559,7 @@ export function doTransform({
 
     ast
       .find(j.CallExpression, {
-        callee: memberPred('yfiles.lang.Class')
+        callee: memberPred('yfiles.lang.Class'),
       })
       .forEach(
         replaceClass(path => {
@@ -596,21 +606,10 @@ function memberPred(pathString: string) {
   let result: any = {
     type: 'MemberExpression',
     object: iPred(parts.shift()),
-    property: iPred(parts.shift())
+    property: iPred(parts.shift()),
   }
   while (parts.length) {
     result = { type: 'MemberExpression', object: result, property: iPred(parts.shift()) }
-  }
-  return result
-}
-
-/**
- * Converts identifier names into predicates that can be used with `j.find()`.
- */
-function iPred(name?: string | ((n: string) => boolean)) {
-  const result = { type: 'Identifier' } as any
-  if (name) {
-    result.name = name
   }
   return result
 }

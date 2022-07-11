@@ -19,3 +19,5 @@ const mm = new HighlightIndicatorManager(gc)
 mm.install(item)
 mm.install(gc, context)
 
+new SelectionIndicatorManager(gc, model, selectionModel)
+new HighlightIndicatorManager(gc, selectionModel)

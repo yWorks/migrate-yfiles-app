@@ -5,6 +5,8 @@ import { Identifier } from 'jscodeshift/src/core'
 
 export function apply25Transforms(api: any, ast: Collection, filePath: string, options: Options) {
   handleModelManager(ast, filePath)
+  handleSelectionModelManager(ast, filePath)
+  handleHighlightIndicatorManager(ast, filePath)
 }
 
 function handleModelManager(ast: Collection, filePath) {
@@ -17,7 +19,7 @@ function handleModelManager(ast: Collection, filePath) {
         'WebGL2SelectionIndicatorManager',
       ]),
     })
-    .filter(path => path.value.arguments.length === 1)
+    .filter(path => path.value.arguments.length > 0)
     .forEach(path => {
       const constructorIdentifier = path.value.callee as Identifier
       const managerName = constructorIdentifier.name
@@ -46,3 +48,34 @@ function handleModelManager(ast: Collection, filePath) {
       )
     })
 }
+
+function handleSelectionModelManager(ast: Collection, filePath) {
+  ast
+    .find(j.NewExpression, {
+      callee: iPred('SelectionIndicatorManager'),
+    })
+    .filter(path => path.value.arguments.length > 1)
+    .forEach(path => {
+      logMigrationMessage(
+        filePath,
+        path,
+        createLogMessage`The optional ${'selectionModel and model parameters'} have been removed from the SelectionIndicatorManager constructor in version 2.5. Please use the corresponding properties instead.`
+      )
+    })
+}
+
+function handleHighlightIndicatorManager(ast: Collection, filePath) {
+  ast
+    .find(j.NewExpression, {
+      callee: iPred('HighlightIndicatorManager'),
+    })
+    .filter(path => path.value.arguments.length > 1)
+    .forEach(path => {
+      logMigrationMessage(
+        filePath,
+        path,
+        createLogMessage`The optional ${'selectionModel parameter'} has been removed from the HighlightIndicatorManager constructor in version 2.5. Please use the corresponding property instead.`
+      )
+    })
+}
+

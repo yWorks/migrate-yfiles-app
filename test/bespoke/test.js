@@ -3,6 +3,7 @@ const path = require('path')
 const sinon = require('sinon')
 const assert = require('assert').strict
 
+let log
 const tests = prepareTests(__dirname)
 describe(path.basename(__dirname), () => {
   before(() => {

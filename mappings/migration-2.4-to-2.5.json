@@ -482,14 +482,7 @@
   },
   "signatureChanges": {
     "yfiles.algorithms.Bfs": {
-      "getLayers(yfiles.algorithms.Graph,yfiles.algorithms.NodeList,yfiles.algorithms.TraversalDirection,yfiles.algorithms.INodeMap,number)": {
-        "0": 0,
-        "1": 1,
-        "2": "boolean",
-        "3": 3,
-        "4": 4,
-        "length": 5
-      }
+      "getLayers": [0, 1, "yfiles.algorithms.BfsDirection", 3, 4]
     },
     "yfiles.view.WebGL2GraphModelManager": {
       "createArcHeightAnimation": ["yfiles.view.WebGL2AnimationTiming"],

@@ -492,37 +492,21 @@
       }
     },
     "yfiles.view.WebGL2GraphModelManager": {
-      "createArcHeightAnimation": [
+      "createArcHeightAnimation": ["yfiles.view.WebGL2AnimationTiming"],
+      "createFadeAnimation": [0, 1, 2, "yfiles.view.WebGL2AnimationTiming"],
+      "createPulseAnimation": [
+        "yfiles.view.WebGL2PulseAnimationType",
+        "number",
+        "boolean",
         "yfiles.view.WebGL2AnimationTiming"
       ],
-      "createFadeAnimation": {
-        "0": 0,
-        "1": 1,
-        "2": 2,
-        "3": "yfiles.view.WebGL2AnimationTiming",
-        "length": 4
-      },
-      "createPulseAnimation": {
-        "0": "yfiles.view.WebGL2PulseAnimationType",
-        "1": "number",
-        "2": "boolean",
-        "3": "yfiles.view.WebGL2AnimationTiming",
-        "length": 4
-      },
-      "createShakeAnimation": {
-        "0": "yfiles.view.WebGL2ShakeAnimationType",
-        "1": "number",
-        "2": "boolean",
-        "3": "yfiles.view.WebGL2AnimationTiming",
-        "length": 4
-      },
-      "createNodeEffectFadeAnimation": {
-        "0": 0,
-        "1": 1,
-        "2": 2,
-        "3": "yfiles.view.WebGL2AnimationTiming",
-        "length": 4
-      }
+      "createShakeAnimation": [
+        "yfiles.view.WebGL2ShakeAnimationType",
+        "number",
+        "boolean",
+        "yfiles.view.WebGL2AnimationTiming"
+      ],
+      "createNodeEffectFadeAnimation": [0, 1, 2, "yfiles.view.WebGL2AnimationTiming"]
     }
   },
   "constructorMappings": {},

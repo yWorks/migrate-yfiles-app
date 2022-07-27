@@ -93,6 +93,9 @@ export function doTransform({
       }
       const args = path.value.arguments
       const entry = nameMap.get(functionName)
+      if (!entry.some) {
+        console.log('!!! ' + functionName)
+      }
       if (entry.some(e => typeof e !== 'number')) {
         // just a parameter type change. We ignore it for now, as there is only one
         return

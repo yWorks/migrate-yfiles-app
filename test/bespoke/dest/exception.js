@@ -4,4 +4,4 @@ import { Exception } from "yfiles";
 // Replace with Exception, pass type as name
 throw new Exception("ohmygod", "InvalidOperationException");
 
-const isInstance = e instanceof Exception;
+var isInstance = e instanceof Exception

@@ -42,17 +42,17 @@
     return;
   }
 
-  const dependencyState = {};
-  const absoluteLocationMatcher = /^\w+:\/\//;
-  const relativeLocationMatcher = /^(\.\.?)/;
-  const moduleMatcher = /^([^\/]*)(\/.*)?/;
-  const jsFileMatcher = /\.js$/;
-  let currentlyLoadedModule = null;
-  const pathToCurrentlyLoadedModule = {};
-  let pendingRequires = [];
+  var dependencyState = {};
+  var absoluteLocationMatcher = /^\w+:\/\//;
+  var relativeLocationMatcher = /^(\.\.?)/;
+  var moduleMatcher = /^([^\/]*)(\/.*)?/;
+  var jsFileMatcher = /\.js$/;
+  var currentlyLoadedModule = null;
+  var pathToCurrentlyLoadedModule = {};
+  var pendingRequires = [];
 
-  let currentImport = ""; // just for importScripts (loaded synchronously)
-  const isWebWorker = typeof importScripts!=='undefined' && (typeof window == 'undefined' || typeof window.document == 'undefined');
+  var currentImport = ""; // just for importScripts (loaded synchronously)
+  var isWebWorker = typeof importScripts!=='undefined' && (typeof window == 'undefined' || typeof window.document == 'undefined');
 
   function importScript(path, context) {
     dependencyState[path] = {
@@ -76,7 +76,7 @@
   }
 
   function scriptLoaded(path,context) {
-    const currentlyLoadedModuleLocal = pathToCurrentlyLoadedModule[path] || currentlyLoadedModule;
+    var currentlyLoadedModuleLocal = pathToCurrentlyLoadedModule[path] || currentlyLoadedModule;
     dependencyState[path].state = 'loaded';
     if(currentlyLoadedModuleLocal) {
       currentlyLoadedModuleLocal.dependants = dependencyState[path].dependants;
@@ -89,7 +89,7 @@
       }
     } else {
       var dependants = dependencyState[path].dependants;
-      for(let i = 0; i < dependants.length; i++) {
+      for(var i = 0; i < dependants.length; i++) {
         dependants[i].resolve();
       }
       dependencyState[path].state = 'executed';
@@ -101,8 +101,8 @@
       dependants: [context],
       state: 'pending'
     };
-    const script = document.createElement('script');
-    let timerId = -1;
+    var script = document.createElement('script');
+    var timerId = -1;
     script.type = 'text/javascript';
     script.onload = function() {
       script.onload = undefined;
@@ -116,7 +116,7 @@
       clearTimeout(timerId);
       delete script['data-yworks-loading-state'];
     };
-    timerId = setTimeout(() => {
+    timerId = setTimeout(function() {
       console.log('Timeout while trying to load '+path);
       script.onload = undefined;
       delete script['data-yworks-loading-state'];
@@ -145,9 +145,9 @@
       return normalizePath(dep);
     } else if (!relativeLocationMatcher.test(dep)) {
       // does not start with dots and does not end in .js - its a module
-      const res = moduleMatcher.exec(dep);
+      var res = moduleMatcher.exec(dep);
       if (res){
-        const moduleName = res[1];
+        var moduleName = res[1];
         if (context.paths && context.paths[moduleName]){
           return normalizePath(context.paths[moduleName]+res[2]+".js");
         }
@@ -165,7 +165,7 @@
    * @returns {string} The path to the parent directory of the given dependency
    */
   function determineParentUrl(dep) {
-    const lastIndexOf = dep.lastIndexOf("/");
+    var lastIndexOf = dep.lastIndexOf("/");
     return lastIndexOf <= 0 ? "./" : dep.substr(0, lastIndexOf + 1);
   }
 
@@ -173,7 +173,7 @@
    * @param path {string}
    */
   function normalizePath(path) {
-    let length = -1;
+    var length = -1;
     while (path && length !== path.length) {
       length = path.length;
       // remove inner parent specifier '..'
@@ -188,19 +188,21 @@
   }
 
   function getResultArguments(deps) {
-    return deps.map(item => dependencyState[item].result);
+    return deps.map(function(item) {
+      return dependencyState[item].result;
+    });
   }
 
   global.require = function(deps, fn) {
 
-    const anonRequire = {
+    var anonRequire = {
       cancelled: false,
       unresolvedDependencyCount: 1,
       callback: fn,
       resolve: function() {
         if(!this.cancelled) {
           if(--this.unresolvedDependencyCount == 0) {
-            const args = getResultArguments(this.deps);
+            var args = getResultArguments(this.deps);
             if(this.handler === null || global.require.disableErrorReporting) {
               this.callback.apply(null,args);
             } else {
@@ -235,7 +237,7 @@
             global.demo.Application.handleError(error ? error : cause, "", "");
           } else {
             if(!isWebWorker) {
-              const loader = document.getElementById("loader");
+              var loader = document.getElementById("loader");
               if(loader && !global.require.disableErrorReporting) {
                 loader.innerHTML = "<h1>An error occured, starting the application failed.</h1>"
                     + "<p>Please review the error message in your browsers developer tools.</p>";
@@ -247,16 +249,18 @@
       }
     };
     anonRequire.handler = require.handler;
-    const context = { 'parentUrl': require.baseUrl, 'baseUrl': require.baseUrl, 'paths': require.paths || {} };
+    var context = { 'parentUrl': require.baseUrl, 'baseUrl': require.baseUrl, 'paths': require.paths || {} };
     pendingRequires.push(anonRequire);
 
-    const resolvedDeps = deps.map(dep => resolveDependency(dep, context));
+    var resolvedDeps = deps.map(function(dep) {
+      return resolveDependency(dep,context);
+    });
     anonRequire.deps = resolvedDeps;
 
-    for(let i = 0, length = deps.length; i < length; i++) {
-      const dependency = resolvedDeps[i];
+    for(var i = 0, length = deps.length; i < length; i++) {
+      var dependency = resolvedDeps[i];
       if(dependencyState.hasOwnProperty(dependency)) {
-        const module = dependencyState[dependency];
+        var module = dependencyState[dependency];
         if(module.state == 'pending'  || module.state == "loaded" || module.state == "resolved") {
           anonRequire.unresolvedDependencyCount++;
           module.dependants.push(anonRequire);
@@ -272,7 +276,7 @@
       }
     }
     // make sure that we asynchronously invoke the callback if everything is resolved
-    setTimeout(() => {
+    setTimeout(function () {
       anonRequire.resolve();
     }, 4);
   };
@@ -303,7 +307,7 @@
     }
 
 
-    const clm = currentlyLoadedModule = {
+    var clm = currentlyLoadedModule = {
       callback: fn,
       dependants: [],
       dependencyNames: [],
@@ -314,7 +318,7 @@
           dependencyState[this.name].state = "resolved";
           dependencyState[this.name].deps = this.dependencyNames;
           try {
-            const args = getResultArguments(this.dependencyNames);
+            var args = getResultArguments(this.dependencyNames);
             dependencyState[this.name].result = this.callback.apply(null,args);
             dependencyState[this.name].state = "defined";
           } catch(e) {
@@ -322,7 +326,7 @@
             console.log(e);
             return;
           }
-          for(let i = 0; i < this.dependants.length; i++) {
+          for(var i = 0; i < this.dependants.length; i++) {
             this.dependants[i].resolve();
           }
         }
@@ -335,7 +339,7 @@
           }
           dependencyState[this.name].state = "failed";
         }
-        for(let i = 0; i < this.dependants.length; i++) {
+        for(var i = 0; i < this.dependants.length; i++) {
           this.dependants[i].fail(cause, error);
         }
       }
@@ -353,9 +357,9 @@
         }
         // still no name, find out name for IE < 11 (readyState) or other browsers
         if (!path) {
-          const children = document.head.children;
+          var children = document.head.children;
           for (i = 0, length = children.length; i < length; i++){
-            const child = children[i];
+            var child = children[i];
             // if readyState is defined, we're looking for the script with 'interactive' state, otherwise use the first one that is marked with our custom attribute
             if (child.src && (child.readyState == "interactive" || (!child.readyState && child['data-yworks-loading-state'] === "pending"))){
               path = child['data-yworks-module-path'];
@@ -374,11 +378,11 @@
       }
     }
 
-    const context = { 'parentUrl': path ? determineParentUrl(path) : require.baseUrl, 'baseUrl': require.baseUrl, 'paths': require.paths || {} };
+    var context = { 'parentUrl': path ? determineParentUrl(path) : require.baseUrl, 'baseUrl': require.baseUrl, 'paths': require.paths || {} };
     for(var i = 0, length = deps.length; i < length; i++) {
-      const dependency = resolveDependency(deps[i], context);
+      var dependency = resolveDependency(deps[i], context);
       if(dependencyState.hasOwnProperty(dependency)) {
-        const module = dependencyState[dependency];
+        var module = dependencyState[dependency];
         if(module.state == 'pending' || module.state == "loaded" || module.state == "resolved" || module.state == "failed") {
           clm.unresolvedDependencyCount++;
           module.dependants.push(clm);
@@ -404,12 +408,12 @@
   require.load = require;
   require.disableErrorReporting = false;
   require.getRequiredModuleStates = function() {
-    const modules = [];
-    Object.getOwnPropertyNames(dependencyState).forEach(moduleName => {
-      const state = dependencyState[moduleName];
-      const info = { name: moduleName, state: state.state, dependencies:[] };
+    var modules = [];
+    Object.getOwnPropertyNames(dependencyState).forEach(function(moduleName) {
+      var state = dependencyState[moduleName];
+      var info = { name: moduleName, state: state.state, dependencies:[] };
       if (state.deps){
-        for(let i = 0; i < state.deps.length; i++) {
+        for(var i = 0; i < state.deps.length; i++) {
           info.dependencies.push(state.deps[i]);
         }
       }
@@ -417,9 +421,9 @@
     });
     return modules;
   };
-  const isAbsolutePath = /^(\/)|(\w+:\/\/)/;
+  var isAbsolutePath = /^(\/)|(\w+:\/\/)/;
   require.config = function(configuration) {
-    const baseUrlType = typeof(configuration.baseUrl);
+    var baseUrlType = typeof(configuration.baseUrl);
     // specifying baseUrl in the config is optional
     if (baseUrlType !== "undefined") {
       if (baseUrlType === "string") {
@@ -432,14 +436,14 @@
         throw new Error("baseUrl must be a string.");
       }
     }
-    const pathsType = typeof(configuration.paths);
+    var pathsType = typeof(configuration.paths);
     // specifying baseUrl in the config is optional
     if (pathsType !== "undefined") {
       if (pathsType === "object") {
         // baseUrl must be a object
         require.paths = require.paths || {};
-        Object.getOwnPropertyNames(configuration.paths).forEach(name => {
-          const path = configuration.paths[name];
+        Object.getOwnPropertyNames(configuration.paths).forEach(function(name){
+          var path = configuration.paths[name];
           if (!isAbsolutePath.test(path) && require.baseUrl){
             require.paths[name] = require.baseUrl + path;
           } else {

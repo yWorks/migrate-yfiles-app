@@ -1,3 +1,3 @@
 import { LayoutGraphAdapter } from "yfiles";
-const copy = new LayoutGraphAdapter(graph).createCopiedLayoutGraph();
-const copy2 = adapter.createCopiedLayoutGraph();
+var copy = new LayoutGraphAdapter(graph).createCopiedLayoutGraph();
+var copy2 = adapter.createCopiedLayoutGraph()

@@ -103,14 +103,14 @@ import { BaseClass } from "yfiles";
         }
 
         // Create the nodes that specify the visualizations for the panel.
-        const items = itemFactory();
+        var items = itemFactory();
 
         // Convert the nodes into plain visualizations
-        const graphControl = new GraphComponent();
-        let /**number*/ i;
+        var graphControl = new GraphComponent();
+        var /**number*/ i;
         for (i = 0; i < items.length; i++) {
-          const node = items[i];
-          const visual = this.createNodeVisual(node, graphControl);
+          var node = items[i];
+          var visual = this.createNodeVisual(node, graphControl);
           addPointerDownListener(node, visual, this.beginDragCallback);
           this.div.appendChild(visual);
         }
@@ -124,23 +124,23 @@ import { BaseClass } from "yfiles";
        * @private
        */
       createNodeVisual(/**INode*/ original, /**yfiles.canvas.GraphControl*/ graphControl) {
-        const graph = graphControl.graph;
+        var graph = graphControl.graph;
         graph.clear();
 
-        const node = graph.createNode(original.layout.toRectD(), original.style, original.tag);
-        original.labels.forEach(/**ILabel*/ label => {
+        var node = graph.createNode(original.layout.toRectD(), original.style, original.tag);
+        original.labels.forEach(function(/**ILabel*/ label) {
           graph.addLabel(node, label.text, label.labelModelParameter, label.style, label.preferredSize, label.tag);
         });
-        original.ports.forEach(/**IPort*/ port => {
+        original.ports.forEach(function(/**IPort*/ port) {
           graph.addPort(node, port.locationModelParameter, port.style, port.tag);
         });
         updateViewport(graphControl);
 
-        const exporter = new SvgExport(graphControl.contentRect);
+        var exporter = new SvgExport(graphControl.contentRect);
         exporter.margin = new Insets(5);
 
         exporter.setScaleForWidth(Math.min(this.maxItemWidth, graphControl.contentRect.width));
-        const element = exporter.exportSvg(graphControl);
+        var element = exporter.exportSvg(graphControl);
 
         // Firefox does not display the SVG correctly because of the clip - so we remove it.
         element.removeAttribute("clip-path");
@@ -154,16 +154,16 @@ import { BaseClass } from "yfiles";
     export const DemoDialogFactory = class DemoDialogFactory {
       /** @return {Element[]} */
       static createPlainDialog(/**string*/ titleText) {
-        const dialogAnchor = document.createElement("div");
+        var dialogAnchor = document.createElement("div");
         demo.ElementExtensions.addClass(dialogAnchor, "demo-dialog-anchor");
 
-        const dialogPanel = document.createElement("div");
+        var dialogPanel = document.createElement("div");
         demo.ElementExtensions.addClass(dialogPanel, "demo-dialog");
 
-        const title = document.createElement("h2");
+        var title = document.createElement("h2");
         ((/**@type {HTMLElement}*/(title))).innerHTML = titleText;
 
-        const contentPanel = document.createElement("div");
+        var contentPanel = document.createElement("div");
         demo.ElementExtensions.addClass(contentPanel, "demo-dialog-content");
 
         dialogAnchor.appendChild(dialogPanel);
@@ -181,14 +181,14 @@ import { BaseClass } from "yfiles";
         /**number*/ columnNumber,
         error
       ) {
-        /*final*/ const actionUrl = "http://kb.yworks.com/errorFeedback.html";
-        const elements = demo.DemoDialogFactory.createPlainDialog("Report Error to yWorks");
-        const dialogRoot = elements[0];
-        const parent = document.body;
+        /*final*/ var actionUrl = "http://kb.yworks.com/errorFeedback.html";
+        var elements = demo.DemoDialogFactory.createPlainDialog("Report Error to yWorks");
+        var dialogRoot = elements[0];
+        var parent = document.body;
 
         demo.ElementExtensions.addClass(elements[1], "demo-error-dialog");
 
-        const form = (/**@type {HTMLFormElement}*/(document.createElement("form")));
+        var form = (/**@type {HTMLFormElement}*/(document.createElement("form")));
         demo.ElementExtensions.addClass(form, "demo-properties");
         form.setAttribute("method", "POST");
         form.setAttribute("target", "_blank");
@@ -202,7 +202,7 @@ import { BaseClass } from "yfiles";
         }
         addHiddenField(form, "license_expiry", (/**@type {string}*/(yfiles.license["expires"])));
         addHiddenField(form, "version", yfiles.version);
-        const inputEmail = addFormRow(form, "email", "E-Mail <span class=\"optional\">In case we need to contact you</span>", "text", "");
+        var inputEmail = addFormRow(form, "email", "E-Mail <span class=\"optional\">In case we need to contact you</span>", "text", "");
         ((/**@type {HTMLTextAreaElement}*/(addFormRow(form, "system", "System Info", "textarea", "appVersion: " + window.navigator.appVersion + "\nVendor: " + window.navigator.vendor + "\nOS: " + window.navigator.platform + "\nuserAgent: " + window.navigator.userAgent)))).rows = 2;
         addFormRow(form, "url", "URL", "text", window.top.location.href);
         if (!error) {
@@ -212,7 +212,7 @@ import { BaseClass } from "yfiles";
           addFormRow(form, "error_Line", "Line number", "text", lineNumber + "");
           addFormRow(form, "error_column", "Column number", "text", columnNumber + "");
         } else {
-          const err = (/**@type {Object}*/(error));
+          var err = (/**@type {Object}*/(error));
           tryAddFormRow(form, "error_message", "Error Message", "text", typeof(err["name"]) !== "undefined" ? err["name"] + ": " + err["message"] : err["message"]);
           tryAddFormRow(form, "stack", "Stack", "textarea", encode(typeof(err["stacktrace"]) !== "undefined" ? err["stacktrace"] : err["stack"]));
           tryAddFormRow(form, "error_line", "Error Line", "text", typeof(err["line"]) !== "undefined" ? err["line"] : err["lineNumber"]);
@@ -220,18 +220,18 @@ import { BaseClass } from "yfiles";
           tryAddFormRow(form, "error_source", "Error Source", "text", err["sourceURL"]);
         }
 
-        const inputComment = addFormRow(form, "comment", "Additional Comments", "textarea", "");
+        var inputComment = addFormRow(form, "comment", "Additional Comments", "textarea", "");
 
         // if yFiles for HTML require.js was used to load modules, also add information about the loaded modules
-        const require = window["require"];
+        var require = window["require"];
         if (typeof(require) !== "undefined" && typeof(require["getRequiredModuleStates"]) !== "undefined") {
-          let moduleInfoText = "";
-          let definedModules = "";
-          const f = (/**@type {system.Func.<yfiles.lang.ModuleInfo[]>}*/((require["getRequiredModuleStates"])));
-          let /**yfiles.lang.ModuleInfo[]*/ arr;
-          let /**number*/ i;
+          var moduleInfoText = "";
+          var definedModules = "";
+          var f = (/**@type {system.Func.<yfiles.lang.ModuleInfo[]>}*/((require["getRequiredModuleStates"])));
+          var /**yfiles.lang.ModuleInfo[]*/ arr;
+          var /**number*/ i;
           for (i = 0, arr = f(); i < arr.length; i++) {
-            const moduleInfo = arr[i];
+            var moduleInfo = arr[i];
             if (moduleInfo.state === "defined") {
               definedModules += moduleInfo.name + "\n";
             } else {
@@ -247,10 +247,10 @@ import { BaseClass } from "yfiles";
           addFormRow(form, "loaded_modules", "Loaded Modules", "textarea", moduleInfoText);
         }
 
-        const submitButton = document.createElement("button");
+        var submitButton = document.createElement("button");
         submitButton.setAttribute("type", "submit");
-        submitButton.addEventListener("click", /**Event*/ evt => {
-          setTimeout(() => {
+        submitButton.addEventListener("click", function(/**Event*/ evt) {
+          setTimeout(function() {
             parent.removeChild(dialogRoot);
             demo.Application.errorDialogOpen = false;
           }, 10);
@@ -258,9 +258,9 @@ import { BaseClass } from "yfiles";
         submitButton.textContent = "Submit";
         form.appendChild(submitButton);
 
-        const cancelButton = document.createElement("button");
+        var cancelButton = document.createElement("button");
         cancelButton.setAttribute("type", "reset");
-        cancelButton.addEventListener("click", /**Event*/ evt => {
+        cancelButton.addEventListener("click", function(/**Event*/ evt) {
           parent.removeChild(dialogRoot);
           demo.Application.errorDialogOpen = false;
         }, false);
@@ -269,17 +269,17 @@ import { BaseClass } from "yfiles";
 
         //Submit form data automatically if url is on *.yworks.com
         if ((new RegExp("^[^.]+(\\.yworks\\.com)+", "i")).test(window.top.location.href) && !inErrorState() && window["FormData"] !== undefined) {
-          const xhr = new XMLHttpRequest();
-          const formData = new FormData(form);
+          var xhr = new XMLHttpRequest();
+          var formData = new FormData(form);
           formData.append("error_dialog_suppressResponse", "1");
           xhr.open("POST", actionUrl, true);
           xhr.send(formData);
           //After automatic submit, activate the submit button only if user enters custom information
           submitButton.setAttribute("type", "button");
-          inputEmail.addEventListener("change", /**Event*/ args => {
+          inputEmail.addEventListener("change", function(/**Event*/ args) {
             submitButton.setAttribute("type", "submit");
           }, false);
-          inputComment.addEventListener("change", /**Event*/ args => {
+          inputComment.addEventListener("change", function(/**Event*/ args) {
             submitButton.setAttribute("type", "submit");
           }, false);
         }
@@ -397,7 +397,7 @@ import { BaseClass } from "yfiles";
 
       /** @return {Object} */
       getProperty(/**string*/ name) {
-        const property = this[name];
+        var property = this[name];
         return property ? property : null;
       }
 
@@ -418,12 +418,12 @@ import { BaseClass } from "yfiles";
         /**function(Object, ParseEventArgs)*/ afterParsing
       ) {
         graph.clear();
-        const ioHandler = this.createGraphMLIOHandler();
+        var ioHandler = this.createGraphMLIOHandler();
         ioHandler.addParsedListener(afterParsing);
 
-        let message = "Unable to open the graph.\nPerhaps your browser does not allow handling cross domain HTTP requests. Please see the demo readme for details.";
-        ioHandler.addParsedListener((sender, /**ParseEventArgs*/ args) => {
-          const parsedGraph = args.context.graph;
+        var message = "Unable to open the graph.\nPerhaps your browser does not allow handling cross domain HTTP requests. Please see the demo readme for details.";
+        ioHandler.addParsedListener(function(sender, /**ParseEventArgs*/ args) {
+          var parsedGraph = args.context.graph;
           if (parsedGraph.nodes.count === 0 && window.location.protocol.toLowerCase().indexOf("file") >= 0) {
             alert(message);
           }
@@ -434,7 +434,7 @@ import { BaseClass } from "yfiles";
           return true;
         } catch ( /**Exception*/ e ) {
           {
-            const error = (/**@type {Object}*/(e));
+            var error = (/**@type {Object}*/(e));
             if (error["message"]) {
               message += "\n" + error["message"] + "\n";
             }
@@ -463,20 +463,20 @@ import { BaseClass } from "yfiles";
           return -1;
         }
 
-        const ua = window.navigator.userAgent;
-        const msie = ua.indexOf("MSIE ");
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
         if (msie > 0) {
           return parseInt(ua.substr(msie + 5, yfiles.system.StringExtensions.indexOf(ua, ".", msie)), 10);
         }
 
-        const trident = ua.indexOf("Trident/");
+        var trident = ua.indexOf("Trident/");
         if (trident > 0) {
           // IE 11 => return version number
-          const rv = ua.indexOf("rv:");
+          var rv = ua.indexOf("rv:");
           return parseInt(ua.substr(rv + 3, yfiles.system.StringExtensions.indexOf(ua, ".", rv)), 10);
         }
 
-        const edge = ua.indexOf("Edge/");
+        var edge = ua.indexOf("Edge/");
         if (edge > 0) {
           //IE 12 => return version number
           return parseInt(ua.substr(edge + 5, yfiles.system.StringExtensions.indexOf(ua, ".", edge)), 10);
@@ -495,8 +495,8 @@ import { BaseClass } from "yfiles";
        * @param {Object} config Configuration settings.
        */
       static start(/**demo.Application*/ application, appRootOrId, /**Object*/ config) {
-        const internetExplorerVersion = demo.Application.detectInternetExplorerVersion();
-        const windowsVersion = detectWindowsVersion();
+        var internetExplorerVersion = demo.Application.detectInternetExplorerVersion();
+        var windowsVersion = detectWindowsVersion();
 
         // Enable support for labels with consecutive spaces in IE
         if (internetExplorerVersion !== -1) {
@@ -514,25 +514,25 @@ import { BaseClass } from "yfiles";
         // Prevent default for context menu key - it is handled by the context menu implementation
         yfiles.workaroundCR433873 = true;
 
-        const chromeVersion = detectChromeVersion();
+        var chromeVersion = detectChromeVersion();
         if (chromeVersion > 46) {
           // 24: flush uses requestAnimationFrame, which might add another delay of about max. 16ms.
           // 42ms (24fps) should still be ok.
           yfiles.workaroundCR570845 = 24;
         }
-        const catchErrors = !!config["catchErrors"];
+        var catchErrors = !!config["catchErrors"];
         if (catchErrors) {
           Exception.catchErrors = true;
           Exception.handler = function(e) {
             demo.Application.handleError(e, "", 0);
           };
           window.onerror = function(/**string*/ message, /**string*/ url, /**number*/ lineNumber, /**number*/ columnNumber, error) {
-            const cl = typeof(columnNumber) === "number" ? columnNumber : 0;
-            const e = typeof(error) !== "undefined" ? error : null;
+            var cl = typeof(columnNumber) === "number" ? columnNumber : 0;
+            var e = typeof(error) !== "undefined" ? error : null;
             // no automatic error reporting for GraphML parsing errors
             if (e instanceof Exception && ((/**@type {yfiles.system.IOException}*/(e))).message.indexOf("XML Parsing Error") === 0) {
-              let errMessage = "File parsing failed. Maybe the provided file format was not expected or the file's integrity is corrupt.";
-              const err = (/**@type {Object}*/(e));
+              var errMessage = "File parsing failed. Maybe the provided file format was not expected or the file's integrity is corrupt.";
+              var err = (/**@type {Object}*/(e));
               if (err["message"]) {
                 errMessage += "\n" + err["message"] + "\n";
               }
@@ -551,29 +551,29 @@ import { BaseClass } from "yfiles";
           };
         }
 
-        const appRoot = typeof(appRootOrId) === "string" ? document.getElementById((/**@type {string}*/(appRootOrId))) : (/**@type {Element}*/(appRootOrId));
-        const backend = demo.BackendFactory.getBackend(typeof(config["backend"]) === "string" ? config["backend"] : "yfiles");
+        var appRoot = typeof(appRootOrId) === "string" ? document.getElementById((/**@type {string}*/(appRootOrId))) : (/**@type {Element}*/(appRootOrId));
+        var backend = demo.BackendFactory.getBackend(typeof(config["backend"]) === "string" ? config["backend"] : "yfiles");
 
-        const callback = function() {
+        var callback = function() {
           try {
-            const appConverter = new demo.ApplicationParser();
+            var appConverter = new demo.ApplicationParser();
             appConverter.application = application;
             appConverter.backend = backend;
 
-            const frame = appConverter.parseApplication(appRoot);
-            const loaderId = config["loaderId"];
+            var frame = appConverter.parseApplication(appRoot);
+            var loaderId = config["loaderId"];
             if (typeof(config["loaderId"]) === "string") {
-              const loader = document.getElementById(loaderId);
+              var loader = document.getElementById(loaderId);
               loader.style.setProperty("display", "none", "");
             }
             application.registerCommands();
             appConverter.bindCommands(frame);
             application.loaded();
-            const loadedCallback = config["loadedCallback"];
+            var loadedCallback = config["loadedCallback"];
             if (typeof(loadedCallback) === "function") {
               ((/**@type {system.Action}*/(loadedCallback)))();
             }
-            setTimeout(() => {
+            setTimeout(function() {
               if (!window["yFilesAppStatus"]) {
                 window["yFilesAppStatus"] = demo.Application.OK_STATE;
               }
@@ -611,7 +611,7 @@ import { BaseClass } from "yfiles";
           return true;// prevent default
         }
         demo.Application.errorDialogOpen = true;
-        const dialogAnchor = YString.$class.isInstance(error) ? demo.DemoDialogFactory.createErrorDialog((/**@type {string}*/(error)), url, lineNumber, 0, null) : demo.DemoDialogFactory.createErrorDialog(null, url, lineNumber, 0, error);
+        var dialogAnchor = YString.$class.isInstance(error) ? demo.DemoDialogFactory.createErrorDialog((/**@type {string}*/(error)), url, lineNumber, 0, null) : demo.DemoDialogFactory.createErrorDialog(null, url, lineNumber, 0, error);
 
         document.body.appendChild(dialogAnchor);
         // Don't move the App Status before the error dialog creation. Otherwise, automatic sending will be disabled.
@@ -621,9 +621,9 @@ import { BaseClass } from "yfiles";
 
       static removeAllChildren(/**HTMLElement*/ element) {
         if (element.children !== undefined) {
-          const n = element.children.length;
-          for (let i = 0; i < n; i++) {
-            const child = (/**@type {Element}*/(element.children[0]));
+          var n = element.children.length;
+          for (var i = 0; i < n; i++) {
+            var child = (/**@type {Element}*/(element.children[0]));
             element.removeChild(child);
           }
         }
@@ -757,23 +757,23 @@ import { BaseClass } from "yfiles";
       return {
         'constructor': function(/**HTMLElement*/ element) {
           demo.ElementDimensions.createDefault.call(this);
-          const style = getComputedStyle(element);
+          var style = getComputedStyle(element);
 
           if (style) {
-            const pl = parseFloat(style.getPropertyValue("padding-left"));
-            const pt = parseFloat(style.getPropertyValue("padding-top"));
-            const pr = parseFloat(style.getPropertyValue("padding-right"));
-            const pb = parseFloat(style.getPropertyValue("padding-bottom"));
-            const ml = parseFloat(style.getPropertyValue("margin-left"));
-            const mt = parseFloat(style.getPropertyValue("margin-top"));
-            const mr = parseFloat(style.getPropertyValue("margin-right"));
-            const mb = parseFloat(style.getPropertyValue("margin-bottom"));
-            const w = parseFloat(style.getPropertyValue("width"));
-            const h = parseFloat(style.getPropertyValue("height"));
-            const bl = parseFloat(style.getPropertyValue("border-left-width"));
-            const bt = parseFloat(style.getPropertyValue("border-top-width"));
-            const br = parseFloat(style.getPropertyValue("border-right-width"));
-            const bb = parseFloat(style.getPropertyValue("border-bottom-width"));
+            var pl = parseFloat(style.getPropertyValue("padding-left"));
+            var pt = parseFloat(style.getPropertyValue("padding-top"));
+            var pr = parseFloat(style.getPropertyValue("padding-right"));
+            var pb = parseFloat(style.getPropertyValue("padding-bottom"));
+            var ml = parseFloat(style.getPropertyValue("margin-left"));
+            var mt = parseFloat(style.getPropertyValue("margin-top"));
+            var mr = parseFloat(style.getPropertyValue("margin-right"));
+            var mb = parseFloat(style.getPropertyValue("margin-bottom"));
+            var w = parseFloat(style.getPropertyValue("width"));
+            var h = parseFloat(style.getPropertyValue("height"));
+            var bl = parseFloat(style.getPropertyValue("border-left-width"));
+            var bt = parseFloat(style.getPropertyValue("border-top-width"));
+            var br = parseFloat(style.getPropertyValue("border-right-width"));
+            var bb = parseFloat(style.getPropertyValue("border-bottom-width"));
             this.paddingField = new Insets(pl, pt, pr, pb);
             this.marginField = new Insets(ml, mt, mr, mb);
             this.borderField = new Insets(bl, bt, br, bb);
@@ -785,7 +785,7 @@ import { BaseClass } from "yfiles";
             this.sizeField = Size.EMPTY;
           }
 
-          const rect = element.getBoundingClientRect();
+          var rect = element.getBoundingClientRect();
 
           this.locationField = new Point(rect.left, rect.top);
           this.boundsField = new Rect(this.locationField.x - this.marginField.left, this.locationField.y - this.marginField.top, rect.width + this.marginField.left + this.marginField.right, rect.height + this.marginField.top + this.marginField.bottom);
@@ -889,23 +889,29 @@ import { BaseClass } from "yfiles";
     /**
      * @interface demo.IComponent
      */
-    export const IComponent = new InterfaceDefinition(() => /** @lends {demo.IComponent.prototype} */
-    ({
-      /** @type {Element} */
-      'element': {
-        'get': Abstract
-      },
-
-      'setSize': Abstract,
-      'setSizeWithUnit': Abstract,
-      'setLocation': Abstract,
-      'setBounds': Abstract,
-
-      /** @return {demo.ElementDimensions} */
-      'getDimensions': Abstract,
-
-      'setStyleProperty': Abstract
-    }));
+    export const IComponent = new InterfaceDefinition(function() {
+      /** @lends {demo.IComponent.prototype} */
+      return {
+        /** @type {Element} */
+        'element': {
+          'get': Abstract
+        },
+        
+        'setSize': Abstract,
+        
+        'setSizeWithUnit': Abstract,
+        
+        'setLocation': Abstract,
+        
+        'setBounds': Abstract,
+        
+        /** @return {demo.ElementDimensions} */
+        'getDimensions': Abstract,
+        
+        'setStyleProperty': Abstract
+        
+      };
+    });
 
     /**
      * Walks through a given DOM Element and its children and modifies the DOM to represent a fully functional application.
@@ -928,10 +934,10 @@ import { BaseClass } from "yfiles";
 
       /** @return {demo.IApplicationFrame} */
       parseApplication(/**Element*/ appRoot) {
-        const conversionResult = this.convertElement((/**@type {HTMLElement}*/(appRoot)), null);
-        const component = conversionResult.component;
+        var conversionResult = this.convertElement((/**@type {HTMLElement}*/(appRoot)), null);
+        var component = conversionResult.component;
         if (demo.IApplicationFrame.isInstance(component)) {
-          const applicationFrame = ((/**@type {demo.IApplicationFrame}*/(component)));
+          var applicationFrame = ((/**@type {demo.IApplicationFrame}*/(component)));
           applicationFrame.init();
           return applicationFrame;
         }
@@ -943,7 +949,7 @@ import { BaseClass } from "yfiles";
        * @private
        */
       convertElement(/**HTMLElement*/ element, /**demo.IContainer*/ parent) {
-        const conversionResult = this.convert(element);
+        var conversionResult = this.convert(element);
 
         if (conversionResult !== null) {
           if (parent !== null) {
@@ -955,19 +961,19 @@ import { BaseClass } from "yfiles";
           }
         }
 
-        const convertedElement = conversionResult !== null && conversionResult.hasReplacement ? conversionResult.replacement : element;
+        var convertedElement = conversionResult !== null && conversionResult.hasReplacement ? conversionResult.replacement : element;
 
-        const nextParent = conversionResult !== null && demo.IContainer.isInstance(conversionResult.component) ? (/**@type {demo.IContainer}*/(conversionResult.component)) : parent;
+        var nextParent = conversionResult !== null && demo.IContainer.isInstance(conversionResult.component) ? (/**@type {demo.IContainer}*/(conversionResult.component)) : parent;
 
         if (!convertedElement.children) {
           // this can happen for svg elements in IE
           return conversionResult;
         }
 
-        let /**HTMLElement[]*/ arr;
-        let /**number*/ i;
+        var /**HTMLElement[]*/ arr;
+        var /**number*/ i;
         for (i = 0, arr = convertedElement.children; i < arr.length; i++) {
-          const child = arr[i];
+          var child = arr[i];
           if (child.nodeType === Node.ELEMENT_NODE) {
             this.convertElement(child, nextParent);
           }
@@ -982,22 +988,22 @@ import { BaseClass } from "yfiles";
        * @private
        */
       adjustGestureRecognizerThresholds(/**yfiles.canvas.GraphControl*/ control, /**HTMLElement*/ element) {
-        const touchStartListener = /**Event*/ evt => {
+        var touchStartListener = (function(/**Event*/ evt) {
           if (this.lastInputDevice !== "touch") {
             control.dragSize = new Size(20, 20);
             control.hitTestRadius = 8;
             this.lastInputDevice = "touch";
           }
-        };
-        const mouseDownListener = /**Event*/ evt => {
+        }).bind(this);
+        var mouseDownListener = (function(/**Event*/ evt) {
           if (this.lastInputDevice !== "mouse") {
             control.dragSize = new Size(5, 5);
             control.hitTestRadius = 3;
             this.lastInputDevice = "mouse";
           }
-        };
-        const pointerEnterListener = /**Event*/ evt => {
-          const pointerType = evt["pointerType"];
+        }).bind(this);
+        var pointerEnterListener = (function(/**Event*/ evt) {
+          var pointerType = evt["pointerType"];
           switch ((/**@type {string}*/(pointerType))) {
             case "touch":
               control.dragSize = new Size(20, 20);
@@ -1015,7 +1021,7 @@ import { BaseClass } from "yfiles";
               this.lastInputDevice = "mouse";
               break;
           }
-        };
+        }).bind(this);
         if (control) {
           // Chrome, Android, ... (touch on desktop FF are mouse events)
           element.addEventListener("touchstart", touchStartListener, false);
@@ -1033,8 +1039,8 @@ import { BaseClass } from "yfiles";
        * @private
        */
       convert(/**HTMLElement*/ element) {
-        let /**demo.ConversionResult*/ result = null;
-        const type = element.getAttribute("data-type");
+        var /**demo.ConversionResult*/ result = null;
+        var type = element.getAttribute("data-type");
 
         if ("application" === type) {
           result = this.backend.convertAppRoot(element, this.application);
@@ -1088,14 +1094,14 @@ import { BaseClass } from "yfiles";
         }
 
         if (result !== null && result.hasReplacement) {
-          const origElement = element;
+          var origElement = element;
           var replacement = result.replacement;
 
           demo.ApplicationParser.replaceElement(origElement, replacement);
         }
 
         if (element.hasAttribute("data-name")) {
-          let dataObject = element;
+          var dataObject = element;
           if (result !== null) {
             if (result.component !== null) {
               dataObject = result.component;
@@ -1114,19 +1120,19 @@ import { BaseClass } from "yfiles";
           this.backend.bindCommand((/**@type {demo.ICommandComponent}*/(component)), this.application);
         }
         if (demo.IContainer.isInstance(component)) {
-          ((/**@type {demo.IContainer}*/(component))).children.forEach(/**demo.IComponent*/ child => {
+          ((/**@type {demo.IContainer}*/(component))).children.forEach((function(/**demo.IComponent*/ child) {
             this.bindCommands(child);
-          });
+          }).bind(this));
         }
       }
 
       static replaceElement(/**HTMLElement*/ origElement, /**HTMLElement*/ replacement) {
         origElement.parentNode.replaceChild(replacement, origElement);
 
-        const attrs = origElement.attributes;
-        const length = attrs.length;
-        for (let i = 0; i < length; i++) {
-          const attr = (/**@type {Attr}*/(attrs.item(i)));
+        var attrs = origElement.attributes;
+        var length = attrs.length;
+        for (var i = 0; i < length; i++) {
+          var attr = (/**@type {Attr}*/(attrs.item(i)));
           if (!replacement.hasAttribute(attr.name)) {
             replacement.setAttribute(attr.name, attr.value);
           } else if (attr.name === "class" && attr.value !== replacement.getAttribute(attr.name)) {
@@ -1167,115 +1173,118 @@ import { BaseClass } from "yfiles";
      * Converts (modifies or creates a replacement for) a DOM element so that it is suitable for usage as a component.
      * @interface demo.IApplicationParserBackend
      */
-    export const IApplicationParserBackend = new InterfaceDefinition(() => /** @lends {demo.IApplicationParserBackend.prototype} */
-    ({
-      /**
-       * The given action will be executed once the DOM has been build and all scripts and style sheets have been loaded.
-       * @see Specified by {@link demo.IApplicationParserBackend#addOnLoadCallback}.
-       */
-      'addOnLoadCallback': Abstract,
-
-      /**
-       * Converts the application root. Might be a div element or the document body.
-       * @see Specified by {@link demo.IApplicationParserBackend#convertAppRoot}.
-       * @return {demo.ConversionResult}
-       */
-      'convertAppRoot': Abstract,
-
-      /**
-       * Binds registered commands to the elements with 'command-name' attribute. 
-       * This is called after {@link demo.IApplicationParserBackend#convertAppRoot} to ensure that all members already exist.
-       * @see Specified by {@link demo.IApplicationParserBackend#bindCommand}.
-       */
-      'bindCommand': Abstract,
-
-      /**
-       * Creates the default yFiles for HTML demo header.
-       * @see Specified by {@link demo.IApplicationParserBackend#createHeader}.
-       * @return {demo.IComponent}
-       */
-      'createHeader': Abstract,
-
-      /**
-       * Creates the default yFiles for HTML demo footer.
-       * @see Specified by {@link demo.IApplicationParserBackend#createFooter}.
-       * @return {demo.IComponent}
-       */
-      'createFooter': Abstract,
-
-      /** @return {demo.ConversionResult} */
-      'convertPanel': Abstract,
-
-      /**
-       * Creates a button from the given element.
-       * If there is a "data-command" attribute, then it should try to find a matching {@link yfiles.system.ICommand} from
-       * either the given {@link demo.Application} or the {@link yfiles.system.CommandTypeConverter} and wrap it as the handler.
-       * @see Specified by {@link demo.IApplicationParserBackend#convertButton}.
-       * @return {demo.ConversionResult}
-       */
-      'convertButton': Abstract,
-
-      /**
-       * Creates a combo box from the given element.
-       * @see Specified by {@link demo.IApplicationParserBackend#convertComboBox}.
-       * @return {demo.ConversionResult}
-       */
-      'convertComboBox': Abstract,
-
-      /**
-       * Creates a collapsible pane for the given element.
-       * The collapsible pane should contain a header and a content area.
-       * The header content is contained in the "data-header" attribute, the content is the content of the element.
-       * The collapse operation should be based on the value of the "data-collapse" property and should support the following values:
-       * <ul>
-       * <li>none - No action should be performed.</li>
-       * <li>top - The content disappears, the header should not be changed.</li>
-       * <li>left - The content disappears, the header is translated by -90 degrees.</li>
-       * <li>right - The content disappears, the header is translated by 270 degrees.</li>
-       * </ul>
-       * If present, the {@link demo.ConversionResult#component} should be an instance of {@link demo.ICollapsiblePane}.
-       * @see Specified by {@link demo.IApplicationParserBackend#convertCollapsiblePane}.
-       * @return {demo.ConversionResult}
-       */
-      'convertCollapsiblePane': Abstract,
-
-      /**
-       * Creates a component that can be used as a separator. The input may be any type of element.
-       * @see Specified by {@link demo.IApplicationParserBackend#convertSeparator}.
-       * @return {demo.ConversionResult}
-       */
-      'convertSeparator': Abstract,
-
-      /**
-       * Converts an element into a toolbar which contains buttons.
-       * @param {HTMLElement} element 
-       * @param {demo.Application} application 
-       * @return {demo.ConversionResult} 
-       * @see Specified by {@link demo.IApplicationParserBackend#convertToolBar}.
-       */
-      'convertToolBar': Abstract,
-
-      /** @return {demo.ConversionResult} */
-      'convertToggleButton': Abstract,
-
-      /** @return {demo.ConversionResult} */
-      'convertTextArea': Abstract,
-
-      /** @return {demo.ConversionResult} */
-      'convertBorderLayout': Abstract,
-
-      /** @return {demo.ConversionResult} */
-      'convertControl': Abstract,
-
-      /** @return {demo.ConversionResult} */
-      'convertCheckBox': Abstract,
-
-      /** @return {demo.ConversionResult} */
-      'convertSlider': Abstract,
-
-      /** @return {demo.ConversionResult} */
-      'convertFramerateCounter': Abstract
-    }));
+    export const IApplicationParserBackend = new InterfaceDefinition(function() {
+      /** @lends {demo.IApplicationParserBackend.prototype} */
+      return {
+        /**
+         * The given action will be executed once the DOM has been build and all scripts and style sheets have been loaded.
+         * @see Specified by {@link demo.IApplicationParserBackend#addOnLoadCallback}.
+         */
+        'addOnLoadCallback': Abstract,
+        
+        /**
+         * Converts the application root. Might be a div element or the document body.
+         * @see Specified by {@link demo.IApplicationParserBackend#convertAppRoot}.
+         * @return {demo.ConversionResult}
+         */
+        'convertAppRoot': Abstract,
+        
+        /**
+         * Binds registered commands to the elements with 'command-name' attribute. 
+         * This is called after {@link demo.IApplicationParserBackend#convertAppRoot} to ensure that all members already exist.
+         * @see Specified by {@link demo.IApplicationParserBackend#bindCommand}.
+         */
+        'bindCommand': Abstract,
+        
+        /**
+         * Creates the default yFiles for HTML demo header.
+         * @see Specified by {@link demo.IApplicationParserBackend#createHeader}.
+         * @return {demo.IComponent}
+         */
+        'createHeader': Abstract,
+        
+        /**
+         * Creates the default yFiles for HTML demo footer.
+         * @see Specified by {@link demo.IApplicationParserBackend#createFooter}.
+         * @return {demo.IComponent}
+         */
+        'createFooter': Abstract,
+        
+        /** @return {demo.ConversionResult} */
+        'convertPanel': Abstract,
+        
+        /**
+         * Creates a button from the given element.
+         * If there is a "data-command" attribute, then it should try to find a matching {@link yfiles.system.ICommand} from
+         * either the given {@link demo.Application} or the {@link yfiles.system.CommandTypeConverter} and wrap it as the handler.
+         * @see Specified by {@link demo.IApplicationParserBackend#convertButton}.
+         * @return {demo.ConversionResult}
+         */
+        'convertButton': Abstract,
+        
+        /**
+         * Creates a combo box from the given element.
+         * @see Specified by {@link demo.IApplicationParserBackend#convertComboBox}.
+         * @return {demo.ConversionResult}
+         */
+        'convertComboBox': Abstract,
+        
+        /**
+         * Creates a collapsible pane for the given element.
+         * The collapsible pane should contain a header and a content area.
+         * The header content is contained in the "data-header" attribute, the content is the content of the element.
+         * The collapse operation should be based on the value of the "data-collapse" property and should support the following values:
+         * <ul>
+         * <li>none - No action should be performed.</li>
+         * <li>top - The content disappears, the header should not be changed.</li>
+         * <li>left - The content disappears, the header is translated by -90 degrees.</li>
+         * <li>right - The content disappears, the header is translated by 270 degrees.</li>
+         * </ul>
+         * If present, the {@link demo.ConversionResult#component} should be an instance of {@link demo.ICollapsiblePane}.
+         * @see Specified by {@link demo.IApplicationParserBackend#convertCollapsiblePane}.
+         * @return {demo.ConversionResult}
+         */
+        'convertCollapsiblePane': Abstract,
+        
+        /**
+         * Creates a component that can be used as a separator. The input may be any type of element.
+         * @see Specified by {@link demo.IApplicationParserBackend#convertSeparator}.
+         * @return {demo.ConversionResult}
+         */
+        'convertSeparator': Abstract,
+        
+        /**
+         * Converts an element into a toolbar which contains buttons.
+         * @param {HTMLElement} element 
+         * @param {demo.Application} application 
+         * @return {demo.ConversionResult} 
+         * @see Specified by {@link demo.IApplicationParserBackend#convertToolBar}.
+         */
+        'convertToolBar': Abstract,
+        
+        /** @return {demo.ConversionResult} */
+        'convertToggleButton': Abstract,
+        
+        /** @return {demo.ConversionResult} */
+        'convertTextArea': Abstract,
+        
+        /** @return {demo.ConversionResult} */
+        'convertBorderLayout': Abstract,
+        
+        /** @return {demo.ConversionResult} */
+        'convertControl': Abstract,
+        
+        /** @return {demo.ConversionResult} */
+        'convertCheckBox': Abstract,
+        
+        /** @return {demo.ConversionResult} */
+        'convertSlider': Abstract,
+        
+        /** @return {demo.ConversionResult} */
+        'convertFramerateCounter': Abstract
+        
+      };
+    });
 
     /**
      * A simple context menu implementation for the yFiles for HTML demos.
@@ -1296,7 +1305,7 @@ import { BaseClass } from "yfiles";
          */
         this.element = null;
 
-        const contextMenu = (/**@type {HTMLElement}*/(document.createElement("ul")));
+        var contextMenu = (/**@type {HTMLElement}*/(document.createElement("ul")));
         contextMenu.setAttribute("class", "demo-context-menu");
         this.element = contextMenu;
       }
@@ -1310,27 +1319,27 @@ import { BaseClass } from "yfiles";
       setOnCloseCallback(/**function()*/ onCloseCallback) {
         // Add a click listener that closes the menu and calls the callback.
         // This way, the individual menu items was not call the callback by themselves.
-        this.element.addEventListener("click", /**Event*/ evt => {
+        this.element.addEventListener("click", (function(/**Event*/ evt) {
           onCloseCallback();
           this.close();
           evt.stopPropagation();
-        }, false);
+        }).bind(this), false);
 
         // Create a ESC key press listener that closes the menu and calls the callback.
-        this.closeOnEscListener = /**Event*/ evt => {
+        this.closeOnEscListener = (function(/**Event*/ evt) {
           if (evt.keyCode === 27 && this.element.parentNode) {
             onCloseCallback();
             this.close();
             evt.stopPropagation();
           }
-        };
+        }).bind(this);
       }
 
       /**
        * Adds a new separator to this menu.
        */
       addSeparator() {
-        const separator = document.createElement("span");
+        var separator = document.createElement("span");
         demo.ElementExtensions.addClass(separator, "demo-separator");
         this.element.appendChild(separator);
       }
@@ -1340,7 +1349,7 @@ import { BaseClass } from "yfiles";
        * @return {HTMLElement} The HTML element of the created menu entry.
        */
       addMenuItem(/**string*/ label, /**function(Event)*/ clickListener) {
-        const menuItem = (/**@type {HTMLElement}*/(document.createElement("li")));
+        var menuItem = (/**@type {HTMLElement}*/(document.createElement("li")));
         menuItem.setAttribute("class", "demo-menu-item");
         menuItem.innerHTML = label;
         if (clickListener !== null) {
@@ -1354,7 +1363,7 @@ import { BaseClass } from "yfiles";
        * Removes all menu entries and separators from this menu.
        */
       clearItems() {
-        const element = this.element;
+        var element = this.element;
         while (element.firstChild) {
           element.removeChild(element.firstChild);
         }
@@ -1366,7 +1375,7 @@ import { BaseClass } from "yfiles";
        * @private
        */
       setLocation(/**yfiles.geometry.PointD*/ location) {
-        const style = this.element.style;
+        var style = this.element.style;
         style.setProperty("position", "absolute", "");
         style.setProperty("left", location.x + "px", "");
         style.setProperty("top", location.y + "px", "");
@@ -1408,9 +1417,9 @@ import { BaseClass } from "yfiles";
        * It gets the desired location as parameter (in absolute coordinates relative to the body element).
        */
       static addEventListeners(/**Element*/ parent, /**function(yfiles.geometry.PointD)*/ openCallback) {
-        const contextMenuListener = function(/**Event*/ evt) {
+        var contextMenuListener = function(/**Event*/ evt) {
           evt.preventDefault();
-          const me = (/**@type {MouseEvent}*/(evt));
+          var me = (/**@type {MouseEvent}*/(evt));
           if (evt["mozInputSource"] === 1 && me.button === 0) {
             // This event was triggered by the context menu key in Firefox.
             // Thus, the coordinates of the event point to the lower left corner of the element and should be corrected.
@@ -1426,7 +1435,7 @@ import { BaseClass } from "yfiles";
         parent.addEventListener("contextmenu", contextMenuListener, false);
 
         // additionally, register to the context menu key to make it work in Chrome
-        const contextMenuKeyListener = function(/**Event*/ evt) {
+        var contextMenuKeyListener = function(/**Event*/ evt) {
           if (((/**@type {KeyboardEvent}*/(evt))).keyCode === 93) {
             evt.preventDefault();
             openCallback(getCenterInPage((/**@type {HTMLElement}*/(parent))));
@@ -1444,7 +1453,7 @@ import { BaseClass } from "yfiles";
       // #region IApplicationParserBackend members
 
       addOnLoadCallback(/**function()*/ callback) {
-        document.addEventListener("DOMContentLoaded", /**Event*/ evt => {
+        document.addEventListener("DOMContentLoaded", function(/**Event*/ evt) {
           callback();
         }, false);
       }
@@ -1453,10 +1462,10 @@ import { BaseClass } from "yfiles";
         /**demo.ICommandComponent*/ commandComponent,
         /**demo.Application*/ application
       ) {
-        const element = commandComponent.element;
+        var element = commandComponent.element;
         if (element.hasAttribute("data-command")) {
-          const commandName = element.getAttribute("data-command");
-          let command = application.getProperty(commandName);
+          var commandName = element.getAttribute("data-command");
+          var command = application.getProperty(commandName);
           if (command !== null) {
             if (ICommand.isInstance(command)) {
               commandComponent.command = (/**@type {yfiles.system.ICommand}*/(command));
@@ -1464,7 +1473,7 @@ import { BaseClass } from "yfiles";
               commandComponent.addEventListener((/**@type {EventListener}*/(command)));
             }
           } else {
-            const converter = new yfiles.system.CommandTypeConverter();
+            var converter = new yfiles.system.CommandTypeConverter();
             command = converter.convertFrom(commandName);
             if (command !== null) {
               commandComponent.command = (/**@type {yfiles.system.ICommand}*/(command));
@@ -1481,19 +1490,19 @@ import { BaseClass } from "yfiles";
 
       /** @return {demo.IComponent} */
       createHeader() {
-        const header = document.createElement("header");
+        var header = document.createElement("header");
         header.setAttribute(demo.DefaultApplicationParserBackend.YBorderLayout.DATA_ATTRIBUTE_LAYOUT_REGION, Enum.getName(demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.$class, demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.TOP));
         header.setAttribute(demo.DefaultApplicationParserBackend.YBorderLayout.DATA_ATTRIBUTE_SPLITTER, "false");
         header.setAttribute("data-type", "Panel");
         demo.ElementExtensions.addClass(header, "demo-header");
 
-        const leftDiv = document.createElement("div");
+        var leftDiv = document.createElement("div");
         demo.ElementExtensions.addClass(leftDiv, "demo-left");
         header.appendChild(leftDiv);
 
         leftDiv.appendChild(createImageLink("demo-yFiles", "http://www.yworks.com/en/products_yfileshtml_about.html"));
 
-        const rightDiv = document.createElement("div");
+        var rightDiv = document.createElement("div");
         demo.ElementExtensions.addClass(rightDiv, "demo-right");
         header.appendChild(rightDiv);
 
@@ -1504,7 +1513,7 @@ import { BaseClass } from "yfiles";
 
       /** @return {demo.IComponent} */
       createFooter() {
-        const footer = document.createElement("footer");
+        var footer = document.createElement("footer");
         ((/**@type {HTMLElement}*/(footer))).innerHTML = "Copyright &copy; 2011-2017 yWorks GmbH &middot; All rights reserved";
         footer.setAttribute(demo.DefaultApplicationParserBackend.YBorderLayout.DATA_ATTRIBUTE_LAYOUT_REGION, Enum.getName(demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.$class, demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.BOTTOM));
         footer.setAttribute(demo.DefaultApplicationParserBackend.YBorderLayout.DATA_ATTRIBUTE_SPLITTER, "false");
@@ -1516,11 +1525,11 @@ import { BaseClass } from "yfiles";
       convertAppRoot(/**HTMLElement*/ appRoot, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(appRoot, "demo-app");
 
-        const applicationFrame = new demo.DefaultApplicationParserBackend.YApplicationFrame(appRoot);
+        var applicationFrame = new demo.DefaultApplicationParserBackend.YApplicationFrame(appRoot);
 
         this.maybeAddHeaderAndFooter(appRoot, applicationFrame);
 
-        const result = new demo.ConversionResult(applicationFrame);
+        var result = new demo.ConversionResult(applicationFrame);
         return result;
       }
 
@@ -1529,15 +1538,15 @@ import { BaseClass } from "yfiles";
         /**Element*/ appRoot,
         /**demo.DefaultApplicationParserBackend.YApplicationFrame*/ applicationFrame
       ) {
-        let shouldAddHeader = true;
-        let shouldAddFooter = true;
+        var shouldAddHeader = true;
+        var shouldAddFooter = true;
 
-        for (let i = 0; i < appRoot.childNodes.length; i++) {
-          const child = appRoot.childNodes.item(i);
+        for (var i = 0; i < appRoot.childNodes.length; i++) {
+          var child = appRoot.childNodes.item(i);
           if (child.nodeType !== Node.ELEMENT_NODE) {
             continue;
           }
-          const element = (/**@type {HTMLElement}*/(child));
+          var element = (/**@type {HTMLElement}*/(child));
           switch (element.tagName) {
             case "header":
               shouldAddHeader = false;
@@ -1564,9 +1573,9 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertButton(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-button");
-        const button = new demo.DefaultApplicationParserBackend.YButton(element);
+        var button = new demo.DefaultApplicationParserBackend.YButton(element);
         initButton(element, button);
-        const newConversionResult = new demo.ConversionResult(button);
+        var newConversionResult = new demo.ConversionResult(button);
         newConversionResult.traverseChildren = false;
         return newConversionResult;
       }
@@ -1574,7 +1583,7 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertCheckBox(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-checkbox");
-        const newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YCheckBox(element));
+        var newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YCheckBox(element));
         newConversionResult.traverseChildren = false;
         return newConversionResult;
       }
@@ -1582,12 +1591,12 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertToggleButton(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-toggle-button");
-        const button = new demo.DefaultApplicationParserBackend.YToggleButton(element);
+        var button = new demo.DefaultApplicationParserBackend.YToggleButton(element);
         initButton(element, button);
         if ("true" === element.getAttribute("data-selected")) {
           button.isChecked = true;
         }
-        const newConversionResult = new demo.ConversionResult(button);
+        var newConversionResult = new demo.ConversionResult(button);
         newConversionResult.traverseChildren = false;
         return newConversionResult;
       }
@@ -1595,7 +1604,7 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertComboBox(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-combobox");
-        const newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YComboBox(element));
+        var newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YComboBox(element));
         newConversionResult.traverseChildren = false;
         return newConversionResult;
       }
@@ -1603,7 +1612,7 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertSlider(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-slider");
-        const newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YSlider(element));
+        var newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YSlider(element));
         newConversionResult.traverseChildren = false;
         return newConversionResult;
       }
@@ -1611,7 +1620,7 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertTextArea(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-textarea");
-        const newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YTextArea(element));
+        var newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YTextArea(element));
         newConversionResult.traverseChildren = false;
         return newConversionResult;
       }
@@ -1619,19 +1628,19 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertBorderLayout(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-borderlayout");
-        const newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YBorderLayout(element));
+        var newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YBorderLayout(element));
         newConversionResult.traverseChildren = true;
         return newConversionResult;
       }
 
       /** @return {demo.ConversionResult} */
       convertControl(/**HTMLElement*/ element, /**demo.Application*/ application) {
-        const controlType = element.getAttribute("data-control-type");
-        let /**yfiles.canvas.Control*/ control = null;
+        var controlType = element.getAttribute("data-control-type");
+        var /**yfiles.canvas.Control*/ control = null;
         if (controlType !== null && controlType.length > 0) {
-          const type = Class.forName(controlType);
+          var type = Class.forName(controlType);
           if (type !== null) {
-            const instance = type.newInstance();
+            var instance = type.newInstance();
             control = (instance instanceof yfiles.canvas.Control) ? (/**@type {yfiles.canvas.Control}*/(instance)) : null;
             if (control !== null) {
               control.initialize((/**@type {HTMLDivElement}*/(element)));
@@ -1643,7 +1652,7 @@ import { BaseClass } from "yfiles";
           throw new Exception("Could not create control instance (" + controlType + ")");
         }
 
-        const newConversionResult = new demo.ConversionResult((/**@type {demo.IComponent}*/(control)));
+        var newConversionResult = new demo.ConversionResult((/**@type {demo.IComponent}*/(control)));
         newConversionResult.traverseChildren = false;
         return newConversionResult;
       }
@@ -1651,24 +1660,24 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertCollapsiblePane(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-collapsible-pane");
-        const header = document.createElement("span");
+        var header = document.createElement("span");
         ((/**@type {HTMLElement}*/(header))).innerHTML = element.getAttribute("data-header");
         header.setAttribute("class", "demo-collapsible-pane-header");
 
-        const content = document.createElement("div");
+        var content = document.createElement("div");
         content.setAttribute("class", "demo-collapsible-pane-content");
 
         if (element.children !== undefined) {
-          const n = element.children.length;
-          for (let i = 0; i < n; i++) {
-            const child = (/**@type {Element}*/(element.children[0]));
+          var n = element.children.length;
+          for (var i = 0; i < n; i++) {
+            var child = (/**@type {Element}*/(element.children[0]));
             element.removeChild(child);
             content.appendChild(child);
           }
         }
 
-        let /**demo.CollapseStyle*/ collapseStyle;
-        const style = element.hasAttribute("data-collapse") ? element.getAttribute("data-collapse").toLowerCase() : "none";
+        var /**demo.CollapseStyle*/ collapseStyle;
+        var style = element.hasAttribute("data-collapse") ? element.getAttribute("data-collapse").toLowerCase() : "none";
         switch (style) {
           case "left":
             collapseStyle = demo.CollapseStyle.LEFT;
@@ -1684,7 +1693,7 @@ import { BaseClass } from "yfiles";
             break;
         }
 
-        const collapsiblePane = new demo.DefaultApplicationParserBackend.YCollapsiblePane(element);
+        var collapsiblePane = new demo.DefaultApplicationParserBackend.YCollapsiblePane(element);
         collapsiblePane.header = element.getAttribute("data-header");
         collapsiblePane.content = content;
         collapsiblePane.collapseStyle = collapseStyle;
@@ -1698,7 +1707,7 @@ import { BaseClass } from "yfiles";
           element = (/**@type {HTMLElement}*/(document.createElement("span")));
         }
         demo.ElementExtensions.addClass(element, "demo-separator");
-        const newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YSeparator(element));
+        var newConversionResult = new demo.ConversionResult(new demo.DefaultApplicationParserBackend.YSeparator(element));
         newConversionResult.replacement = element;
         newConversionResult.traverseChildren = false;
         return newConversionResult;
@@ -1713,17 +1722,17 @@ import { BaseClass } from "yfiles";
       /** @return {demo.ConversionResult} */
       convertFramerateCounter(/**HTMLElement*/ element, /**demo.Application*/ application) {
         demo.ElementExtensions.addClass(element, "demo-fps-counter");
-        const counter = new demo.DefaultApplicationParserBackend.YFramerateCounter(element);
+        var counter = new demo.DefaultApplicationParserBackend.YFramerateCounter(element);
 
-        const smoothingAtt = element.getAttribute("smoothing");
+        var smoothingAtt = element.getAttribute("smoothing");
         if (smoothingAtt !== null) {
-          const smoothing = parseInt(smoothingAtt, 10);
+          var smoothing = parseInt(smoothingAtt, 10);
           counter.smoothing = smoothing;
         }
 
-        const updateInterval = element.getAttribute("updateInterval");
+        var updateInterval = element.getAttribute("updateInterval");
         if (updateInterval !== null) {
-          const update = parseInt(updateInterval, 10);
+          var update = parseInt(updateInterval, 10);
           counter.updateInterval = update;
         }
 
@@ -1845,13 +1854,13 @@ import { BaseClass } from "yfiles";
       }
 
       setSizeWithUnit(/**yfiles.geometry.SizeD*/ newSize, /**string*/ unit) {
-        const dim = this.getDimensions();
+        var dim = this.getDimensions();
 
-        const oldSize = dim.contentRect.size;
+        var oldSize = dim.contentRect.size;
 
-        const padding = dim.padding;
-        const margin = dim.margin;
-        const border = dim.border;
+        var padding = dim.padding;
+        var margin = dim.margin;
+        var border = dim.border;
         newSize.width = Math.max(0, newSize.width - padding.left - padding.right - margin.left - margin.right - border.left - border.right);
         newSize.height = Math.max(0, newSize.height - padding.top - padding.bottom - margin.top - margin.bottom - border.top - border.bottom);
 
@@ -1883,7 +1892,7 @@ import { BaseClass } from "yfiles";
       }
 
       setStyleProperty(/**string*/ propertyName, /**string*/ value) {
-        const style = ((/**@type {HTMLElement}*/(this.elementField))).style;
+        var style = ((/**@type {HTMLElement}*/(this.elementField))).style;
         style.setProperty(propertyName, value, null);
       }
     };
@@ -1927,7 +1936,7 @@ import { BaseClass } from "yfiles";
       }
 
       layoutChildren(/**boolean*/ resizeComponents) {
-        this.children.forEach(/**demo.IComponent*/ child => {
+        this.children.forEach(function(/**demo.IComponent*/ child) {
           if (demo.IContainer.isInstance(child)) {
             ((/**@type {demo.IContainer}*/(child))).layoutChildren(resizeComponents);
           }
@@ -2021,14 +2030,14 @@ import { BaseClass } from "yfiles";
          */
         this.centerPanel = null;
 
-        const borderLayoutDiv = (/**@type {HTMLElement}*/(document.createElement("div")));
+        var borderLayoutDiv = (/**@type {HTMLElement}*/(document.createElement("div")));
         borderLayoutDiv.setAttribute("id", "demo-app-borderlayout");
         borderLayoutDiv.setAttribute("data-type", "BorderLayout");
         this.borderLayout = new demo.DefaultApplicationParserBackend.YBorderLayout(borderLayoutDiv);
         this.borderLayout.setStyleProperty("width", "100%");
         this.borderLayout.setStyleProperty("height", "100%");
 
-        const centerDiv = (/**@type {HTMLElement}*/(document.createElement("div")));
+        var centerDiv = (/**@type {HTMLElement}*/(document.createElement("div")));
         centerDiv.setAttribute(demo.DefaultApplicationParserBackend.YBorderLayout.DATA_ATTRIBUTE_LAYOUT_REGION, Enum.getName(demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.$class, demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.CENTER));
         centerDiv.setAttribute("id", "demo-app-borderlayout-center");
         centerDiv.setAttribute("data-type", "Panel");
@@ -2036,10 +2045,10 @@ import { BaseClass } from "yfiles";
         this.borderLayout.add(this.centerPanel);
         this.borderLayout.element.appendChild(this.centerPanel.element);
 
-        let /**HTMLElement[]*/ arr;
-        let /**number*/ i;
+        var /**HTMLElement[]*/ arr;
+        var /**number*/ i;
         for (i = 0, arr = ((/**@type {HTMLElement}*/(element))).children; i < arr.length; i++) {
-          const child = arr[i];
+          var child = arr[i];
           centerDiv.appendChild(child);
         }
 
@@ -2053,7 +2062,7 @@ import { BaseClass } from "yfiles";
 
       /** @type {demo.IComponent} */
       set header(/**demo.IComponent*/ value) {
-        const headerParent = this.borderLayout.element;
+        var headerParent = this.borderLayout.element;
         if (value.element.parentNode !== headerParent) {
           if (this.headerField !== null) {
             this.remove(this.headerField);
@@ -2075,7 +2084,7 @@ import { BaseClass } from "yfiles";
 
       /** @type {demo.IComponent} */
       set footer(/**demo.IComponent*/ value) {
-        const footerParent = this.borderLayout.element;
+        var footerParent = this.borderLayout.element;
         if (value.element.parentNode !== footerParent) {
           if (this.footerField !== null) {
             this.remove(this.footerField);
@@ -2096,9 +2105,9 @@ import { BaseClass } from "yfiles";
 
       init() {
         this.layoutChildren(true);
-        window.addEventListener("resize", /**Event*/ evt => {
+        window.addEventListener("resize", (function(/**Event*/ evt) {
           this.layoutChildren(true);
-        }, false);
+        }).bind(this), false);
       }
     };
 
@@ -2115,14 +2124,14 @@ import { BaseClass } from "yfiles";
 
       /** @return {demo.ISeparator} */
       addSeparator() {
-        const separator = demo.DefaultApplicationParserBackend.YToolkit.INSTANCE.createSeparator();
+        var separator = demo.DefaultApplicationParserBackend.YToolkit.INSTANCE.createSeparator();
         this.add(separator);
         return separator;
       }
 
       /** @return {demo.IButton} */
       addButton(/**string*/ label) {
-        const button = demo.DefaultApplicationParserBackend.YToolkit.INSTANCE.createButton(label);
+        var button = demo.DefaultApplicationParserBackend.YToolkit.INSTANCE.createButton(label);
         this.add(button);
         return button;
       }
@@ -2259,7 +2268,7 @@ import { BaseClass } from "yfiles";
       /** @private */
       handleCommandCanExecuteChanged(sender, /**yfiles.system.EventArgs*/ e) {
         if (this.commandField !== null) {
-          const canExecute = this.canExecute();
+          var canExecute = this.canExecute();
           this.enabled = canExecute;
         } else {
           this.enabled = false;
@@ -2283,7 +2292,7 @@ import { BaseClass } from "yfiles";
       /** @private */
       maybeExecuteCommand(/**Event*/ e) {
         if (this.commandField !== null && this.enabledField) {
-          const canExecute = this.canExecute();
+          var canExecute = this.canExecute();
 
           if (canExecute) {
             if (this.commandField instanceof yfiles.system.RoutedCommand) {
@@ -2362,7 +2371,7 @@ import { BaseClass } from "yfiles";
       /** @type {string} */
       set icon(/**string*/ value) {
         if (this.iconClass !== value) {
-          const span = ((/**@type {HTMLElement}*/(this.elementField.firstChild)));
+          var span = ((/**@type {HTMLElement}*/(this.elementField.firstChild)));
           if (this.iconClass !== null) {
             demo.ElementExtensions.removeClass(span, this.iconClass);
           }
@@ -2487,7 +2496,7 @@ import { BaseClass } from "yfiles";
     DefaultApplicationParserBackend.YBorderLayout = class YBorderLayout extends demo.DefaultApplicationParserBackend.YContainer {
       constructor(/**Element*/ element) {
         super(element);
-        const idAtt = element.getAttribute("id");
+        var idAtt = element.getAttribute("id");
         if (idAtt === null || idAtt.length === 0) {
           element.setAttribute("id", "y-border-layout-" + count);
         }
@@ -2497,26 +2506,26 @@ import { BaseClass } from "yfiles";
       layoutChildren(/**boolean*/ resizeComponents) {
         this.setStyleProperty("position", "relative");
 
-        const box = this.getDimensions().contentRect;
+        var box = this.getDimensions().contentRect;
 
-        const sorted = this.children.toList();
+        var sorted = this.children.toList();
         sorted.sort(new demo.DefaultApplicationParserBackend.YBorderLayout.BorderLayoutComparer(this));
 
-        const childrenAndSplitters = new List();
+        var childrenAndSplitters = new List();
 
-        sorted.forEach(/**demo.IComponent*/ child => {
+        sorted.forEach(function(/**demo.IComponent*/ child) {
           childrenAndSplitters.add(child);
           if (child instanceof demo.DefaultApplicationParserBackend.YBorderLayout.YResizableComponent) {
-            const splitter = ((/**@type {demo.DefaultApplicationParserBackend.YBorderLayout.YResizableComponent}*/(child))).splitter;
+            var splitter = ((/**@type {demo.DefaultApplicationParserBackend.YBorderLayout.YResizableComponent}*/(child))).splitter;
             if (null !== splitter) {
               childrenAndSplitters.add(splitter);
             }
           }
         });
 
-        let /**IEnumerator*/ tmpEnumerator;
+        var /**IEnumerator*/ tmpEnumerator;
         for (tmpEnumerator = childrenAndSplitters.getEnumerator(); tmpEnumerator.moveNext(); ) {
-          const child = tmpEnumerator.current;
+          var child = tmpEnumerator.current;
           {
             //Remove the height/width style property before measurement *only* if 
             //it was created in yComponent.setSize() - if it is user-set leave it. 
@@ -2526,17 +2535,17 @@ import { BaseClass } from "yfiles";
               child.setStyleProperty("height", "");
               child.setStyleProperty("width", "");
             }
-            const childDimensions = child.getDimensions();
-            const childBounds = childDimensions.bounds;
+            var childDimensions = child.getDimensions();
+            var childBounds = childDimensions.bounds;
             // we round the size to avoid floating point offsets due to subpixel layouts. 
             childBounds.width = (((/**@type {number}*/(childBounds.width))) | 0);
             childBounds.height = (((/**@type {number}*/(childBounds.height))) | 0);
-            const region = getLayoutRegion(child);
+            var region = getLayoutRegion(child);
 
             if (child instanceof demo.DefaultApplicationParserBackend.YBorderLayout.YResizableComponent) {
-              const resizableChild = ((/**@type {demo.DefaultApplicationParserBackend.YBorderLayout.YResizableComponent}*/(child)));
+              var resizableChild = ((/**@type {demo.DefaultApplicationParserBackend.YBorderLayout.YResizableComponent}*/(child)));
               if (resizableChild.changeSize) {
-                const newSize = resizableChild.newSize;
+                var newSize = resizableChild.newSize;
                 childBounds.width = newSize.width;
                 childBounds.height = newSize.height;
                 resizableChild.changeSize = false;
@@ -2578,13 +2587,13 @@ import { BaseClass } from "yfiles";
       }
 
       add(/**demo.IComponent*/ child) {
-        const childElement = child.element;
-        const layoutRegion = getLayoutRegion(child);
+        var childElement = child.element;
+        var layoutRegion = getLayoutRegion(child);
         if (layoutRegion !== demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.CENTER) {
-          const splitterAtt = childElement.getAttribute(demo.DefaultApplicationParserBackend.YBorderLayout.DATA_ATTRIBUTE_SPLITTER);
-          const resizable = splitterAtt !== null ? splitterAtt.toLowerCase() !== "false" : true;
+          var splitterAtt = childElement.getAttribute(demo.DefaultApplicationParserBackend.YBorderLayout.DATA_ATTRIBUTE_SPLITTER);
+          var resizable = splitterAtt !== null ? splitterAtt.toLowerCase() !== "false" : true;
           if (resizable) {
-            const resizableChild = demo.IContainer.isInstance(child) ? new demo.DefaultApplicationParserBackend.YBorderLayout.YResizableContainer(this, (/**@type {demo.IContainer}*/(child)), layoutRegion) : new demo.DefaultApplicationParserBackend.YBorderLayout.YResizableComponent(this, child, layoutRegion);
+            var resizableChild = demo.IContainer.isInstance(child) ? new demo.DefaultApplicationParserBackend.YBorderLayout.YResizableContainer(this, (/**@type {demo.IContainer}*/(child)), layoutRegion) : new demo.DefaultApplicationParserBackend.YBorderLayout.YResizableComponent(this, child, layoutRegion);
             super.add(resizableChild);
           } else {
             super.add(child);
@@ -2593,27 +2602,31 @@ import { BaseClass } from "yfiles";
           super.add(child);
         }
 
-        const idAtt = child.element.getAttribute("id");
+        var idAtt = child.element.getAttribute("id");
         if (idAtt === null || idAtt.length === 0) {
-          const parentId = this.element.getAttribute("id");
+          var parentId = this.element.getAttribute("id");
           this.elementField.setAttribute("id", parentId + "-child-" + this.children.size);
         }
       }
     };
 
-    YBorderLayout.LayoutRegion = new EnumDefinition(() => ({
-      'TOP': 0,
-      'LEFT': 1,
-      'BOTTOM': 2,
-      'RIGHT': 3,
-      'CENTER': 4,
-      'UNKNOWN': 5
-    }));
+    YBorderLayout.LayoutRegion = new EnumDefinition(function() {
+      return {
+        'TOP': 0,
+        'LEFT': 1,
+        'BOTTOM': 2,
+        'RIGHT': 3,
+        'CENTER': 4,
+        'UNKNOWN': 5
+      };
+    });
 
-    YBorderLayout.LayoutArrangement = new EnumDefinition(() => ({
-      'HEADLINE': 0,
-      'SIDEBAR': 1
-    }));
+    YBorderLayout.LayoutArrangement = new EnumDefinition(function() {
+      return {
+        'HEADLINE': 0,
+        'SIDEBAR': 1
+      };
+    });
 
     /** @type {string} */
     YBorderLayout.DATA_ATTRIBUTE_LAYOUT_REGION = "data-layout-region";
@@ -2704,7 +2717,7 @@ import { BaseClass } from "yfiles";
 
         this.componentField = component;
 
-        const splitterContainer = (/**@type {HTMLElement}*/(document.createElement("div")));
+        var splitterContainer = (/**@type {HTMLElement}*/(document.createElement("div")));
         demo.ElementExtensions.addClass(splitterContainer, "demo-splitter");
         if (layoutRegion === demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.LEFT || layoutRegion === demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.RIGHT) {
           demo.ElementExtensions.addClass(splitterContainer, "demo-splitter-vertical");
@@ -2713,11 +2726,11 @@ import { BaseClass } from "yfiles";
         }
         splitterContainer.setAttribute(demo.DefaultApplicationParserBackend.YBorderLayout.DATA_ATTRIBUTE_LAYOUT_REGION, Enum.getName(demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.$class, layoutRegion));
 
-        const splitterThumb = (/**@type {HTMLElement}*/(document.createElement("div")));
+        var splitterThumb = (/**@type {HTMLElement}*/(document.createElement("div")));
         demo.ElementExtensions.addClass(splitterThumb, "demo-splitter-thumb");
         splitterContainer.appendChild(splitterThumb);
 
-        const sibling = this.element.nextSibling;
+        var sibling = this.element.nextSibling;
         if (sibling === null) {
           parent.element.appendChild(splitterContainer);
         } else {
@@ -2880,26 +2893,26 @@ import { BaseClass } from "yfiles";
       /** @private */
       onDragStart(/**Event*/ evt) {
         this.dragging = true;
-        let /**number*/ position;
+        var /**number*/ position;
         if (evt.type === "touchstart") {
           position = this.horizontal ? ((/**@type {SVGElement}*/(evt))).touches.item(0).pageY : ((/**@type {SVGElement}*/(evt))).touches.item(0).pageX;
         } else {
           position = this.horizontal ? ((/**@type {MouseEvent}*/(evt))).pageY : ((/**@type {MouseEvent}*/(evt))).pageX;
         }
         this.dragStartMousePosition = position;
-        const bounds = this.component.getDimensions().bounds;
+        var bounds = this.component.getDimensions().bounds;
         this.dragStartSize = this.horizontal ? bounds.height : bounds.width;
         this.fixedChildSize = this.horizontal ? bounds.width : bounds.height;
-        const positionAtt = this.horizontal ? "top" : "left";
+        var positionAtt = this.horizontal ? "top" : "left";
         this.dragStartSplitterPosition = parseFloat(((/**@type {HTMLElement}*/(this.element))).style.getPropertyValue(positionAtt));
 
-        let available = 0;
-        let /**demo.IComponent*/ centerComponent = null;
-        let /**IEnumerator*/ tmpEnumerator;
+        var available = 0;
+        var /**demo.IComponent*/ centerComponent = null;
+        var /**IEnumerator*/ tmpEnumerator;
         for (tmpEnumerator = this.container.children.getEnumerator(); tmpEnumerator.moveNext(); ) {
-          const child = tmpEnumerator.current;
+          var child = tmpEnumerator.current;
           {
-            const layoutRegion = getLayoutRegion(child);
+            var layoutRegion = getLayoutRegion(child);
             if (layoutRegion === demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.CENTER) {
               centerComponent = child;
               break;
@@ -2908,7 +2921,7 @@ import { BaseClass } from "yfiles";
         }
         // initialize the correct sizes for the panels
         if (centerComponent !== null) {
-          const centerBounds = centerComponent.getDimensions().bounds;
+          var centerBounds = centerComponent.getDimensions().bounds;
           available = this.horizontal ? centerBounds.height : centerBounds.width;
         }
         this.dragStartMaxSize = Math.max(0, this.dragStartSize + available - CENTER_COMPONENT_MIN_SIZE);
@@ -2916,20 +2929,20 @@ import { BaseClass } from "yfiles";
 
       /** @private */
       onDrag(/**Event*/ evt) {
-        let /**number*/ position;
+        var /**number*/ position;
         if (evt.type === "touchmove") {
           position = this.horizontal ? ((/**@type {SVGElement}*/(evt))).touches.item(0).pageY : ((/**@type {SVGElement}*/(evt))).touches.item(0).pageX;
         } else {
           position = this.horizontal ? ((/**@type {MouseEvent}*/(evt))).pageY : ((/**@type {MouseEvent}*/(evt))).pageX;
         }
-        const delta = position - this.dragStartMousePosition;
-        let newSize = this.topleft ? this.dragStartSize + delta : this.dragStartSize - delta;
+        var delta = position - this.dragStartMousePosition;
+        var newSize = this.topleft ? this.dragStartSize + delta : this.dragStartSize - delta;
         newSize = Math.max(Math.min(newSize, this.dragStartMaxSize), this.dragStartMinSize);
 
-        const splitterPos = delta + this.dragStartSplitterPosition + "px";
-        const positionAtt = this.horizontal ? "top" : "left";
+        var splitterPos = delta + this.dragStartSplitterPosition + "px";
+        var positionAtt = this.horizontal ? "top" : "left";
 
-        const futureSize = (this.horizontal ? new Size(this.fixedChildSize, newSize) : new Size(newSize, this.fixedChildSize)).clone();
+        var futureSize = (this.horizontal ? new Size(this.fixedChildSize, newSize) : new Size(newSize, this.fixedChildSize)).clone();
         this.component.newSize = futureSize;
         this.component.changeSize = true;
         this.setStyleProperty(positionAtt, splitterPos);
@@ -3020,7 +3033,7 @@ import { BaseClass } from "yfiles";
        * @private
        */
       getWeight(/**demo.IComponent*/ x) {
-        const layoutRegion = getLayoutRegion(x);
+        var layoutRegion = getLayoutRegion(x);
         switch (layoutRegion) {
           case demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.LEFT:
           case demo.DefaultApplicationParserBackend.YBorderLayout.LayoutRegion.RIGHT:
@@ -3036,8 +3049,8 @@ import { BaseClass } from "yfiles";
 
       /** @return {number} */
       compare(/**demo.IComponent*/ x, /**demo.IComponent*/ y) {
-        const weightX = this.getWeight(x);
-        const weightY = this.getWeight(y);
+        var weightX = this.getWeight(x);
+        var weightY = this.getWeight(y);
         return weightX - weightY;
       }
     };
@@ -3096,11 +3109,11 @@ import { BaseClass } from "yfiles";
         this.enabled = !this.isEmpty;
 
         if (value !== null) {
-          value.forEach(/**string*/ s => {
-            const optionElement = document.createElement("option");
+          value.forEach((function(/**string*/ s) {
+            var optionElement = document.createElement("option");
             optionElement.textContent = s;
             this.element.appendChild(optionElement);
-          });
+          }).bind(this));
           this.setSelectedIndexCore(0);
         } else {
           this.maybeExecuteCommand(null);
@@ -3128,7 +3141,7 @@ import { BaseClass } from "yfiles";
 
       /** @return {string} */
       elementAt(/**number*/ index) {
-        const elementAt = this.selectElement.options.item(index);
+        var elementAt = this.selectElement.options.item(index);
         return elementAt === null ? null : elementAt.textContent;
       }
 
@@ -3151,8 +3164,8 @@ import { BaseClass } from "yfiles";
 
       /** @type {string} */
       set selectedItem(/**string*/ value) {
-        const n = this.length;
-        for (let i = 0; i < n; i++) {
+        var n = this.length;
+        for (var i = 0; i < n; i++) {
           if (value === this.elementAt(i)) {
             this.selectedIndex = i;
             break;
@@ -3335,9 +3348,9 @@ import { BaseClass } from "yfiles";
           } else {
             this.elementField.appendChild(this.headerField);
           }
-          this.headerField.addEventListener("click", /**Event*/ e => {
+          this.headerField.addEventListener("click", (function(/**Event*/ e) {
             this.toggle();
-          }, false);
+          }).bind(this), false);
         }
         ((/**@type {HTMLElement}*/(this.headerField))).innerHTML = value;
       }
@@ -3382,14 +3395,14 @@ import { BaseClass } from "yfiles";
 
       /** @return {demo.DefaultApplicationParserBackend.YSeparator} */
       createSeparator() {
-        const element = document.createElement("span");
+        var element = document.createElement("span");
         demo.ElementExtensions.addClass(element, "demo-separator");
         return new demo.DefaultApplicationParserBackend.YSeparator(element);
       }
 
       /** @return {demo.DefaultApplicationParserBackend.YButton} */
       createButton(/**string*/ label) {
-        const button = document.createElement("button");
+        var button = document.createElement("button");
         button.setAttribute("class", "demo-button");
         ((/**@type {HTMLElement}*/(button))).innerHTML = label;
         return new demo.DefaultApplicationParserBackend.YButton(button);
@@ -3397,14 +3410,14 @@ import { BaseClass } from "yfiles";
 
       /** @return {demo.DefaultApplicationParserBackend.YToolBar} */
       createToolBar() {
-        const e = document.createElement("div");
+        var e = document.createElement("div");
         e.setAttribute("class", "demo-toolbar");
         return new demo.DefaultApplicationParserBackend.YToolBar(e);
       }
 
       /** @return {demo.IButton} */
       createMenuItem(/**string*/ label) {
-        const button = document.createElement("li");
+        var button = document.createElement("li");
         button.setAttribute("class", "demo-menu-item");
         ((/**@type {HTMLElement}*/(button))).innerHTML = label;
         return new demo.DefaultApplicationParserBackend.YButton(button);
@@ -3417,9 +3430,9 @@ import { BaseClass } from "yfiles";
 
       static removeAllChildren(/**HTMLElement*/ element) {
         if (element.children !== undefined) {
-          const n = element.children.length;
-          for (let i = 0; i < n; i++) {
-            const child = (/**@type {Element}*/(element.children[0]));
+          var n = element.children.length;
+          for (var i = 0; i < n; i++) {
+            var child = (/**@type {Element}*/(element.children[0]));
             element.removeChild(child);
           }
         }
@@ -3441,7 +3454,7 @@ import { BaseClass } from "yfiles";
 
       /** @type {boolean} */
       static get IS_LANDSCAPE() {
-        const size = demo.DefaultApplicationParserBackend.YToolkit.BROWSER_SIZE;
+        var size = demo.DefaultApplicationParserBackend.YToolkit.BROWSER_SIZE;
         return size.width > size.height;
       }
 
@@ -3619,9 +3632,9 @@ import { BaseClass } from "yfiles";
 
       /** @private */
       tick() {
-        const now = Date.now();
-        const d = now - this.lastUpdate;
-        const current = d !== 0 ? 1000 / d : 0;
+        var now = Date.now();
+        var d = now - this.lastUpdate;
+        var current = d !== 0 ? 1000 / d : 0;
         this.fps += (current - this.fps) / this.smoothing;
         this.lastUpdate = now;
 
@@ -3649,46 +3662,55 @@ import { BaseClass } from "yfiles";
      * @interface demo.ICheckBox
      * @implements {demo.IComponent}
      */
-    export const ICheckBox = new InterfaceDefinition(() => /** @lends {demo.ICheckBox.prototype} */
-    ({
-      '$with': [demo.IComponent],
-
-      /** @type {boolean} */
-      'isChecked': {
-        'get': Abstract,
-        'set': Abstract
-      }
-    }));
+    export const ICheckBox = new InterfaceDefinition(function() {
+      /** @lends {demo.ICheckBox.prototype} */
+      return {
+        '$with': [demo.IComponent],
+        
+        /** @type {boolean} */
+        'isChecked': {
+          'get': Abstract,
+          'set': Abstract
+        }
+        
+      };
+    });
 
     /**
      * @interface demo.ITextArea
      * @implements {demo.IComponent}
      */
-    export const ITextArea = new InterfaceDefinition(() => /** @lends {demo.ITextArea.prototype} */
-    ({
-      '$with': [demo.IComponent],
-
-      /** @type {string} */
-      'text': {
-        'get': Abstract,
-        'set': Abstract
-      }
-    }));
+    export const ITextArea = new InterfaceDefinition(function() {
+      /** @lends {demo.ITextArea.prototype} */
+      return {
+        '$with': [demo.IComponent],
+        
+        /** @type {string} */
+        'text': {
+          'get': Abstract,
+          'set': Abstract
+        }
+        
+      };
+    });
 
     /**
      * @interface demo.IToolBar
      * @implements {demo.IContainer}
      */
-    export const IToolBar = new InterfaceDefinition(() => /** @lends {demo.IToolBar.prototype} */
-    ({
-      '$with': [demo.IContainer],
-
-      /** @return {demo.ISeparator} */
-      'addSeparator': Abstract,
-
-      /** @return {demo.IButton} */
-      'addButton': Abstract
-    }));
+    export const IToolBar = new InterfaceDefinition(function() {
+      /** @lends {demo.IToolBar.prototype} */
+      return {
+        '$with': [demo.IContainer],
+        
+        /** @return {demo.ISeparator} */
+        'addSeparator': Abstract,
+        
+        /** @return {demo.IButton} */
+        'addButton': Abstract
+        
+      };
+    });
 
     /**
      * Provides helper methods for file saving.
@@ -3708,7 +3730,7 @@ import { BaseClass } from "yfiles";
         /**function(Object, yfiles.canvas.FileEventArgs)*/ handler
       ) {
         // extract file format
-        const format = yfiles.system.StringExtensions.split(fileName, ['.'])[1].toLowerCase();
+        var format = yfiles.system.StringExtensions.split(fileName, ['.'])[1].toLowerCase();
 
         if (demo.FileSaveSupport.isFileConstructorAvailable()) {
           if (format === "svg") {
@@ -3716,10 +3738,10 @@ import { BaseClass } from "yfiles";
             // when downloading svg files.
             var options = new Object();
             options["type"] = "image/svg+xml";
-            const blob = new Blob([fileContent], options);
+            var blob = new Blob([fileContent], options);
             fileContent = URL.createObjectURL(blob);
           }
-          const aElement = (/**@type {HTMLElement}*/(document.createElement("a")));
+          var aElement = (/**@type {HTMLElement}*/(document.createElement("a")));
           aElement.setAttribute("href", fileContent);
           aElement.setAttribute("download", fileName);
           aElement.style.setProperty("display", "none", "");
@@ -3730,15 +3752,15 @@ import { BaseClass } from "yfiles";
           return;
         }
         if (demo.FileSaveSupport.isMsSaveAvailable()) {
-          const arr = yfiles.system.StringExtensions.split(fileContent, [',']);
-          const bstr = window.atob(arr[1]);
-          const u8Arr = new Uint8Array(bstr.length);
+          var arr = yfiles.system.StringExtensions.split(fileContent, [',']);
+          var bstr = window.atob(arr[1]);
+          var u8Arr = new Uint8Array(bstr.length);
           // extract mime
           var options = new Object();
           options["type"] = (arr[0]).match(new RegExp(":(.*?);", ""))[1];
 
-          const byteArray = new Array(bstr.length);
-          for (let i = bstr.length - 1; i >= 0; i--) {
+          var byteArray = new Array(bstr.length);
+          for (var i = bstr.length - 1; i >= 0; i--) {
             byteArray[i] = (/**@type {number}*/(bstr.charCodeAt(i)));
           }
           u8Arr.set(byteArray);
@@ -3800,7 +3822,7 @@ import { BaseClass } from "yfiles";
 
       /** @return {Object} */
       static createFilePropertyBag() {
-        const blobPropertyBag = new Object();
+        var blobPropertyBag = new Object();
         blobPropertyBag["type"] = "image/png";
         blobPropertyBag["lastModified"] = Date.now();
         return blobPropertyBag;
@@ -3847,20 +3869,20 @@ import { BaseClass } from "yfiles";
          */
         this.form = null;
 
-        const elements = demo.DemoDialogFactory.createPlainDialog(title);
+        var elements = demo.DemoDialogFactory.createPlainDialog(title);
         this.div = elements[0];
 
-        const label = (/**@type {HTMLDivElement}*/(document.createElement("label")));
+        var label = (/**@type {HTMLDivElement}*/(document.createElement("label")));
         label.textContent = message;
         label.setAttribute("style", "margin: 20px 7px 17px 2px");
 
         this.form = (/**@type {HTMLFormElement}*/(document.createElement("form")));
-        const contentPanel = elements[3];
+        var contentPanel = elements[3];
         contentPanel.setAttribute("class", "demo-properties " + contentPanel.getAttribute("class"));
         contentPanel.appendChild(this.form);
         this.form.appendChild(label);
 
-        const buttonContainer = (/**@type {HTMLFormElement}*/(document.createElement("div")));
+        var buttonContainer = (/**@type {HTMLFormElement}*/(document.createElement("div")));
         buttonContainer.setAttribute("style", "text-align:right");
         this.form.appendChild(buttonContainer);
 
@@ -3922,18 +3944,18 @@ import { BaseClass } from "yfiles";
        * @private
        */
       createButton(/**string*/ label, /**boolean*/ close, /**boolean*/ submit) {
-        const btn = document.createElement("button");
+        var btn = document.createElement("button");
         btn.textContent = label;
-        const wrappedHandler = /**Event*/ evt => {
+        var wrappedHandler = (function(/**Event*/ evt) {
           if (close) {
             removeFromParent(this.div);
           }
-          const buttonHandler = this.getButtonHandler(label);
+          var buttonHandler = this.getButtonHandler(label);
           if (buttonHandler) {
             buttonHandler();
           }
           evt.preventDefault();
-        };
+        }).bind(this);
 
         if (submit) {
           this.form.addEventListener("submit", wrappedHandler, false);
@@ -3946,14 +3968,16 @@ import { BaseClass } from "yfiles";
     /**
      * The button configurations supported by this dialog.
      */
-    MessageDialog.MessageDialogButtons = new EnumDefinition(() => ({
-      'ABORT_RETRY_IGNORE': 0,
-      'OK': 1,
-      'OK_CANCEL': 2,
-      'RETRY_CANCEL': 3,
-      'YES_NO': 4,
-      'YES_NO_CANCEL': 5
-    }));
+    MessageDialog.MessageDialogButtons = new EnumDefinition(function() {
+      return {
+        'ABORT_RETRY_IGNORE': 0,
+        'OK': 1,
+        'OK_CANCEL': 2,
+        'RETRY_CANCEL': 3,
+        'YES_NO': 4,
+        'YES_NO_CANCEL': 5
+      };
+    });
 
     /**
      * @class demo.ElementExtensions
@@ -3961,7 +3985,7 @@ import { BaseClass } from "yfiles";
     export const ElementExtensions = class ElementExtensions {
       /** @return {Element} */
       static addClass(/**Element*/ e, /**string*/ className) {
-        const classes = e.getAttribute("class");
+        var classes = e.getAttribute("class");
         if (classes === null || classes === "") {
           e.setAttribute("class", className);
         } else if (!demo.ElementExtensions.hasClass(e, className)) {
@@ -3972,12 +3996,14 @@ import { BaseClass } from "yfiles";
 
       /** @return {Element} */
       static removeClass(/**Element*/ e, /**string*/ className) {
-        const classes = e.getAttribute("class");
+        var classes = e.getAttribute("class");
         if (classes !== null && classes !== "") {
           if (classes === className) {
             e.setAttribute("class", "");
           } else {
-            const result = ((classes.split(" ")).filter(/**String*/ s => s !== className)).join(" ");
+            var result = ((classes.split(" ")).filter(function(/**String*/ s) {
+              return s !== className;
+            })).join(" ");
             e.setAttribute("class", result);
           }
         }
@@ -3986,8 +4012,8 @@ import { BaseClass } from "yfiles";
 
       /** @return {boolean} */
       static hasClass(/**Element*/ e, /**string*/ className) {
-        const classes = e.getAttribute("class");
-        const r = new RegExp("\b" + className + "\b", "");
+        var classes = e.getAttribute("class");
+        var r = new RegExp("\b" + className + "\b", "");
         return r.test(classes);
       }
     };
@@ -3995,12 +4021,14 @@ import { BaseClass } from "yfiles";
     /**
      * @class demo.LayoutDirection
      */
-    export const LayoutDirection = new EnumDefinition(() => /** @lends {demo.LayoutDirection.prototype} */
-    ({
-      'VERTICAL': 0,
-      'HORIZONTAL': 1,
-      'UNKNOWN': 2
-    }));
+    export const LayoutDirection = new EnumDefinition(function() {
+      /** @lends {demo.LayoutDirection.prototype} */
+      return {
+        'VERTICAL': 0,
+        'HORIZONTAL': 1,
+        'UNKNOWN': 2
+      };
+    });
 
     /**
      * @class demo.DemoFrameworkConstants
@@ -4014,245 +4042,282 @@ import { BaseClass } from "yfiles";
      * @interface demo.ISlider
      * @implements {demo.IComponent}
      */
-    export const ISlider = new InterfaceDefinition(() => /** @lends {demo.ISlider.prototype} */
-    ({
-      '$with': [demo.IComponent],
-
-      /** @type {number} */
-      'value': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {boolean} */
-      'enabled': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {number} */
-      'min': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {number} */
-      'max': {
-        'get': Abstract,
-        'set': Abstract
-      }
-    }));
+    export const ISlider = new InterfaceDefinition(function() {
+      /** @lends {demo.ISlider.prototype} */
+      return {
+        '$with': [demo.IComponent],
+        
+        /** @type {number} */
+        'value': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {boolean} */
+        'enabled': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {number} */
+        'min': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {number} */
+        'max': {
+          'get': Abstract,
+          'set': Abstract
+        }
+        
+      };
+    });
 
     /**
      * @interface demo.ISeparator
      * @implements {demo.IComponent}
      */
-    export const ISeparator = new InterfaceDefinition(() => /** @lends {demo.ISeparator.prototype} */
-    ({
-      '$with': [demo.IComponent]
-    }));
+    export const ISeparator = new InterfaceDefinition(function() {
+      /** @lends {demo.ISeparator.prototype} */
+      return {
+        '$with': [demo.IComponent]
+        
+      };
+    });
 
     /**
      * @interface demo.ICollapsiblePane
      * @implements {demo.IPanel}
      */
-    export const ICollapsiblePane = new InterfaceDefinition(() => /** @lends {demo.ICollapsiblePane.prototype} */
-    ({
-      '$with': [demo.IPanel],
-      'collapse': Abstract,
-      'expand': Abstract,
-
-      /** @type {boolean} */
-      'isExpanded': {
-        'get': Abstract
-      },
-
-      /** @type {string} */
-      'header': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {Element} */
-      'content': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {demo.CollapseStyle} */
-      'collapseStyle': {
-        'get': Abstract,
-        'set': Abstract
-      }
-    }));
+    export const ICollapsiblePane = new InterfaceDefinition(function() {
+      /** @lends {demo.ICollapsiblePane.prototype} */
+      return {
+        '$with': [demo.IPanel],
+        
+        'collapse': Abstract,
+        
+        'expand': Abstract,
+        
+        /** @type {boolean} */
+        'isExpanded': {
+          'get': Abstract
+        },
+        
+        /** @type {string} */
+        'header': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {Element} */
+        'content': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {demo.CollapseStyle} */
+        'collapseStyle': {
+          'get': Abstract,
+          'set': Abstract
+        }
+        
+      };
+    });
 
     /**
      * @interface demo.IApplicationFrame
      * @implements {demo.IPanel}
      */
-    export const IApplicationFrame = new InterfaceDefinition(() => /** @lends {demo.IApplicationFrame.prototype} */
-    ({
-      '$with': [demo.IPanel],
-
-      /** @type {demo.IComponent} */
-      'header': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {demo.IComponent} */
-      'footer': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      'init': Abstract
-    }));
+    export const IApplicationFrame = new InterfaceDefinition(function() {
+      /** @lends {demo.IApplicationFrame.prototype} */
+      return {
+        '$with': [demo.IPanel],
+        
+        /** @type {demo.IComponent} */
+        'header': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {demo.IComponent} */
+        'footer': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        'init': Abstract
+        
+      };
+    });
 
     /**
      * @interface demo.IPanel
      * @implements {demo.IContainer}
      */
-    export const IPanel = new InterfaceDefinition(() => /** @lends {demo.IPanel.prototype} */
-    ({
-      '$with': [demo.IContainer]
-    }));
+    export const IPanel = new InterfaceDefinition(function() {
+      /** @lends {demo.IPanel.prototype} */
+      return {
+        '$with': [demo.IContainer]
+        
+      };
+    });
 
     /**
      * @interface demo.IContainer
      * @implements {demo.IComponent}
      */
-    export const IContainer = new InterfaceDefinition(() => /** @lends {demo.IContainer.prototype} */
-    ({
-      '$with': [demo.IComponent],
-
-      /** @type {IEnumerable.<demo.IComponent>} */
-      'children': {
-        'get': Abstract
-      },
-
-      'add': Abstract,
-      'remove': Abstract,
-      'layoutChildren': Abstract
-    }));
+    export const IContainer = new InterfaceDefinition(function() {
+      /** @lends {demo.IContainer.prototype} */
+      return {
+        '$with': [demo.IComponent],
+        
+        /** @type {IEnumerable.<demo.IComponent>} */
+        'children': {
+          'get': Abstract
+        },
+        
+        'add': Abstract,
+        
+        'remove': Abstract,
+        
+        'layoutChildren': Abstract
+        
+      };
+    });
 
     /**
      * @interface demo.IComboBox
      * @implements {demo.ICommandComponent}
      */
-    export const IComboBox = new InterfaceDefinition(() => /** @lends {demo.IComboBox.prototype} */
-    ({
-      '$with': [demo.ICommandComponent],
-
-      /** @return {string} */
-      'elementAt': Abstract,
-
-      /** @type {IEnumerable.<string>} */
-      'items': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {number} */
-      'length': {
-        'get': Abstract
-      },
-
-      /** @type {number} */
-      'selectedIndex': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {string} */
-      'selectedItem': {
-        'get': Abstract,
-        'set': Abstract
-      }
-    }));
+    export const IComboBox = new InterfaceDefinition(function() {
+      /** @lends {demo.IComboBox.prototype} */
+      return {
+        '$with': [demo.ICommandComponent],
+        
+        /** @return {string} */
+        'elementAt': Abstract,
+        
+        /** @type {IEnumerable.<string>} */
+        'items': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {number} */
+        'length': {
+          'get': Abstract
+        },
+        
+        /** @type {number} */
+        'selectedIndex': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {string} */
+        'selectedItem': {
+          'get': Abstract,
+          'set': Abstract
+        }
+        
+      };
+    });
 
     /**
      * @interface demo.IToggleButton
      * @implements {demo.IButton}
      */
-    export const IToggleButton = new InterfaceDefinition(() => /** @lends {demo.IToggleButton.prototype} */
-    ({
-      '$with': [demo.IButton],
-
-      /** @type {boolean} */
-      'isChecked': {
-        'get': Abstract,
-        'set': Abstract
-      }
-    }));
+    export const IToggleButton = new InterfaceDefinition(function() {
+      /** @lends {demo.IToggleButton.prototype} */
+      return {
+        '$with': [demo.IButton],
+        
+        /** @type {boolean} */
+        'isChecked': {
+          'get': Abstract,
+          'set': Abstract
+        }
+        
+      };
+    });
 
     /**
      * @interface demo.IButton
      * @implements {demo.ICommandComponent}
      */
-    export const IButton = new InterfaceDefinition(() => /** @lends {demo.IButton.prototype} */
-    ({
-      '$with': [demo.ICommandComponent],
-
-      /** @type {string} */
-      'label': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {string} */
-      'icon': {
-        'get': Abstract,
-        'set': Abstract
-      }
-    }));
+    export const IButton = new InterfaceDefinition(function() {
+      /** @lends {demo.IButton.prototype} */
+      return {
+        '$with': [demo.ICommandComponent],
+        
+        /** @type {string} */
+        'label': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {string} */
+        'icon': {
+          'get': Abstract,
+          'set': Abstract
+        }
+        
+      };
+    });
 
     /**
      * @class demo.CollapseStyle
      */
-    export const CollapseStyle = new EnumDefinition(() => /** @lends {demo.CollapseStyle.prototype} */
-    ({
-      'TOP': 0,
-      'LEFT': 1,
-      'RIGHT': 2,
-      'NONE': 3
-    }));
+    export const CollapseStyle = new EnumDefinition(function() {
+      /** @lends {demo.CollapseStyle.prototype} */
+      return {
+        'TOP': 0,
+        'LEFT': 1,
+        'RIGHT': 2,
+        'NONE': 3
+      };
+    });
 
     /**
      * @interface demo.ICommandComponent
      * @implements {demo.IComponent}
      */
-    export const ICommandComponent = new InterfaceDefinition(() => /** @lends {demo.ICommandComponent.prototype} */
-    ({
-      '$with': [demo.IComponent],
-
-      /** @type {yfiles.system.ICommand} */
-      'command': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {Object} */
-      'commandParameter': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {yfiles.canvas.Control} */
-      'commandTarget': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      /** @type {boolean} */
-      'enabled': {
-        'get': Abstract,
-        'set': Abstract
-      },
-
-      'addEventListener': Abstract,
-      'removeEventListener': Abstract
-    }));
+    export const ICommandComponent = new InterfaceDefinition(function() {
+      /** @lends {demo.ICommandComponent.prototype} */
+      return {
+        '$with': [demo.IComponent],
+        
+        /** @type {yfiles.system.ICommand} */
+        'command': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {Object} */
+        'commandParameter': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {yfiles.canvas.Control} */
+        'commandTarget': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        /** @type {boolean} */
+        'enabled': {
+          'get': Abstract,
+          'set': Abstract
+        },
+        
+        'addEventListener': Abstract,
+        
+        'removeEventListener': Abstract
+        
+      };
+    });
   })(r);
 
 

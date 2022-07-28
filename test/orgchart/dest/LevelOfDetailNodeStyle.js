@@ -165,8 +165,8 @@ import {
       
       /** @return {yfiles.drawing.Visual} */
       'createVisual': function(/**yfiles.drawing.IRenderContext*/ renderContext, /**INode*/ node) {
-        const zoom = renderContext.zoom;
-        const container = new SvgVisualGroup();
+        var zoom = renderContext.zoom;
+        var container = new SvgVisualGroup();
         if (zoom >= this.detailThreshold) {
           container.add(this.detailNodeStyle.renderer.getVisualCreator(node, this.detailNodeStyle).createVisual(undefined, renderContext));
           container.svgElement["data-renderDataCache"] = this.detailNodeStyle.renderer;
@@ -182,13 +182,13 @@ import {
       
       /** @return {yfiles.drawing.Visual} */
       'updateVisual': function(/**yfiles.drawing.IRenderContext*/ renderContext, /**yfiles.drawing.Visual*/ oldVisual, /**INode*/ node) {
-        const zoom = renderContext.zoom;
-        const container = (oldVisual instanceof SvgVisualGroup) ? (/**@type {yfiles.canvas.CanvasContainer}*/(oldVisual)) : null;
+        var zoom = renderContext.zoom;
+        var container = (oldVisual instanceof SvgVisualGroup) ? (/**@type {yfiles.canvas.CanvasContainer}*/(oldVisual)) : null;
         if (container === null) {
           return this.createVisual(renderContext, node);
         }
-        const oldInnerVisual = container.children.get(0);
-        const cache = container.getRenderDataCache(INodeStyleRenderer.$class);
+        var oldInnerVisual = container.children.get(0);
+        var cache = container.getRenderDataCache(INodeStyleRenderer.$class);
         if (zoom >= this.detailThreshold && cache === this.detailNodeStyle.renderer) {
           container.children.set(0, this.detailNodeStyle.renderer.getVisualCreator(node, this.detailNodeStyle).updateVisual(oldInnerVisual, undefined, renderContext));
           return container;

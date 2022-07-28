@@ -51,22 +51,22 @@ import { INode } from "yfiles";
 
       // When the graph is created from the source data by class yfiles.binding.TreeSource,
       // The source data for each node is attached to the node as it's tag.
-      const employee = node.tag;
+      var employee = node.tag;
       if(typeof employee !== undefined) {
-        const heading = document.createElement("div");
+        var heading = document.createElement("div");
         demo.ElementExtensions.addClass(heading, "user-detail");
         this.element.appendChild(heading);
         // The employee name
         heading.appendChild(createElement("h2", employee["name"]));
         heading.appendChild(createElement("div", employee["position"]));
 
-        const svgIcon = this.createSVGIcon(employee.icon, 50, 50, "0 0 75 75");
+        var svgIcon = this.createSVGIcon(employee.icon, 50, 50, "0 0 75 75");
         if(null!=svgIcon) {
           heading.appendChild(svgIcon);
         }
 
         // Display the individual properties
-        const table = document.createElement("table");
+        var table = document.createElement("table");
         this.element.appendChild(table);
         // The employee business unit
         var tr = document.createElement("tr");
@@ -92,27 +92,27 @@ import { INode } from "yfiles";
         var tr = document.createElement("tr");
         table.appendChild(tr);
         tr.appendChild(createElement("td", "Status"));
-        const statusTd = document.createElement("td");
+        var statusTd = document.createElement("td");
         tr.appendChild(statusTd);
         statusTd.appendChild(this.createSVGIcon(employee.status + "_icon", 100, 15, "-5 -2.5 70 5"));
 
         // Create links to the parent and colleague nodes.
         // (Note that the parent references are added to the
         // source data in method demo.OrgChartDemo#addParentReferences()).
-        const parent = employee["parent"];
+        var parent = employee["parent"];
         if(typeof parent !== "undefined") {
-          const parentTr = document.createElement("tr");
+          var parentTr = document.createElement("tr");
           parentTr.appendChild(createElement("td", "Superior"));
-          const parentTd = document.createElement("td");
+          var parentTd = document.createElement("td");
           parentTd.appendChild(this.createLinkEntry(parent));
           parentTr.appendChild(parentTd);
           table.appendChild(parentTr);
 
-          const colleagues = parent["subordinates"];
+          var colleagues = parent["subordinates"];
           if(typeof colleagues !== "undefined" && colleagues.length > 1) {
-            const colleagueTr = document.createElement("tr");
+            var colleagueTr = document.createElement("tr");
             colleagueTr.appendChild(createElement("td", "Colleagues"));
-            const colleagueTd = document.createElement("td");
+            var colleagueTd = document.createElement("td");
             colleagues.forEach(function(colleague) {
               if(colleague != employee) {
                 if (colleagueTd.childElementCount > 0) {
@@ -127,11 +127,11 @@ import { INode } from "yfiles";
         }
 
         // Create links to subordinate nodes
-        const subs = employee["subordinates"];
+        var subs = employee["subordinates"];
         if(typeof subs !== "undefined") {
-          const subTr = document.createElement("tr");
+          var subTr = document.createElement("tr");
           subTr.appendChild(createElement("td", "Subordinates"));
-          const subTd = document.createElement("td");
+          var subTd = document.createElement("td");
           subs.forEach(function(sub) {
             if (subTd.childElementCount > 0) {
               subTd.appendChild(document.createTextNode(", "));
@@ -147,12 +147,12 @@ import { INode } from "yfiles";
     // Creates an SVG element that references the provided SVG icon, e.g.:
     // <svg width="50" height="50"><use xlink:href="#usericon_male1"></use></svg>
     createSVGIcon(iconRef, width, height, viewBox) {
-      const icon = document.getElementById(iconRef);
+      var icon = document.getElementById(iconRef);
       if(icon!=null) {
-        const svgNS = "http://www.w3.org/2000/svg";
-        const xlinkNS = "http://www.w3.org/1999/xlink";
+        var svgNS = "http://www.w3.org/2000/svg";
+        var xlinkNS = "http://www.w3.org/1999/xlink";
         var svgElement = document.createElementNS(svgNS, "svg");
-        const useElement = document.createElementNS(svgNS, "use");
+        var useElement = document.createElementNS(svgNS, "use");
         useElement.setAttributeNS(xlinkNS,"xlink:href","#"+iconRef);
         svgElement.setAttribute("width", width);
         svgElement.setAttribute("height", height);
@@ -166,12 +166,12 @@ import { INode } from "yfiles";
     // and zoom to the corresponding node in the organization chart.
     // We use the E-Mail address to identify individual employees.
     createLinkEntry(employee) {
-      const element = createElement("a", employee.name);
+      var element = createElement("a", employee.name);
       element.setAttribute("href", "#");
-      element.addEventListener("click", event => {
+      element.addEventListener("click", function(event) {
         this.orgchart.selectAndZoomToNodeWithEmail(employee.email);
         event.preventDefault();
-      });
+      }.bind(this));
       return element;
     }
 

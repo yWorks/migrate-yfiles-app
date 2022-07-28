@@ -18,7 +18,7 @@ class Foo {
  * Foo2
  * @type {ClassExpression | ClassDeclaration}
  */
-const Foo2 = new Class('Foo2', {
+var Foo2 = new Class('Foo2', {
   createVisual: function(/*contextComment*/context, /*itemComment*/item) {},
 
   /**
@@ -28,4 +28,4 @@ const Foo2 = new Class('Foo2', {
    * @param oldVisual
    */
   updateVisual: function(context, oldVisual, item) {}
-});
+})

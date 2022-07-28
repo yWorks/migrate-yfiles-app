@@ -118,16 +118,16 @@ import {
 
       this.createAdditionalComponents();
 
-      this.graphComponent.addCurrentItemChangedListener((sender, /**yfiles.system.PropertyChangedEventArgs*/ args) => {
+      this.graphComponent.addCurrentItemChangedListener((function(sender, /**yfiles.system.PropertyChangedEventArgs*/ args) {
         this.propertiesView.showProperties((/**@type {INode}*/(this.graphComponent.currentItem)));
-      });
+      }).bind(this));
     }
 
     /** @private */
     createAdditionalComponents() {
       // Create the properties view that populates the "propertiesView" element with 
       // the properties of the selected employee.
-      const propertiesViewElement = (/**@type {HTMLElement}*/(document.getElementById("propertiesView")));
+      var propertiesViewElement = (/**@type {HTMLElement}*/(document.getElementById("propertiesView")));
       this.propertiesView = new demo.OrgChartPropertiesView(propertiesViewElement, this);
     }
 
@@ -139,9 +139,9 @@ import {
       this.setProperty("ZoomIn", new demo.ApplicationCommand(ICommand.INCREASE_ZOOM, this.graphComponent));
       this.setProperty("ZoomOut", new demo.ApplicationCommand(ICommand.DECREASE_ZOOM, this.graphComponent));
       this.setProperty("FitContent", new demo.ApplicationCommand(GraphComponent.FIT_GRAPH_BOUNDS_COMMAND, this.graphComponent));
-      this.setProperty("ZoomOriginal", new demo.ActionCommand(() => {
+      this.setProperty("ZoomOriginal", new demo.ActionCommand((function() {
         ICommand.ZOOM.executeOnTarget(1.0, this.graphComponent);
-      }));
+      }).bind(this)));
 
       this.setProperty("HideChildren", new demo.ApplicationCommand(demo.OrgChartDemo.HIDE_CHILDREN_COMMAND, this.graphComponent));
       this.setProperty("ShowChildren", new demo.ApplicationCommand(demo.OrgChartDemo.SHOW_CHILDREN_COMMAND, this.graphComponent));
@@ -170,7 +170,7 @@ import {
 
     /** @private */
     initializeInputMode() {
-      const graphViewerInputMode = new GraphViewerInputMode();
+      var graphViewerInputMode = new GraphViewerInputMode();
       graphViewerInputMode.clickableItems = GraphItemTypes.NODE;
       graphViewerInputMode.selectableItems = GraphItemTypes.NONE;
       graphViewerInputMode.marqueeSelectableItems = GraphItemTypes.NONE;
@@ -191,7 +191,7 @@ import {
     registerElementDefaults(/**IGraph*/ graph) {
       graph.nodeDefaults.style = new demo.LevelOfDetailNodeStyle(new TemplateNodeStyle("detailNodeStyleTemplate"), new TemplateNodeStyle("intermediateNodeStyleTemplate"), new TemplateNodeStyle("overviewNodeStyleTemplate"));
       graph.nodeDefaults.size = new Size(285, 100);
-      const newPolylineEdgeStyle = new PolylineEdgeStyle();
+      var newPolylineEdgeStyle = new PolylineEdgeStyle();
       newPolylineEdgeStyle.pen = new Stroke.FromBrushAndThickness(new SolidColorFill(Color.fromArgb(255, 170, 170, 170)), 2);
       newPolylineEdgeStyle.targetArrow = IArrow.NONE;
       graph.edgeDefaults.style = newPolylineEdgeStyle;
@@ -218,14 +218,16 @@ import {
         return null;
       }
 
-      return this.filteredGraphWrapper.wrappedGraph.nodes.firstOrDefault(/**INode*/ node => node.tag !== null && email === ((/**@type {demo.Employee}*/(node.tag))).email);
+      return this.filteredGraphWrapper.wrappedGraph.nodes.firstOrDefault(function(/**INode*/ node) {
+        return node.tag !== null && email === ((/**@type {demo.Employee}*/(node.tag))).email;
+      });
     }
 
     /**
      * Selects and zooms to the node representing the employee with the specified E-Mail address.
      */
     selectAndZoomToNodeWithEmail(/**string*/ email) {
-      const nodeForEMail = this.getNodeForEMail(email);
+      var nodeForEMail = this.getNodeForEMail(email);
       if (null !== nodeForEMail) {
         this.selectAndZoomToNode(nodeForEMail);
       }
@@ -239,11 +241,11 @@ import {
      * @private
      */
     addParentReferences(nodesSourceItem) {
-      const subs = (/**@type {Object[]}*/(nodesSourceItem["subordinates"]));
+      var subs = (/**@type {Object[]}*/(nodesSourceItem["subordinates"]));
       if (subs !== undefined) {
-        let /**number*/ i;
+        var /**number*/ i;
         for (i = 0; i < subs.length; i++) {
-          const sub = subs[i];
+          var sub = subs[i];
           sub["parent"] = nodesSourceItem;
           this.addParentReferences(sub);
         }
@@ -258,14 +260,16 @@ import {
     createGraph(nodesSource) {
       this.addParentReferences(((/**@type {Object[]}*/(nodesSource)))[0]);
 
-      const treeSource = new yfiles.binding.TreeSource();
+      var treeSource = new yfiles.binding.TreeSource();
       treeSource.childBinding = "subordinates";
       treeSource.nodesSource = nodesSource;
 
 
       this.registerElementDefaults(treeSource.graph);
 
-      this.filteredGraphWrapper = new FilteredGraphWrapper(treeSource.buildGraph(), delegate(this.shouldShowNode, this), /**IEdge*/ e => true);
+      this.filteredGraphWrapper = new FilteredGraphWrapper(treeSource.buildGraph(), delegate(this.shouldShowNode, this), function(/**IEdge*/ e) {
+        return true;
+      });
       this.graphComponent.graph = this.filteredGraphWrapper;
 
       this.applyLayout();
@@ -281,7 +285,7 @@ import {
      */
     limitViewport() {
       this.graphComponent.updateContentRect(new Insets(100));
-      const limiter = this.graphComponent.viewportLimiter;
+      var limiter = this.graphComponent.viewportLimiter;
       limiter.honorBothDimensions = false;
       limiter.bounds = this.graphComponent.contentRect;
     }
@@ -304,7 +308,7 @@ import {
      * guide the the layout.
      */
     doLayout() {
-      const tree = this.graphComponent.graph;
+      var tree = this.graphComponent.graph;
 
       this.configureLayout(tree);
       new TreeLayout().applyLayout(tree);
@@ -313,16 +317,16 @@ import {
 
     /** @private */
     configureLayout(/**IGraph*/ tree) {
-      const registry = tree.mapperRegistry;
+      var registry = tree.mapperRegistry;
 
-      const nodePlacerMapper = registry.createMapper(INode.$class, ITreeLayoutNodePlacer.$class, TreeLayout.NODE_PLACER_DP_KEY);
-      const assistantMapper = registry.createMapper(INode.$class, YBoolean.$class, AssistantNodePlacer.ASSISTANT_NODE_DP_KEY);
+      var nodePlacerMapper = registry.createMapper(INode.$class, ITreeLayoutNodePlacer.$class, TreeLayout.NODE_PLACER_DP_KEY);
+      var assistantMapper = registry.createMapper(INode.$class, YBoolean.$class, AssistantNodePlacer.ASSISTANT_NODE_DP_KEY);
 
-      tree.nodes.forEach(/**INode*/ node => {
+      tree.nodes.forEach((function(/**INode*/ node) {
         if (tree.inDegree(node) === 0) {
           this.setNodePlacers(node, nodePlacerMapper, assistantMapper, tree);
         }
-      });
+      }).bind(this));
     }
 
     /** @private */
@@ -332,22 +336,22 @@ import {
       /**yfiles.model.IMapper.<INode, boolean>*/ assistantMapper,
       /**IGraph*/ tree
     ) {
-      const employee = (/**@type {demo.Employee}*/(rootNode.tag));
+      var employee = (/**@type {demo.Employee}*/(rootNode.tag));
       if (employee !== null) {
-        const layout = employee.layout;
+        var layout = employee.layout;
         switch (layout) {
           case "rightHanging":
-            const newDefaultNodePlacer = new DefaultNodePlacer(ChildPlacement.VERTICAL_TO_RIGHT, RootAlignment.LEADING_ON_BUS, 30, 30);
+            var newDefaultNodePlacer = new DefaultNodePlacer(ChildPlacement.VERTICAL_TO_RIGHT, RootAlignment.LEADING_ON_BUS, 30, 30);
             newDefaultNodePlacer.routingStyle = TreeLayoutEdgeRoutingStyle.FORK_AT_ROOT;
             nodePlacerMapper.setItem(rootNode, newDefaultNodePlacer);
             break;
           case "leftHanging":
-            const newDefaultNodePlacer1 = new DefaultNodePlacer(ChildPlacement.VERTICAL_TO_LEFT, RootAlignment.LEADING_ON_BUS, 30, 30);
+            var newDefaultNodePlacer1 = new DefaultNodePlacer(ChildPlacement.VERTICAL_TO_LEFT, RootAlignment.LEADING_ON_BUS, 30, 30);
             newDefaultNodePlacer1.routingStyle = TreeLayoutEdgeRoutingStyle.FORK_AT_ROOT;
             nodePlacerMapper.setItem(rootNode, newDefaultNodePlacer1);
             break;
           case "bothHanging":
-            const newLeftRightPlacer = new LeftRightNodePlacer();
+            var newLeftRightPlacer = new LeftRightNodePlacer();
             newLeftRightPlacer.placeLastOnBottom = false;
             nodePlacerMapper.setItem(rootNode, newLeftRightPlacer);
             break;
@@ -356,27 +360,27 @@ import {
             break;
         }
 
-        const assistant = employee.assistant;
+        var assistant = employee.assistant;
         if (assistant && tree.inDegree(rootNode) > 0) {
-          const inEdge = tree.inEdgesAt(rootNode).getItem(0);
-          const parent = inEdge.getSourceNode;
-          const oldParentPlacer = nodePlacerMapper.getItem(parent);
-          const assistantPlacer = new AssistantNodePlacer();
+          var inEdge = tree.inEdgesAt(rootNode).getItem(0);
+          var parent = inEdge.getSourceNode;
+          var oldParentPlacer = nodePlacerMapper.getItem(parent);
+          var assistantPlacer = new AssistantNodePlacer();
           assistantPlacer.childNodePlacer = oldParentPlacer;
           nodePlacerMapper.setItem(parent, assistantPlacer);
           assistantMapper.setItem(rootNode, true);
         }
       }
 
-      tree.outEdgesAt(rootNode).forEach(/**IEdge*/ outEdge => {
-        const child = (/**@type {INode}*/(outEdge.targetPort.owner));
+      tree.outEdgesAt(rootNode).forEach((function(/**IEdge*/ outEdge) {
+        var child = (/**@type {INode}*/(outEdge.targetPort.owner));
         this.setNodePlacers(child, nodePlacerMapper, assistantMapper, tree);
-      });
+      }).bind(this));
     }
 
     /** @private */
     cleanUp(/**IGraph*/ graph) {
-      const registry = graph.mapperRegistry;
+      var registry = graph.mapperRegistry;
       registry.removeMapper(AssistantNodePlacer.ASSISTANT_NODE_DP_KEY);
       registry.removeMapper(TreeLayout.NODE_PLACER_DP_KEY);
     }
@@ -389,8 +393,8 @@ import {
      * Helper method that determines whether the {@link demo.OrgChartDemo#SHOW_PARENT_COMMAND} can be executed.
      */
     canExecuteShowChildren(sender, /**yfiles.system.CanExecuteRoutedEventArgs*/ e) {
-      const param = e.parameter;
-      const item = param !== null ? param : this.graphComponent.currentItem;
+      var param = e.parameter;
+      var item = param !== null ? param : this.graphComponent.currentItem;
       if (INode.isInstance(item) && !this.doingLayout && this.filteredGraphWrapper !== null) {
         e.canExecute = this.filteredGraphWrapper.outDegree((/**@type {INode}*/(item))) !== this.filteredGraphWrapper.wrappedGraph.outDegree((/**@type {INode}*/(item)));
       } else {
@@ -403,17 +407,17 @@ import {
      * Handler for the {@link demo.OrgChartDemo#SHOW_CHILDREN_COMMAND}.
      */
     showChildrenExecuted(sender, /**yfiles.system.ExecutedRoutedEventArgs*/ e) {
-      const param = e.parameter;
-      const item = param !== null ? param : this.graphComponent.currentItem;
+      var param = e.parameter;
+      var item = param !== null ? param : this.graphComponent.currentItem;
       if (INode.isInstance(item) && !this.doingLayout) {
-        const count = this.hiddenNodesSet.count;
-        this.filteredGraphWrapper.wrappedGraph.outEdgesAt((/**@type {INode}*/(item))).forEach(/**IEdge*/ childEdge => {
-          const child = childEdge.getTargetNode;
+        var count = this.hiddenNodesSet.count;
+        this.filteredGraphWrapper.wrappedGraph.outEdgesAt((/**@type {INode}*/(item))).forEach((function(/**IEdge*/ childEdge) {
+          var child = childEdge.getTargetNode;
           if (this.hiddenNodesSet.remove(child)) {
             this.filteredGraphWrapper.wrappedGraph.setCenter(child, ((/**@type {INode}*/(item))).layout.getRectangleCenter());
             this.filteredGraphWrapper.wrappedGraph.clearBends(childEdge);
           }
-        });
+        }).bind(this));
         this.refreshLayout(count, (/**@type {INode}*/(item)));
       }
     }
@@ -423,8 +427,8 @@ import {
      * @private
      */
     canExecuteShowParent(sender, /**yfiles.system.CanExecuteRoutedEventArgs*/ e) {
-      const param = e.parameter;
-      const item = param !== null ? param : this.graphComponent.currentItem;
+      var param = e.parameter;
+      var item = param !== null ? param : this.graphComponent.currentItem;
       if (INode.isInstance(item) && !this.doingLayout && this.filteredGraphWrapper !== null) {
         e.canExecute = this.filteredGraphWrapper.inDegree((/**@type {INode}*/(item))) === 0 && this.filteredGraphWrapper.wrappedGraph.inDegree((/**@type {INode}*/(item))) > 0;
       } else {
@@ -438,17 +442,17 @@ import {
      * @private
      */
     showParentExecuted(sender, /**yfiles.system.ExecutedRoutedEventArgs*/ e) {
-      const param = e.parameter;
-      const item = param !== null ? param : this.graphComponent.currentItem;
+      var param = e.parameter;
+      var item = param !== null ? param : this.graphComponent.currentItem;
       if (INode.isInstance(item) && !this.doingLayout) {
-        const count = this.hiddenNodesSet.count;
-        this.filteredGraphWrapper.wrappedGraph.inEdgesAt((/**@type {INode}*/(item))).forEach(/**IEdge*/ parentEdge => {
-          const parent = parentEdge.getSourceNode;
+        var count = this.hiddenNodesSet.count;
+        this.filteredGraphWrapper.wrappedGraph.inEdgesAt((/**@type {INode}*/(item))).forEach((function(/**IEdge*/ parentEdge) {
+          var parent = parentEdge.getSourceNode;
           if (this.hiddenNodesSet.remove(parent)) {
             this.filteredGraphWrapper.wrappedGraph.setCenter(parent, ((/**@type {INode}*/(item))).layout.getRectangleCenter());
             this.filteredGraphWrapper.wrappedGraph.clearBends(parentEdge);
           }
-        });
+        }).bind(this));
         this.refreshLayout(count, (/**@type {INode}*/(item)));
       }
     }
@@ -458,8 +462,8 @@ import {
      * @private
      */
     canExecuteHideParent(sender, /**yfiles.system.CanExecuteRoutedEventArgs*/ e) {
-      const param = e.parameter;
-      const item = param !== null ? param : this.graphComponent.currentItem;
+      var param = e.parameter;
+      var item = param !== null ? param : this.graphComponent.currentItem;
       if (INode.isInstance(item) && !this.doingLayout && this.filteredGraphWrapper !== null) {
         e.canExecute = this.filteredGraphWrapper.inDegree((/**@type {INode}*/(item))) > 0;
       } else {
@@ -473,17 +477,17 @@ import {
      * @private
      */
     hideParentExecuted(sender, /**yfiles.system.ExecutedRoutedEventArgs*/ e) {
-      const param = e.parameter;
-      const item = param !== null ? param : this.graphComponent.currentItem;
+      var param = e.parameter;
+      var item = param !== null ? param : this.graphComponent.currentItem;
       if (INode.isInstance(item) && !this.doingLayout) {
-        const count = this.hiddenNodesSet.count;
+        var count = this.hiddenNodesSet.count;
 
-        this.filteredGraphWrapper.wrappedGraph.nodes.forEach(/**INode*/ testNode => {
+        this.filteredGraphWrapper.wrappedGraph.nodes.forEach((function(/**INode*/ testNode) {
           if (testNode !== item && this.filteredGraphWrapper.contains(testNode) && this.filteredGraphWrapper.inDegree(testNode) === 0) {
             // this is a root node - remove it and all children unless 
             this.hideAllExcept(testNode, (/**@type {INode}*/(item)));
           }
-        });
+        }).bind(this));
         this.refreshLayout(count, (/**@type {INode}*/(item)));
       }
     }
@@ -493,8 +497,8 @@ import {
      * @private
      */
     canExecuteHideChildren(sender, /**yfiles.system.CanExecuteRoutedEventArgs*/ e) {
-      const param = e.parameter;
-      const item = param !== null ? param : this.graphComponent.currentItem;
+      var param = e.parameter;
+      var item = param !== null ? param : this.graphComponent.currentItem;
       if (INode.isInstance(item) && !this.doingLayout && this.filteredGraphWrapper !== null) {
         e.canExecute = this.filteredGraphWrapper.outDegree((/**@type {INode}*/(item))) > 0;
       } else {
@@ -508,13 +512,13 @@ import {
      * @private
      */
     hideChildrenExecuted(sender, /**yfiles.system.ExecutedRoutedEventArgs*/ e) {
-      const param = e.parameter;
-      const item = param !== null ? param : this.graphComponent.currentItem;
+      var param = e.parameter;
+      var item = param !== null ? param : this.graphComponent.currentItem;
       if (INode.isInstance(item) && !this.doingLayout) {
-        const count = this.hiddenNodesSet.count;
-        this.filteredGraphWrapper.outEdgesAt((/**@type {INode}*/(item))).forEach(/**IEdge*/ child => {
+        var count = this.hiddenNodesSet.count;
+        this.filteredGraphWrapper.outEdgesAt((/**@type {INode}*/(item))).forEach((function(/**IEdge*/ child) {
           this.hideAllExcept((/**@type {INode}*/(child.targetPort.owner)), (/**@type {INode}*/(item)));
-        });
+        }).bind(this));
         this.refreshLayout(count, (/**@type {INode}*/(item)));
       }
     }
@@ -552,33 +556,35 @@ import {
         yfiles.system.CommandManager.invalidateRequerySuggested();
 
         // now layout the graph in animated fashion
-        const tree = this.graphComponent.graph;
+        var tree = this.graphComponent.graph;
 
         // we mark a node as the center node
-        this.graphComponent.graph.mapperRegistry.createDelegateMapper(INode.$class, YBoolean.$class, FixNodeLayoutStage.FIXED_NODE_DP_KEY, /**INode*/ node => node === centerNode);
+        this.graphComponent.graph.mapperRegistry.createDelegateMapper(INode.$class, YBoolean.$class, FixNodeLayoutStage.FIXED_NODE_DP_KEY, function(/**INode*/ node) {
+          return node === centerNode;
+        });
         // configure the tree layout
         this.configureLayout(tree);
 
         // create the layouter (with a stage that fixes the center node in the coordinate system)
-        const layouter = new FixNodeLayoutStage.WithCoreLayouter(new TreeLayout());
+        var layouter = new FixNodeLayoutStage.WithCoreLayouter(new TreeLayout());
 
         // configure a LayoutExecutor
-        const executor = new LayoutExecutor(this.graphComponent, layouter);
+        var executor = new LayoutExecutor(this.graphComponent, layouter);
         executor.animateViewport = centerNode === null;
         executor.easedAnimation = true;
         executor.updateContentRect = true;
         executor.duration = yfiles.system.TimeSpan.fromMilliseconds(500);
 
-        executor.start().then((sender, /**yfiles.system.EventArgs*/ args) => {
+        executor.start().then((function(sender, /**yfiles.system.EventArgs*/ args) {
           this.graphComponent.graph.mapperRegistry.removeMapper(FixNodeLayoutStage.FIXED_NODE_DP_KEY);
           this.cleanUp(tree);
           this.doingLayout = false;
           this.limitViewport();
           if (args instanceof yfiles.graph.LayoutExceptionEventArgs) {
-            const exception = ((/**@type {yfiles.graph.LayoutExceptionEventArgs}*/(args))).exception;
+            var exception = ((/**@type {yfiles.graph.LayoutExceptionEventArgs}*/(args))).exception;
             demo.Application.handleError(exception, exception.message, 0);
           }
-        });
+        }).bind(this));
       }
     }
 
@@ -590,17 +596,17 @@ import {
      */
     hideAllExcept(/**INode*/ nodeToHide, /**INode*/ exceptNode) {
       this.hiddenNodesSet.add(nodeToHide);
-      this.filteredGraphWrapper.wrappedGraph.outEdgesAt(nodeToHide).forEach(/**IEdge*/ edge => {
-        const child = (/**@type {INode}*/(edge.targetPort.owner));
+      this.filteredGraphWrapper.wrappedGraph.outEdgesAt(nodeToHide).forEach((function(/**IEdge*/ edge) {
+        var child = (/**@type {INode}*/(edge.targetPort.owner));
         if (exceptNode !== child) {
           this.hideAllExcept(child, exceptNode);
         }
-      });
+      }).bind(this));
     }
 
     /** @private */
     zoomToCurrentItem() {
-      const currentItem = this.graphComponent.currentItem;
+      var currentItem = this.graphComponent.currentItem;
 
       if (INode.isInstance(currentItem)) {
         // visible current item
@@ -612,18 +618,18 @@ import {
             // uhide all nodes...
             this.hiddenNodesSet.clear();
             // except the node to be displayed and all its descendants
-            this.filteredGraphWrapper.wrappedGraph.nodes.forEach(/**INode*/ testNode => {
+            this.filteredGraphWrapper.wrappedGraph.nodes.forEach((function(/**INode*/ testNode) {
               if (testNode !== currentItem && this.filteredGraphWrapper.wrappedGraph.inDegree(testNode) === 0) {
                 this.hideAllExcept(testNode, (/**@type {INode}*/(currentItem)));
               }
-            });
+            }).bind(this));
             // reset the layout to make the animation nicer
-            this.filteredGraphWrapper.nodes.forEach(/**INode*/ n => {
+            this.filteredGraphWrapper.nodes.forEach((function(/**INode*/ n) {
               this.filteredGraphWrapper.setCenter(n, Point.ORIGIN);
-            });
-            this.filteredGraphWrapper.edges.forEach(/**IEdge*/ edge => {
+            }).bind(this));
+            this.filteredGraphWrapper.edges.forEach((function(/**IEdge*/ edge) {
               this.filteredGraphWrapper.clearBends(edge);
-            });
+            }).bind(this));
             this.refreshLayout(-1, null);
           }
         }
@@ -634,7 +640,7 @@ import {
      * Prints the graph, separated in tiles.
      */
     print() {
-      const printingSupport = new demo.OrgChartPrintingSupport();
+      var printingSupport = new demo.OrgChartPrintingSupport();
       printingSupport.tiledPrinting = true;
       printingSupport.scale = 0.29;
       printingSupport.margin = 1;
@@ -645,7 +651,9 @@ import {
 
     /** @return {INode} */
     static getRootNode(/**IGraph*/ graph) {
-      return graph.nodes.firstOrDefault(/**INode*/ node => graph.inDegree(node) === 0);
+      return graph.nodes.firstOrDefault(function(/**INode*/ node) {
+        return graph.inDegree(node) === 0;
+      });
     }
   };
 

@@ -108,7 +108,7 @@ import {
      */
     printGraphWithClipping(/**IGraph*/ graph, /**IRectangle*/ clippingRectangle) {
       // Create a new graph control for exporting the original SVG content
-      const exportControl = new GraphComponent();
+      var exportControl = new GraphComponent();
       // ... and assign it the same graph.
       exportControl.graph = graph;
       exportControl.updateContentRect();
@@ -124,11 +124,11 @@ import {
       /**yfiles.canvas.GraphControl*/ graphControl,
       /**IRectangle*/ clippingRectangle
     ) {
-      const targetRect = (clippingRectangle !== null && clippingRectangle !== undefined ? Rect.fromRectangle(clippingRectangle) : graphControl.contentRect).clone();
+      var targetRect = (clippingRectangle !== null && clippingRectangle !== undefined ? Rect.fromRectangle(clippingRectangle) : graphControl.contentRect).clone();
 
-      let /**number*/ rows;
-      let /**number*/ columns;
-      let /**yfiles.geometry.RectD[][]*/ tiles;
+      var /**number*/ rows;
+      var /**number*/ columns;
+      var /**yfiles.geometry.RectD[][]*/ tiles;
 
       if (!this.tiledPrinting) {
         // no tiles - just one row and column
@@ -136,8 +136,8 @@ import {
         tiles = [[targetRect]];
       } else {
         // get the size of the printed tiles
-        const tileSize = new Size(this.tileWidth, this.tileHeight);
-        const tileSizeScaled = new Size(tileSize.width / this.scale, tileSize.height / this.scale);
+        var tileSize = new Size(this.tileWidth, this.tileHeight);
+        var tileSizeScaled = new Size(tileSize.width / this.scale, tileSize.height / this.scale);
 
         // calculate number of rows and columns
         rows = (((/**@type {number}*/(Math.ceil((targetRect.height * this.scale) / tileSize.height)))) | 0);
@@ -151,10 +151,10 @@ import {
           }
         }
         // calculate bounds of last row/column
-        const lastX = targetRect.x + tileSizeScaled.width * (columns - 1);
-        const lastY = targetRect.y + tileSizeScaled.height * (rows - 1);
-        const lastWidth = targetRect.width - (tileSizeScaled.width * (columns - 1));
-        const lastHeight = targetRect.height - (tileSizeScaled.height * (rows - 1));
+        var lastX = targetRect.x + tileSizeScaled.width * (columns - 1);
+        var lastY = targetRect.y + tileSizeScaled.height * (rows - 1);
+        var lastWidth = targetRect.width - (tileSizeScaled.width * (columns - 1));
+        var lastHeight = targetRect.height - (tileSizeScaled.height * (rows - 1));
         // set bounds of last row
         for (var k = 0; k < columns - 1; k++) {
           tiles[rows - 1][k] = new Rect(targetRect.x + tileSizeScaled.width * k, lastY, tileSizeScaled.width, lastHeight);
@@ -168,28 +168,28 @@ import {
       }
 
       // display exported svg in new window
-      const w = window.open(this.targetUrl);
+      var w = window.open(this.targetUrl);
       // wait a little so the window can load
-      window.setTimeout(() => {
+      window.setTimeout((function() {
         try {
           // loop through all rows and columns
-          for (let i = 0; i < rows; i++) {
-            for (let k = 0; k < columns; k++) {
-              const lastRow = i === rows - 1;
-              const lastColumn = k === columns - 1;
+          for (var i = 0; i < rows; i++) {
+            for (var k = 0; k < columns; k++) {
+              var lastRow = i === rows - 1;
+              var lastColumn = k === columns - 1;
 
-              const exporter = new SvgExport.FromWorldBoundsAndScale(tiles[i][k].clone(), this.scale);
+              var exporter = new SvgExport.FromWorldBoundsAndScale(tiles[i][k].clone(), this.scale);
               exporter.copyDefsElements = true;
               this.configureMargin(exporter, i === 0, lastRow, k === 0, lastColumn);
 
-              const div = (/**@type {HTMLElement}*/(w.document.createElement("div")));
+              var div = (/**@type {HTMLElement}*/(w.document.createElement("div")));
               w.document.body.appendChild(div);
               if (!lastRow || !lastColumn) {
                 div.setAttribute("class", "pagebreak");
               }
 
               // export the svg to an XML string
-              const svgXml = SvgExport.exportSvgString(exporter.exportSvg(graphControl));
+              var svgXml = SvgExport.exportSvgString(exporter.exportSvg(graphControl));
               // ...and put the xml into the DOM
               div.innerHTML += svgXml;
             }
@@ -208,7 +208,7 @@ import {
             }
           }
         }
-      }, 200);
+      }).bind(this), 200);
     }
 
     /** @private */

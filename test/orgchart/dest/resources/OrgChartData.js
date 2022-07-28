@@ -31,7 +31,7 @@
 // Class yfiles.binding.TreeSource automatically creates
 // a yFiles graph model from this data.
 //
-const orgChartData = [{
+var orgChartData = [{
   "position": "Chief Executive Officer",
   "name": "Eric Joplin",
   "email": "ejoplin@yoyodyne.com",

@@ -18,12 +18,12 @@ export const GlobalClass = class GlobalClass {
   }
 };
 
-const demo = yfiles_module_demo;
+var demo = yfiles_module_demo
 
-const d = new demo.MyClass();
+var d = new demo.MyClass()
 
 console.log(d.blub)
 
-const globalThing = new globalModule.GlobalClass();
+var globalThing = new globalModule.GlobalClass()
 
 console.log(globalThing.IAmAvailableGlobally)

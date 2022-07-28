@@ -26,7 +26,7 @@ class LazyClass extends NodeStyleBase {
    * method comment
    */
   getIntersection(node, inner, outer) {
-    const otherInner = 'otherInner';
+    var otherInner = 'otherInner'
     const result = super.getIntersection(node, otherInner, outer)
     return result
   }
@@ -141,7 +141,7 @@ class NonLazyClass extends BaseClass(Object, ILookup, IHitTestable) {
 /**
  * Don't migrate classes that use $meta
  */
-const ClassWithMeta = Class('ClassWithMeta', {
+var ClassWithMeta = Class('ClassWithMeta', {
   constructor: {
     $meta: [],
     value: function() {}
@@ -150,7 +150,7 @@ const ClassWithMeta = Class('ClassWithMeta', {
     $meta: [FormTypeAttribute('text')],
     value: ''
   }
-});
+})
 
 class AnotherNonLazyClass {}
 exports.AnotherNonLazyClass = class AnotherNonLazyClass {};

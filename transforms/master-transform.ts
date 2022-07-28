@@ -15,8 +15,6 @@ import { doTransform as transformToModule } from './UMD-to-ES-modules'
 import { doTransform as toEs6Class } from './toEs6Class'
 import { doTransform as customTransform } from './custom-transform'
 
-import noVars from 'js-codemod/transforms/no-vars'
-import arrowFunctions from 'js-codemod/transforms/arrow-function'
 import { JSCodeshift } from 'jscodeshift/src/core'
 
 const debug = require('debug')('migrate-yfiles-app:transformer')
@@ -27,10 +25,6 @@ const allTransforms = [
   { name: 'signatureChanges', fn: signatureChanges, needsMappings: true },
   { name: 'methodsProperties', fn: methodsProperties, needsMappings: true },
   { name: 'memberRenamings', fn: memberRenamings, needsMappings: true },
-
-  // these come from third parties
-  { name: 'replace-vars', fn: noVars, external: true },
-  { name: 'arrow-functions', fn: arrowFunctions, external: true },
 
   // these only refactor code
   { name: 'toEs6Class', fn: toEs6Class },
@@ -82,7 +76,7 @@ export default function transformer(file, api, options: Options) {
   let stringSource = null
   const transforms = options.transforms.split(',')
 
-  for (const { name, fn, needsMappings, external, secondPass } of allTransforms) {
+  for (const { name, fn, needsMappings, secondPass } of allTransforms) {
     const tryApplyTransform = (fn, ...args) => {
       debug(`Running transform '${name}' on ${file.path}`)
       try {
@@ -98,44 +92,29 @@ export default function transformer(file, api, options: Options) {
       debug(`Skipping transform '${name}'`)
       continue
     }
-    if (external) {
-      if (options.incremental) {
-        debug(`Skipping external transform '${name}' due to incremental mode`)
-        continue
-      }
-      if (typeof stringSource !== 'string') {
-        stringSource = sources.toSource()
-        sources = null
-      }
-      stringSource =
-        tryApplyTransform(fn, { path: file.path, source: stringSource }, api, options) ||
-        stringSource
-    } else {
-      if (!sources) {
-        sources = j(stringSource)
-        stringSource = null
-      }
-      if (needsMappings) {
-        for (const { mappings, from, to } of MIGRATIONS_FOR_VERSION[options.from]) {
-          sources =
-            tryApplyTransform(fn, {
-              api,
-              ast: sources,
-              filePath: file.path,
-              mappings,
-              from,
-              to,
-              options,
-              secondPass,
-            }) || sources
-        }
-      } else {
+    if (!sources) {
+      sources = j(stringSource)
+      stringSource = null
+    }
+    if (needsMappings) {
+      for (const { mappings, from, to } of MIGRATIONS_FOR_VERSION[options.from]) {
         sources =
-          tryApplyTransform(fn, { api, ast: sources, filePath: file.path, options }) || sources
+          tryApplyTransform(fn, {
+            api,
+            ast: sources,
+            filePath: file.path,
+            mappings,
+            from,
+            to,
+            options,
+            secondPass,
+          }) || sources
       }
+    } else {
+      sources =
+        tryApplyTransform(fn, { api, ast: sources, filePath: file.path, options }) || sources
     }
   }
-
   if (typeof stringSource !== 'string') {
     stringSource = sources.toSource()
   }

@@ -32,7 +32,7 @@ export function doTransform({
       name: n => nonFqnNameMap.has(n),
     })
     .replaceWith(path => {
-      if (path.parentPath && j.MemberExpression.check(path.parentPath.value)) {
+      if (path.parentPath && j.MemberExpression.check(path.parentPath.value) && path.parentPath.value.property === path.value) {
         return path.value
       }
       const oldName = path.value.name

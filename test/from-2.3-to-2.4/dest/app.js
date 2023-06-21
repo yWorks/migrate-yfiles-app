@@ -6,7 +6,6 @@ import {
 
 const gc = new GraphComponent()
 new EdgeRouterData()
-new yfiles.router.EdgeRouterData()
 new foo.bar.PolylineEdgeRouterData()
 class Foo extends EdgeRouterData {}
 

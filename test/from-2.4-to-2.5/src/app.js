@@ -7,7 +7,7 @@ import {
 
 const gc = new GraphComponent()
 
-new yfiles.tree.NodeLabelingPolicy()
+new NodeLabelingPolicy()
 new foo.bar.NodeLabelingPolicy()
 
 new WebGL2NodeEffect()

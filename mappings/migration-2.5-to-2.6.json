@@ -1,0 +1,254 @@
+{
+  "namespaceChanges": {
+    "yfiles.layout.OrganicLayoutGroupSubstructureScope": "yfiles.organic.OrganicLayoutGroupSubstructureScope",
+    "yfiles.layout.OrganicLayoutTreeSubstructureStyle": "yfiles.organic.OrganicLayoutTreeSubstructureStyle",
+    "yfiles.organic.StarSubstructureStyle": "yfiles.organic.OrganicLayoutStarSubstructureStyle"
+  },
+  "removedTypes": [],
+  "newMembers": {
+    "yfiles.binding.AdjacencyNodesSource": [
+      "getParentId",
+      "idProvider",
+      "nodeCreator",
+      "parentIdProvider"
+    ],
+    "yfiles.binding.NodesSource": [
+      "addChildNodesSource",
+      "addParentNodesSource",
+      "createChildNodesSource",
+      "createParentNodesSource"
+    ],
+    "yfiles.binding.TreeNodesSource": [
+      "getParentId",
+      "idProvider",
+      "nodeCreator",
+      "parentIdProvider"
+    ],
+    "yfiles.circular.CircularLayout": [
+      "EDGE_DIRECTEDNESS_DP_KEY",
+      "starSubstructureSize",
+      "starSubstructureStyle",
+      "starSubstructureTypeSeparation"
+    ],
+    "yfiles.circular.CircularLayoutData": ["edgeDirectedness"],
+    "yfiles.collections.IEnumerable": [
+      "reduce(yfiles.collections.Accumulator)",
+      "reduceRight(yfiles.collections.Accumulator)"
+    ],
+    "yfiles.geometry.IMutableOrientedRectangle": ["getEnlarged"],
+    "yfiles.geometry.IOrientedRectangle": ["getEnlarged"],
+    "yfiles.geometry.Matrix": ["applyTo(HTMLElement)", "toCssTransform"],
+    "yfiles.geometry.MutableRectangle": ["getEnlarged"],
+    "yfiles.geometry.OrientedRectangle": ["getEnlarged"],
+    "yfiles.graph.ILookupDecorator": [
+      "add(yfiles.lang.Class,yfiles.lang.Class,yfiles.graph.WrapperFactory,boolean)"
+    ],
+    "yfiles.graph.LookupDecorator": [
+      "setFactory(yfiles.graph.Factory)",
+      "setImplementationWrapper(yfiles.graph.WrapperFactory)"
+    ],
+    "yfiles.input.CreateEdgeInputMode": [
+      "createDummyBend",
+      "dummySourceNodePort",
+      "sourceNodeDraggingFinishedRecognizer"
+    ],
+    "yfiles.lang.Workarounds": ["webGLStaggeredLabelRenderingDuration"],
+    "yfiles.layout.LayoutExecutor": ["labelPreferredPlacement"],
+    "yfiles.layout.LayoutExecutorAsync": ["labelPreferredPlacementPolicy"],
+    "yfiles.layout.LayoutGraphAdapter": ["labelPreferredPlacement"],
+    "yfiles.layout.PreferredPlacementDescriptor": ["fromModel", "fromParameter"],
+    "yfiles.layout.TabularLayout": ["considerEdges", "maximumDuration"],
+    "yfiles.organic.OrganicLayout": [
+      "chainRecognition",
+      "constraints",
+      "EDGE_ORIENTATION_DP_KEY",
+      "MINIMUM_EDGE_LENGTH_DP_KEY",
+      "OVERLAPPING_NODES_DP_KEY"
+    ],
+    "yfiles.organic.OrganicLayoutData": [
+      "constraints",
+      "edgeOrientation",
+      "minimumEdgeLengths",
+      "overlappingNodes"
+    ],
+    "yfiles.radial.RadialLayout": ["OUT_EDGE_COMPARER_DP_KEY"],
+    "yfiles.radial.RadialLayoutData": ["nodeTypes", "outEdgeComparers"],
+    "yfiles.styles.ArcEdgeStyle": ["cssClass"],
+    "yfiles.styles.ArrowEdgeStyle": ["cssClass"],
+    "yfiles.styles.ArrowNodeStyle": ["cssClass"],
+    "yfiles.styles.ArrowNodeStyleRenderer": ["getCssClass"],
+    "yfiles.styles.BezierEdgeStyle": ["cssClass"],
+    "yfiles.styles.BridgeEdgeStyle": ["cssClass"],
+    "yfiles.styles.DefaultLabelStyle": ["cssClass"],
+    "yfiles.styles.DefaultLabelStyleRenderer": ["getCssClass"],
+    "yfiles.styles.GeneralPathNodeStyle": ["cssClass"],
+    "yfiles.styles.GeneralPathNodeStyleRenderer": ["getCssClass"],
+    "yfiles.styles.GroupNodeStyle": ["tabSizePolicy"],
+    "yfiles.styles.GroupNodeStyleRenderer": ["getTabSizePolicy"],
+    "yfiles.styles.IconLabelStyle": ["cssClass"],
+    "yfiles.styles.IconLabelStyleRenderer": ["getCssClass"],
+    "yfiles.styles.ImageNodeStyle": ["cssClass"],
+    "yfiles.styles.ImageNodeStyleRenderer": ["getCssClass"],
+    "yfiles.styles.MarkupLabelStyle": ["cssClass"],
+    "yfiles.styles.MarkupLabelStyleRenderer": ["getCssClass"],
+    "yfiles.styles.PathBasedEdgeStyleRenderer": ["getCssClass"],
+    "yfiles.styles.PolylineEdgeStyle": ["cssClass"],
+    "yfiles.styles.RectangleNodeStyle": ["cssClass"],
+    "yfiles.styles.RectangleNodeStyleRenderer": ["getCssClass"],
+    "yfiles.styles.ShapeNodeStyle": ["cssClass"],
+    "yfiles.styles.ShapeNodeStyleRenderer": ["getCssClass"],
+    "yfiles.styles.StringTemplateLabelStyle": ["cssClass"],
+    "yfiles.styles.StringTemplateNodeStyle": ["cssClass"],
+    "yfiles.styles.StringTemplatePortStyle": ["cssClass"],
+    "yfiles.styles.TemplateLabelStyle": ["cssClass"],
+    "yfiles.styles.TemplateLabelStyleBase": ["cssClass"],
+    "yfiles.styles.TemplateNodeStyle": ["cssClass"],
+    "yfiles.styles.TemplateNodeStyleBase": ["cssClass"],
+    "yfiles.styles.TemplateNodeStyleRenderer": ["getCssClass"],
+    "yfiles.styles.TemplatePortStyle": ["cssClass"],
+    "yfiles.styles.TemplatePortStyleBase": ["cssClass"],
+    "yfiles.styles.TextRenderSupport": ["invalidateTextMeasurementCache"],
+    "yfiles.view.Fill": ["CURRENT_COLOR"],
+    "yfiles.view.GraphComponent": ["SelectionModelChanged"],
+    "yfiles.view.GraphModelManager": [
+      "edgeLabelLayerPolicy",
+      "nodeLabelLayerPolicy",
+      "portLabelLayerPolicy"
+    ],
+    "yfiles.view.GraphOverviewComponent": ["createWebGL2VisualCreator"],
+    "yfiles.view.LinearGradient": ["CURRENT_COLOR"],
+    "yfiles.view.PatternFill": ["CURRENT_COLOR"],
+    "yfiles.view.RadialGradient": ["CURRENT_COLOR"],
+    "yfiles.view.RenderModes": ["AUTO", "WEB_GL2"],
+    "yfiles.view.SolidColorFill": ["CURRENT_COLOR"],
+    "yfiles.view.Stroke": ["CURRENT_COLOR"],
+    "yfiles.view.StyleDecorationZoomPolicy": ["NO_DOWNSCALING"],
+    "yfiles.view.SvgExport": ["rasterizeHtmlVisuals"],
+    "yfiles.view.SvgVisual": ["from(TElement,TTag)", "from(TElement)"],
+    "yfiles.view.SvgVisualGroup": ["from(TElement,TTag)", "from(TElement)"],
+    "yfiles.view.WebGL2DefaultLabelStyle": [
+      "textWrappingPadding",
+      "textWrappingShape",
+      "verticalTextAlignment",
+      "wrapping"
+    ],
+    "yfiles.view.WebGL2GraphModelManager": [
+      "edgeLabelLayerPolicy",
+      "nodeLabelLayerPolicy",
+      "portLabelLayerPolicy",
+      "renderMode",
+      "ShadersCompiled",
+      "ShadersCompiling"
+    ],
+    "yfiles.view.WebGL2GroupNodeStyle": ["renderTransparentContentArea", "tabSizePolicy"],
+    "yfiles.view.WebGL2IndicatorType": ["HALO"],
+    "yfiles.view.WebGL2Stroke": ["from"],
+    "yfiles.view.WebGLSupport": ["FlushingContext"]
+  },
+  "newTypes": [
+    "yfiles.circular.CircularLayoutStarSubstructureStyle",
+    "yfiles.collections.Accumulator",
+    "yfiles.collections.ElementAction",
+    "yfiles.collections.ElementComparison",
+    "yfiles.collections.ElementPredicate",
+    "yfiles.collections.FlatMapSelector",
+    "yfiles.collections.KeySelector",
+    "yfiles.collections.ResultCreator",
+    "yfiles.collections.Selector",
+    "yfiles.collections.ShortKeySelector",
+    "yfiles.graph.Factory",
+    "yfiles.graph.WrapperFactory",
+    "yfiles.layout.AlignmentStage",
+    "yfiles.layout.AlignmentStageAlignmentPolicy",
+    "yfiles.layout.AlignmentStageData",
+    "yfiles.layout.LabelPreferredPlacementPolicy",
+    "yfiles.organic.OrganicConstraintData",
+    "yfiles.organic.OrganicLayoutConstraintFactory",
+    "yfiles.organic.OrganicLayoutConstraintOrientation",
+    "yfiles.organic.OrganicLayoutConstraintSet",
+    "yfiles.organic.OrganicLayoutSeparationConstraint",
+    "yfiles.styles.GroupNodeStyleTabSizePolicy",
+    "yfiles.styles.HtmlNodeStyleBase",
+    "yfiles.styles.IndicatorEdgeStyleDecorator",
+    "yfiles.styles.IndicatorLabelStyleDecorator",
+    "yfiles.styles.IndicatorNodeStyleDecorator",
+    "yfiles.styles.IndicatorPortStyleDecorator",
+    "yfiles.view.GraphFocusIndicatorManager",
+    "yfiles.view.GraphHighlightIndicatorManager",
+    "yfiles.view.GraphSelectionIndicatorManager",
+    "yfiles.view.HtmlVisual",
+    "yfiles.view.TaggedHtmlVisual",
+    "yfiles.view.TaggedSvgVisual",
+    "yfiles.view.TypedHtmlVisual",
+    "yfiles.view.TypedSvgVisual",
+    "yfiles.view.WebGL2BeaconNodeIndicatorStyle",
+    "yfiles.view.WebGL2GraphModelManagerRenderMode",
+    "yfiles.view.WebGL2GraphOverviewVisualCreator"
+  ],
+  "memberRenamings": {
+    "yfiles.layout.CactusGroupLayout": {
+      "defaultNodeComparator": "defaultNodeComparer"
+    }
+  },
+  "removedMembers": {
+    "yfiles.lang.Exception": ["cause"],
+    "yfiles.lang.Object": ["referenceEquals"]
+  },
+  "signatureChanges": {},
+  "returnTypeChanges": {
+    "yfiles.styles.EdgeStyleBase": {
+      "createVisual": "TVisual",
+      "updateVisual": "TVisual"
+    },
+    "yfiles.styles.LabelStyleBase": {
+      "createVisual": "TVisual",
+      "updateVisual": "TVisual"
+    },
+    "yfiles.styles.NodeStyleBase": {
+      "createVisual": "TVisual",
+      "updateVisual": "TVisual"
+    },
+    "yfiles.styles.PortStyleBase": {
+      "createVisual": "TVisual",
+      "updateVisual": "TVisual"
+    },
+    "yfiles.styles.StripeStyleBase": {
+      "createVisual": "TVisual",
+      "updateVisual": "TVisual"
+    },
+    "yfiles.view.WebGL2GraphModelManager": {
+      "getStyle(yfiles.graph.IEdge)": "WebGL2PolylineEdgeStyle|WebGL2ArcEdgeStyle|WebGL2BridgeEdgeStyle",
+      "getStyle(yfiles.graph.ILabel)": "WebGL2DefaultLabelStyle|WebGL2IconLabelStyle",
+      "getStyle(yfiles.graph.INode)": "WebGL2ShapeNodeStyle|WebGL2IconNodeStyle|WebGL2GroupNodeStyle",
+      "getWebGL2EdgeStyle": "WebGL2PolylineEdgeStyle|WebGL2ArcEdgeStyle|WebGL2BridgeEdgeStyle",
+      "getWebGL2LabelStyle": "WebGL2DefaultLabelStyle|WebGL2IconLabelStyle",
+      "getWebGL2NodeStyle": "WebGL2ShapeNodeStyle|WebGL2IconNodeStyle|WebGL2GroupNodeStyle"
+    }
+  },
+  "propertyTypeChanges": {
+    "yfiles.hierarchic.LayerConstraintData": {
+      "nodeComparables": "yfiles.layout.ItemMapping<yfiles.graph.INode,yfiles.lang.IComparable>"
+    },
+    "yfiles.hierarchic.SequenceConstraintData": {
+      "itemComparables": "yfiles.layout.ItemMapping<yfiles.graph.IModelItem,yfiles.lang.IComparable>"
+    },
+    "yfiles.input.HoveredItemChangedEventArgs": {
+      "item": "yfiles.graph.IModelItem | null"
+    },
+    "yfiles.layout.ComponentLayoutData": {
+      "componentIds": "yfiles.layout.ItemMapping<yfiles.graph.INode,yfiles.lang.IComparable>"
+    },
+    "yfiles.view.WebGL2FocusIndicatorManager": {
+      "nodeStyle": "WebGL2NodeIndicatorStyle | WebGL2BeaconNodeIndicatorStyle"
+    },
+    "yfiles.view.WebGL2HighlightIndicatorManager": {
+      "nodeStyle": "WebGL2NodeIndicatorStyle | WebGL2BeaconNodeIndicatorStyle"
+    },
+    "yfiles.view.WebGL2SelectionIndicatorManager": {
+      "nodeStyle": "WebGL2NodeIndicatorStyle | WebGL2BeaconNodeIndicatorStyle"
+    }
+  },
+  "constructorMappings": {},
+  "compatMethods": {},
+  "methodsProperties": {}
+}

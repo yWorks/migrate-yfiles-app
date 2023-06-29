@@ -1,4 +1,3 @@
-import { OrganicLayoutStarSubstructureStyle } from "yfiles";
 import {
     CactusGroupLayout,
     Exception,

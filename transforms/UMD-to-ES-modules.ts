@@ -18,7 +18,7 @@ export function doTransform({
   api,
   ast,
   filePath,
-  options
+  options,
 }: {
   api: any
   ast: any
@@ -68,7 +68,7 @@ export function doTransform({
 function unwrapUMDHeader(j, ast) {
   const def = ast.find(j.CallExpression, {
     callee: { name: 'define' },
-    arguments: [{ type: 'ArrayExpression' }, { type: 'Identifier' }]
+    arguments: [{ type: 'ArrayExpression' }, { type: 'Identifier' }],
   })
   if (def.length === 1) {
     // the define call inside the UMD header
@@ -128,7 +128,7 @@ function isCJSCode(j, ast) {
   const noDefines =
     ast.find(j.CallExpression, {
       callee: { name: 'define' },
-      arguments: [{ type: 'ArrayExpression' }]
+      arguments: [{ type: 'ArrayExpression' }],
     }).length === 0
 
   return requireCalls.length > 0 && allRequiresHaveOnlyOneStringArg && noDefines
@@ -158,8 +158,8 @@ function unwrapSimpleDefines(j, ast) {
       callee: { name: 'define' },
       arguments: [
         { type: 'ArrayExpression' },
-        { type: 'ArrowFunctionExpression', body: { type: (t: string) => t !== 'BlockStatement' } }
-      ]
+        { type: 'ArrowFunctionExpression', body: { type: (t: string) => t !== 'BlockStatement' } },
+      ],
     })
     .replaceWith(path => {
       return j.exportDeclaration(true, path.node.arguments[1].body)
@@ -169,12 +169,7 @@ function unwrapSimpleDefines(j, ast) {
 function replaceReturnStatementWithExport(j: JSCodeshift, container) {
   j(container)
     .find(j.ReturnStatement)
-    .filter(
-      p =>
-        j(p)
-          .closest(j.Function)
-          .get().parentPath.parentPath === container
-    )
+    .filter(p => j(p).closest(j.Function).get().parentPath.parentPath === container)
     .replaceWith(ret => {
       return j.exportDefaultDeclaration(ret.node.argument)
     })
@@ -188,14 +183,14 @@ function extractRequirePaths(j, ast) {
         type: 'MemberExpression',
         object: {
           type: 'Identifier',
-          name: 'require'
+          name: 'require',
         },
         property: {
           type: 'Identifier',
-          name: 'config'
-        }
-      }
-    }
+          name: 'config',
+        },
+      },
+    },
   })
   requireConfig.findObjectMembers({ key: { name: 'paths' } }).forEach(property => {
     property.value.value.properties.forEach(prop => {
@@ -216,8 +211,8 @@ function collectRequireParams(j, ast) {
     callee: { type: 'Identifier', name: (n: string) => n === 'define' || n === 'require' },
     arguments: [
       { type: 'ArrayExpression' },
-      { type: (t: string) => t === 'ArrowFunctionExpression' || t === 'FunctionExpression' }
-    ]
+      { type: (t: string) => t === 'ArrowFunctionExpression' || t === 'FunctionExpression' },
+    ],
   })
   requireExpressions.forEach(path => {
     const requireArray = path.node.arguments[0].elements.map(p => p.value)
@@ -247,9 +242,9 @@ function unwrapAMDCalls(j, ast) {
         callee: { type: 'Identifier', name: n => n === 'define' || n === 'require' },
         arguments: [
           { type: 'ArrayExpression' },
-          { type: (t: string) => t === 'ArrowFunctionExpression' || t === 'FunctionExpression' }
-        ]
-      }
+          { type: (t: string) => t === 'ArrowFunctionExpression' || t === 'FunctionExpression' },
+        ],
+      },
     })
     .forEach(call => {
       sortedSources.push(call)
@@ -294,8 +289,8 @@ function replaceYFilesCJSRequires(j, ast) {
   ast
     .find(j.VariableDeclaration, {
       declarations: [
-        { init: { type: 'CallExpression', callee: { type: 'Identifier', name: 'require' } } }
-      ]
+        { init: { type: 'CallExpression', callee: { type: 'Identifier', name: 'require' } } },
+      ],
     })
     .filter(
       path =>
@@ -353,8 +348,8 @@ function replaceYFilesAliases(j, ast) {
     .find(j.VariableDeclarator, {
       init: {
         type: 'MemberExpression',
-        object: { object: { name: 'yfiles' } }
-      }
+        object: { object: { name: 'yfiles' } },
+      },
     })
     .forEach(p => {
       variableMapping.set(p.value.id.name, p.value.init)
@@ -373,8 +368,8 @@ function replaceYFilesNamespaces(j, ast) {
       object: {
         type: 'MemberExpression',
         property: { type: 'Identifier' },
-        object: { type: 'Identifier', name: 'yfiles' }
-      }
+        object: { type: 'Identifier', name: 'yfiles' },
+      },
     })
     .forEach(path => {
       const key = 'yfiles.' + path.node.object.property.name + '.' + path.node.property.name
@@ -391,28 +386,41 @@ function replaceYFilesNamespaces(j, ast) {
 }
 
 function addYFilesImports(j: JSCodeshift, ast, isCJS) {
-  if (Object.keys(yfilesImports).length) {
-    ast.find(j.Program).forEach(path => {
-      const allNames = Object.values(yfilesImports).reduce((acc, val) => acc.concat(...val), [])
-      allNames.sort()
-      const expr = isCJS
-        ? j.variableDeclaration('const', [
-            j.variableDeclarator(
-              j.objectPattern(
-                allNames.map(name => {
-                  const prop = j.property('init', j.identifier(name), j.identifier(name))
-                  prop.shorthand = true
-                  return prop
-                })
-              ),
-              j.callExpression(j.identifier('require'), [j.stringLiteral('yfiles')])
-            )
-          ])
-        : j.importDeclaration(
-            allNames.map(name => j.importSpecifier(j.identifier(name))),
-            j.literal('yfiles')
-          )
-      path.node.body.unshift(expr)
-    })
+  const existingImports = new Set(
+    ast
+      .find(j.ImportDeclaration, { source: { value: 'yfiles' } })
+      .nodes()
+      .map(node => {
+        return node.specifiers.map(specifier => {
+          return specifier.local.name
+        })
+      })
+      .flat()
+  )
+  let allNames = Object.values(yfilesImports).reduce((acc, val) => acc.concat(...val), [])
+  allNames = allNames.filter(name => !existingImports.has(name))
+  allNames.sort()
+  if (!allNames.length) {
+    return
   }
+  ast.find(j.Program).forEach(path => {
+    const expr = isCJS
+      ? j.variableDeclaration('const', [
+          j.variableDeclarator(
+            j.objectPattern(
+              allNames.map(name => {
+                const prop = j.property('init', j.identifier(name), j.identifier(name))
+                prop.shorthand = true
+                return prop
+              })
+            ),
+            j.callExpression(j.identifier('require'), [j.stringLiteral('yfiles')])
+          ),
+        ])
+      : j.importDeclaration(
+          allNames.map(name => j.importSpecifier(j.identifier(name))),
+          j.literal('yfiles')
+        )
+    path.node.body.unshift(expr)
+  })
 }

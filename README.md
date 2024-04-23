@@ -1,4 +1,6 @@
 # yFiles for HTML migration tool
+[![NPM version](https://img.shields.io/npm/v/@yworks/migrate-yfiles-app?style=flat)](https://www.npmjs.org/package/@yworks/migrate-yfiles-app)
+
 Migrate outdated yFiles for HTML code to **yFiles for HTML 2.6**.
 
 The source of this tool is available at [GitHub](https://github.com/yWorks/migrate-yfiles-app). 

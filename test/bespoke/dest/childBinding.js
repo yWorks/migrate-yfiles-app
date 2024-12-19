@@ -1,1 +1,0 @@
-treeSource.childBinding = "subordinates";

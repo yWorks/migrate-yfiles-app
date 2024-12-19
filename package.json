@@ -1,54 +1,34 @@
 {
   "name": "@yworks/migrate-yfiles-app",
-  "version": "7.0.0",
   "description": "Semi-automatically migrate yFiles for HTML code to the latest version",
-  "main": "src/index.js",
-  "bin": {
-    "migrate-yfiles-app": "src/cli.js"
-  },
   "repository": "https://github.com/yWorks/migrate-yfiles-app",
-  "scripts": {
-    "test": "mocha test/**/test.js",
-    "start": "node src"
-  },
-  "standard": {
-    "env": [
-      "mocha"
-    ],
-    "ignore": [
-      "test/rename"
-    ]
-  },
-  "files": [
-    "doc",
-    "mappings",
-    "src",
-    "transforms",
-    "LICENSE",
-    "README.md",
-    "!*.tgz"
-  ],
-  "author": {
-    "name": "yFiles for HTML team @ yWorks GmbH",
-    "email": "yfileshtml@yworks.com"
-  },
+  "author": "yWorks GmbH <yfileshtml@yworks.com>",
+  "version": "30.0.0",
   "license": "MIT",
-  "dependencies": {
-    "colors": "^1.4.0",
-    "debug": "^4.3.4",
-    "fs-extra": "^10.1.0",
-    "jscodeshift": "^0.13.1",
-    "yargs": "^17.5.1"
+  "bin": "dist/cli.js",
+  "engines": {
+    "node": ">= 18"
   },
-  "devDependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "@types/jscodeshift": "^0.11.5",
-    "@types/mocha": "^9.1.1",
-    "@types/node": "^18.6.2",
-    "@types/yargs": "^17.0.10",
-    "mocha": "^10.0.0",
-    "prettier": "^2.7.1",
-    "sinon": "^14.0.0",
-    "typescript": "^4.7.4"
-  }
+  "scripts": {
+    "migrate": "node ./dist/cli.js",
+    "migrate-internal": "tsx cli.ts --configPath=../../demos/tsconfig.json --target=yfiles",
+    "migrate-playground": "tsx cli.ts --configPath=./playground/vite/tsconfig.json",
+    "migrate-lib-snippets": "tsx cli.ts --configPath=../../../lib/src/snippets/tsconfig.json",
+    "migrate-dguide-snippets": "tsx cli.ts --configPath=../../../dguide/src/examples/tsconfig.src.json",
+    "build": "npx tsc",
+    "test": "node --import tsx --test **/*.spec.ts"
+
+  },
+  "dependencies": {
+    "kolorist": "^1.8.0",
+    "lodash": "^4.17.21",
+    "ts-morph": "^22.0.0"
+  },
+  "private": true,
+  "type": "module",
+  "files": [
+    "README.md",
+    "package.json",
+    "dist"
+  ]
 }

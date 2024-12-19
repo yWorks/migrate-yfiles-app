@@ -1,1 +1,0 @@
-graphControl.add(group, visual)

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { NewLineKind, Project, QuoteKind } from 'ts-morph'
 import { transform } from './src/transformations.js'
 import { parseArgs } from 'node:util'

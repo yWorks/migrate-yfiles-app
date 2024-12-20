@@ -19,11 +19,11 @@ operations.
 ## Usage
 Point the migration-tool to the tsconfig of your project
 ```
-npx @yworks/migration-tool --configPath=<path_to_tsconfig>
+npx @yworks/migrate-yfiles-app@latest --configPath=<path_to_tsconfig>
 ```
 or alternatively to a folder containing the files you want to migrate
 ```
-npx @yworks/migration-tool --folderPath=<path_to_migratable_files>
+npx @yworks/migrate-yfiles-app@latest --folderPath=<path_to_migratable_files>
 ```
 ## About yFiles
 

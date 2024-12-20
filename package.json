@@ -11,7 +11,10 @@
   },
   "scripts": {
     "migrate": "node ./dist/cli.js",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "node --import tsx --test **/*.spec.ts",
+    "migrate-internal": "tsx cli.ts --configPath=../../demos/tsconfig.json --target=yfiles",
+    "migrate-playground": "tsx cli.ts --folderPath=./playground"
   },
   "dependencies": {
     "kolorist": "^1.8.0",
@@ -21,7 +24,8 @@
   "devDependencies": {
     "@types/node": "^22.10.2",
     "@types/lodash": "^4.17.13",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "tsx": "^4.19.2"
   },
   "private": false,
   "type": "module",

@@ -11,18 +11,17 @@
   },
   "scripts": {
     "migrate": "node ./dist/cli.js",
-    "migrate-internal": "tsx cli.ts --configPath=../../demos/tsconfig.json --target=yfiles",
-    "migrate-playground": "tsx cli.ts --configPath=./playground/vite/tsconfig.json",
-    "migrate-lib-snippets": "tsx cli.ts --configPath=../../../lib/src/snippets/tsconfig.json",
-    "migrate-dguide-snippets": "tsx cli.ts --configPath=../../../dguide/src/examples/tsconfig.src.json",
-    "build": "npx tsc",
-    "test": "node --import tsx --test **/*.spec.ts"
-
+    "build": "tsc"
   },
   "dependencies": {
     "kolorist": "^1.8.0",
     "lodash": "^4.17.21",
     "ts-morph": "^22.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/lodash": "^4.17.13",
+    "typescript": "^5.7.2"
   },
   "private": false,
   "type": "module",

@@ -1,4 +1,5 @@
 # yFiles Migration Tool
+[![NPM version](https://img.shields.io/npm/v/@yworks/migrate-yfiles-app?style=flat)](https://www.npmjs.org/package/@yworks/migrate-yfiles-app)
 
 The source of this tool is available at [GitHub](https://github.com/yWorks/migrate-yfiles-app).
 

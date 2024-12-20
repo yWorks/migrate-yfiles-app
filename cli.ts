@@ -44,7 +44,7 @@ if (values.configPath) {
   ])
 } else {
   throw new Error(
-    "No source provided, use the 'config' or 'filePath' option to supply source file)"
+    "No source provided, use the 'configPath' or 'folderPath' option to supply source files)"
   )
 }
 

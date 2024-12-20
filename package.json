@@ -24,7 +24,7 @@
     "lodash": "^4.17.21",
     "ts-morph": "^22.0.0"
   },
-  "private": true,
+  "private": false,
   "type": "module",
   "files": [
     "README.md",

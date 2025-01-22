@@ -15,7 +15,7 @@ const { values } = parseArgs({
     experimental: {
       type: 'boolean'
     },
-    target: {
+    from: {
       type: 'string',
       default: 'default' as const
     }
@@ -64,7 +64,7 @@ for (const sourceFile of sourceFiles) {
   }
 
   console.log(`Working on ${sourceFile.getFilePath()}`)
-  const report = transform(sourceFile, values.experimental, values.target)
+  const report = transform(sourceFile, values.experimental, values.from)
   statisticsReports.push(report)
   const changeCount = report.getTotalChanges()
   if (changeCount > 0) {

@@ -296,7 +296,7 @@ export function isBaseClassYfiles(node: Node) {
     .getType()
     .getBaseTypes()
     .some((type) => {
-      return type.getText().includes('yfiles')
+      return type.getText().includes('yfiles-api')
     })
 }
 
@@ -311,7 +311,7 @@ export function getDeclaringClass(node: Node) {
 export function checkIfYfiles(node: Node, checkBase = true) {
   try {
     const type = node.getType().getText()
-    return type.includes('yfiles') || (isBaseClassYfiles(node) && checkBase)
+    return type.includes('yfiles-api') || (isBaseClassYfiles(node) && checkBase)
   } catch {
     return false
   }

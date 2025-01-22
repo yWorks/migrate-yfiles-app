@@ -80,6 +80,9 @@ export default {
     "Graph": {
       "groupNodes(IEnumerable)": "groupNodes(IEnumerable,INodeStyle,any)"
     },
+    "GraphCopier": {
+      "copy": "copy(IGraph,IGraph,IEnumerable,INode,Point,UNRESOLVED.ItemCopiedCallback)"
+    },
     "GraphWrapperBase": {
       "groupNodes(IEnumerable)": "groupNodes(IEnumerable,INodeStyle,any)"
     },
@@ -111,6 +114,9 @@ export default {
     "EditLabelInputMode": {
       "startLabelCreation": "startLabelAddition"
     },
+    "LabelPositionHandler": {
+      "useParameterFinder": "shouldUseParameterFinder"
+    },
     "CanvasComponent": {
       "toPageFromView": "viewToPageCoordinates",
       "toViewFromPage": "pageToViewCoordinates",
@@ -140,9 +146,18 @@ export default {
     },
     "StripeSelection": {
       "ofType": "ofType(number)"
+    },
+    "TextWrapping": {
+      "CHARACTER": "WRAP_CHARACTER",
+      "CHARACTER_ELLIPSIS": "WRAP_CHARACTER_ELLIPSIS",
+      "WORD": "WRAP_WORD",
+      "WORD_ELLIPSIS": "WRAP_WORD_ELLIPSIS"
     }
   },
   "membersRemoved": {
+    "Point": {
+      "moveBy": null
+    },
     "Command": {
       "MOVE_FOCUS_PAGE_DOWN": null,
       "MOVE_FOCUS_PAGE_UP": null,
@@ -262,6 +277,9 @@ export default {
       "distanceTo(Point)",
       "distanceTo(Rect)"
     ],
+    "GraphCopier": [
+      "copy(IGraph,IGraph,UNRESOLVED.Predicate,INode,Point,UNRESOLVED.ItemCopiedCallback)"
+    ],
     "Command": [
       "EXTEND_SELECTION_HIERARCHY_DOWN",
       "EXTEND_SELECTION_HIERARCHY_UP",
@@ -272,6 +290,9 @@ export default {
     ],
     "EditLabelHelper": [
       "onLabelPasting"
+    ],
+    "GraphEditorInputMode": [
+      "allowEditLabelOnTyping"
     ],
     "KeyboardInputMode": [
       "onTextInput",
@@ -291,6 +312,17 @@ export default {
     "TextEditorInputMode": [
       "initializeSelection",
       "selectContents"
+    ],
+    "ToolTipEventArgs": [
+      "toolTipAsync"
+    ],
+    "TabularLayout": [
+      "createLayoutData(IGraph)",
+      "createLayoutData(LayoutGraph)"
+    ],
+    "TreeMapLayout": [
+      "createLayoutData(IGraph)",
+      "createLayoutData(LayoutGraph)"
     ],
     "Color": [
       "CURRENT_COLOR"
@@ -416,14 +448,8 @@ export default {
     "MultiComponentLayerAssigner": {
       "componentComparator": "function(yfiles.collections.YList<yfiles.layout.LayoutNode>, yfiles.collections.YList<yfiles.layout.LayoutNode>):number"
     },
-    "ItemToolTipEventArgs": {
-      "toolTip": "string | HTMLElement | Promise<string | HTMLElement>"
-    },
     "LabelTextValidatingEventArgs": {
       "validatedText": "Promise<string | null> | string"
-    },
-    "ToolTipEventArgs": {
-      "toolTip": "string | HTMLElement | Promise<string | HTMLElement>"
     },
     "LayoutExecutor": {
       "edgeComparator": "function(yfiles.graph.IEdge, yfiles.graph.IEdge):number",
@@ -495,9 +521,16 @@ export default {
   "methodsProperties": {},
   "compatMethods": {},
   "typesRenamed": {
+    "EdgeDecorationBendsRenderTag": "EdgeIndicatorBendsRenderTag",
+    "EdgeStyleDecorationRenderer": "EdgeStyleIndicatorRenderer",
     "ItemToolTipEventArgs": "QueryItemToolTipEventArgs",
+    "LabelStyleDecorationRenderer": "LabelStyleIndicatorRenderer",
+    "NodeStyleDecorationRenderer": "NodeStyleIndicatorRenderer",
+    "PortStyleDecorationRenderer": "PortStyleIndicatorRenderer",
     "SegmentRatioPortLocationModel": "EdgeSegmentPortLocationModel",
-    "SegmentRatioPortLocationModelParameter": "EdgeSegmentPortLocationModelParameter"
+    "SegmentRatioPortLocationModelParameter": "EdgeSegmentPortLocationModelParameter",
+    "StyleDecorationZoomPolicy": "StyleIndicatorZoomPolicy",
+    "ToolTipEventArgs": "QueryToolTipEventArgs"
   },
   "moduleChanges": {},
   "constructorMappings": {}

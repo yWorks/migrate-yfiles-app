@@ -422,7 +422,6 @@ export default {
     "SnapSize",
     "StripeInputRenderTag",
     "StripeLabelInputRenderTag",
-    "ToolTipEventArgs",
     "LabelingCosts",
     "LabelingScope",
     "LabelScopeData",
@@ -488,7 +487,7 @@ export default {
     "RootPlacementPolicy",
     "SubtreeTransform",
     "CssFill",
-    "EdgeDecorationBendsRenderTag",
+    "EdgeIndicatorBendsRenderTag",
     "ObjectRendererBase",
     "PointerType",
     "PortCandidateRenderTag",
@@ -992,12 +991,12 @@ export default {
     },
     "GraphCopier": {
       "clone": "cloneTypes",
-      "copy(IGraph,UNRESOLVED.Predicate,IGraph,Point,UNRESOLVED.ElementCopiedCallback)": "copy",
-      "copy(IGraph,UNRESOLVED.Predicate,IGraph,INode,Point,UNRESOLVED.ElementCopiedCallback)": "copy",
-      "copy(IGraph,IGraph)": "copy",
-      "copyChildNode": "copy",
+      "copy(IGraph,UNRESOLVED.Predicate,IGraph,Point,UNRESOLVED.ElementCopiedCallback)": "copy(IGraph,IGraph,UNRESOLVED.Predicate,INode,Point,UNRESOLVED.ItemCopiedCallback)",
+      "copy(IGraph,UNRESOLVED.Predicate,IGraph,INode,Point,UNRESOLVED.ElementCopiedCallback)": "copy(IGraph,IGraph,UNRESOLVED.Predicate,INode,Point,UNRESOLVED.ItemCopiedCallback)",
+      "copy(IGraph,IGraph)": "copy(IGraph,IGraph,UNRESOLVED.Predicate,INode,Point,UNRESOLVED.ItemCopiedCallback)",
+      "copyChildNode": "copy(IGraph,IGraph,UNRESOLVED.Predicate,INode,Point,UNRESOLVED.ItemCopiedCallback)",
       "copyGroupNode": "createGroupNode",
-      "copyNode": "copy"
+      "copyNode": "copy(IGraph,IGraph,UNRESOLVED.Predicate,INode,Point,UNRESOLVED.ItemCopiedCallback)"
     },
     "GraphDecorator": {
       "bendDecorator": "bends",
@@ -1678,7 +1677,8 @@ export default {
       "snappedMousePosition": "snappedPointerPosition"
     },
     "LabelPositionHandler": {
-      "candidateTemplate": "candidateRenderer"
+      "candidateTemplate": "candidateRenderer",
+      "useParameterFinder": "shouldUseParameterFinder"
     },
     "LabelSnapContext": {
       "collectAllEdgeDistanceSnapLines": "considerEdgeLabelAllEdgeLabelsDistanceSnapping",
@@ -3025,6 +3025,12 @@ export default {
     "SelectionIndicatorManager": {
       "getCanvasObjectGroup": "getRenderTreeGroup",
       "getInstaller": "getRenderer"
+    },
+    "TextWrapping": {
+      "CHARACTER": "WRAP_CHARACTER",
+      "CHARACTER_ELLIPSIS": "WRAP_CHARACTER_ELLIPSIS",
+      "WORD": "WRAP_WORD",
+      "WORD_ELLIPSIS": "WRAP_WORD_ELLIPSIS"
     },
     "TouchEventArgs": {
       "eventType": "pointerType",
@@ -7036,8 +7042,17 @@ export default {
       "copy(IGraph,UNRESOLVED.Predicate,IGraph,Point,UNRESOLVED.ElementCopiedCallback)": [
         0,
         2,
+        1,
         3,
         4
+      ],
+      "copy(IGraph,UNRESOLVED.Predicate,IGraph,INode,Point,UNRESOLVED.ElementCopiedCallback)": [
+        0,
+        2,
+        1,
+        3,
+        4,
+        5
       ],
       "copyChildNode": [
         0,
@@ -8627,7 +8642,7 @@ export default {
     "EdgeRouterPath": "PathSearchResult",
     "EdgeSegmentSnapLine": "SnapLine",
     "EdgeSnapLineProvider": "EdgeSnapReferenceProvider",
-    "EdgeStyleDecorationInstaller": "EdgeStyleDecorationRenderer",
+    "EdgeStyleDecorationInstaller": "EdgeStyleIndicatorRenderer",
     "EdgeType": "MultiPageEdgeType",
     "ExteriorEdgeLayoutDescriptor": "CircularLayoutExteriorEdgeDescriptor",
     "ExteriorLabelModel": "ExteriorNodeLabelModel",
@@ -8726,7 +8741,7 @@ export default {
     "LabelPlacements": "LabelAlongEdgePlacements",
     "LabelPreferredPlacementPolicy": "LabelPlacementPolicy",
     "LabelSnapContext": "GraphSnapContext",
-    "LabelStyleDecorationInstaller": "LabelStyleDecorationRenderer",
+    "LabelStyleDecorationInstaller": "LabelStyleIndicatorRenderer",
     "LassoTestables": "ILassoTestable",
     "LayeredNodePlacer": "LevelAlignedSubtreePlacer",
     "LayeredRoutingStyle": "LevelAlignedSubtreePlacerRoutingStyle",
@@ -8759,7 +8774,7 @@ export default {
     "NodePairBasedSnapLine": "OrthogonalSnapLine",
     "NodePlacerBase": "SingleLayerSubtreePlacer",
     "NodeSnapLineProvider": "NodeSnapReferenceProvider",
-    "NodeStyleDecorationInstaller": "NodeStyleDecorationRenderer",
+    "NodeStyleDecorationInstaller": "NodeStyleIndicatorRenderer",
     "NodeType": "MultiPageNodeType",
     "Obstacle": "RoutingObstacle",
     "OptimizationStrategy": "LabelingOptimizationStrategy",
@@ -8788,7 +8803,7 @@ export default {
     "PortDirections": "PortSides",
     "PortPlacementStageData": "BasicPortData",
     "PortSide": "PortSides",
-    "PortStyleDecorationInstaller": "PortStyleDecorationRenderer",
+    "PortStyleDecorationInstaller": "PortStyleIndicatorRenderer",
     "PreferredPlacementDescriptor": "EdgeLabelPreferredPlacement",
     "RadialLayoutEdgeRoutingStrategy": "RadialLayoutRoutingStyle",
     "RadialLayoutLayeringStrategy": "RadialLayeringStrategy",
@@ -8809,6 +8824,7 @@ export default {
     "SliderMode": "EdgeLabelSliderMode",
     "SliderParameterLocation": "SliderParameterLocations",
     "SnapLineVisualizationType": "SnapReferenceVisualizationType",
+    "StyleDecorationZoomPolicy": "StyleIndicatorZoomPolicy",
     "SubgraphLayout": "SubgraphLayoutStage",
     "SubgraphLayoutData": "SubgraphLayoutStageData",
     "SubtreeArrangement": "ChildArrangementPolicy",

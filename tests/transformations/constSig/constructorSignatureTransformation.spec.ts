@@ -42,4 +42,13 @@ describe('constructor signature transformation', () => {
     constructorSignatureTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+  it('should transform defaultLabel constructor such that clip and wrap are handled correctly', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(project, 'textWrapping', __dirname)
+    const constructorSignatureTransformation = new ConstructorSignatureTransformations(
+      sourceFile,
+      statisticsReporting
+    )
+    constructorSignatureTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
 })

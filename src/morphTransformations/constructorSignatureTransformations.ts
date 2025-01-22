@@ -29,7 +29,7 @@ export class ConstructorSignatureTransformations implements ITransformation {
         newExpression.replaceWithText(`Insets.from(${newInsets})`)
         this.statisticsReporting.addChangeCount('constructorSignatureTransformation', 1)
       }
-      if (constructedClass === 'HierarchicLayout' && constructorArgs.length == 1) {
+      else if (constructedClass === 'HierarchicLayout' && constructorArgs.length == 1) {
         const arg = constructorArgs[0]
         if (!arg.isKind(SyntaxKind.ObjectLiteralExpression)) {
           return
@@ -47,6 +47,48 @@ export class ConstructorSignatureTransformations implements ITransformation {
               `nodeLabelPlacement: NodeLabelPlacement.${initializer === 'true' ? 'CONSIDER' : 'IGNORE'}`
             )
           }
+        }
+      }
+      else if ((constructedClass === 'DefaultLabelStyle' || constructedClass === 'MarkupLabelStyle' || constructedClass === 'WebGLLabelStyle') && constructorArgs.length ==1){
+        const arg = constructorArgs[0]
+        if (!arg.isKind(SyntaxKind.ObjectLiteralExpression)) {
+          return
+        }
+        const clipTextPA = arg
+          .getProperties()
+          .find(
+            (arg) =>
+              arg.isKind(SyntaxKind.PropertyAssignment) && arg.getName() === 'clipText'
+          ) as PropertyAssignment
+        const wrappingPA = arg
+          .getProperties()
+          .find(
+            (arg) =>
+              arg.isKind(SyntaxKind.PropertyAssignment) && arg.getName() === 'wrapping'
+          ) as PropertyAssignment
+        // clip text defaults to true
+        const clipTextVal = !clipTextPA || clipTextPA.getInitializer()?.getText() == 'true'
+        const wrappingPAVal = !wrappingPA ? "'none'" : wrappingPA.getInitializer()?.getText()
+        let replaceVal:string = ''
+        if(wrappingPAVal && wrappingPAVal.includes('.')){
+          if(wrappingPAVal == "TextWrapping.NONE"){
+            if(clipTextVal){
+              replaceVal = "TextWrapping.CLIP"
+            }
+          }
+        }else{
+          if(wrappingPAVal == "'none'"){
+            if(clipTextVal){
+            replaceVal = "'clip'"
+            }
+          }else{
+            replaceVal = `'wrap-${wrappingPAVal?.replaceAll("'","")}'`
+          }
+        }
+        if(replaceVal) {
+          wrappingPA.replaceWithText(
+            `wrapping: ${replaceVal}`
+          )
         }
       }
     }

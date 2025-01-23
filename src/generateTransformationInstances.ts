@@ -38,7 +38,8 @@ export function generateTransformationInstances(
   return {
     simplePropertyAccessTransformations: new SimplePropertyAccessTransformations(
       sourceFile,
-      statisticsReporting
+      statisticsReporting,
+      loggingFunction
     ),
     simpleCallExpressionTransformations: new SimpleCallExpressionTransformations(
       sourceFile,

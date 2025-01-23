@@ -6,11 +6,12 @@ import { fileURLToPath } from 'node:url'
 import { dirname } from 'path'
 
 import { SimplePropertyAccessTransformations } from '../../../src/morphTransformations/simplePropertyAccessTransformations'
-import { setGlobalProject } from '../../../src/utils'
+import { addMigrationComment, setGlobalProject } from '../../../src/utils'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const statisticsReporting = new StatisticsReport()
+const loggingFunction = addMigrationComment
 const project = generateProject(__dirname)
 
 describe('simple property access transformations', () => {
@@ -20,7 +21,8 @@ describe('simple property access transformations', () => {
     const { sourceFile, assertSourceFile } = setupProjects(project, 'removeDollarClass', __dirname)
     const methodTransformation = new SimplePropertyAccessTransformations(
       sourceFile,
-      statisticsReporting
+      statisticsReporting,
+      loggingFunction
     )
     methodTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
@@ -33,7 +35,8 @@ describe('simple property access transformations', () => {
     )
     const methodTransformation = new SimplePropertyAccessTransformations(
       sourceFile,
-      statisticsReporting
+      statisticsReporting,
+      loggingFunction
     )
     methodTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
@@ -42,7 +45,8 @@ describe('simple property access transformations', () => {
     const { sourceFile, assertSourceFile } = setupProjects(project, 'incrementalHints', __dirname)
     const methodTransformation = new SimplePropertyAccessTransformations(
       sourceFile,
-      statisticsReporting
+      statisticsReporting,
+      loggingFunction
     )
     methodTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
@@ -51,7 +55,8 @@ describe('simple property access transformations', () => {
     const { sourceFile, assertSourceFile } = setupProjects(project, 'lineSegmentHV', __dirname)
     const methodTransformation = new SimplePropertyAccessTransformations(
       sourceFile,
-      statisticsReporting
+      statisticsReporting,
+      loggingFunction
     )
     methodTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
@@ -64,7 +69,8 @@ describe('simple property access transformations', () => {
     )
     const methodTransformation = new SimplePropertyAccessTransformations(
       sourceFile,
-      statisticsReporting
+      statisticsReporting,
+      loggingFunction
     )
     methodTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
@@ -77,7 +83,22 @@ describe('simple property access transformations', () => {
     )
     const methodTransformation = new SimplePropertyAccessTransformations(
       sourceFile,
-      statisticsReporting
+      statisticsReporting,
+      loggingFunction
+    )
+    methodTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
+  it('should add warning to OrientedRectangle.angle', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'orientedRect',
+      __dirname
+    )
+    const methodTransformation = new SimplePropertyAccessTransformations(
+      sourceFile,
+      statisticsReporting,
+      loggingFunction
     )
     methodTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())

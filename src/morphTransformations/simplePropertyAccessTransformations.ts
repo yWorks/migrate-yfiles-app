@@ -1,4 +1,4 @@
-import { checkIfYfiles, matchType, type ITransformation, getDeclaringClass } from '../utils.js'
+import { checkIfYfiles, matchType, type ITransformation, getDeclaringClass, loggingFunction } from '../utils.js'
 import {
   type LeftHandSideExpression,
   Node,
@@ -12,11 +12,14 @@ import type { StatisticsReport } from '../statisticsReport.js'
 export class SimplePropertyAccessTransformations implements ITransformation {
   sourceFile: SourceFile
   statisticsReporting: StatisticsReport
+  loggingFunction: loggingFunction
 
-  constructor(sourceFile: SourceFile, statisticsReporting: StatisticsReport) {
+  constructor(sourceFile: SourceFile, statisticsReporting: StatisticsReport, loggingFunction: loggingFunction) {
     this.sourceFile = sourceFile
     this.statisticsReporting = statisticsReporting
+    this.loggingFunction = loggingFunction
   }
+
   transform() {
     const unAppliedTransforms: (() => Node<ts.Node>)[] = []
     for (const propertyAccessExpression of this.sourceFile.getDescendantsOfKind(
@@ -91,6 +94,9 @@ export class SimplePropertyAccessTransformations implements ITransformation {
             unAppliedTransforms
           )
         ) {
+          continue
+        }
+        if (this.orientedRectangleAngle(declaringClass, rightSide, propertyAccessExpression, leftSide, unAppliedTransforms)) {
           continue
         }
       }
@@ -181,6 +187,7 @@ export class SimplePropertyAccessTransformations implements ITransformation {
       }
     }
   }
+
   private lineSegmentHorizontalVertical(
     declaringClass: Node,
     rightSide: string,
@@ -216,6 +223,7 @@ export class SimplePropertyAccessTransformations implements ITransformation {
       }
     }
   }
+
   private arrowTransformations(
     declaringClass: Node,
     rightSide: string,
@@ -237,6 +245,24 @@ export class SimplePropertyAccessTransformations implements ITransformation {
       if (Object.hasOwn(arrowMap, rightSide)) {
         unAppliedTransforms.push(() =>
           propertyAccessExpression.replaceWithText(`new Arrow(ArrowType.${arrowMap[rightSide]})`)
+        )
+        this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
+        return true
+      }
+    }
+  }
+
+  private orientedRectangleAngle(
+    declaringClass: Node,
+    rightSide: string,
+    propertyAccessExpression: PropertyAccessExpression,
+    leftSide: LeftHandSideExpression,
+    unAppliedTransforms: (() => Node<ts.Node>)[]
+  ) {
+    if (matchType(declaringClass, 'OrientedRectangle')) {
+      if (rightSide === 'angle') {
+        unAppliedTransforms.push(() =>
+          this.loggingFunction(propertyAccessExpression, [], 'Rotation for angle has changed negate the angle and check the resulting visual')
         )
         this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
         return true

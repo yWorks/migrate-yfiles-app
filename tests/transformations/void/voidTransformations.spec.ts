@@ -26,6 +26,16 @@ describe('change void', () => {
     tryTransform(sourceFile, voidTransformations)
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+  it('should change the instances of voids when using instanceof', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'instanceOf',
+      __dirname
+    )
+    const voidTransformations = new VoidTransformations(sourceFile, statisticsReporting)
+    tryTransform(sourceFile, voidTransformations)
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
   it('should not change anything', () => {
     const { sourceFile, assertSourceFile } = setupProjects(project, 'notYfiles', __dirname)
     const voidTransformations = new VoidTransformations(sourceFile, statisticsReporting)

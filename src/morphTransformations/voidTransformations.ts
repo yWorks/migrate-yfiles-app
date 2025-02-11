@@ -1,5 +1,5 @@
 import { Identifier, type SourceFile, SyntaxKind } from 'ts-morph'
-import { checkIfYfiles, type ITransformation } from '../utils.js'
+import { type ITransformation } from '../utils.js'
 import type { StatisticsReport } from '../statisticsReport.js'
 
 export class VoidTransformations implements ITransformation {
@@ -23,16 +23,23 @@ export class VoidTransformations implements ITransformation {
   transform(): void
   transform(identifier: Identifier): void
   transform(identifier?: Identifier): void {
-    if (identifier?.wasForgotten()) {
+    if (!identifier || identifier?.wasForgotten()) {
       return
     }
-    const name = identifier!.getText()
+    const name = identifier.getText()
     if (
-      !identifier!.getParent().isKind(SyntaxKind.ImportSpecifier) &&
+      !identifier.getParent().isKind(SyntaxKind.ImportSpecifier) &&
       Object.hasOwn(this.voids, name)
     ) {
       const voidElem = this.voids[name]
-      identifier!.getParent().replaceWithText(`${voidElem.import}.${voidElem.singleton}`)
+      const parent = identifier?.getParent()
+      if(parent?.isKind(SyntaxKind.BinaryExpression)){
+        // instanceOf case
+        identifier.replaceWithText(`${voidElem.import}.${voidElem.singleton}`)
+      }else if(parent?.isKind(SyntaxKind.PropertyAccessExpression)){
+        // .INSTANCE case
+        identifier.getParent().replaceWithText(`${voidElem.import}.${voidElem.singleton}`)
+      }
       //TODO does this work for variations of importing yfiles?
       const yFilesImport = this.sourceFile.getImportDeclaration((i) => {
         return i.getModuleSpecifierValue().includes('yfiles')

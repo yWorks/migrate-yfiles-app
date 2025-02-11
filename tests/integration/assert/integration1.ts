@@ -1,4 +1,4 @@
-import { LayoutGraph, LayoutGrid } from 'yfiles'
+import { LayoutGraph, LayoutGrid } from '@yfiles/yfiles'
 
 function applyLayout(graph: LayoutGraph): void {
   if (graph.isEmpty

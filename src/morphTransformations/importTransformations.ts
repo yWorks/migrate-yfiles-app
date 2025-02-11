@@ -34,6 +34,7 @@ export class ImportTransformations implements ITransformation {
       for (const namedImport of importDeclaration.getNamedImports()) {
         this.handleImport(namedImport, seenNamedImports)
       }
+      importDeclaration.getModuleSpecifier().replaceWithText("'@yfiles/yfiles'")
     }
     return
   }

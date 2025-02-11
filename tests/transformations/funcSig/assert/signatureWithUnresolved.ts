@@ -21,6 +21,6 @@ const mapping = new Map<IModelItem, INode | IEdge | ILabel>()
   (original, copy) => {
     mapping.set(copy, original as INode | IEdge | ILabel)
   }
-), verify if the applied changes are desired*/copier.copy(gc.graph, copiedGraph, Point.ORIGIN, (original, copy) => {
+)*/copier.copy(gc.graph, copiedGraph, Point.ORIGIN, (original, copy) => {
         mapping.set(copy, original as INode | IEdge | ILabel)
       })

@@ -84,7 +84,7 @@ export class ChangeFunctionSignatures implements ITransformation {
           this.loggingFunction(
             callExpression,
             [originalCallExpressionText],
-            'Signature changes have been applied to #insert0#, verify if the applied changes are desired'
+            'Signature changes have been applied to #insert0#'
           )
         }
         this.statisticsReporting.addChangeCount('signaturesChanged', 1)

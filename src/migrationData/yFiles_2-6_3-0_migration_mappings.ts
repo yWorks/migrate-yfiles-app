@@ -310,7 +310,6 @@ export default {
     "PortStyle": null,
     "RootPlacement": null,
     "RotatableNodePlacerBase": null,
-    "RotatableNodePlacerMatrix": null,
     "RotatedSubtreeShape": null,
     "SimpleNodePlacer": null,
     "TreeComponentLayout": null,
@@ -1355,6 +1354,7 @@ export default {
       "getNodeData": "getNodeContext"
     },
     "INodeData": {
+      "groupId": "edgeGroupId",
       "nodeLayoutDescriptor": "nodeDescriptor",
       "parentGroupNode": "groupNode"
     },
@@ -2786,6 +2786,16 @@ export default {
     },
     "RootNodePolicy": {
       "SELECTED_ROOT": "CENTER_ROOT"
+    },
+    "RotatableNodePlacerMatrix": {
+      "DEFAULT": "NONE",
+      "MIR_HOR": "FLIP_Y",
+      "MIR_HOR_ROT90": "ROTATE_LEFT",
+      "MIR_VERT": "ROTATE_RIGHT_FLIP_Y",
+      "MIR_VERT_ROT90": "ROTATE_LEFT",
+      "ROT180": "ROTATE_180",
+      "ROT270": "ROTATE_LEFT",
+      "ROT90": "ROTATE_LEFT"
     },
     "TreeLayoutEdgeRoutingStyle": {
       "FORK": "ORTHOGONAL",
@@ -8361,6 +8371,16 @@ export default {
       "RIGHT": "number",
       "TRAILING": "number"
     },
+    "RotatableNodePlacerMatrix": {
+      "DEFAULT": "number",
+      "MIR_HOR": "number",
+      "MIR_HOR_ROT90": "number",
+      "MIR_VERT": "number",
+      "MIR_VERT_ROT90": "number",
+      "ROT180": "number",
+      "ROT270": "number",
+      "ROT90": "number"
+    },
     "TreeLayout": {
       "considerNodeLabels": "NodeLabelPlacement",
       "integratedEdgeLabeling": "EdgeLabelPlacement"
@@ -8815,6 +8835,7 @@ export default {
     "RootAlignment": "SingleLayerSubtreePlacerRootAlignment",
     "RootNodeAlignment": "SubtreeRootAlignment",
     "RootNodePolicy": "RootSelectionPolicy",
+    "RotatableNodePlacerMatrix": "SubtreeTransform",
     "RoutingPolicy": "EdgeRouterScope",
     "RowDescriptor": "LayoutGridRow",
     "SegmentRatioPortLocationModel": "EdgeSegmentPortLocationModel",
@@ -9630,6 +9651,7 @@ export default {
     "RootAlignment": "layout",
     "RootNodeAlignment": "layout",
     "RootNodePolicy": "layout",
+    "RotatableNodePlacerMatrix": "layout",
     "RoutingPolicy": "layout",
     "RoutingType": "layout",
     "RowDescriptor": "layout",
@@ -9852,8 +9874,29 @@ export default {
           "true"
         ],
         "ctorPosition": -1,
-        "helpMsg": "Orthogonal Routing is the new default, if a different edge routing is desired it needs to be set on the routingStyleDescriptor.DefaultRoutingStyle"
+        "helpMsg": "Orthogonal Routing is the new default, if a different edge routing is desired it needs to be set on the RoutingStyleDescriptor.defaultRoutingStyle"
+      }
+    },
+    "DefaultLabelStyle": {
+      "wrapping": {
+        "values": [
+          "NONE",
+          "TextWrapping.WRAP_WORD_ELLIPSIS"
+        ],
+        "ctorPosition": -1,
+        "helpMsg": ""
+      }
+    },
+    "MarkupLabelStyle": {
+      "wrapping": {
+        "values": [
+          "NONE",
+          "TextWrapping.WRAP_WORD_ELLIPSIS"
+        ],
+        "ctorPosition": -1,
+        "helpMsg": ""
       }
     }
   }
 }
+

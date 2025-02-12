@@ -17,7 +17,7 @@ const { values } = parseArgs({
     },
     from: {
       type: 'string',
-      default: 'default' as const
+      default: '2.6' as const
     }
   }
 })

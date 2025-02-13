@@ -12,7 +12,7 @@ const geim =  new GraphEditorInputMode({
   /*TODO-Migration movableItems has been removed. use movableSelected/UnselectedItems respectively*/movableItems:GraphItemTypes.NONE
 })
 
-const layout = new HierarchicalLayout(/*TODO-Migration Orthogonal Routing is the new default, if a different edge routing is desired it needs to be set on the routingStyleDescriptor.DefaultRoutingStyle*/{
+const layout = new HierarchicalLayout(/*TODO-Migration Orthogonal Routing is the new default, if a different edge routing is desired it needs to be set on the RoutingStyleDescriptor.defaultRoutingStyle*/{
   automaticEdgeGrouping: true
 })
 layout.fromSketchMode = true

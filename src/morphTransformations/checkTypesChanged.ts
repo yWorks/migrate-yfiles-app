@@ -75,7 +75,7 @@ export class TypesChangedTransformation implements ITransformation {
       //check if new type is just a renaming then we do not log a message
       if (
         Object.values(this.changes.typesRenamed).includes(newType) ||
-        (paeParent && isExcluded(getType(paeParent) ?? null))
+        (paeParent && (isExcluded(getType(paeParent) ?? null) || isExcluded(`${declaringClassType}.${paeName}`)))
       ) {
         return false
       }

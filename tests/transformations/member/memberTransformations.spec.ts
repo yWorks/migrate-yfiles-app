@@ -49,13 +49,13 @@ describe('member transformations', () => {
     memberTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
-  it('should not rename the coerceViewportLimits to newMember as it is excluded', () => {
+  it('should not warn the coerceViewportLimits to newMember as it is excluded', () => {
     const { sourceFile, assertSourceFile } = setupProjects(project, 'isExcluded', __dirname)
     const memberTransformation = new MemberTransformations(
       sourceFile,
       {
         ...emptyChanges,
-        membersRenamed: { CanvasComponent: { coerceViewportLimits: 'newMember' } }
+        returnTypesChangedTypesChanged: { CanvasComponent: { coerceViewportLimits: 'newType' } }
       },
       loggingFunction,
       statisticsReporting

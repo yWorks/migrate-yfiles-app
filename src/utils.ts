@@ -19,7 +19,8 @@ const testExcludeList = [
   'OrganicLayout.smartComponentLayout',
   'IRenderContext',
   'IInputMode',
-  'CanvasComponent.coerceViewportLimits'
+  'CanvasComponent.coerceViewportLimits',
+  'ICommand.ADD_LABEL'
 ]
 const localExcludeList = process.env.NODE_TEST_CONTEXT?.includes('child')
   ? testExcludeList

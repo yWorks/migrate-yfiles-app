@@ -89,24 +89,25 @@ export class ConstructorTransformations implements ITransformation {
     let optionProperties = optionArg.getProperties()
     for (const prop of optionProperties) {
       if (
-        prop.isKind(SyntaxKind.PropertyAssignment) &&
-        !isExcluded(`${constructedClass}.${prop.getName()}`)
+        prop.isKind(SyntaxKind.PropertyAssignment)
       ) {
         const originalPropName = prop.getName()
         const renamedProp = this.checkRename(prop, constructedClass)
         // are exclusive, can not be in rename and obsolete/removed
-        if (!renamedProp) {
-          if (this.checkObsolete(prop, constructedClass)) {
-            continue
-          }
-          if (this.checkRemoved(prop, constructedClass)) {
-            {
+        if (!isExcluded(`${constructedClass}.${prop.getName()}`)) {
+          if (!renamedProp) {
+            if (this.checkObsolete(prop, constructedClass)) {
               continue
             }
+            if (this.checkRemoved(prop, constructedClass)) {
+              {
+                continue
+              }
+            }
           }
+          // can be renamed and type changed
+          this.checkTypeChanged(renamedProp ?? prop, originalPropName, constructedClass)
         }
-        // can be renamed and type changed
-        this.checkTypeChanged(renamedProp ?? prop, originalPropName, constructedClass)
       }
     }
     //re-acquire properties in case one was obsolete-removed
@@ -125,6 +126,7 @@ export class ConstructorTransformations implements ITransformation {
     }
     return renamedProp?.getParent() as PropertyAssignment | undefined
   }
+
   checkObsolete(prop: PropertyAssignment, constructedClass: string) {
     const propertyName = prop.getName()
     const obsoleteProps = this.changes.membersObsolete?.[constructedClass]
@@ -135,6 +137,7 @@ export class ConstructorTransformations implements ITransformation {
     }
     return false
   }
+
   checkRemoved(prop: PropertyAssignment, constructedClass: string) {
     const propertyName = prop.getName()
     const removedProps = this.changes.membersRemoved?.[constructedClass] ?? {}
@@ -171,6 +174,7 @@ export class ConstructorTransformations implements ITransformation {
     }
     return
   }
+
   checkDefaultsChanged(node: Node, properties: Node[], constructedClass: string) {
     const defaultChanges = this.changes.defaultChanges?.[constructedClass]
     const propertyNames = properties.map((prop) => {

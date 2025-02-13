@@ -48,6 +48,16 @@ export class MemberTransformations implements ITransformation {
       }
       const memberName = propertyAccessExpression.getName()
       const memberNameNode = propertyAccessExpression.getNameNode()
+      if (
+        this.checkRenamed(
+          declaringClassTypeText,
+          memberName,
+          propertyAccessExpression,
+          unAppliedTransforms
+        )
+      ) {
+        continue
+      }
       //exclusions should be mentioned in full "class.method"
       if (isExcluded(`${declaringClassTypeText}.${memberName}`)) {
         continue
@@ -61,17 +71,7 @@ export class MemberTransformations implements ITransformation {
       )
 
       // if members are functionally required but have been removed with their functionality now
-      // found in other concepts warn the user and TODO point to a KB article (or similar)
-      if (
-        this.checkRenamed(
-          declaringClassTypeText,
-          memberName,
-          propertyAccessExpression,
-          unAppliedTransforms
-        )
-      ) {
-        continue
-      }
+      // found in other concepts warn the user and  point to a KB article (or similar)
       this.checkRemoved(declaringClassTypeText, memberName, memberNameNode, unAppliedTransforms)
     }
     for (const fn of unAppliedTransforms) {

@@ -1,4 +1,4 @@
-import { LayoutGraph, LayoutGrid } from '@yfiles/yfiles'
+import { LayoutGraph, LayoutGrid, Command } from '@yfiles/yfiles'
 
 function applyLayout(graph: LayoutGraph): void {
   if (graph.isEmpty
@@ -8,3 +8,5 @@ function applyLayout(graph: LayoutGraph): void {
 
   const grid = LayoutGrid.getLayoutGrid(graph)
 }
+
+const command = Command.ADD_LABEL

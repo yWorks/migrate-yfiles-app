@@ -59,7 +59,7 @@ export class TypesRemovedTransformations implements ITransformation {
   transform(identifier?: Identifier): void {
     if (identifier) {
       const name = identifier?.getText()
-      if (Object.keys(this.changes.typesRemoved).includes(name)) {
+      if (Object.keys(this.changes.typesRemoved).includes(name) && !isExcluded(name)) {
         this.loggingFunction(
           identifier,
           [identifier.getText()],

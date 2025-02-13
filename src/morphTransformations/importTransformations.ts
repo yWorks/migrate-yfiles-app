@@ -20,13 +20,14 @@ export class ImportTransformations implements ITransformation {
     this.wrappedTransform = wrappedTransform
     this.statisticsReporting = statisticsReporting
   }
+  yfilesModuleSpecifiers = ['yfiles', '@yfiles/yfiles']
   /**
    * Process imports: Remove no longer existing types and duplicates created by previous renames
    */
   transform() {
     const importDeclarations = this.sourceFile.getImportDeclarations()
     for (const importDeclaration of importDeclarations) {
-      if (!importDeclaration.getModuleSpecifier().getLiteralValue().includes('yfiles')) {
+      if (!this.yfilesModuleSpecifiers.includes(importDeclaration.getModuleSpecifier().getLiteralValue())) {
         continue
       }
 

@@ -14,7 +14,7 @@ import {
   getType,
   isExcluded,
   type ITransformation,
-  type loggingFunction
+  type loggingFunction, replaceWithTextTryCatch
 } from '../utils.js'
 import type { StatisticsReport } from '../statisticsReport.js'
 
@@ -94,7 +94,7 @@ export class MemberTransformations implements ITransformation {
       if (matchingSignature) {
         const matchedValue = this.changes.membersRenamed[declaringClassTypeText][matchingSignature]
         const replaceText = matchedValue.split('(')[0]
-        unappliedTransforms.push(() => parent.getNameNode().replaceWithText(replaceText))
+        unappliedTransforms.push(() => replaceWithTextTryCatch(parent.getNameNode(), replaceText))
         this.statisticsReporting.addChangeCount('membersRenamed', 1)
         return true
       }

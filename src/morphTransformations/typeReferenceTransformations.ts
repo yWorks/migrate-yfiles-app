@@ -1,4 +1,4 @@
-import { type ITransformation } from '../utils.js'
+import { type ITransformation, replaceWithTextTryCatch } from '../utils.js'
 import { type SourceFile, SyntaxKind } from 'ts-morph'
 import type { StatisticsReport } from '../statisticsReport.js'
 
@@ -16,7 +16,7 @@ export class TypeReferenceTransformations implements ITransformation {
       .reverse()) {
       const refName = typeReference.getTypeName().getText()
       if (Object.hasOwn(this.typeReferenceRenamings, refName)) {
-        typeReference.getTypeName().replaceWithText(this.typeReferenceRenamings[refName])
+        replaceWithTextTryCatch(typeReference.getTypeName(), this.typeReferenceRenamings[refName])
         this.statisticsReporting.addChangeCount('typeReferenceTransformation', 1)
       }
     }

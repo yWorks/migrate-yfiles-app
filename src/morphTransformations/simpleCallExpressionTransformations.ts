@@ -1,4 +1,4 @@
-import { checkIfYfiles, matchType, type ITransformation, getDeclaringClass } from '../utils.js'
+import { checkIfYfiles, matchType, type ITransformation, getDeclaringClass, replaceWithTextTryCatch } from '../utils.js'
 import {
   type CallExpression,
   type LeftHandSideExpression,
@@ -127,7 +127,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
       if (parent && parent.isKind(SyntaxKind.CallExpression)) {
         const callArgs: string[] = parent.getArguments().map((arg) => arg.getText())
         const newText = `new Size(${callArgs.join(', ')})`
-        callExpression.replaceWithText(newText)
+        replaceWithTextTryCatch(callExpression, newText)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       }
@@ -142,7 +142,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
   ) {
     if (rightSide === 'getDataProvider' && matchType(declaringClass, 'Graph')) {
       const arg = callExpression.getArguments()[0]
-      callExpression.replaceWithText(`${leftSide.getText()}.context.getItemData(${arg.getText()})`)
+      replaceWithTextTryCatch(callExpression, `${leftSide.getText()}.context.getItemData(${arg.getText()})`)
       this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
       return true
     }
@@ -157,7 +157,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
     if (rightSide === 'addDataProvider' && matchType(declaringClass, 'Graph')) {
       const arg1 = callExpression.getArguments()[0]
       const arg2 = callExpression.getArguments()[1]
-      callExpression.replaceWithText(
+      replaceWithTextTryCatch(callExpression, 
         `${leftSide.getText()}.context.addItemData(${arg1.getText()}, ${arg2.getText()})`
       )
       this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
@@ -174,7 +174,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
     if (rightSide == 'setStyle' && matchType(declaringClass, 'GraphModelManager')) {
       const arg1 = callExpression.getArguments()[0]
       const arg2 = callExpression.getArguments()[1]
-      callExpression.replaceWithText(
+      replaceWithTextTryCatch(callExpression, 
         `${leftSide.getText()}.graph.setStyle(${arg1.getText()}, ${arg2.getText()})`
       )
       this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
@@ -190,7 +190,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
   ) {
     if (rightSide === 'removeDataProvider' && matchType(declaringClass, 'Graph')) {
       const arg = callExpression.getArguments()[0]
-      callExpression.replaceWithText(`${leftSide.getText()}.context.remove(${arg.getText()})`)
+      replaceWithTextTryCatch(callExpression, `${leftSide.getText()}.context.remove(${arg.getText()})`)
       this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
       return true
     }
@@ -203,7 +203,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
   ) {
     if (matchType(declaringClass, 'Class')) {
       if (callExpression.getArguments()[0].getText() === 'LayoutExecutor') {
-        callExpression.replaceWithText('LayoutExecutor.ensure()')
+        replaceWithTextTryCatch(callExpression, 'LayoutExecutor.ensure()')
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else {
@@ -229,7 +229,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
       const arg1 = callExpression.getArguments()[0]
       const arg2 = callExpression.getArguments()[1]
       const addRemove = arg2.getText() === 'true' ? 'add' : 'remove'
-      callExpression.replaceWithText(`${leftHand.getText()}.${addRemove}(${arg1.getText()})`)
+      replaceWithTextTryCatch(callExpression, `${leftHand.getText()}.${addRemove}(${arg1.getText()})`)
       this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
       return true
     }
@@ -244,7 +244,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
   ) {
     if (propertyAccessExpression.getName() === 'isInstance') {
       const arg1 = callExpression.getArguments()[0]
-      callExpression.replaceWithText(`(${arg1.getText()} instanceof ${leftHand.getText()})`)
+      replaceWithTextTryCatch(callExpression, `(${arg1.getText()} instanceof ${leftHand.getText()})`)
 
       this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
       return true
@@ -267,7 +267,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
       }
       const arg1 = callExpression.getArguments()[0]
       if (Object.hasOwn(mapping, arg1.getText())) {
-        arg1.replaceWithText(`${mapping[arg1.getText()]}`)
+        replaceWithTextTryCatch(arg1, `${mapping[arg1.getText()]}`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       }
@@ -283,17 +283,17 @@ export class SimpleCallExpressionTransformations implements ITransformation {
   ) {
     if (matchType(declaringClass, 'HighlightIndicatorManager<IModelItem>')) {
       if (rightHand === 'clearHighlights') {
-        callExpression.replaceWithText(`${leftHand.getText()}.items?.clear()`)
+        replaceWithTextTryCatch(callExpression, `${leftHand.getText()}.items?.clear()`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (rightHand === 'addHighlight') {
         const arg = callExpression.getArguments()[0]
-        callExpression.replaceWithText(`${leftHand.getText()}.items?.add(${arg.getText()})`)
+        replaceWithTextTryCatch(callExpression, `${leftHand.getText()}.items?.add(${arg.getText()})`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (rightHand === 'removeHighlight') {
         const arg = callExpression.getArguments()[0]
-        callExpression.replaceWithText(`${leftHand.getText()}.items?.remove(${arg.getText()})`)
+        replaceWithTextTryCatch(callExpression, `${leftHand.getText()}.items?.remove(${arg.getText()})`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       }
@@ -326,12 +326,12 @@ export class SimpleCallExpressionTransformations implements ITransformation {
           const arg1 = args[0].getText()
           const arg2 = args[1].getText()
           const arg3 = args[2].getText()
-          parent.replaceWithText(`${arg1}.layout.width = ${arg2}\n${arg1}.layout.height = ${arg3}`)
+          replaceWithTextTryCatch(parent, `${arg1}.layout.width = ${arg2}\n${arg1}.layout.height = ${arg3}`)
           this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         } else if (args.length == 2) {
           const arg1 = args[0].getText()
           const arg2 = args[1].getText()
-          parent.replaceWithText(
+          replaceWithTextTryCatch(parent, 
             `${arg1}.layout.width = ${arg2}.width\n${arg1}.layout.height = ${arg2}.height`
           )
         } else {
@@ -348,12 +348,12 @@ export class SimpleCallExpressionTransformations implements ITransformation {
           const arg1 = args[0].getText()
           const arg2 = args[1].getText()
           const arg3 = args[2].getText()
-          parent.replaceWithText(`${arg1}.layout.center = new Point(${arg2},${arg3})`)
+          replaceWithTextTryCatch(parent, `${arg1}.layout.center = new Point(${arg2},${arg3})`)
           this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         } else if (args.length == 2) {
           const arg1 = args[0].getText()
           const arg2 = args[1].getText()
-          parent.replaceWithText(`${arg1}.layout.center = ${arg2}`)
+          replaceWithTextTryCatch(parent, `${arg1}.layout.center = ${arg2}`)
         } else {
           return false
         }
@@ -368,12 +368,12 @@ export class SimpleCallExpressionTransformations implements ITransformation {
           const arg1 = args[0].getText()
           const arg2 = args[1].getText()
           const arg3 = args[2].getText()
-          parent.replaceWithText(`${arg1}.layout.topLeft = new Point(${arg2},${arg3})`)
+          replaceWithTextTryCatch(parent, `${arg1}.layout.topLeft = new Point(${arg2},${arg3})`)
           this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         } else if (args.length == 2) {
           const arg1 = args[0].getText()
           const arg2 = args[1].getText()
-          parent.replaceWithText(`${arg1}.layout.topLeft = ${arg2}`)
+          replaceWithTextTryCatch(parent, `${arg1}.layout.topLeft = ${arg2}`)
         } else {
           return false
         }
@@ -381,7 +381,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
       } else if (Object.keys(propsMap).includes(rightHand)) {
         const args = callExpression.getArguments()
         if (args.length == 1) {
-          callExpression.replaceWithText(`${args[0].getText()}.${propsMap[rightHand]}`)
+          replaceWithTextTryCatch(callExpression, `${args[0].getText()}.${propsMap[rightHand]}`)
           this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         }
       }
@@ -399,81 +399,81 @@ export class SimpleCallExpressionTransformations implements ITransformation {
         ? leftHand.getExpression()
         : leftHand
       if (matchType(leftHandInternal, 'CompositeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.parameters.first()`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.parameters.first()`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'GenericLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.parameters.first()`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.parameters.first()`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'InteriorNodeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.CENTER`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.CENTER`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'StripeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.TOP`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.TOP`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'StretchStripeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.TOP`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.TOP`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'SmartEdgeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.createParameterFromSource(0)`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.createParameterFromSource(0)`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'SandwichLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.BOTTOM`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.BOTTOM`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'NinePositionsEdgeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.CENTER_CENTERED`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.CENTER_CENTERED`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'InsideOutsidePortLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.createOutsideParameter()`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.createOutsideParameter()`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'GroupNodeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.createTabParameter()`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.createTabParameter()`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'FreePortLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.CENTER`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.CENTER`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'FreeLabelModel')) {
-        callExpression.replaceWithText(
+        replaceWithTextTryCatch(callExpression,
           `${leftHandInternal.getText()}.createAbsolute(Point.ORIGIN, 0)`
         )
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'FreeNodeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.CENTER`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.CENTER`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'FreeEdgeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.createParameter()`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.createParameter()`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'ExteriorNodeLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.TOP`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.TOP`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'EdgeSegmentLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.createParameterFromSource(0)`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.createParameterFromSource(0)`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'EdgePathLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.createRatioParameter()`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.createRatioParameter()`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'BezierEdgeSegmentLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.createParameterFromSource(0)`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.createParameterFromSource(0)`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       } else if (matchType(leftHandInternal, 'BezierEdgePathLabelModel')) {
-        callExpression.replaceWithText(`${leftHandInternal.getText()}.createParameter(0.5)`)
+        replaceWithTextTryCatch(callExpression, `${leftHandInternal.getText()}.createParameter(0.5)`)
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       }

@@ -12,7 +12,7 @@ import {
   type ITransformation,
   isExcluded,
   getType,
-  compareSignature
+  compareSignature, replaceWithTextTryCatch
 } from '../utils.js'
 import type { StatisticsReport } from '../statisticsReport.js'
 
@@ -120,7 +120,7 @@ export class ConstructorTransformations implements ITransformation {
     const propertyName = prop.getName()
     let renamedProp
     if (renamedProps && Object.hasOwn(renamedProps, propertyName)) {
-      renamedProp = prop.getNameNode().replaceWithText(renamedProps[propertyName])
+      renamedProp = replaceWithTextTryCatch(prop.getNameNode(), renamedProps[propertyName])
       this.statisticsReporting.addChangeCount('membersRenamed', 1)
     }
     return renamedProp?.getParent() as PropertyAssignment | undefined

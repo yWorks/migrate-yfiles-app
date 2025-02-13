@@ -5,7 +5,7 @@ import {
   getType,
   type ITransformation,
   type loggingFunction,
-  reorderCallExpressionParameters
+  reorderCallExpressionParameters, replaceWithTextTryCatch
 } from '../utils.js'
 import {
   LeftHandSideExpression,
@@ -126,7 +126,7 @@ export class RenderTreeTransformations implements ITransformation {
       const newRightHandName = this.iCanvasObjectToRenderTreeRename[rightSide].name
       const paeExpression = propertyAccessExpression.getExpression()
       if (paeExpression.isKind(SyntaxKind.Identifier)) {
-        parent.replaceWithText(
+        replaceWithTextTryCatch(parent, 
           parent
             .getText()
             .replace(
@@ -170,7 +170,7 @@ export class RenderTreeTransformations implements ITransformation {
       if (matchingSignature) {
         const order = this.canvasComponentToRenderTreeSignatureChange[rightSide][matchingSignature]
         reorderCallExpressionParameters(parent, order)
-        propertyAccessExpression.replaceWithText(
+        replaceWithTextTryCatch(propertyAccessExpression, 
           `${leftSide.getText()}${propertyAccessExpression.hasQuestionDotToken() ? '?' : ''}.renderTree.${rightSide}`
         )
         return true
@@ -190,7 +190,7 @@ export class RenderTreeTransformations implements ITransformation {
       (baseTypes.includes('CanvasComponent') || type === 'CanvasComponent') &&
       Object.keys(this.canvasComponentToRenderTreeRename).includes(rightSide)
     ) {
-      propertyAccessExpression.replaceWithText(
+      replaceWithTextTryCatch(propertyAccessExpression, 
         `${leftSide.getText()}${propertyAccessExpression.hasQuestionDotToken() ? '?' : ''}.renderTree.${this.canvasComponentToRenderTreeRename[rightSide]}`
       )
       return true
@@ -209,7 +209,7 @@ export class RenderTreeTransformations implements ITransformation {
       (baseTypes.includes('CanvasComponent') || type === 'CanvasComponent') &&
       this.canvasComponentToRenderTree.includes(rightSide)
     ) {
-      propertyAccessExpression.replaceWithText(
+      replaceWithTextTryCatch(propertyAccessExpression, 
         `${leftSide.getText()}${propertyAccessExpression.hasQuestionDotToken() ? '?' : ''}.renderTree.${rightSide}`
       )
 
@@ -253,7 +253,7 @@ export class RenderTreeTransformations implements ITransformation {
           return false
         }
       }
-      parent.replaceWithText(
+      replaceWithTextTryCatch(parent, 
         `${leftSide.getText()}${propertyAccessExpression.hasQuestionDotToken() ? '?' : ''}.renderTree.createElement(${leftSide.getText()}, ${args[0].getText()})`
       )
       return true

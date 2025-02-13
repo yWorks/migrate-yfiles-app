@@ -1,4 +1,4 @@
-import { checkIfYfiles, type ITransformation } from '../utils.js'
+import { checkIfYfiles, type ITransformation, replaceWithTextTryCatch } from '../utils.js'
 import { type PropertyAssignment, type SourceFile, SyntaxKind } from 'ts-morph'
 import type { StatisticsReport } from '../statisticsReport.js'
 
@@ -26,7 +26,7 @@ export class ConstructorSignatureTransformations implements ITransformation {
           newExpression.removeArgument(arg)
         })
         const newInsets = `{top: ${argText[1]}, right: ${argText[2]}, bottom: ${argText[3]}, left: ${argText[0]}}`
-        newExpression.replaceWithText(`Insets.from(${newInsets})`)
+        replaceWithTextTryCatch(newExpression, `Insets.from(${newInsets})`)
         this.statisticsReporting.addChangeCount('constructorSignatureTransformation', 1)
       }
       else if (constructedClass === 'HierarchicLayout' && constructorArgs.length == 1) {
@@ -43,7 +43,7 @@ export class ConstructorSignatureTransformations implements ITransformation {
         if (considerNodeLabels) {
           const initializer = considerNodeLabels.getInitializer()?.getText()
           if (initializer) {
-            considerNodeLabels.replaceWithText(
+            replaceWithTextTryCatch(considerNodeLabels, 
               `nodeLabelPlacement: NodeLabelPlacement.${initializer === 'true' ? 'CONSIDER' : 'IGNORE'}`
             )
           }
@@ -86,7 +86,7 @@ export class ConstructorSignatureTransformations implements ITransformation {
           }
         }
         if(replaceVal) {
-          wrappingPA.replaceWithText(
+          replaceWithTextTryCatch(wrappingPA, 
             `wrapping: ${replaceVal}`
           )
         }

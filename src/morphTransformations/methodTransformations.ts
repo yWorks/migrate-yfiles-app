@@ -1,4 +1,4 @@
-import { getType, type ITransformation } from '../utils.js'
+import { getType, type ITransformation, replaceWithTextTryCatch } from '../utils.js'
 import {
   ExpressionWithTypeArguments,
   type MethodDeclaration,
@@ -30,7 +30,7 @@ export class MethodTransformations implements ITransformation {
   renameMethod(method: MethodDeclaration, mappings: Record<string, string>) {
     const methodName = method.getName()
     if (Object.hasOwn(mappings, methodName)) {
-      method.getNameNode().replaceWithText(mappings[methodName])
+      replaceWithTextTryCatch(method.getNameNode(), mappings[methodName])
       this.statisticsReporting.addChangeCount('methodTransformations', 1)
     }
   }

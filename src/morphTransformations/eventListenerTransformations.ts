@@ -13,7 +13,13 @@ import {
   SyntaxKind,
   ts
 } from 'ts-morph'
-import { checkIfYfiles, getType, type ITransformation, type loggingFunction } from '../utils.js'
+import {
+  checkIfYfiles,
+  getType,
+  type ITransformation,
+  type loggingFunction,
+  replaceWithTextTryCatch
+} from '../utils.js'
 import type { StatisticsReport } from '../statisticsReport.js'
 
 const eventNames = [
@@ -542,7 +548,7 @@ export class EventListenerTransformations implements ITransformation {
       // the function is an anonymous function
       this.handleArguments(arg as FunctionExpression)
       callExpression.insertArgument(0, `${eventString},`)
-      propertyAccessExpression.getNameNode().replaceWithText(`${prefix}EventListener`)
+      replaceWithTextTryCatch(propertyAccessExpression.getNameNode(), `${prefix}EventListener`)
       this.statisticsReporting.addChangeCount('eventTransformation', 1)
     } else {
       // any more complex case
@@ -550,7 +556,7 @@ export class EventListenerTransformations implements ITransformation {
       this.statisticsReporting.addChangeCount('eventTransformation', 1)
       callExpression.insertArgument(0, `${eventString},`)
       //TODO this was previously handled in the handleFunctionObjectArg, why?
-      propertyAccessExpression.getNameNode().replaceWithText(`${prefix}EventListener`)
+      replaceWithTextTryCatch(propertyAccessExpression.getNameNode(), `${prefix}EventListener`)
     }
   }
   transform() {

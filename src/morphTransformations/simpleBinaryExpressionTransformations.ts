@@ -3,7 +3,7 @@ import {
   getDeclaringClass,
   getType,
   type ITransformation,
-  matchType
+  matchType, replaceWithTextTryCatch
 } from '../utils.js'
 import {
   type BinaryExpression,
@@ -53,7 +53,7 @@ export class SimpleBinaryExpressionTransformations implements ITransformation {
   ) {
     if (getType(declaringClass)?.includes('Layout')) {
       if (leftSide.getName() === 'recursiveGroupLayering' && rightSide.getText() === 'false') {
-        binaryExpression.replaceWithText(
+        replaceWithTextTryCatch(binaryExpression, 
           `${leftSide.getExpression().getText()}.groupLayeringPolicy ${operatorToken.getText()} GroupLayeringPolicy.IGNORE_GROUPS`
         )
         this.statisticsReporting.addChangeCount('binaryExpressionTransformation', 1)
@@ -61,14 +61,14 @@ export class SimpleBinaryExpressionTransformations implements ITransformation {
       }
       if (leftSide.getName() === 'layoutMode') {
         if (rightSide.getText() === 'LayoutMode.INCREMENTAL') {
-          binaryExpression.replaceWithText(
+          replaceWithTextTryCatch(binaryExpression, 
             `${leftSide.getExpression().getText()}.fromSketchMode ${operatorToken.getText()} true`
           )
           this.statisticsReporting.addChangeCount('binaryExpressionTransformation', 1)
           return true
         }
         if (rightSide.getText() === 'LayoutMode.FROM_SCRATCH') {
-          binaryExpression.replaceWithText(
+          replaceWithTextTryCatch(binaryExpression, 
             `${leftSide.getExpression().getText()}.fromSketchMode ${operatorToken.getText()} false`
           )
           this.statisticsReporting.addChangeCount('binaryExpressionTransformation', 1)
@@ -79,14 +79,14 @@ export class SimpleBinaryExpressionTransformations implements ITransformation {
         const radial = matchType(leftSide.getExpression(), 'BalloonLayout')
         const placement = radial ? 'RadialNodeLabelPlacement' : 'NodeLabelPlacement'
         if (rightSide.getText() === 'false') {
-          binaryExpression.replaceWithText(
+          replaceWithTextTryCatch(binaryExpression, 
             `${leftSide.getExpression().getText()}.nodeLabelPlacement = ${placement}.IGNORE`
           )
           this.statisticsReporting.addChangeCount('binaryExpressionTransformation', 1)
           return true
         }
         if (rightSide.getText() === 'true') {
-          binaryExpression.replaceWithText(
+          replaceWithTextTryCatch(binaryExpression, 
             `${leftSide.getExpression().getText()}.nodeLabelPlacement = ${placement}.CONSIDER`
           )
           this.statisticsReporting.addChangeCount('binaryExpressionTransformation', 1)
@@ -95,14 +95,14 @@ export class SimpleBinaryExpressionTransformations implements ITransformation {
       }
       if (leftSide.getName() === 'integratedEdgeLabeling') {
         if (rightSide.getText() === 'false') {
-          binaryExpression.replaceWithText(
+          replaceWithTextTryCatch(binaryExpression, 
             `${leftSide.getExpression().getText()}.edgeLabelPlacement = EdgeLabelPlacement.IGNORE`
           )
           this.statisticsReporting.addChangeCount('binaryExpressionTransformation', 1)
           return true
         }
         if (rightSide.getText() === 'true') {
-          binaryExpression.replaceWithText(
+          replaceWithTextTryCatch(binaryExpression, 
             `${leftSide.getExpression().getText()}.edgeLabelPlacement = EdgeLabelPlacement.INTEGRATED`
           )
           this.statisticsReporting.addChangeCount('binaryExpressionTransformation', 1)
@@ -111,7 +111,7 @@ export class SimpleBinaryExpressionTransformations implements ITransformation {
       }
       if (leftSide.getName() === 'maximumDuration') {
         if (rightSide.getText() === '0') {
-          binaryExpression.replaceWithText(`${leftSide.getText()} = TimeSpan.MAX_VALUE`)
+          replaceWithTextTryCatch(binaryExpression, `${leftSide.getText()} = TimeSpan.MAX_VALUE`)
           this.statisticsReporting.addChangeCount('binaryExpressionTransformation', 1)
           return true
         }

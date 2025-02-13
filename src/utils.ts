@@ -193,6 +193,15 @@ export function getAliasType(node: Node) {
   }
 }
 
+export function replaceWithTextTryCatch(node: Node, text:string){
+  try{
+    return node.replaceWithText(text)
+  }catch (e) {
+    console.log(e)
+    return node
+  }
+}
+
 export function getAliasBaseTypes(node: Node) {
   let typeLocallyDefined
   try {

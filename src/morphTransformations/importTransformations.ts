@@ -1,6 +1,6 @@
 import { ImportSpecifier, type SourceFile } from 'ts-morph'
 import type { Changes } from '../types.js'
-import type { ITransformation, ITransformFunction } from '../utils.js'
+import { ITransformation, ITransformFunction, replaceWithTextTryCatch } from '../utils.js'
 import type { StatisticsReport } from '../statisticsReport.js'
 
 export class ImportTransformations implements ITransformation {
@@ -34,7 +34,7 @@ export class ImportTransformations implements ITransformation {
       for (const namedImport of importDeclaration.getNamedImports()) {
         this.handleImport(namedImport, seenNamedImports)
       }
-      importDeclaration.getModuleSpecifier().replaceWithText("'@yfiles/yfiles'")
+      replaceWithTextTryCatch(importDeclaration.getModuleSpecifier(), "'@yfiles/yfiles'")
     }
     return
   }

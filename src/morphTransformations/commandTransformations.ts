@@ -1,4 +1,4 @@
-import { matchType, type ITransformation } from '../utils.js'
+import { matchType, type ITransformation, replaceWithTextTryCatch } from '../utils.js'
 import {
   type CallExpression,
   type LeftHandSideExpression,
@@ -37,7 +37,7 @@ export class CommandTransformation implements ITransformation {
     if (matchType(paeLeftSide, 'ICommand')) {
       const paeRightSide = expression.getName()
       if (paeRightSide === 'canExecute' || paeRightSide === 'execute') {
-        callExpression.replaceWithText(
+        replaceWithTextTryCatch(callExpression,
           `${callExpression
             .getArguments()[1]
             .getText()}.${paeRightSide}Command(${paeLeftSide.getText()},${callExpression

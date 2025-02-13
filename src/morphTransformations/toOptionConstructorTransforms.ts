@@ -12,7 +12,7 @@ import {
   Statement,
   SyntaxKind
 } from 'ts-morph'
-import { checkIfYfiles, type loggingFunction, type ITransformation } from '../utils.js'
+import { checkIfYfiles, type loggingFunction, type ITransformation, replaceWithTextTryCatch } from '../utils.js'
 import _ from 'lodash'
 import type { StatisticsReport } from '../statisticsReport.js'
 
@@ -211,7 +211,7 @@ export class ToOptionConstructorTransforms implements ITransformation {
         }
       )
       const newObjArg = buildOptionArgument(optionArgsOutsideConstructor, existingArgs)
-      objArg.replaceWithText(newObjArg)
+      replaceWithTextTryCatch(objArg, newObjArg)
       this.statisticsReporting.addChangeCount('toOptionConstructorTransformation', 1)
       return
     }

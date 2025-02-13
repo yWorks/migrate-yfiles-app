@@ -1,5 +1,5 @@
 import { Identifier, type SourceFile, SyntaxKind } from 'ts-morph'
-import { type ITransformation } from '../utils.js'
+import { type ITransformation, replaceWithTextTryCatch } from '../utils.js'
 import type { StatisticsReport } from '../statisticsReport.js'
 
 export class VoidTransformations implements ITransformation {
@@ -35,10 +35,10 @@ export class VoidTransformations implements ITransformation {
       const parent = identifier?.getParent()
       if(parent?.isKind(SyntaxKind.BinaryExpression)){
         // instanceOf case
-        identifier.replaceWithText(`${voidElem.import}.${voidElem.singleton}`)
+        replaceWithTextTryCatch(identifier, `${voidElem.import}.${voidElem.singleton}`)
       }else if(parent?.isKind(SyntaxKind.PropertyAccessExpression)){
         // .INSTANCE case
-        identifier.getParent().replaceWithText(`${voidElem.import}.${voidElem.singleton}`)
+        replaceWithTextTryCatch(identifier.getParent(), `${voidElem.import}.${voidElem.singleton}`)
       }
       //TODO does this work for variations of importing yfiles?
       const yFilesImport = this.sourceFile.getImportDeclaration((i) => {

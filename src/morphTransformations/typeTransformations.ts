@@ -1,6 +1,6 @@
 import { Identifier, type SourceFile } from 'ts-morph'
 import type { Changes } from '../types.js'
-import { isExcluded, type ITransformation, type loggingFunction } from '../utils.js'
+import { isExcluded, type ITransformation, type loggingFunction, replaceWithTextTryCatch } from '../utils.js'
 import type { StatisticsReport } from '../statisticsReport.js'
 
 export class TypesRenamedTransformations implements ITransformation {
@@ -27,7 +27,7 @@ export class TypesRenamedTransformations implements ITransformation {
     if (identifier) {
       const name = identifier?.getText()
       if (Object.hasOwn(this.changes.typesRenamed, name)) {
-        identifier.replaceWithText(this.changes.typesRenamed[name])
+        replaceWithTextTryCatch(identifier, this.changes.typesRenamed[name])
         this.statisticsReporting.addChangeCount('typesRenamed', 1)
       }
     }

@@ -1,4 +1,11 @@
-import { checkIfYfiles, matchType, type ITransformation, getDeclaringClass, loggingFunction } from '../utils.js'
+import {
+  checkIfYfiles,
+  matchType,
+  type ITransformation,
+  getDeclaringClass,
+  loggingFunction,
+  replaceWithTextTryCatch
+} from '../utils.js'
 import {
   type LeftHandSideExpression,
   Node,
@@ -115,7 +122,7 @@ export class SimplePropertyAccessTransformations implements ITransformation {
     unAppliedTransforms: (() => Node<ts.Node>)[]
   ) {
     if (rightSide === '$class') {
-      unAppliedTransforms.push(() => propertyAccessExpression.replaceWithText(leftSide.getText()))
+      unAppliedTransforms.push(() => replaceWithTextTryCatch(propertyAccessExpression, leftSide.getText()))
       this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
       return true
     }
@@ -138,7 +145,7 @@ export class SimplePropertyAccessTransformations implements ITransformation {
       ) {
         if (rightSide === 'incrementalLayeringNodes') {
           unAppliedTransforms.push(() =>
-            propertyAccessExpression.replaceWithText(
+            replaceWithTextTryCatch(propertyAccessExpression, 
               `${leftSide.getExpression().getText()}.incrementalNodes`
             )
           )
@@ -148,7 +155,7 @@ export class SimplePropertyAccessTransformations implements ITransformation {
 
         if (rightSide === 'incrementalSequencingItems') {
           unAppliedTransforms.push(() =>
-            propertyAccessExpression.replaceWithText(
+            replaceWithTextTryCatch(propertyAccessExpression, 
               `${leftSide.getExpression().getText()}.incrementalEdges`
             )
           )
@@ -169,19 +176,19 @@ export class SimplePropertyAccessTransformations implements ITransformation {
     if (matchType(declaringClass, 'Graph')) {
       if (rightSide === 'nodeCount' || rightSide === 'n') {
         unAppliedTransforms.push(() =>
-          propertyAccessExpression.replaceWithText(`${leftSide.getText()}.nodes.size`)
+          replaceWithTextTryCatch(propertyAccessExpression, `${leftSide.getText()}.nodes.size`)
         )
         this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
         return true
       } else if (rightSide === 'edgeCount' || rightSide === 'e') {
         unAppliedTransforms.push(() =>
-          propertyAccessExpression.replaceWithText(`${leftSide.getText()}.edges.size`)
+          replaceWithTextTryCatch(propertyAccessExpression, `${leftSide.getText()}.edges.size`)
         )
         this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
         return true
       } else if (rightSide === 'empty') {
         unAppliedTransforms.push(() =>
-          propertyAccessExpression.replaceWithText(`${leftSide.getText()}.isEmpty`)
+          replaceWithTextTryCatch(propertyAccessExpression, `${leftSide.getText()}.isEmpty`)
         )
         this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
       }
@@ -198,7 +205,7 @@ export class SimplePropertyAccessTransformations implements ITransformation {
     if (matchType(declaringClass, 'LineSegment')) {
       if (rightSide === 'isHorizontal' || rightSide === 'isVertical') {
         unAppliedTransforms.push(() =>
-          propertyAccessExpression.replaceWithText(`${propertyAccessExpression.getText()}()`)
+          replaceWithTextTryCatch(propertyAccessExpression, `${propertyAccessExpression.getText()}()`)
         )
         this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
         return true
@@ -216,7 +223,7 @@ export class SimplePropertyAccessTransformations implements ITransformation {
     if (matchType(declaringClass, 'LabelEditingEventArgs')) {
       if (rightSide === 'owner') {
         unAppliedTransforms.push(() =>
-          propertyAccessExpression.replaceWithText(`${leftSide.getText()}.item.owner`)
+          replaceWithTextTryCatch(propertyAccessExpression, `${leftSide.getText()}.item.owner`)
         )
         this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
         return true
@@ -244,7 +251,7 @@ export class SimplePropertyAccessTransformations implements ITransformation {
     if (matchType(declaringClass, 'IArrow')) {
       if (Object.hasOwn(arrowMap, rightSide)) {
         unAppliedTransforms.push(() =>
-          propertyAccessExpression.replaceWithText(`new Arrow(ArrowType.${arrowMap[rightSide]})`)
+          replaceWithTextTryCatch(propertyAccessExpression, `new Arrow(ArrowType.${arrowMap[rightSide]})`)
         )
         this.statisticsReporting.addChangeCount('propertyAccessTransformation', 1)
         return true

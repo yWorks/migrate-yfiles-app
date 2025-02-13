@@ -3,6 +3,7 @@
 import { NewLineKind, Project, QuoteKind } from 'ts-morph'
 import { transform } from './src/transformations.js'
 import { parseArgs } from 'node:util'
+import { red } from 'kolorist'
 import type { StatisticsReport } from './src/statisticsReport.js'
 import { setGlobalProject } from './src/utils.js'
 import { createRequire } from 'node:module'
@@ -66,30 +67,39 @@ setGlobalProject(project, true)
 let statisticsReports: StatisticsReport[] = []
 let fileModificationCount = 0
 const sourceFiles = project.getSourceFiles()
+let installedYfiles_below3_0
+let installedYfiles_above3_0
 try {
-  const installedYfiles_below3_0 = JSON.parse(fs.readFileSync(createRequire(path.resolve(requirePath)).resolve('yfiles').replace('yfiles.js', 'package.json'), 'utf-8'))['version']
-  if (!installedYfiles_below3_0.startsWith(values.from.replace('.', ''))) {
-    throw new Error(`You specified from version ${values.from} but yfiles (semver) version ${installedYfiles_below3_0} is installed`)
-  }
+  installedYfiles_below3_0 = JSON.parse(fs.readFileSync(createRequire(path.resolve(requirePath)).resolve('yfiles').replace('yfiles.js', 'package.json'), 'utf-8'))['version']
 } catch (e: any) {
-  if (e.code == 'MODULE_NOT_FOUND') {
-    if (values.from == '2.6') {
-      throw new Error('From version is 2.6, but no 2.6 yFiles version is installed. Please install yFiles 2.6.')
-    }
-  } else throw e
+  if (values.from == '2.6') {
+    throw new Error('From version is 2.6, but no 2.6 yFiles version is installed. Please install yFiles 2.6.')
+  }
 }
 try {
-  const installedYfiles_above3_0 = JSON.parse(fs.readFileSync(createRequire(path.resolve(requirePath)).resolve('@yfiles/yfiles').replace('yfiles.js', 'package.json'), 'utf-8'))['version']
-  if (!installedYfiles_above3_0.startsWith('30') || !installedYfiles_above3_0.includes(values.from)) {
+  installedYfiles_above3_0 = JSON.parse(fs.readFileSync(createRequire(path.resolve(requirePath)).resolve('@yfiles/yfiles').replace('yfiles.js', 'package.json'), 'utf-8'))['version']
+} catch (e: any) {
+  if (values.from == 'EAP1' || values.from == 'EAP2') {
+    throw new Error(`From version is ${values.from}, but no ${values.from} yFiles version is installed. Please install yFiles ${values.from}.`)
+  }
+}
+if ((installedYfiles_below3_0 && installedYfiles_above3_0)) {
+  if (installedYfiles_below3_0.startsWith(values.from.replace('.', ''))) {
+    console.log(red(`You specified --from=${values.from}. But both: ${installedYfiles_above3_0} and ${installedYfiles_below3_0} are installed. Make sure you import from ${installedYfiles_below3_0}.`))
+  } else if (installedYfiles_above3_0.startsWith('30') && installedYfiles_above3_0.includes(values.from)) {
+    console.log(red(`You specified --from=${values.from}. But both: ${installedYfiles_below3_0} and ${installedYfiles_above3_0} are installed. Make sure you import from ${installedYfiles_above3_0}.`))
+  } else {
+    throw new Error(`You specified --from=${values.from}. But neither of the installed yFiles versions (${installedYfiles_below3_0}, ${installedYfiles_above3_0}) matches this`)
+  }
+} else {
+  if (installedYfiles_below3_0 && !installedYfiles_below3_0.startsWith(values.from.replace('.', ''))) {
+    throw new Error(`You specified from version ${values.from} but yfiles (semver) version ${installedYfiles_below3_0} is installed`)
+  } else if (installedYfiles_above3_0 && (!installedYfiles_above3_0.startsWith('30') || !installedYfiles_above3_0.includes(values.from))) {
     throw new Error(`You specified from version ${values.from} but yfiles (semver) version ${installedYfiles_above3_0} is installed`)
   }
-} catch (e: any) {
-  if (e.code == 'MODULE_NOT_FOUND') {
-    if (values.from == 'EAP1' || values.from == 'EAP2') {
-      throw new Error(`From version is ${values.from}, but no ${values.from} yFiles version is installed. Please install yFiles ${values.from}.`)
-    }
-  }else throw e
 }
+
+
 for (const sourceFile of sourceFiles) {
   if (sourceFile.getBaseName() === 'yfiles.d.ts') {
     continue

@@ -72,16 +72,15 @@ try {
     throw new Error(`You specified from version ${values.from} but yfiles (semver) version ${installedYfiles_below3_0} is installed`)
   }
 } catch (e: any) {
-  console.log('CODE', e.code)
   if (e.code == 'MODULE_NOT_FOUND') {
-    if (values.from != '2.6') {
+    if (values.from == '2.6') {
       throw new Error('From version is 2.6, but no 2.6 yFiles version is installed. Please install yFiles 2.6.')
     }
   } else throw e
 }
 try {
   const installedYfiles_above3_0 = JSON.parse(fs.readFileSync(createRequire(path.resolve(requirePath)).resolve('@yfiles/yfiles').replace('yfiles.js', 'package.json'), 'utf-8'))['version']
-  if (!installedYfiles_above3_0.startsWith('30') && !installedYfiles_above3_0.includes(values.from)) {
+  if (!installedYfiles_above3_0.startsWith('30') || !installedYfiles_above3_0.includes(values.from)) {
     throw new Error(`You specified from version ${values.from} but yfiles (semver) version ${installedYfiles_above3_0} is installed`)
   }
 } catch (e: any) {

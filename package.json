@@ -3,7 +3,7 @@
   "description": "Semi-automatically migrate yFiles for HTML code to the latest version",
   "repository": "https://github.com/yWorks/migrate-yfiles-app",
   "author": "yWorks GmbH <yfileshtml@yworks.com>",
-  "version": "30.0.7",
+  "version": "30.0.8",
   "license": "MIT",
   "bin": "dist/cli.js",
   "engines": {

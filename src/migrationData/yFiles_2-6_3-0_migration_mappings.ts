@@ -63,6 +63,7 @@ export default {
     "MapperRegistry": null,
     "SandwichLabelModel": null,
     "UndoUnitBase": null,
+    "Future": null,
     "GraphElementIdAcceptor": null,
     "GraphMLAttribute": null,
     "GraphMLParser": null,
@@ -1220,8 +1221,8 @@ export default {
       "addGraphOutputData(Class,string,TValue,UNRESOLVED.EventHandler1,KeyType,string)": "addGraphOutputData(Constructor,string,TValue,UNRESOLVED.Action3,KeyType,string)",
       "addInputMapper(Class,Class,string,IMapper)": "addInputMapper(Constructor,Constructor,string,IMapper)",
       "addInputMapper(Class,Class,UNRESOLVED.Predicate,IMapper,UNRESOLVED.EventHandler1)": "addInputMapper(Constructor,Constructor,UNRESOLVED.Predicate,IMapper,UNRESOLVED.Func4)",
-      "addInputMapperFuture(Class,Class,string)": "addInputMapperFuture(Constructor,Constructor,string)",
-      "addInputMapperFuture(Class,Class,UNRESOLVED.Predicate,UNRESOLVED.EventHandler1)": "addInputMapperFuture(Constructor,Constructor,UNRESOLVED.Predicate,UNRESOLVED.Func4)",
+      "addInputMapperFuture(Class,Class,string)": "addInputMapper(Constructor,Constructor,string,IMapper)",
+      "addInputMapperFuture(Class,Class,UNRESOLVED.Predicate,UNRESOLVED.EventHandler1)": "addInputMapper(Constructor,Constructor,string,IMapper)",
       "addOutputMapper(Class,Class,string,string,IMapper,UNRESOLVED.EventHandler1,KeyType)": "addOutputMapper(Constructor,Constructor,string,string,IMapper,UNRESOLVED.Action3,KeyType)",
       "addOutputMapper(Class,Class,string,IMapper)": "addOutputMapper(Constructor,Constructor,string,IMapper)",
       "addXamlNamespaceMapping(string,Object)": "addXamlNamespaceMapping",
@@ -1812,7 +1813,6 @@ export default {
     },
     "PortRelocationHandle": {
       "createDummyEdge": "createPreviewEdge",
-      "createDummyEdgeVisualCreator": "createPreviewEdgeVisualCreator",
       "inputModeContext": "parentInputModeContext"
     },
     "RectangleHandle": {
@@ -7626,6 +7626,10 @@ export default {
     "StripeLabelModel": {
       "createParameter": "StripeLabelModelParameter"
     },
+    "GraphMLIOHandler": {
+      "addInputMapperFuture(Class,Class,string)": "",
+      "addInputMapperFuture(Class,Class,UNRESOLVED.Predicate,UNRESOLVED.EventHandler1)": ""
+    },
     "IXamlNameMapper": {
       "getClassForName": "Constructor"
     },
@@ -8461,6 +8465,9 @@ export default {
       "eventType": "PointerType",
       "originalEvent": "PointerEventArgs"
     },
+    "WebGL2DefaultLabelStyle": {
+      "insets": "Insets"
+    },
     "WebGL2FocusIndicatorManager": {
       "nodeStyle": "WebGLNodeIndicatorStyle | WebGLBeaconNodeIndicatorStyle"
     },
@@ -9115,7 +9122,6 @@ export default {
     "FreeNodePlacer": "layout",
     "FreeNodePortLocationModel": "view",
     "FreePortLabelModel": "view",
-    "Future": "view",
     "GeneralPath": "view",
     "GeneralPathCursor": "view",
     "GeneralPathNodeStyle": "view",
@@ -9899,4 +9905,3 @@ export default {
     }
   }
 }
-

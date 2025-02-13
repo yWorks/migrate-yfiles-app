@@ -57,6 +57,7 @@ let fileModificationCount = 0
 const sourceFiles = project.getSourceFiles()
 for (const sourceFile of sourceFiles) {
   if (sourceFile.getBaseName() === 'yfiles.d.ts') {
+    //TODO einen check hier?
     continue
   }
   if (!extensionIncludeList.includes(sourceFile.getExtension())) {

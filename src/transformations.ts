@@ -3,6 +3,7 @@ import type { Changes } from './types.js'
 import changesJson2_6 from './migrationData/yFiles_2-6_3-0_migration_mappings.js'
 import changesOverride2_6 from './migrationData/changesOverride.js'
 import changesJsonEAP1 from './migrationData/yfiles_EAP1_EAP2_migration_mappings.js'
+import changesJsonEAP2 from './migrationData/yfiles_EAP1_EAP2_migration_mappings.js'
 import { addMigrationComment, logMigrationMessage, tryTransform } from './utils.js'
 import { ToOptionConstructorTransforms } from './morphTransformations/toOptionConstructorTransforms.js'
 import { StatisticsReport } from './statisticsReport.js'
@@ -20,6 +21,9 @@ export function transform(
       changes = _.merge(changesJson2_6, changesOverride2_6) as unknown as Changes
       break
     case 'EAP1':
+      changes = changesJsonEAP1 as unknown as Changes
+      break
+    case 'EAP2':
       changes = changesJsonEAP1 as unknown as Changes
       break
     default:

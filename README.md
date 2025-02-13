@@ -7,7 +7,9 @@ Use this tool to help you migrate your existing yFiles application a new version
 
 The migration-tool will work best on strict typescript. For frontend frameworks,
 it is best to keep the script-code separate from HTML-templates.
-In order to type-check the code you want migrate the tool requires you to have the previous version of yFiles for HTML installed into your project. That is, when migrating from 2.6 to 3.0, 2.6 needs to be installed. 
+> [!CAUTION]
+>In order for the migration tool to work, you to have the version of yFiles for HTML installed into your project that you want to migrate from. That is, when migrating from 2.6 to 3.0, 2.6 needs to be installed.
+
 
 ![Automatic migrations](https://raw.githubusercontent.com/yWorks/migrate-yfiles-app/master/assets/automaticMigration.png)
 

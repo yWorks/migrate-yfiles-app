@@ -143,7 +143,7 @@ export const addMigrationComment: loggingFunction = (
     if (isJsDoc) {
       return astNode
     } else {
-      return astNode.replaceWithText(`/*${todoString}*/${astNode.getText()}`)
+      return replaceWithTextTryCatch(astNode,(`/*${todoString}*/${astNode.getText()}`))
     }
   }
 
@@ -427,7 +427,7 @@ export function reorderCallExpressionParameters(
     if (expression.isKind(SyntaxKind.PropertyAccessExpression)) {
       renameNode = expression.getNameNode()
     }
-    renameNode.replaceWithText(rename)
+    replaceWithTextTryCatch(renameNode,rename)
   }
   return argsTypeChanged
 }

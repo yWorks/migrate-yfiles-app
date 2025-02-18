@@ -3,7 +3,7 @@
   "description": "Semi-automatically migrate yFiles for HTML code to the latest version",
   "repository": "https://github.com/yWorks/migrate-yfiles-app",
   "author": "yWorks GmbH <yfileshtml@yworks.com>",
-  "version": "30.0.10",
+  "version": "30.0.11",
   "license": "MIT",
   "bin": "dist/cli.js",
   "engines": {
@@ -14,7 +14,7 @@
     "build": "tsc",
     "test": "node --import tsx --test **/*.spec.ts",
     "migrate-internal": "tsx cli.ts --configPath=../../demos/tsconfig.json --target=yfiles",
-    "migrate-playground": "tsx cli.ts --folderPath=./playground"
+    "migrate-playground": "tsx cli.ts --folderPath=C:\\Users\\nicolasbrich\\vcs\\online-demos\\more-demos\\space-time-graphs\\src"
   },
   "dependencies": {
     "kolorist": "^1.8.0",

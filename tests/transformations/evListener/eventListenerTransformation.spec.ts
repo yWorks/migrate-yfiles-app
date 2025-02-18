@@ -295,4 +295,18 @@ describe('event listener transformation', () => {
     eventListenerTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+  it('event listener should also be changed on objects that are a prop on a custom class object', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'propOnClass',
+      __dirname
+    )
+    const eventListenerTransformation = new EventListenerTransformations(
+      sourceFile,
+      loggingFunction,
+      statisticsReporting
+    )
+    eventListenerTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
 })

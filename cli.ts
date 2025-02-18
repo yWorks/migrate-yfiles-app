@@ -99,7 +99,7 @@ if ((installedYfiles_below3_0 && installedYfiles_above3_0)) {
   }
 }
 
-
+const saveOps = []
 for (const sourceFile of sourceFiles) {
   if (sourceFile.getBaseName() === 'yfiles.d.ts') {
     continue
@@ -117,7 +117,9 @@ for (const sourceFile of sourceFiles) {
     console.log(`Applied ${changeCount} changes`)
   }
 
-  await sourceFile.save()
+  saveOps.push(sourceFile)
 }
-
+for (const sourceFile of saveOps) {
+  await  sourceFile.save()
+}
 console.log(`Changed ${fileModificationCount} of ${project.getSourceFiles().length} files`)

@@ -84,6 +84,51 @@ describe('member transformations', () => {
     memberTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+  it('should rename the enum constant value EAST to RIGHT', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'enumConstantRename',
+      __dirname
+    )
+    const memberTransformation = new MemberTransformations(
+      sourceFile,
+      {
+        ...emptyChanges,
+        membersRenamed: {
+          ExteriorLabelModel: { EAST: 'RIGHT' },
+        }
+      },
+      loggingFunction,
+      statisticsReporting
+    )
+    memberTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
+  it('should rename get of IDataProvider', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'idataProviderMembers',
+      __dirname
+    )
+    const memberTransformation = new MemberTransformations(
+      sourceFile,
+      {
+        ...emptyChanges,
+        membersRemoved: {
+          "DataProviderBase": {
+            "create": null,
+            "getBoolean": "Use 'get', NOTE: Check the default return's type.",
+            "getInt": "Use 'get', NOTE: Check the default return's type.",
+            "getNumber": "Use 'get', NOTE: Check the default return's type."
+          }
+        }
+      },
+      loggingFunction,
+      statisticsReporting
+    )
+    memberTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
   it('should warn of removal of getCanvasObject', () => {
     const { sourceFile, assertSourceFile } = setupProjects(
       project,

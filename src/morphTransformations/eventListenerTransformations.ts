@@ -371,7 +371,7 @@ export class EventListenerTransformations implements ITransformation {
     //check if first arg is already event args
     //todo this should only occur if were already on 3.0
     const argType = getType(args[0])
-    if (args[0].getType().getText().includes('EventArgs')) {
+    if (argType?.includes('EventArgs')) {
       return
     }
     const srcParam = args[0].getStructure()

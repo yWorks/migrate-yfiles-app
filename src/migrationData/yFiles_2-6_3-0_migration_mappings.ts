@@ -336,7 +336,7 @@ export default {
     "SizeChangedDetectionMode": null,
     "SolidColorFill": "Use color instead",
     "TableAnimation": null,
-    "Theme": null,
+    "Theme": "Use CSS classes as described in the DGuideChapter:'Themes' ",
     "ThemeVariant": null,
     "ToolTip": null,
     "TouchDevice": null,
@@ -557,30 +557,16 @@ export default {
       "setNumber": "set"
     },
     "IDataMap": {
-      "getBoolean": "get",
-      "getInt": "get",
-      "getNumber": "get",
       "setBoolean": "set",
       "setInt": "set",
       "setNumber": "set"
     },
-    "IDataProvider": {
-      "getBoolean": "get",
-      "getInt": "get",
-      "getNumber": "get"
-    },
     "IEdgeMap": {
-      "getBoolean": "get",
-      "getInt": "get",
-      "getNumber": "get",
       "setBoolean": "set",
       "setInt": "set",
       "setNumber": "set"
     },
     "INodeMap": {
-      "getBoolean": "get",
-      "getInt": "get",
-      "getNumber": "get",
       "setBoolean": "set",
       "setInt": "set",
       "setNumber": "set"
@@ -2109,7 +2095,7 @@ export default {
     },
     "LayoutExecutorAsync": {
       "createMorphAnimation": "createLayoutAnimation",
-      "duration": "stopDuration",
+      "duration": "animationDuration",
       "graphControl": "graph",
       "labelPreferredPlacementPolicy": "labelPlacementPolicies",
       "portAdjustmentPolicy": "portAdjustmentPolicies",
@@ -2145,8 +2131,6 @@ export default {
       "setRelativePortLocation": "setEdgePortLocation"
     },
     "LayoutKeys": {
-      "AFFECTED_EDGES_DP_KEY": "AFFECTED_EDGES_DATA_KEY",
-      "AFFECTED_NODES_DP_KEY": "AFFECTED_NODES_DATA_KEY",
       "NODE_TYPE_DP_KEY": "NODE_TYPE_DATA_KEY"
     },
     "LayoutStageBase": {
@@ -2378,7 +2362,7 @@ export default {
       "createRectangularCageRestriction": "createRectangularConstraint"
     },
     "OrthogonalLayoutStyle": {
-      "NORMAL": "DEFAULT"
+      "NORMAL": "STRICT"
     },
     "OrthogonalLayout": {
       "chainSize": "chainSubstructureSize",
@@ -3284,9 +3268,9 @@ export default {
     },
     "IDataProvider": {
       "create": null,
-      "getBoolean": "get",
-      "getInt": "get",
-      "getNumber": "get"
+      "getBoolean": "Use 'get', NOTE: Check the default return's type.",
+      "getInt": "Use 'get', NOTE: Check the default return's type.",
+      "getNumber": "Use 'get', NOTE: Check the default return's type."
     },
     "IEdgeLabelLayoutDpKey": {
       "declaringType": null,
@@ -4606,9 +4590,9 @@ export default {
       "PriorityChanged": "use the 'priority-changed' event"
     },
     "ContextMenuInputMode": {
-      "menuClosed": null,
-      "shouldOpenMenu": null,
-      "CloseMenu": "use the 'close-menu' event",
+      "menuClosed": "It is not needed anymore.",
+      "shouldOpenMenu": "It is not needed anymore.",
+      "CloseMenu": "use the 'menu-closed' event",
       "PopulateMenu": "use the 'populate-menu' event"
     },
     "CreateBendInputMode": {
@@ -7485,28 +7469,16 @@ export default {
       "createNode": "INode"
     },
     "IDataMap": {
-      "get": "V",
-      "getBoolean": "V",
-      "getInt": "V",
-      "getNumber": "V"
+      "get": "V"
     },
     "IDataProvider": {
-      "get": "V",
-      "getBoolean": "V",
-      "getInt": "V",
-      "getNumber": "V"
+      "get": "V"
     },
     "IEdgeMap": {
-      "get": "V",
-      "getBoolean": "V",
-      "getInt": "V",
-      "getNumber": "V"
+      "get": "V"
     },
     "INodeMap": {
-      "get": "V",
-      "getBoolean": "V",
-      "getInt": "V",
-      "getNumber": "V"
+      "get": "V"
     },
     "YNodeList": {
       "addAll(ICursor)": "boolean",
@@ -9881,26 +9853,6 @@ export default {
         ],
         "ctorPosition": -1,
         "helpMsg": "Orthogonal Routing is the new default, if a different edge routing is desired it needs to be set on the RoutingStyleDescriptor.defaultRoutingStyle"
-      }
-    },
-    "DefaultLabelStyle": {
-      "wrapping": {
-        "values": [
-          "NONE",
-          "TextWrapping.WRAP_WORD_ELLIPSIS"
-        ],
-        "ctorPosition": -1,
-        "helpMsg": ""
-      }
-    },
-    "MarkupLabelStyle": {
-      "wrapping": {
-        "values": [
-          "NONE",
-          "TextWrapping.WRAP_WORD_ELLIPSIS"
-        ],
-        "ctorPosition": -1,
-        "helpMsg": ""
       }
     }
   }

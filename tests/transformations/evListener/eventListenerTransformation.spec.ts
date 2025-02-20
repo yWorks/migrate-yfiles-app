@@ -309,4 +309,18 @@ describe('event listener transformation', () => {
     eventListenerTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+  it('function is a arrowFunction in a Variable Declaration', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'functionIsVariableDeclaration',
+      __dirname
+    )
+    const eventListenerTransformation = new EventListenerTransformations(
+      sourceFile,
+      loggingFunction,
+      statisticsReporting
+    )
+    eventListenerTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
 })

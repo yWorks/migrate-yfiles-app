@@ -1,7 +1,7 @@
 import { GraphComponent,IGraph, ItemEventArgs, IBend  } from 'yfiles'
 
 class someClass{
-  handler = function (evt: ItemEventArgs<IBend>, sender: IGraph){
+  handler =  (evt: ItemEventArgs<IBend>, sender: IGraph){
     console.log(sender,evt)
   }
 

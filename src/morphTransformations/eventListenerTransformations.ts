@@ -11,7 +11,8 @@ import {
   PropertyDeclaration,
   type SourceFile,
   SyntaxKind,
-  ts
+  ts,
+  VariableDeclaration
 } from 'ts-morph'
 import {
   checkIfYfiles,
@@ -445,7 +446,8 @@ export class EventListenerTransformations implements ITransformation {
       const decl = declarations[0]
       if (decl) {
         // the function is a property declaration
-        if (decl.isKind(SyntaxKind.PropertyDeclaration)) {
+        if (decl.isKind(SyntaxKind.PropertyDeclaration)||
+          decl.isKind(SyntaxKind.VariableDeclaration)) {
           return this.handlePropertyDeclaration(decl)
         }
         if (
@@ -460,10 +462,10 @@ export class EventListenerTransformations implements ITransformation {
     return
   }
 
-  handlePropertyDeclaration(decl: PropertyDeclaration) {
+  handlePropertyDeclaration(decl: PropertyDeclaration|VariableDeclaration) {
     // declaration and intialization are separate
     const functionDeclaration = decl.getFirstChildByKind(SyntaxKind.FunctionType)
-    const functionExpression = decl.getFirstChildByKind(SyntaxKind.FunctionExpression)
+    const functionExpression = decl.getFirstChildByKind(SyntaxKind.FunctionExpression) ?? decl.getFirstChildByKind(SyntaxKind.ArrowFunction)
     if (functionDeclaration) {
       this.handleArguments(functionDeclaration as unknown as FunctionExpression, false)
       // handle the initializer

@@ -104,6 +104,26 @@ describe('member transformations', () => {
     memberTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+  it('should rename firstOrDefault to first', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'last_firstOrDefault',
+      __dirname
+    )
+    const memberTransformation = new MemberTransformations(
+      sourceFile,
+      {
+        ...emptyChanges,
+        membersRenamed: {
+          IEnumerable: { firstOrDefault: 'first' },
+        }
+      },
+      loggingFunction,
+      statisticsReporting
+    )
+    memberTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
   it('should rename get of IDataProvider', () => {
     const { sourceFile, assertSourceFile } = setupProjects(
       project,

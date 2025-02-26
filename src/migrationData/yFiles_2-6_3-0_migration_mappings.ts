@@ -177,7 +177,7 @@ export default {
     "OperationType": null,
     "PartitionLayout": null,
     "PortCalculator": null,
-    "PortConstraint": null,
+    "PortConstraint": "PortConstraints and PortCandidates have been unified and renamed to LayoutPortCandidate.",
     "PortConstraintConfigurator": null,
     "PortConstraintKeys": null,
     "RowAlignment": null,
@@ -344,6 +344,8 @@ export default {
     "WebGL2GraphOverviewVisualCreator": null
   },
   "typesNew": [
+    "KShortestPaths",
+    "KShortestPathsResult",
     "LayoutGraphAlgorithms",
     "LayoutGraphNodeAggregation",
     "PartitionDescriptor",
@@ -607,14 +609,18 @@ export default {
       "addAll(number,ICollection)": "addAll(number,IEnumerable)",
       "addAll(ICursor)": "addAll(IEnumerable)",
       "addAll(ICollection)": "addAll(IEnumerable)",
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "findCell": "findCell(UNRESOLVED.Predicate)",
       "firstOrDefault": "first",
       "getInfo": "get",
       "lastOrDefault": "last",
       "ofType": "ofType(number)",
+      "orderBy": "toSorted",
       "removeAll": "removeAll(IEnumerable)",
       "setInfo": "set",
+      "skip": "drop",
+      "skipWhile": "dropWhile",
       "sort": "sort",
       "sort(IComparer)": "sort"
     },
@@ -633,14 +639,18 @@ export default {
       "addAll(number,ICollection)": "addAll(number,IEnumerable)",
       "addAll(ICursor)": "addAll(IEnumerable)",
       "addAll(ICollection)": "addAll(IEnumerable)",
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "findCell": "findCell(UNRESOLVED.Predicate)",
       "firstOrDefault": "first",
       "getInfo": "get",
       "lastOrDefault": "last",
       "ofType": "ofType(number)",
+      "orderBy": "toSorted",
       "removeAll": "removeAll(IEnumerable)",
       "setInfo": "set",
+      "skip": "drop",
+      "skipWhile": "dropWhile",
       "sort": "sort",
       "sort(IComparer)": "sort"
     },
@@ -681,17 +691,25 @@ export default {
       "maximumDuration": "stopDuration"
     },
     "ResultItemCollection": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "ResultItemMapping": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "fromDelegate": "from",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "GraphBuilder": {
       "setData(EdgesSource,Object)": "setData(EdgesSource,any)",
@@ -731,68 +749,104 @@ export default {
       "edgeToEdgeDistance": "edgeDistance"
     },
     "ICollection": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "IEnumerable": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "IList": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "IListEnumerable": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "IMap": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "fromDelegate": "from",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "IMapper": {
       "fromDelegate": "from"
     },
     "IObservableCollection": {
-      "filter": "filter(UNRESOLVED.ElementPredicate,any)",
-      "firstOrDefault": "first",
-      "lastOrDefault": "last",
-      "ofType": "ofType(number)"
-    },
-    "List": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "lastOrDefault": "last",
       "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
+    },
+    "List": {
+      "elementAt": "at",
+      "filter": "filter(UNRESOLVED.ElementPredicate,any)",
+      "firstOrDefault": "first",
+      "lastOrDefault": "last",
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile",
       "sort": "sort",
       "sort(UNRESOLVED.ElementComparison)": "sort",
       "sort(IComparer)": "sort"
     },
     "ListEnumerable": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "Mapper": {
       "fromDelegate": "from"
     },
     "ObservableCollection": {
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "lastOrDefault": "last",
-      "ofType": "ofType(number)"
+      "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile"
     },
     "GeneralPath": {
       "getBounds": "getBounds",
@@ -891,7 +945,8 @@ export default {
       "createEdge(IPort,IPort,IEdgeStyle,Object)": "createEdge(IPort,IPort,IEdgeStyle,any)",
       "createNode(Rect,INodeStyle,Object)": "createNode(Rect,INodeStyle,any)",
       "createNode(INode,Rect,INodeStyle,Object)": "createNode(INode,Rect,INodeStyle,any)",
-      "groupNodes(IEnumerable)": "groupNodes(IEnumerable,INodeStyle,any)"
+      "groupNodes(IEnumerable)": "groupNodes(IEnumerable,INodeStyle,any)",
+      "setLookupImplementation": "addLookup"
     },
     "EdgeDecorator": {
       "bendCreatorDecorator": "bendCreator",
@@ -955,6 +1010,9 @@ export default {
     "FreeEdgeLabelModel": {
       "createEdgeAnchored": "createParameter"
     },
+    "FreeNodeLabelModel": {
+      "createCanonicalParameter": "createParameterForLayouts"
+    },
     "FreeNodePortLocationModel": {
       "NODE_BOTTOM_ANCHORED": "BOTTOM",
       "NODE_BOTTOM_LEFT_ANCHORED": "BOTTOM_LEFT",
@@ -970,6 +1028,7 @@ export default {
       "createClipboardGraph": "clipboardGraph",
       "empty": "isEmpty",
       "getClipboardHelper": "clipboardContext",
+      "isDummy": "isHelper",
       "onElementCopied": "onItemCopied",
       "onElementCut": "onItemCut",
       "onElementPasted": "onItemPasted",
@@ -1000,6 +1059,9 @@ export default {
       "createNode(Rect,INodeStyle,Object)": "createNode(Rect,INodeStyle,any)",
       "createNode(INode,Rect,INodeStyle,Object)": "createNode(INode,Rect,INodeStyle,any)",
       "groupNodes(IEnumerable)": "groupNodes(IEnumerable,INodeStyle,any)"
+    },
+    "GroupingSupport": {
+      "getPathToRoot": "getAncestors"
     },
     "GroupNodeLabelModel": {
       "considerTabInset": "considerTabPadding"
@@ -1133,6 +1195,10 @@ export default {
       "positionHandlerDecorator": "positionHandler",
       "selectionDecorator": "selectionRenderer",
       "snapLineProviderDecorator": "snapReferenceProvider"
+    },
+    "SegmentRatioPortLocationModel": {
+      "createFromSource": "createParameterFromSource",
+      "createFromTarget": "createParameterFromTarget"
     },
     "SimpleEdge": {
       "isSelfloop": "isSelfLoop"
@@ -1349,6 +1415,10 @@ export default {
       "optimizeAfterLayering": "selectAfterLayering",
       "optimizeAfterSequencing": "selectAfterSequencing"
     },
+    "LayerConstraintData": {
+      "placeAbove": "placeInOrder",
+      "placeBelow": "placeInOrder"
+    },
     "LayerType": {
       "NORMAL": "REGULAR"
     },
@@ -1358,7 +1428,9 @@ export default {
     },
     "NodeDataType": {
       "BUS_STRUCTURE_DUMMY": "GRID_COMPONENT_BUS_NODE",
-      "NORMAL": "REGULAR"
+      "GROUP": "GROUP_END",
+      "NORMAL": "REGULAR",
+      "RECURSIVE_EDGE_DUMMY": "RECURSIVE_EDGE_BEND"
     },
     "HierarchicLayoutNodeLayoutDescriptor": {
       "getPortBorderGapRatio": "borderToPortGapRatio",
@@ -1370,6 +1442,10 @@ export default {
       "crossingPenalty": "crossingCost",
       "overUsagePenalty": "overUsageCost"
     },
+    "PortConstraintOptimizerSameLayerData": {
+      "addDummyNode": "addHelperNode",
+      "dummyNodes": "helperNodes"
+    },
     "RankingPolicy": {
       "NO_RERANKING": "NONE"
     },
@@ -1380,7 +1456,8 @@ export default {
     "SimplexNodePlacer": {
       "getMinDistance": "getMinimumDistance",
       "groupCompactionStrategy": "groupCompaction",
-      "maximumDuration": "stopDuration"
+      "maximumDuration": "stopDuration",
+      "swimLaneCrossingWeight": "layoutGridCrossingWeight"
     },
     "TopologicalLayerer": {
       "rankingPolicy": "rerankingPolicy"
@@ -1402,6 +1479,7 @@ export default {
     },
     "ClickInputMode": {
       "Clicked": "clicked",
+      "doubleClickPolicy": "clickReportingPolicy",
       "onDoubleClicked": "onClicked",
       "onLeftClicked": "onClicked",
       "onLeftDoubleClicked": "onClicked",
@@ -1434,10 +1512,17 @@ export default {
       "doStartEdgeCreation": "startEdgeCreation(IPortCandidate,IPoint)",
       "draggedRecognizer": "moveRecognizer",
       "draggedRecognizerTouch": "moveRecognizerTouch",
+      "dummyEdge": "previewEdge",
+      "dummyEdgeGraph": "previewGraph",
+      "dummyTargetNode": "previewEndNode",
+      "dummyTargetNodePort": "previewEndNodePort",
       "endPointMovedRecognizer": "endPointMoveRecognizer",
+      "getDummyEdgeSnapLines": "getPreviewEdgeSnapLines",
+      "getSource": "getEndPortOwner",
       "getSourcePortCandidate": "selectStartPortCandidate",
       "getSourcePortCandidateProvider": "getStartPortCandidateProvider(Point)",
       "getSourcePortCandidates": "getStartPortCandidates",
+      "getTarget": "getEndPortOwner",
       "getTargetPortCandidateProvider": "getEndPortCandidateProvider(IPortCandidate,Point)",
       "getTargetPortCandidates": "getEndPortCandidates",
       "lookupSourcePortCandidateProvider": "getStartPortCandidateProvider(IPortOwner)",
@@ -1462,6 +1547,9 @@ export default {
       "updateDummyEdgeTargetPort": "updatePreviewEdgeEndPort",
       "updateTargetHighlight": "updateEndHighlight",
       "updateTargetLocation": "updateEndLocation"
+    },
+    "DoubleClickPolicy": {
+      "INITIAL_SINGLE_AND_DOUBLE_CLICK": "INSTANT"
     },
     "DropInputMode": {
       "captureMouseInputDuringDrag": "capturePointerInputDuringDrag",
@@ -1500,6 +1588,7 @@ export default {
       "doubleTap": "doubleClick",
       "mouseHoverInputMode": "toolTipInputMode",
       "moveInputMode": "moveSelectedItemsInputMode",
+      "moveLabelInputMode": "moveSelectedItemsInputMode",
       "moveUnselectedInputMode": "moveUnselectedItemsInputMode",
       "onCanvasTapped": "onCanvasClicked",
       "onItemDoubleTapped": "onItemDoubleClicked",
@@ -1513,10 +1602,14 @@ export default {
       "onMoveUnselectedInputModeChanged": "onMoveUnselectedItemsInputModeChanged",
       "onTapInputModeChanged": "onWaitInputModeChanged",
       "pasteDelta": "pasteAtLocation",
+      "SELECTED_MOVABLES_HIT_TESTABLE": "MOVE_SELECTED_ITEMS_HIT_TESTABLE",
+      "SELECTED_MOVABLES_POSITION_HANDLER": "MOVE_SELECTED_ITEMS_POSITION_HANDLER",
       "selectNodeAndSelfloopBends": "selectNodeAndSelfLoopBends",
       "tap": "click",
       "tapInputMode": "clickInputMode",
-      "textEditorInputMode": "editLabelInputMode"
+      "textEditorInputMode": "editLabelInputMode",
+      "UNSELECTED_MOVABLES_HIT_TESTABLE": "MOVE_SELECTED_ITEMS_HIT_TESTABLE",
+      "UNSELECTED_MOVABLES_QUERY_POSITION_HANDLER": "MOVE_UNSELECTED_ITEMS_QUERY_POSITION_HANDLER"
     },
     "GraphInputMode": {
       "createChildInputModeContext": "createInputModeContext",
@@ -1607,12 +1700,17 @@ export default {
       "WEST": "LEFT"
     },
     "HandleTypes": {
+      "DEFAULT": "MOVE",
       "OFFSET_EAST": "RESIZE_RIGHT",
       "OFFSET_NORTH": "RESIZE_TOP",
       "OFFSET_SOUTH": "RESIZE_BOTTOM",
-      "OFFSET_WEST": "RESIZE_LEFT"
+      "OFFSET_WEST": "RESIZE_LEFT",
+      "SHEAR": "MOVE2",
+      "WARP": "MOVE3"
     },
     "ICommand": {
+      "MOVE_FOCUS_BACK": "MOVE_FOCUS_LEFT",
+      "MOVE_FOCUS_FORWARD": "MOVE_FOCUS_RIGHT",
       "UPDATE_CONTENT_RECT": "UPDATE_CONTENT_BOUNDS"
     },
     "IEdgeReconnectionPortCandidateProvider": {
@@ -1620,7 +1718,11 @@ export default {
       "ALL_NODE_CANDIDATES": "fromAllNodeCandidates"
     },
     "IInputModeContext": {
+      "DEFAULT": "EMPTY",
       "parentInputMode": "inputMode"
+    },
+    "INodeInsetsProvider": {
+      "getInsets": "getPadding"
     },
     "InputModeBase": {
       "Canceled": "canceled",
@@ -1661,10 +1763,12 @@ export default {
     "LabelDropInputMode": {
       "captureMouseInputDuringDrag": "capturePointerInputDuringDrag",
       "mousePosition": "pointerPosition",
-      "snappedMousePosition": "snappedPointerPosition"
+      "snappedMousePosition": "snappedPointerPosition",
+      "useBestMatchingParameter": "useLocationForParameter"
     },
     "LabelPositionHandler": {
       "candidateTemplate": "candidateRenderer",
+      "useFinder": "shouldUseParameterFinder",
       "useParameterFinder": "shouldUseParameterFinder"
     },
     "LabelSnapContext": {
@@ -1683,6 +1787,9 @@ export default {
       "Initializing": "initializing",
       "onCollectSnapLines": "onCollectSnapResults",
       "snapLines": "snapReferences"
+    },
+    "LassoSelectionEventArgs": {
+      "selectionPath": "path"
     },
     "LassoSelectionInputMode": {
       "dragFreeRecognizer": "dragFreeHandRecognizer",
@@ -1748,7 +1855,10 @@ export default {
       "createChildInputModeContext": "createInputModeContext"
     },
     "NavigationInputMode": {
-      "adjustContentRect": "adjustContentBounds"
+      "adjustContentRect": "adjustContentBounds",
+      "shouldEnterGroup": "allowEnterGroup",
+      "shouldExitGroup": "allowExitGroup",
+      "shouldExpandGroup": "allowExpandGroup"
     },
     "NodeBasedSnapLine": {
       "snapType": "visualizationType"
@@ -1757,6 +1867,10 @@ export default {
       "captureMouseInputDuringDrag": "capturePointerInputDuringDrag",
       "mousePosition": "pointerPosition",
       "snappedMousePosition": "snappedPointerPosition"
+    },
+    "NodeInsetsProvider": {
+      "getInsets": "getPadding",
+      "insets": "padding"
     },
     "NodePairBasedSnapLine": {
       "snapType": "visualizationType"
@@ -1795,10 +1909,12 @@ export default {
     "PortDropInputMode": {
       "captureMouseInputDuringDrag": "capturePointerInputDuringDrag",
       "mousePosition": "pointerPosition",
-      "snappedMousePosition": "snappedPointerPosition"
+      "snappedMousePosition": "snappedPointerPosition",
+      "useBestMatchingParameter": "useLocationForParameter"
     },
     "PortRelocationHandle": {
       "createDummyEdge": "createPreviewEdge",
+      "dummyEdge": "previewEdge",
       "inputModeContext": "parentInputModeContext"
     },
     "RectangleHandle": {
@@ -1830,6 +1946,10 @@ export default {
       "pressedRecognizerTouch": "beginRecognizerTouch",
       "releasedRecognizer": "finishRecognizer",
       "releasedRecognizerTouch": "finishRecognizerTouch"
+    },
+    "ShowPortCandidates": {
+      "SOURCE": "START",
+      "TARGET": "END"
     },
     "SnapContext": {
       "createSnapResultCanvasObjectDescriptor": "createSnapResultRenderer",
@@ -1888,6 +2008,9 @@ export default {
       "tapLocation": "clickLocation",
       "validTapHitTestable": "validClickHitTestable"
     },
+    "TextEditorInputMode": {
+      "textBoxPadding": "textBoxMargins"
+    },
     "TouchEventRecognizers": {
       "TOUCH_DOUBLE_TAP_PRIMARY": "TOUCH_PRIMARY_DOUBLE_TAP",
       "TOUCH_DOWN_PRIMARY": "TOUCH_PRIMARY_DOWN",
@@ -1895,6 +2018,9 @@ export default {
       "TOUCH_MOVE_PRIMARY": "TOUCH_PRIMARY_DRAG",
       "TOUCH_TAP_PRIMARY": "TOUCH_PRIMARY_TAP",
       "TOUCH_UP_PRIMARY": "TOUCH_PRIMARY_UP"
+    },
+    "Visualization": {
+      "DUMMY": "PLACEHOLDER"
     },
     "GenericLabeling": {
       "applyLayoutCore": "applyLayout",
@@ -2067,6 +2193,12 @@ export default {
     "InsetsGroupBoundsCalculator": {
       "considerNodeHalos": "considerNodeMargins",
       "defaultInsets": "defaultPadding"
+    },
+    "ItemCollection": {
+      "delegate": "predicate"
+    },
+    "ItemMapping": {
+      "delegate": "mapperFunction"
     },
     "LabelAngleOnRightSideOffsets": {
       "NONE": "COUNTER_CLOCKWISE",
@@ -2362,6 +2494,8 @@ export default {
       "createRectangularCageRestriction": "createRectangularConstraint"
     },
     "OrthogonalLayoutStyle": {
+      "BOX": "FORCED_STRAIGHT_LINE",
+      "FIXED_MIXED": "RELAXED",
       "NORMAL": "STRICT"
     },
     "OrthogonalLayout": {
@@ -2862,7 +2996,8 @@ export default {
     },
     "FocusIndicatorManager": {
       "getCanvasObjectGroup": "getRenderTreeGroup",
-      "getInstaller": "getRenderer"
+      "getInstaller": "getRenderer",
+      "onPropertyChanged": "onFocusedChanged"
     },
     "GraphComponent": {
       "autoDrag": "autoScrollOnBounds",
@@ -2943,10 +3078,17 @@ export default {
     },
     "HighlightIndicatorManager": {
       "getCanvasObjectGroup": "getRenderTreeGroup",
-      "getInstaller": "getRenderer"
+      "getInstaller": "getRenderer",
+      "selectionModel": "items"
     },
     "HtmlCanvasVisual": {
       "paint": "render"
+    },
+    "IAnimation": {
+      "fromDelegate": "fromHandler"
+    },
+    "ICanvasContext": {
+      "DEFAULT": "EMPTY"
     },
     "ICanvasObject": {
       "descriptor": "renderer",
@@ -2955,11 +3097,15 @@ export default {
     },
     "ICanvasObjectGroup": {
       "descriptor": "renderer",
+      "elementAt": "at",
       "filter": "filter(UNRESOLVED.ElementPredicate,any)",
       "firstOrDefault": "first",
       "group": "parent",
       "lastOrDefault": "last",
       "ofType": "ofType(number)",
+      "orderBy": "toSorted",
+      "skip": "drop",
+      "skipWhile": "dropWhile",
       "userObject": "tag"
     },
     "IGraphSelection": {
@@ -2971,6 +3117,7 @@ export default {
       "selectedPorts": "ports"
     },
     "IRenderContext": {
+      "DEFAULT": "EMPTY",
       "toViewCoordinates": "worldToViewCoordinates"
     },
     "ItemModelManager": {
@@ -3017,8 +3164,15 @@ export default {
       "NEVER": "HIDDEN"
     },
     "SelectionIndicatorManager": {
+      "addSelection": "addItem",
       "getCanvasObjectGroup": "getRenderTreeGroup",
-      "getInstaller": "getRenderer"
+      "getInstaller": "getRenderer",
+      "model": "domain",
+      "removeSelection": "removeItem",
+      "selectionModel": "items"
+    },
+    "ShowFocusPolicy": {
+      "ONLY_WHEN_FOCUSED": "WHEN_FOCUSED"
     },
     "TextWrapping": {
       "CHARACTER": "WRAP_CHARACTER",
@@ -3032,9 +3186,11 @@ export default {
       "tapCount": "clickCount"
     },
     "TouchEventTypes": {
+      "LOST_CAPTURE": "DRAG_CAPTURE_LOST",
       "TAP": "DOWN"
     },
     "ViewportAnimation": {
+      "fromDelegate": "fromHandler",
       "targetBounds": "target",
       "targetViewMargins": "targetMargins"
     },
@@ -3042,7 +3198,12 @@ export default {
       "AUTO_DRAG": "AUTO_SCROLL_ON_BOUNDS"
     },
     "ViewportLimiter": {
+      "getCurrentBounds": "getCurrentBoundingPolygon",
+      "honorBothDimensions": "strictBoundsContainment",
       "limitingPolicy": "policy"
+    },
+    "WebGL2Animation": {
+      "fromDelegate": "fromHandler"
     },
     "WebGL2ArrowType": {
       "DEFAULT": "STEALTH",
@@ -3055,7 +3216,8 @@ export default {
     },
     "WebGL2FocusIndicatorManager": {
       "getCanvasObjectGroup": "getRenderTreeGroup",
-      "getInstaller": "getRenderer"
+      "getInstaller": "getRenderer",
+      "onPropertyChanged": "onFocusedChanged"
     },
     "WebGL2GraphModelManager": {
       "compare": "compareRenderOrder",
@@ -3096,19 +3258,30 @@ export default {
     },
     "WebGL2HighlightIndicatorManager": {
       "getCanvasObjectGroup": "getRenderTreeGroup",
-      "getInstaller": "getRenderer"
+      "getInstaller": "getRenderer",
+      "selectionModel": "items"
+    },
+    "WebGL2IconLabelStyle": {
+      "insets": "padding",
+      "shape": "backgroundShape"
     },
     "WebGL2IconNodeStyle": {
+      "fill": "backgroundFill",
       "icon": "image",
       "iconColor": "imageColor",
+      "shape": "backgroundShape",
       "stroke": "backgroundStroke"
     },
     "WebGL2NodeIndicatorShape": {
       "HEXAGON2": "HEXAGON"
     },
     "WebGL2SelectionIndicatorManager": {
+      "addSelection": "addItem",
       "getCanvasObjectGroup": "getRenderTreeGroup",
-      "getInstaller": "getRenderer"
+      "getInstaller": "getRenderer",
+      "model": "domain",
+      "removeSelection": "removeItem",
+      "selectionModel": "items"
     },
     "WebGL2ShapeNodeShape": {
       "HEXAGON2": "HEXAGON"
@@ -4590,8 +4763,8 @@ export default {
       "PriorityChanged": "use the 'priority-changed' event"
     },
     "ContextMenuInputMode": {
-      "menuClosed": "It is not needed anymore.",
-      "shouldOpenMenu": "It is not needed anymore.",
+      "menuClosed": "It is not necessary anymore.",
+      "shouldOpenMenu": "It is not necessary anymore.",
       "CloseMenu": "use the 'menu-closed' event",
       "PopulateMenu": "use the 'populate-menu' event"
     },
@@ -7071,6 +7244,16 @@ export default {
         1
       ]
     },
+    "SegmentRatioPortLocationModel": {
+      "createFromSource": [
+        1,
+        0
+      ],
+      "createFromTarget": [
+        1,
+        0
+      ]
+    },
     "SmartEdgeLabelModel": {
       "findBestParameter": [
         2
@@ -7198,6 +7381,16 @@ export default {
       "sequenceNodeLayers": [
         0,
         2
+      ]
+    },
+    "LayerConstraintData": {
+      "placeAbove": [
+        2,
+        3
+      ],
+      "placeBelow": [
+        2,
+        3
       ]
     },
     "MultiComponentLayerer": {
@@ -7537,6 +7730,7 @@ export default {
       "createDynamic": "DynamicFreeLabelModelParameter"
     },
     "FreeNodeLabelModel": {
+      "createCanonicalParameter": "FreeNodeLabelModelParameter",
       "createParameter": "FreeNodeLabelModelParameter"
     },
     "FreeNodePortLocationModel": {
@@ -7551,6 +7745,9 @@ export default {
     "GraphCopier": {
       "copyChildNode": "",
       "copyNode": ""
+    },
+    "GroupingSupport": {
+      "getPathToRoot": "IListEnumerable<INode>"
     },
     "GroupNodeLabelModel": {
       "createTabBackgroundParameter": "GroupNodeLabelModelParameter"
@@ -7587,6 +7784,10 @@ export default {
     },
     "NodeLabelModelStripeLabelModelAdapter": {
       "createParameter": "NodeLabelModelStripeLabelModelAdapterParameter"
+    },
+    "SegmentRatioPortLocationModel": {
+      "createFromSource": "EdgeSegmentPortLocationModelParameter",
+      "createFromTarget": "EdgeSegmentPortLocationModelParameter"
     },
     "SmartEdgeLabelModel": {
       "createParameterFromSource": "SmartEdgeLabelModelParameter",
@@ -7734,6 +7935,7 @@ export default {
       "exportSvg": "SVGSVGElement"
     },
     "ViewportLimiter": {
+      "getCurrentBounds": "Point",
       "limitViewport": "ViewportDescriptor"
     },
     "WebGL2FocusIndicatorManager": {
@@ -7947,6 +8149,9 @@ export default {
     "MultiComponentLayerer": {
       "componentComparer": "function(yfiles.collections.YList<yfiles.layout.LayoutNode>, yfiles.collections.YList<yfiles.layout.LayoutNode>):number"
     },
+    "PortConstraintOptimizerSameLayerData": {
+      "dummyNodes": "List<LayoutNode>"
+    },
     "SimplexNodePlacer": {
       "groupCompactionStrategy": "boolean",
       "maximumDuration": "TimeSpan"
@@ -7965,6 +8170,7 @@ export default {
     },
     "GraphEditorInputMode": {
       "availableCommands": "IObservableCollection<Command>",
+      "moveLabelInputMode": "MoveInputMode",
       "snapContext": "GraphSnapContext",
       "textEditorInputMode": "EditLabelInputMode"
     },
@@ -8003,7 +8209,9 @@ export default {
       "INCREASE_ZOOM": "number",
       "LOWER": "number",
       "MOVE_DOWN": "number",
+      "MOVE_FOCUS_BACK": "number",
       "MOVE_FOCUS_DOWN": "number",
+      "MOVE_FOCUS_FORWARD": "number",
       "MOVE_FOCUS_UP": "number",
       "MOVE_LEFT": "number",
       "MOVE_RIGHT": "number",
@@ -8030,6 +8238,9 @@ export default {
       "UPDATE_CONTENT_RECT": "number",
       "ZOOM": "number",
       "ZOOM_TO_CURRENT_ITEM": "number"
+    },
+    "IInputModeContext": {
+      "DEFAULT": "ILookup"
     },
     "ItemClickedEventArgs": {
       "originalEvent": "PointerEventArgs"
@@ -8145,6 +8356,9 @@ export default {
     },
     "HideGroupsStage": {
       "groupBoundsCalculator": "ILayoutGroupBoundsCalculator"
+    },
+    "ItemMapping": {
+      "delegate": "function(TItem):TValue"
     },
     "LayoutExecutor": {
       "fixPorts": "ItemMapping<IPort,PortPlacementPolicy>",
@@ -8402,6 +8616,12 @@ export default {
       "sizeChangedDetection": "Size",
       "sizeChangedTimerInterval": "Size"
     },
+    "HighlightIndicatorManager": {
+      "selectionModel": "IObservableCollection<T>"
+    },
+    "ICanvasContext": {
+      "DEFAULT": "ILookup"
+    },
     "ICanvasObject": {
       "descriptor": "IObjectRenderer<unknown>"
     },
@@ -8414,6 +8634,9 @@ export default {
       "selectedLabels": "IObservableCollection<ILabel>",
       "selectedNodes": "IObservableCollection<INode>",
       "selectedPorts": "IObservableCollection<IPort>"
+    },
+    "IRenderContext": {
+      "DEFAULT": "ILookup"
     },
     "IStripeSelection": {
       "selectedColumns": "IObservableCollection<IColumn>",
@@ -8428,6 +8651,9 @@ export default {
     },
     "MouseEventArgs": {
       "originalEvent": "PointerEvent | WheelEvent"
+    },
+    "SelectionIndicatorManager": {
+      "selectionModel": "IObservableCollection<T>"
     },
     "StripeSelection": {
       "selectedColumns": "IObservableCollection<IColumn>",
@@ -8447,10 +8673,15 @@ export default {
       "comparer": "function(yfiles.graph.IModelItem, yfiles.graph.IModelItem):number"
     },
     "WebGL2HighlightIndicatorManager": {
-      "nodeStyle": "WebGLNodeIndicatorStyle | WebGLBeaconNodeIndicatorStyle"
+      "nodeStyle": "WebGLNodeIndicatorStyle | WebGLBeaconNodeIndicatorStyle",
+      "selectionModel": "IObservableCollection<T>"
+    },
+    "WebGL2IconLabelStyle": {
+      "insets": "Insets"
     },
     "WebGL2SelectionIndicatorManager": {
-      "nodeStyle": "WebGLNodeIndicatorStyle | WebGLBeaconNodeIndicatorStyle"
+      "nodeStyle": "WebGLNodeIndicatorStyle | WebGLBeaconNodeIndicatorStyle",
+      "selectionModel": "IObservableCollection<T>"
     }
   },
   "methodsProperties": {
@@ -8521,6 +8752,14 @@ export default {
       "createMarqueeSelectionInputMode": "property",
       "createMoveViewportInputMode": "property",
       "createNavigationInputMode": "property"
+    },
+    "LabelPositionHandler": {
+      "useFinder": "method"
+    },
+    "NavigationInputMode": {
+      "shouldEnterGroup": "property",
+      "shouldExitGroup": "property",
+      "shouldExpandGroup": "property"
     },
     "OrthogonalEdgeEditingContext": {
       "getOrthogonalEdgeHelper": "property"

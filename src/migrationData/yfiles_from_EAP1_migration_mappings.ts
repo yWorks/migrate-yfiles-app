@@ -1,9 +1,12 @@
 export default {
   "typesRemoved": {
+    "Future": null,
     "StorageLocation": null,
     "MouseWheelDeltaMode": null
   },
   "typesNew": [
+    "KShortestPaths",
+    "KShortestPathsResult",
     "QueryToolTipEventArgs",
     "CompositeEdgeStyle",
     "CompositeEdgeStyleExtension",
@@ -108,6 +111,13 @@ export default {
     "StripeLabelModel": {
       "useGlobalPadding": "useTotalPadding"
     },
+    "GraphMLIOHandler": {
+      "addInputMapperFuture(Constructor,Constructor,string)": "addInputMapper(Constructor,Constructor,string,IMapper)",
+      "addInputMapperFuture(Constructor,Constructor,UNRESOLVED.Predicate,UNRESOLVED.Func4)": "addInputMapper(Constructor,Constructor,string,IMapper)"
+    },
+    "HierarchicalLayoutNodeContext": {
+      "groupId": "edgeGroupId"
+    },
     "CreateEdgeInputMode": {
       "createEdgeCreationInputModeContext": "createInputModeContext"
     },
@@ -117,10 +127,27 @@ export default {
     "LabelPositionHandler": {
       "useParameterFinder": "shouldUseParameterFinder"
     },
+    "PortRelocationHandle": {
+      "createPreviewEdgeVisualCreator": "createPreviewEdge"
+    },
+    "TextEditorInputMode": {
+      "textBoxPadding": "textBoxMargins"
+    },
+    "OrthogonalLayoutMode": {
+      "BOX": "FORCED_STRAIGHT_LINE",
+      "DEFAULT": "STRICT",
+      "MIXED": "RELAXED"
+    },
+    "SubtreeTransform": {
+      "ROTATE180": "ROTATE_180"
+    },
     "CanvasComponent": {
       "toPageFromView": "viewToPageCoordinates",
       "toViewFromPage": "pageToViewCoordinates",
       "toWorldFromPage": "pageToWorldCoordinates"
+    },
+    "FocusIndicatorManager": {
+      "onPropertyChanged": "onFocusedItemChanged"
     },
     "GraphComponent": {
       "toPageFromView": "viewToPageCoordinates",
@@ -152,11 +179,21 @@ export default {
       "CHARACTER_ELLIPSIS": "WRAP_CHARACTER_ELLIPSIS",
       "WORD": "WRAP_WORD",
       "WORD_ELLIPSIS": "WRAP_WORD_ELLIPSIS"
+    },
+    "ViewportLimitingMode": {
+      "CONTROL_RESIZED": "COMPONENT_RESIZED"
+    },
+    "WebGLFocusIndicatorManager": {
+      "onPropertyChanged": "onFocusedItemChanged"
     }
   },
   "membersRemoved": {
     "Point": {
       "moveBy": null
+    },
+    "GraphMLIOHandler": {
+      "addInputHandlerFactory": null,
+      "addInputMapperFuture": null
     },
     "Command": {
       "MOVE_FOCUS_PAGE_DOWN": null,
@@ -169,6 +206,17 @@ export default {
     "LabelPositionHandler": {
       "setPosition": null,
       "useFinder": null
+    },
+    "LayoutKeys": {
+      "AFFECTED_EDGE_LABELS_DATA_KEY": null,
+      "AFFECTED_EDGES_DATA_KEY": null,
+      "AFFECTED_NODE_LABELS_DATA_KEY": null,
+      "AFFECTED_NODES_DATA_KEY": null
+    },
+    "OrthogonalLayoutMode": {
+      "FIXED_BOX": null,
+      "FIXED_MIXED": null,
+      "UNIFORM": null
     },
     "Color": {
       "CURRENT_COLOR": null
@@ -190,6 +238,10 @@ export default {
     },
     "RadialGradient": {
       "CURRENT_COLOR": null
+    },
+    "RenderTree": {
+      "VOID_OBJECT_RENDERER": null,
+      "VOID_VISUAL_CREATOR": null
     }
   },
   "membersNew": {
@@ -294,6 +346,15 @@ export default {
     "GraphEditorInputMode": [
       "allowEditLabelOnTyping"
     ],
+    "HandlesRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
+    "IStripeInputRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
+    "IStripeLabelInputRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
     "KeyboardInputMode": [
       "onTextInput",
       "text"
@@ -327,26 +388,73 @@ export default {
     "Color": [
       "CURRENT_COLOR"
     ],
+    "UNRESOLVED.EdgeStyleIndicatorRenderer": [
+      "VOID_OBJECT_RENDERER",
+      "VOID_OBJECT_RENDERER",
+      "VOID_OBJECT_RENDERER"
+    ],
+    "GraphOverviewRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
+    "GridRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
+    "IFocusRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
     "IGraphSelection": [
       "ofType(boolean)",
       "ofType(Constructor)",
       "ofType(string)"
+    ],
+    "IHighlightRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
+    "IObjectRenderer": [
+      "VOID_OBJECT_RENDERER"
     ],
     "IRenderTreeGroup": [
       "ofType(boolean)",
       "ofType(Constructor)",
       "ofType(string)"
     ],
+    "ISelectionRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
     "IStripeSelection": [
       "ofType(boolean)",
       "ofType(Constructor)",
       "ofType(string)"
+    ],
+    "IVisualCreator": [
+      "VOID_VISUAL_CREATOR"
+    ],
+    "UNRESOLVED.LabelStyleIndicatorRenderer": [
+      "VOID_OBJECT_RENDERER",
+      "VOID_OBJECT_RENDERER",
+      "VOID_OBJECT_RENDERER"
+    ],
+    "UNRESOLVED.NodeStyleIndicatorRenderer": [
+      "VOID_OBJECT_RENDERER",
+      "VOID_OBJECT_RENDERER",
+      "VOID_OBJECT_RENDERER"
+    ],
+    "ObjectRendererBase": [
+      "VOID_OBJECT_RENDERER"
     ],
     "PointerButtons": [
       "TOUCH_CONTACT"
     ],
     "PointerEventType": [
       "DRAG_CAPTURE_LOST"
+    ],
+    "PortCandidateRenderer": [
+      "VOID_OBJECT_RENDERER"
+    ],
+    "UNRESOLVED.PortStyleIndicatorRenderer": [
+      "VOID_OBJECT_RENDERER",
+      "VOID_OBJECT_RENDERER",
+      "VOID_OBJECT_RENDERER"
     ],
     "StripeSelection": [
       "ofType(boolean)",
@@ -393,11 +501,18 @@ export default {
     }
   },
   "returnTypesChanged": {
+    "GraphMLIOHandler": {
+      "addInputMapperFuture(Constructor,Constructor,string)": "",
+      "addInputMapperFuture(Constructor,Constructor,UNRESOLVED.Predicate,UNRESOLVED.Func4)": ""
+    },
     "CreateEdgeInputMode": {
       "createEdge": "Promise<IEdge | null> | IEdge"
     },
     "GraphEditorInputMode": {
       "createNode": "Promise<INode | null> | INode"
+    },
+    "PortRelocationHandle": {
+      "createPreviewEdgeVisualCreator": "SimpleEdge"
     },
     "AspectRatioSubtreePlacer": {
       "createFromSketchComparator": "function(yfiles.layout.LayoutEdge, yfiles.layout.LayoutEdge):number"
@@ -507,6 +622,12 @@ export default {
     },
     "WebGLHighlightIndicatorManager": {
       "nodeStyle": "WebGLNodeIndicatorStyle | WebGLBeaconNodeIndicatorStyle"
+    },
+    "WebGLIconLabelStyle": {
+      "padding": "Insets"
+    },
+    "WebGLLabelStyle": {
+      "padding": "Insets"
     },
     "WebGLLabelStyleDecorator": {
       "webGLStyle": "WebGLLabelStyle | WebGLIconLabelStyle"

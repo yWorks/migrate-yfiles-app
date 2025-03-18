@@ -4,7 +4,7 @@ import {
   Identifier,
   Node,
   type Project,
-  type SourceFile,
+  type SourceFile, StringLiteral,
   SyntaxKind,
   ts,
   Type,
@@ -52,7 +52,8 @@ export function returnTypeIsExcluded(identifier: Identifier) {
 
 export interface ITransformFunction {
   (): void
-  (identifier: Identifier): void
+
+  (identifier: StringLiteral | Identifier): void
 }
 
 export type loggingFunction = {

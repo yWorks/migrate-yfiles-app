@@ -34,9 +34,15 @@ or alternatively to a folder containing the files you want to migrate
 npx @yworks/migrate-yfiles-app@latest --folderPath=<path_to_migratable_files>
 ```
 When migrating from e.g. 3.0-EAP1 use the 
-````
+```
 --from="EAP1"
-````
+```
+flag.
+
+To enable the migration of Vue components use the
+```
+---vue
+```
 flag.
 
 ## About yFiles

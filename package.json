@@ -3,7 +3,7 @@
   "description": "Semi-automatically migrate yFiles for HTML code to the latest version",
   "repository": "https://github.com/yWorks/migrate-yfiles-app",
   "author": "yWorks GmbH <yfileshtml@yworks.com>",
-  "version": "30.0.16",
+  "version": "30.0.17",
   "license": "MIT",
   "bin": "dist/cli.js",
   "engines": {
@@ -17,15 +17,17 @@
     "migrate-playground": "tsx cli.ts --folderPath=C:\\Users\\nicolasbrich\\vcs\\online-demos\\more-demos\\space-time-graphs\\src"
   },
   "dependencies": {
+    "@vue/compiler-sfc": "^3.5.13",
     "kolorist": "^1.8.0",
     "lodash": "^4.17.21",
-    "ts-morph": "^25.0.1"
+    "ts-morph": "^24.0.0",
+    "vue-ts-morph": "^0.1.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.13",
-    "@types/node": "^22.10.2",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "@types/lodash": "^4.17.15",
+    "@types/node": "^22.10.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   },
   "private": false,
   "type": "module",

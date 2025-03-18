@@ -81,7 +81,7 @@ export function generateTransformationInstances(
       loggingFunction,
       statisticsReporting
     ),
-    commandTransformation: new CommandTransformation(sourceFile, statisticsReporting),
+    commandTransformation: new CommandTransformation(sourceFile, statisticsReporting, loggingFunction),
     voidTransformations: new VoidTransformations(sourceFile, statisticsReporting),
     importTransformations: new ImportTransformations(
       sourceFile,

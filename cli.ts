@@ -9,6 +9,7 @@ import { setGlobalProject } from './src/utils.js'
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import * as fs from 'node:fs'
+import { createVueFileSystemHost } from 'vue-ts-morph'
 
 const validFromVersions = ['2.6', 'EAP1', 'EAP2']
 
@@ -24,6 +25,10 @@ const { values } = parseArgs({
     from: {
       type: 'string',
       default: '2.6' as const
+    },
+    vue:{
+      type: 'boolean',
+      default: false
     }
   }
 })
@@ -42,6 +47,7 @@ let project: Project
 //TODO this does not work with composite tsconfigs
 if (values.configPath) {
   project = new Project({
+    fileSystem: values.vue ? createVueFileSystemHost(): undefined,
     tsConfigFilePath: values.configPath,
     skipAddingFilesFromTsConfig: !!values.folderPath,
     manipulationSettings: manipulationSettings
@@ -50,6 +56,7 @@ if (values.configPath) {
 } else if (values.folderPath) {
   requirePath = values.folderPath
   project = new Project({
+    fileSystem: values.vue ? createVueFileSystemHost(): undefined,
     manipulationSettings: manipulationSettings
   })
   project.addSourceFilesAtPaths([

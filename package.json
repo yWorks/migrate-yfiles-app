@@ -3,7 +3,7 @@
   "description": "Semi-automatically migrate yFiles for HTML code to the latest version",
   "repository": "https://github.com/yWorks/migrate-yfiles-app",
   "author": "yWorks GmbH <yfileshtml@yworks.com>",
-  "version": "30.0.15",
+  "version": "30.0.16",
   "license": "MIT",
   "bin": "dist/cli.js",
   "engines": {
@@ -19,7 +19,7 @@
   "dependencies": {
     "kolorist": "^1.8.0",
     "lodash": "^4.17.21",
-    "ts-morph": "^22.0.0"
+    "ts-morph": "^25.0.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.13",

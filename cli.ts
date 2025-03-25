@@ -35,7 +35,7 @@ const { values } = parseArgs({
 if (!validFromVersions.includes(values.from)) {
   throw new Error(`Invalid '--from'-version. This version only supports migrating from ${validFromVersions.join(', ')}`)
 }
-const extensionIncludeList = ['.ts', '.js', '.tsx', '.jsx', '.vue']
+const extensionIncludeList = ['.ts', '.d.ts', '.js', '.tsx', '.jsx', '.vue']
 const manipulationSettings = {
   quoteKind: QuoteKind.Single,
   newLineKind:

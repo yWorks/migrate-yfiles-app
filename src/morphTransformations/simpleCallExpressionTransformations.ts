@@ -1,4 +1,4 @@
-import { checkIfYfiles, matchType, type ITransformation, getDeclaringClass, replaceWithTextTryCatch } from '../utils.js'
+import { checkIfYfiles, getDeclaringClass, type ITransformation, matchType, replaceWithTextTryCatch } from '../utils.js'
 import {
   type CallExpression,
   type LeftHandSideExpression,
@@ -6,9 +6,10 @@ import {
   type PropertyAccessExpression,
   type SourceFile,
   type Statement,
-  SyntaxKind
+  ts
 } from 'ts-morph'
 import type { StatisticsReport } from '../statisticsReport.js'
+import SyntaxKind = ts.SyntaxKind
 
 export class SimpleCallExpressionTransformations implements ITransformation {
   sourceFile: SourceFile
@@ -112,6 +113,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
       }
     }
   }
+
   private checkSizefrom(
     declaringClass: Node,
     rightSide: string,
@@ -133,6 +135,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
       }
     }
   }
+
   private getDataProvider(
     declaringClass: Node,
     rightSide: string,
@@ -147,6 +150,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
       return true
     }
   }
+
   private addDataProvider(
     declaringClass: Node,
     rightSide: string,
@@ -157,13 +161,14 @@ export class SimpleCallExpressionTransformations implements ITransformation {
     if (rightSide === 'addDataProvider' && matchType(declaringClass, 'Graph')) {
       const arg1 = callExpression.getArguments()[0]
       const arg2 = callExpression.getArguments()[1]
-      replaceWithTextTryCatch(callExpression, 
+      replaceWithTextTryCatch(callExpression,
         `${leftSide.getText()}.context.addItemData(${arg1.getText()}, ${arg2.getText()})`
       )
       this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
       return true
     }
   }
+
   private gmmSetStyle(
     declaringClass: Node,
     rightSide: string,
@@ -174,13 +179,14 @@ export class SimpleCallExpressionTransformations implements ITransformation {
     if (rightSide == 'setStyle' && matchType(declaringClass, 'GraphModelManager')) {
       const arg1 = callExpression.getArguments()[0]
       const arg2 = callExpression.getArguments()[1]
-      replaceWithTextTryCatch(callExpression, 
+      replaceWithTextTryCatch(callExpression,
         `${leftSide.getText()}.graph.setStyle(${arg1.getText()}, ${arg2.getText()})`
       )
       this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
       return true
     }
   }
+
   private removeDataProvider(
     declaringClass: Node,
     rightSide: string,
@@ -202,11 +208,12 @@ export class SimpleCallExpressionTransformations implements ITransformation {
     callExpression: CallExpression
   ) {
     if (matchType(declaringClass, 'Class')) {
+      const expression = callExpression.getExpression()
       if (callExpression.getArguments()[0].getText() === 'LayoutExecutor') {
         replaceWithTextTryCatch(callExpression, 'LayoutExecutor.ensure()')
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
-      } else {
+      } else if (expression.isKind(SyntaxKind.PropertyAccessExpression) && (expression.getName() === 'ensure' || expression.getName() === 'fixType')) {
         if (Node.isStatement(callExpression.getParent())) {
           ;(callExpression.getParent() as Statement).remove()
           this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
@@ -215,6 +222,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
       }
     }
   }
+
   private selectionAddRemove(
     declaringClass: Node,
     rightHand: string,
@@ -260,10 +268,10 @@ export class SimpleCallExpressionTransformations implements ITransformation {
   ) {
     if (propertyAccessExpression.getName() === 'createParameter') {
       const mapping: Record<string, string> = {
-        "'north'": "'top'",
-        "'south'": "'bottom'",
-        "'west'": "'left'",
-        "'east'": "'right'"
+        '\'north\'': '\'top\'',
+        '\'south\'': '\'bottom\'',
+        '\'west\'': '\'left\'',
+        '\'east\'': '\'right\''
       }
       const arg1 = callExpression.getArguments()[0]
       if (Object.hasOwn(mapping, arg1.getText())) {
@@ -331,7 +339,7 @@ export class SimpleCallExpressionTransformations implements ITransformation {
         } else if (args.length == 2) {
           const arg1 = args[0].getText()
           const arg2 = args[1].getText()
-          replaceWithTextTryCatch(parent, 
+          replaceWithTextTryCatch(parent,
             `${arg1}.layout.width = ${arg2}.width\n${arg1}.layout.height = ${arg2}.height`
           )
         } else {

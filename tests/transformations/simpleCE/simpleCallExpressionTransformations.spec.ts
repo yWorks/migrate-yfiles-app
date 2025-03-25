@@ -100,6 +100,15 @@ describe('call expression transformation', () => {
     ensureTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+  it('should replace A.$class.isInstance(b) with b instanceof A', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(project, 'isInstanceOnClass', __dirname)
+    const ensureTransformation = new SimpleCallExpressionTransformations(
+      sourceFile,
+      statisticsReporting
+    )
+    ensureTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
   it('should convert string convertibles from north, south... to top, bottom...', () => {
     const { sourceFile, assertSourceFile } = setupProjects(
       project,

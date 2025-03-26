@@ -109,6 +109,17 @@ export class SimpleCallExpressionTransformations implements ITransformation {
           ) {
             continue
           }
+          if (
+            this.pointMultiply(
+              declaringClass,
+              rightHand,
+              expression,
+              leftHand,
+              callExpression
+            )
+          ) {
+            continue
+          }
         }
       }
     }
@@ -279,6 +290,19 @@ export class SimpleCallExpressionTransformations implements ITransformation {
         this.statisticsReporting.addChangeCount('simpleCallExpressionTransformation', 1)
         return true
       }
+    }
+  }
+
+  private pointMultiply(
+    declaringClass: Node,
+    rightHand: string,
+    propertyAccessExpression: PropertyAccessExpression,
+    leftHand: LeftHandSideExpression,
+    callExpression: CallExpression
+  ) {
+    if (matchType(declaringClass, 'Point') && matchType(callExpression.getArguments()[0], 'Matrix') && rightHand == 'multiply') {
+      replaceWithTextTryCatch(callExpression, `${callExpression.getArguments()[0].getText()}.transform(${leftHand.getText()})`)
+      return true
     }
   }
 

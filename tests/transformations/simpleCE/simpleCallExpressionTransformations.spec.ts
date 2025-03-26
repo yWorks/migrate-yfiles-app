@@ -145,6 +145,16 @@ describe('call expression transformation', () => {
     ensureTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+  it('should replace point.multiply(mat) with mat.transform(point)', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(project, 'pointMultiplyMatrix', __dirname)
+    const ensureTransformation = new SimpleCallExpressionTransformations(
+      sourceFile,
+      statisticsReporting
+    )
+    ensureTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
+
 
   it('should change clearHighlights and addHighlight on HighlightIndicatorManager to selectionMode.clear/add respectively', () => {
     const { sourceFile, assertSourceFile } = setupProjects(

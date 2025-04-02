@@ -26,7 +26,7 @@ const { values } = parseArgs({
       type: 'string',
       default: '2.6' as const
     },
-    vue:{
+    vue: {
       type: 'boolean',
       default: false
     }
@@ -47,16 +47,18 @@ let project: Project
 //TODO this does not work with composite tsconfigs
 if (values.configPath) {
   project = new Project({
-    fileSystem: values.vue ? createVueFileSystemHost(): undefined,
+    fileSystem: values.vue ? createVueFileSystemHost() : undefined,
     tsConfigFilePath: values.configPath,
     skipAddingFilesFromTsConfig: !!values.folderPath,
     manipulationSettings: manipulationSettings
   })
   requirePath = values.configPath
 } else if (values.folderPath) {
+  if (values.vue) {
+    throw new Error('In vue mode you must point to a tsconfig to allow for proper type resolution')
+  }
   requirePath = values.folderPath
   project = new Project({
-    fileSystem: values.vue ? createVueFileSystemHost(): undefined,
     manipulationSettings: manipulationSettings
   })
   project.addSourceFilesAtPaths([
@@ -122,11 +124,10 @@ for (const sourceFile of sourceFiles) {
   if (changeCount > 0) {
     fileModificationCount++
     console.log(`Applied ${changeCount} changes`)
+    saveOps.push(sourceFile)
   }
-
-  saveOps.push(sourceFile)
 }
 for (const sourceFile of saveOps) {
-  await  sourceFile.save()
+  await sourceFile.save()
 }
 console.log(`Changed ${fileModificationCount} of ${project.getSourceFiles().length} files`)

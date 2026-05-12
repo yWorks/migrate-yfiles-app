@@ -11,7 +11,7 @@ import path from 'node:path'
 import * as fs from 'node:fs'
 import { createVueFileSystemHost } from 'vue-ts-morph'
 
-const validFromVersions = ['2.6', 'EAP1', 'EAP2']
+const validFromVersions = ['2.6', '3.0']
 
 const { values } = parseArgs({
   options: {
@@ -24,7 +24,7 @@ const { values } = parseArgs({
     },
     from: {
       type: 'string',
-      default: '2.6' as const
+      default: '2.6'
     },
     vue: {
       type: 'boolean',
@@ -32,9 +32,16 @@ const { values } = parseArgs({
     }
   }
 })
-if (!validFromVersions.includes(values.from)) {
-  throw new Error(`Invalid '--from'-version. This version only supports migrating from ${validFromVersions.join(', ')}`)
+
+if (values.from && !validFromVersions.includes(values.from)) {
+  console.error(
+    red(
+      `Invalid '--from'-version "${values.from}". This version only supports migrating from: ${validFromVersions.join(', ')}`
+    )
+  )
+  process.exit(1)
 }
+const fromVersion = (values.from as '2.6' | '3.0') ?? '2.6'
 const extensionIncludeList = ['.ts', '.d.ts', '.js', '.tsx', '.jsx', '.vue']
 const manipulationSettings = {
   quoteKind: QuoteKind.Single,
@@ -81,30 +88,54 @@ let installedYfiles_above3_0
 try {
   installedYfiles_below3_0 = JSON.parse(fs.readFileSync(createRequire(path.resolve(requirePath)).resolve('yfiles').replace('yfiles.js', 'package.json'), 'utf-8'))['version']
 } catch (e: any) {
-  if (values.from == '2.6') {
+  if (fromVersion == '2.6') {
     throw new Error('From version is 2.6, but no 2.6 yFiles version is installed. Please install yFiles 2.6.')
   }
 }
 try {
   installedYfiles_above3_0 = JSON.parse(fs.readFileSync(createRequire(path.resolve(requirePath)).resolve('@yfiles/yfiles').replace('yfiles.js', 'package.json'), 'utf-8'))['version']
 } catch (e: any) {
-  if (values.from == 'EAP1' || values.from == 'EAP2') {
-    throw new Error(`From version is ${values.from}, but no ${values.from} yFiles version is installed. Please install yFiles ${values.from}.`)
+  if (fromVersion == '3.0') {
+    throw new Error(`From version is ${fromVersion}, but no ${fromVersion} yFiles version is installed. Please install yFiles ${fromVersion}.`)
   }
 }
-if ((installedYfiles_below3_0 && installedYfiles_above3_0)) {
-  if (installedYfiles_below3_0.startsWith(values.from.replace('.', ''))) {
-    console.log(red(`You specified --from=${values.from}. But both: ${installedYfiles_above3_0} and ${installedYfiles_below3_0} are installed. Make sure you import from ${installedYfiles_below3_0}.`))
-  } else if (installedYfiles_above3_0.startsWith('30') && installedYfiles_above3_0.includes(values.from)) {
-    console.log(red(`You specified --from=${values.from}. But both: ${installedYfiles_below3_0} and ${installedYfiles_above3_0} are installed. Make sure you import from ${installedYfiles_above3_0}.`))
+if (installedYfiles_below3_0 && installedYfiles_above3_0) {
+  if (installedYfiles_below3_0.startsWith(fromVersion.replace('.', ''))) {
+    console.log(
+      red(
+        `You specified --from=${fromVersion}. But both: ${installedYfiles_above3_0} and ${installedYfiles_below3_0} are installed. Make sure you import from ${installedYfiles_below3_0}.`
+      )
+    )
+  } else if (
+    installedYfiles_above3_0.startsWith(fromVersion.replace('.', '')) ||
+    (fromVersion === '3.0' && installedYfiles_above3_0.startsWith('30'))
+  ) {
+    console.log(
+      red(
+        `You specified --from=${fromVersion}. But both: ${installedYfiles_above3_0} and ${installedYfiles_below3_0} are installed. Make sure you import from ${installedYfiles_above3_0}.`
+      )
+    )
   } else {
-    throw new Error(`You specified --from=${values.from}. But neither of the installed yFiles versions (${installedYfiles_below3_0}, ${installedYfiles_above3_0}) matches this`)
+    throw new Error(
+      `You specified --from=${fromVersion}. But neither of the installed yFiles versions (${installedYfiles_below3_0}, ${installedYfiles_above3_0}) matches this`
+    )
   }
 } else {
-  if (installedYfiles_below3_0 && !installedYfiles_below3_0.startsWith(values.from.replace('.', ''))) {
-    throw new Error(`You specified from version ${values.from} but yfiles (semver) version ${installedYfiles_below3_0} is installed`)
-  } else if (installedYfiles_above3_0 && (!installedYfiles_above3_0.startsWith('30') || !installedYfiles_above3_0.includes(values.from))) {
-    throw new Error(`You specified from version ${values.from} but yfiles (semver) version ${installedYfiles_above3_0} is installed`)
+  if (
+    installedYfiles_below3_0 &&
+    !installedYfiles_below3_0.startsWith(fromVersion.replace('.', ''))
+  ) {
+    throw new Error(
+      `You specified from version ${fromVersion} but yfiles (semver) version ${installedYfiles_below3_0} is installed`
+    )
+  } else if (
+    installedYfiles_above3_0 &&
+    !installedYfiles_above3_0.startsWith(fromVersion.replace('.', '')) &&
+    !(fromVersion === '3.0' && installedYfiles_above3_0.startsWith('30'))
+  ) {
+    throw new Error(
+      `You specified from version ${fromVersion} but yfiles (semver) version ${installedYfiles_above3_0} is installed`
+    )
   }
 }
 
@@ -118,7 +149,7 @@ for (const sourceFile of sourceFiles) {
   }
 
   console.log(`Working on ${sourceFile.getFilePath()}`)
-  const report = transform(sourceFile, values.experimental, values.from)
+  const report = transform(sourceFile, values.experimental, fromVersion)
   statisticsReports.push(report)
   const changeCount = report.getTotalChanges()
   if (changeCount > 0) {

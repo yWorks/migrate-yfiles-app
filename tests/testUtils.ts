@@ -18,6 +18,13 @@ export const emptyChanges = {
 
 export function generateProject(dir: string) {
   const project = new Project({
+    compilerOptions: {
+      moduleResolution: 99, // ts.ModuleResolutionKind.NodeNext
+      module: 199, // ts.ModuleKind.NodeNext
+      target: 9, // ts.ScriptTarget.ESNext
+      esModuleInterop: true,
+      lib: ['ESNext', 'DOM']
+    },
     manipulationSettings: {
       quoteKind: QuoteKind.Single,
       newLineKind:

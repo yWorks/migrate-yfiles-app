@@ -240,7 +240,22 @@ export function parseStingToType(string: string) {
     const a = desc.find((a) => a.getText() == 'a')!
     const b = desc.find((a) => a.getText() == 'b')!
     const aType = a.getType()
-    return aType.getSymbol() ? aType : b.getType()
+    if (aType.getSymbol()) {
+      return aType
+    }
+    const bType = b.getType()
+    if (bType.getSymbol()) {
+      return bType
+    }
+    const parseString2 = `import * as yfiles from "@yfiles/yfiles";const a:${yFilesReplace} = null; const b:${string} = null`
+    const sourceFile2 = globalProject.createSourceFile('__temp2__.ts', parseString2, { overwrite: true })
+    try {
+      const desc2 = sourceFile2.getDescendantsOfKind(SyntaxKind.Identifier)
+      const a2 = desc2.find((a) => a.getText() == 'a')!
+      return a2.getType()
+    } finally {
+      sourceFile2.delete()
+    }
   } finally {
     sourceFile?.delete()
   }
@@ -289,6 +304,9 @@ export function getType(node: Node | undefined) {
   if (!node) {
     return null
   }
+  if (Node.isClassDeclaration(node) || Node.isInterfaceDeclaration(node) || Node.isEnumDeclaration(node)) {
+    return node.getName() || null
+  }
   if (node.isKind(SyntaxKind.NumericLiteral)) {
     return 'number'
   } else if (node.isKind(SyntaxKind.StringLiteral)) {
@@ -307,13 +325,47 @@ export function isBaseClassYfiles(node: Node) {
     .getType()
     .getBaseTypes()
     .some((type) => {
-      return type.getText().includes('yfiles-api')
+      const typeText = type.getText()
+      return typeText.includes('yfiles-api') || typeText.includes('/yfiles/') || typeText.endsWith('yfiles')
     })
 }
 
 export function getDeclaringClass(node: Node) {
   try {
-    return node.getSymbol()?.getDeclarations()[0].getParent()
+    const symbol = node.getSymbol()
+    if (symbol) {
+      const declarations = symbol.getDeclarations()
+      if (declarations.length > 0) {
+        const parent = declarations[0].getParent()
+        if (Node.isClassDeclaration(parent) || Node.isInterfaceDeclaration(parent) || Node.isEnumDeclaration(parent)) {
+          return parent
+        }
+      }
+    }
+
+    if (Node.isPropertyAccessExpression(node)) {
+      const expression = node.getExpression()
+      const type = expression.getType()
+      // For static members, the type of the expression is the type of the class/enum itself.
+      // We look for the symbol of that type.
+      const typeSymbol = type.getSymbol() || type.getAliasSymbol()
+      if (typeSymbol) {
+        const decls = typeSymbol.getDeclarations()
+        for (const decl of decls) {
+          if (Node.isClassDeclaration(decl) || Node.isEnumDeclaration(decl) || Node.isInterfaceDeclaration(decl)) {
+            return decl
+          }
+          // If it's a value declaration (like a variable or parameter) of that type, 
+          // we should have caught it above via instance member logic.
+          // But if the type itself is what we are looking for (static access):
+          const parent = decl.getParent()
+          if (Node.isClassDeclaration(parent) || Node.isEnumDeclaration(parent) || Node.isInterfaceDeclaration(parent)) {
+            return parent
+          }
+        }
+      }
+    }
+    return undefined
   } catch (e) {
     return undefined
   }
@@ -322,7 +374,7 @@ export function getDeclaringClass(node: Node) {
 export function checkIfYfiles(node: Node, checkBase = true) {
   try {
     const type = node.getType().getText()
-    return type.includes('yfiles-api') || (isBaseClassYfiles(node) && checkBase)
+    return type.includes('yfiles-api') || type.includes('/yfiles/') || type.endsWith('yfiles') || (isBaseClassYfiles(node) && checkBase)
   } catch {
     return false
   }

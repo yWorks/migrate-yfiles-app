@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { dirname } from 'path'
 import { EnumTransformations } from '../../../src/morphTransformations/enumTransformations'
 import { setGlobalProject } from '../../../src/utils'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -25,6 +26,7 @@ describe('enum transformation', () => {
     enumTransformation.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
+
   it('should not do anything as the pae is not yfiles', () => {
     const { sourceFile, assertSourceFile } = setupProjects(project, 'notYfiles', __dirname)
     const enumTransformation = new EnumTransformations(sourceFile, statisticsReporting)

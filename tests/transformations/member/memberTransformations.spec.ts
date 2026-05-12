@@ -7,12 +7,15 @@ import { fileURLToPath } from 'node:url'
 import { dirname } from 'path'
 
 import { MemberTransformations } from '../../../src/morphTransformations/memberTransformations'
+import changesJson3_0 from '../../../src/migrationData/yFiles_3-0_3-1_migration_mappings'
+import type { Changes } from '../../../src/types'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const loggingFunction = addMigrationComment
 const statisticsReporting = new StatisticsReport()
 const project = generateProject(__dirname)
+const changes = changesJson3_0 as unknown as Changes
 
 describe('member transformations', () => {
   setGlobalProject(project, false)
@@ -183,6 +186,60 @@ describe('member transformations', () => {
       statisticsReporting
     )
     memberTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
+  it('should rename lastInputEvent and lastEventLocation for CanvasComponent', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'canvasComponentMembers',
+      __dirname
+    )
+    const memberTransformation = new MemberTransformations(
+      sourceFile,
+      {
+        ...emptyChanges,
+        membersRenamed: {
+          CanvasComponent: {
+            lastInputEvent: 'lastPointerEvent'
+          }
+        }
+      },
+      loggingFunction,
+      statisticsReporting
+    )
+    memberTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
+  it('should rename lastInputEvent and lastEventLocation for CanvasComponent and inheritors', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'canvasComponentMembersInheritor',
+      __dirname
+    )
+    const memberTransformation = new MemberTransformations(
+      sourceFile,
+      {
+        ...emptyChanges,
+        membersRenamed: {
+          CanvasComponent: {
+            lastInputEvent: 'lastPointerEvent'
+          }
+        }
+      },
+      loggingFunction,
+      statisticsReporting
+    )
+    memberTransformation.transform()
+    assert.equal(sourceFile.getText(), assertSourceFile.getText())
+  })
+  it('should rename DiscreteEdgeLabelPositions.CENTERED to CENTER via MemberTransformations', () => {
+    const { sourceFile, assertSourceFile } = setupProjects(
+      project,
+      'discreteEdgeLabelPositions',
+      __dirname
+    )
+    const memberTransform = new MemberTransformations(sourceFile, changes, loggingFunction, statisticsReporting)
+    memberTransform.transform()
     assert.equal(sourceFile.getText(), assertSourceFile.getText())
   })
 })

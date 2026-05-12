@@ -14,7 +14,9 @@ import {
   getType,
   isExcluded,
   type ITransformation,
-  type loggingFunction, replaceWithTextTryCatch
+  type loggingFunction,
+  matchType,
+  replaceWithTextTryCatch
 } from '../utils.js'
 import type { StatisticsReport } from '../statisticsReport.js'
 
@@ -73,9 +75,29 @@ export class MemberTransformations implements ITransformation {
       // if members are functionally required but have been removed with their functionality now
       // found in other concepts warn the user and  point to a KB article (or similar)
       this.checkRemoved(declaringClassTypeText, memberName, memberNameNode, unAppliedTransforms)
+      this.checkCanvasComponentSpecial(
+        propertyAccessExpression,
+        declaringClass,
+        memberName,
+        unAppliedTransforms
+      )
     }
     for (const fn of unAppliedTransforms) {
       fn()
+    }
+  }
+
+  private checkCanvasComponentSpecial(
+    parent: PropertyAccessExpression,
+    declaringClass: Node,
+    memberName: string,
+    unappliedTransforms: (() => Node)[]
+  ) {
+    if ((matchType(declaringClass, 'CanvasComponent') || getType(declaringClass) === 'CanvasComponent' || getType(declaringClass) === 'GraphComponent') && memberName === 'lastEventLocation') {
+      unappliedTransforms.push(() => {
+        const expressionText = parent.getExpression().getText()
+        return replaceWithTextTryCatch(parent, `${expressionText}.lastPointerEvent.location`)
+      })
     }
   }
 

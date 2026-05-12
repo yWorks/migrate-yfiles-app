@@ -2,9 +2,7 @@ import { SourceFile } from 'ts-morph'
 import type { Changes } from './types.js'
 import changesJson2_6 from './migrationData/yFiles_2-6_3-0_migration_mappings.js'
 import changesOverride2_6 from './migrationData/changesOverride.js'
-import changesJsonEAP1 from './migrationData/yfiles_from_EAP1_migration_mappings.js'
-import changesJsonEAP2 from './migrationData/yfiles_from_EAP2_migration_mappings.js'
-import changesJsonEAP3 from './migrationData/yfiles_from_EAP3_migration_mappings.js'
+import changesJson3_0 from './migrationData/yFiles_3-0_3-1_migration_mappings.js'
 import { addMigrationComment, logMigrationMessage, tryTransform } from './utils.js'
 import { ToOptionConstructorTransforms } from './morphTransformations/toOptionConstructorTransforms.js'
 import { StatisticsReport } from './statisticsReport.js'
@@ -21,14 +19,8 @@ export function transform(
     case '2.6':
       changes = _.merge(changesJson2_6, changesOverride2_6) as unknown as Changes
       break
-    case 'EAP1':
-      changes = changesJsonEAP1 as unknown as Changes
-      break
-    case 'EAP2':
-      changes = changesJsonEAP2 as unknown as Changes
-      break
-    case 'EAP3':
-      changes = changesJsonEAP3 as unknown as Changes
+    case '3.0':
+      changes = changesJson3_0 as unknown as Changes
       break
     default:
       throw new Error('Invalid Version to migrate from')

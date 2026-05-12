@@ -1,2 +1,2 @@
-import { } from '@yfiles/yfiles'
+import '@yfiles/yfiles'
 const gc = new GraphComponent()

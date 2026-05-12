@@ -33,9 +33,9 @@ or alternatively to a folder containing the files you want to migrate
 ```
 npx @yworks/migrate-yfiles-app@latest --folderPath=<path_to_migratable_files>
 ```
-When migrating from e.g. 3.0-EAP1 use the 
+When migrating from e.g. 3.0 to 3.1 use the
 ```
---from="EAP1"
+--from="3.0"
 ```
 flag.
 

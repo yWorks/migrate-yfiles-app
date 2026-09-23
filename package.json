@@ -9,6 +9,10 @@
   "engines": {
     "node": ">= 18"
   },
+  "keywords": [
+    "yfiles",
+    "migration"
+  ],
   "scripts": {
     "migrate": "node ./dist/cli.js",
     "build": "tsc",

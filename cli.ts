@@ -66,7 +66,10 @@ if (values.configPath) {
   }
   requirePath = values.folderPath
   project = new Project({
-    manipulationSettings: manipulationSettings
+    compilerOptions: {
+      allowJs: true
+    },
+    manipulationSettings: manipulationSettings,
   })
   project.addSourceFilesAtPaths([
     `${values.folderPath}/**`,
